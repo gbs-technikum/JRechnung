@@ -1,0 +1,6 @@
+--Alle Variablennamen/ Datenfelder / Klassen / Methoden in Englisch
+--Cammelcase
+--wer will kann MVP oder Ähnliches umsetzen
+--Klassen werden kommentiert!!! (mindestens jede Methode) + grobe beschreibung der Funktionalität der Klasse im Kopf
+--jede angelegte Datei wird mit Anlegedatum, letzte Änderung, Name des Ändernden, Name des Erstellers versehen
+
