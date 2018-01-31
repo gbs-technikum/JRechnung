@@ -16,6 +16,10 @@ class Contacts {
         contactDatas = new ArrayList<>();
     }
 
+    /**
+     *
+     * @return Returns a new ArrayList of ContactDatas
+     */
     public ArrayList<String> getContactDatas() {
         ArrayList<String> returnContactDatas = new ArrayList<>();
         for (String contact:contactDatas) {
@@ -26,6 +30,10 @@ class Contacts {
 
     public void addContact(String contact){
         contactDatas.add(contact);
+    }
+
+    public void setContactDatas(ArrayList<String> contactDatas) {
+        this.contactDatas = contactDatas;
     }
 
     public boolean removeContact(String contact){
