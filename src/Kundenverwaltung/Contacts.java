@@ -17,7 +17,11 @@ class Contacts {
     }
 
     public ArrayList<String> getContactDatas() {
-        return contactDatas;
+        ArrayList<String> returnContactDatas = new ArrayList<>();
+        for (String contact:contactDatas) {
+            returnContactDatas.add(contact);
+        }
+        return returnContactDatas;
     }
 
     public void addContact(String contact){
