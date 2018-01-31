@@ -13,13 +13,13 @@ Verwendete Datenbank: SQLite
 Ein Programm zum erstellen von Rechnungen für Kleinunternehmen. 
 Es soll folgende Features unterstützen:
 
-    ---Erstellung von Rechnungen für Arbeitsaufträge
+    ---Erstellung von Rechnungen
 
-    ---Arbeitsauftragsverwaltung
+    ---Verwaltung von Standardprodukten / Dienste( inkl. deren Preise )
 
     ---Halten eines Kundenstamms
 
-    ---Erstellung von Rechnungsvorlagen
+    ---Importieren von Rechnungsvorlagen ( aus Word-Dateien )
 
     ---Übersicht Gesamtrechnungssumme und abzuführende MwSt(Jahresweise)
 
