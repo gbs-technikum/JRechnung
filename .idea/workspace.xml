@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c255c5b7-36df-49ab-9b1c-fc81a3931983" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/org_xerial_sqlite_jdbc_3_21_0_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/Kundenverwaltung/CustomerService.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/Kundenverwaltung/Customer_Test.java" />
+    <list default="true" id="c255c5b7-36df-49ab-9b1c-fc81a3931983" name="Default" comment="Klasse Customer, Contacts und Customers fertig, mit Sqlite-Zugang angefangen.">
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/Kundenverwaltung/Customer.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/Kundenverwaltung/customers.sqlite" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/JRechnung.iml" afterPath="$PROJECT_DIR$/JRechnung.iml" />
-      <change beforePath="$PROJECT_DIR$/src/Kundenverwaltung/Contacts.java" afterPath="$PROJECT_DIR$/src/Kundenverwaltung/Contacts.java" />
-      <change beforePath="$PROJECT_DIR$/src/Kundenverwaltung/Customers.java" afterPath="$PROJECT_DIR$/src/Kundenverwaltung/Customers.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,12 +16,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Customer.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Customer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Kundenverwaltung/Customer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="18" lean-forward="false" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+            <state relative-caret-position="306">
+              <caret line="18" column="25" lean-forward="false" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="e#1306#1307#0" expanded="true" />
                 <element signature="e#1331#1332#0" expanded="true" />
                 <element signature="e#1364#1365#0" expanded="true" />
@@ -83,11 +80,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CustomerService.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CustomerService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Kundenverwaltung/CustomerService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="31" column="10" lean-forward="false" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
+            <state relative-caret-position="60">
+              <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <marker date="1517992734375" expanded="true" signature="808:843" ph="INSERT INTO customer... " />
@@ -409,7 +406,7 @@
       <workItem from="1517386579741" duration="6814000" />
       <workItem from="1517469105357" duration="1131000" />
       <workItem from="1517479896491" duration="21000" />
-      <workItem from="1517987512514" duration="5189000" />
+      <workItem from="1517987512514" duration="5347000" />
     </task>
     <task id="LOCAL-00001" summary="Klasse fuer Kontaktdaten restellt">
       <created>1517389587482</created>
@@ -439,11 +436,18 @@
       <option name="project" value="LOCAL" />
       <updated>1517469553582</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Klasse Customer, Contacts und Customers fertig, mit Sqlite-Zugang angefangen.">
+      <created>1517992846495</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1517992846495</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21149000" />
+    <option name="totallyTimeSpent" value="21307000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -498,7 +502,8 @@
     <MESSAGE value="Klasse Customer mit Kontaktdaten erweitert!" />
     <MESSAGE value="Klasse Customers erstellt!" />
     <MESSAGE value="Klasse Customers mit setter für die jeweiligen Contacts erweitert!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Klasse Customers mit setter für die jeweiligen Contacts erweitert!" />
+    <MESSAGE value="Klasse Customer, Contacts und Customers fertig, mit Sqlite-Zugang angefangen." />
+    <option name="LAST_COMMIT_MESSAGE" value="Klasse Customer, Contacts und Customers fertig, mit Sqlite-Zugang angefangen." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -510,6 +515,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="e#1306#1307#0" expanded="true" />
             <element signature="e#1331#1332#0" expanded="true" />
             <element signature="e#1364#1365#0" expanded="true" />
@@ -601,6 +607,7 @@
         <state relative-caret-position="1615">
           <caret line="145" column="50" lean-forward="false" selection-start-line="145" selection-start-column="50" selection-end-line="145" selection-end-column="50" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="e#1306#1307#0" expanded="true" />
             <element signature="e#1331#1332#0" expanded="true" />
             <element signature="e#1364#1365#0" expanded="true" />
@@ -703,6 +710,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="e#1306#1307#0" expanded="true" />
             <element signature="e#1331#1332#0" expanded="true" />
             <element signature="e#1364#1365#0" expanded="true" />
@@ -882,11 +890,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Kundenverwaltung/CustomerService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1517992734375" expanded="true" signature="808:843" ph="INSERT INTO customer... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Kundenverwaltung/Customer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="18" lean-forward="false" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+        <state relative-caret-position="306">
+          <caret line="18" column="25" lean-forward="false" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="e#1306#1307#0" expanded="true" />
             <element signature="e#1331#1332#0" expanded="true" />
             <element signature="e#1364#1365#0" expanded="true" />
@@ -939,17 +959,6 @@
             <element signature="e#3782#3783#0" expanded="true" />
             <element signature="e#3834#3835#0" expanded="true" />
             <element signature="e#3885#3886#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Kundenverwaltung/CustomerService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="31" column="10" lean-forward="false" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1517992734375" expanded="true" signature="808:843" ph="INSERT INTO customer... " />
           </folding>
         </state>
       </provider>
