@@ -47,4 +47,18 @@ class Contacts {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        String string = "{";
+        int contactDatasSize = contactDatas.size();
+        for(int i=0; i<contactDatasSize; i++){
+            string += contactDatas.get(i);
+            if(i<contactDatasSize-1){
+                string += ", ";
+            }
+        }
+        string += "}";
+        return string;
+    }
 }

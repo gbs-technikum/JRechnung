@@ -31,4 +31,13 @@ public class Customers {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        String string = "";
+        for (Customer customer:customers) {
+            string += "\n" + customer;
+        }
+        return string;
+    }
 }
