@@ -19,5 +19,9 @@ public class Services {
         services.add(service);
     }
 
-    
+    public void showService (int index) {
+
+        System.out.println(services.get(index));
+
+    }
 }

@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c255c5b7-36df-49ab-9b1c-fc81a3931983" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/Diensteverwaltung/Services.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/Diensteverwaltung/brainstorming" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/Entwuerfe/2018_02_07 Dienstleistungen.xlsx" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/Diensteverwaltung/Services.java" afterPath="$PROJECT_DIR$/src/Diensteverwaltung/Services.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,8 +37,8 @@
       <file leaf-file-name="Services.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/Services.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="4" lean-forward="false" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
+            <state relative-caret-position="374">
+              <caret line="22" column="8" lean-forward="true" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
               <folding>
                 <element signature="e#228#229#0" expanded="true" />
                 <element signature="e#272#273#0" expanded="true" />
@@ -138,7 +138,6 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="960" />
     <option name="width" value="960" />
     <option name="height" value="1040" />
   </component>
@@ -208,6 +207,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Richter\3. Semester\Programmierung\IdeaProjects\JRechnung\Entwuerfe" />
       <recent name="C:\Users\Gollmer\IdeaProjects\JRechnung\src" />
     </key>
   </component>
@@ -348,11 +348,18 @@
       <option name="project" value="LOCAL" />
       <updated>1517393392563</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Klasse Services erstellt.&#10;addService hinzugefügt.&#10;brainstroming für Diensteverwaltung hinzugefügt">
+      <created>1517990244969</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1517990244969</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16333000" />
+    <option name="totallyTimeSpent" value="17973000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -413,10 +420,12 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <MESSAGE value="Klasse fuer Kontaktdaten restellt" />
     <MESSAGE value="Klasse Customer mit Kontaktdaten erweitert!" />
     <MESSAGE value="Klasse Customers erstellt!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Klasse Customers erstellt!" />
+    <MESSAGE value="Klasse Services erstellt.&#10;addService hinzugefügt.&#10;brainstroming für Diensteverwaltung hinzugefügt" />
+    <option name="LAST_COMMIT_MESSAGE" value="Klasse Services erstellt.&#10;addService hinzugefügt.&#10;brainstroming für Diensteverwaltung hinzugefügt" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -736,8 +745,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/Services.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="4" lean-forward="false" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
+        <state relative-caret-position="374">
+          <caret line="22" column="8" lean-forward="true" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
           <folding>
             <element signature="e#228#229#0" expanded="true" />
             <element signature="e#272#273#0" expanded="true" />
