@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Start extends WizardMain {
+public class Start extends WizardWindow {
 
     JPanel mainPanel;
 
@@ -30,7 +30,7 @@ public class Start extends WizardMain {
         this.setNextButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new NewBusiness((WizardMain) SwingUtilities.getRoot((Component) e.getSource()));
+                new NewBusiness((WizardWindow) SwingUtilities.getRoot((Component) e.getSource()));
             }
         });
 

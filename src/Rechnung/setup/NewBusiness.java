@@ -6,11 +6,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class NewBusiness extends WizardMain {
+public class NewBusiness extends WizardWindow {
     private JPanel mainPanel;
-    private WizardMain retrunWindow;
+    private WizardWindow retrunWindow;
 
-    public NewBusiness(WizardMain retrunWindow) throws HeadlessException {
+    public NewBusiness(WizardWindow retrunWindow) throws HeadlessException {
         super("neue Unternehmung erstellen...");
         this.retrunWindow = retrunWindow;
         initComponents();

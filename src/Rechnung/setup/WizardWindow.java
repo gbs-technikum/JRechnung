@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public abstract class WizardMain extends JFrame {
+public abstract class WizardWindow extends JFrame {
 
     private JPanel jpWirzardControl;
     private  JPanel jpButtons;
@@ -13,7 +13,7 @@ public abstract class WizardMain extends JFrame {
     private JButton jbtnBack;
     private JButton jbtnNext;
 
-    public WizardMain(String name) throws HeadlessException {
+    public WizardWindow(String name) throws HeadlessException {
         super(name);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.initComponents();
