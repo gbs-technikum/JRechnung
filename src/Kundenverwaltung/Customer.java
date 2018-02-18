@@ -6,7 +6,6 @@ package Kundenverwaltung;
  */
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Customer {
 
@@ -17,30 +16,25 @@ public class Customer {
     private String houseNumber;
     private String postCode;
     private String village;
+    private String land;
+
     private Contacts mailAddresses;
     private Contacts phoneNumbers;
     private Contacts faxNumbers;
 
-    public Customer() {
-        id = -1;
-        mailAddresses = new Contacts();
-        phoneNumbers = new Contacts();
-        faxNumbers = new Contacts();
-    }
-
-    public Customer(String name, String forename, String street, String houseNumber, String postCode, String village) {
-        this();
+    public Customer(int id, String name, String forename, String street, String houseNumber, String postCode, String village, String land) {
+        this.id = id;
         this.name = name;
         this.forename = forename;
         this.street = street;
         this.houseNumber = houseNumber;
         this.postCode = postCode;
         this.village = village;
-    }
+        this.land = land;
 
-    public Customer(int id, String name, String forename, String street, String houseNumber, String postCode, String village) {
-        this(name, forename, street, houseNumber, postCode, village); // Must be the first statement in the constructor
-        this.id = id;
+        mailAddresses = new Contacts();
+        phoneNumbers = new Contacts();
+        faxNumbers = new Contacts();
     }
 
     public int getId() {
@@ -99,11 +93,19 @@ public class Customer {
         this.village = village;
     }
 
+    public String getLand() {
+        return land;
+    }
+
+    public void setLand(String land) {
+        this.land = land;
+    }
+
     /**
      *
      * @return Returns the ArrayList of the MailAddresses
      */
-    public ArrayList<String> getArrayListMailAddresses() {
+    public ArrayList<String> getMailAddresses() {
         return mailAddresses.getContactDatas();
     }
 
@@ -123,7 +125,7 @@ public class Customer {
      *
      * @return Returns the ArrayList of the PhoneNumbers
      */
-    public ArrayList<String> getArrayListPhoneNumbers() {
+    public ArrayList<String> getPhoneNumbers() {
         return phoneNumbers.getContactDatas();
     }
 
@@ -143,7 +145,7 @@ public class Customer {
      *
      * @return Returns the ArrayList of the FaxNumbers
      */
-    public ArrayList<String> getArrayListFaxNumbers() {
+    public ArrayList<String> getFaxNumbers() {
         return faxNumbers.getContactDatas();
     }
 
@@ -163,23 +165,39 @@ public class Customer {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Customer customer = (Customer) o;
-        return id == customer.id &&
-                Objects.equals(name, customer.name) &&
-                Objects.equals(forename, customer.forename) &&
-                Objects.equals(street, customer.street) &&
-                Objects.equals(houseNumber, customer.houseNumber) &&
-                Objects.equals(postCode, customer.postCode) &&
-                Objects.equals(village, customer.village) &&
-                Objects.equals(mailAddresses, customer.mailAddresses) &&
-                Objects.equals(phoneNumbers, customer.phoneNumbers) &&
-                Objects.equals(faxNumbers, customer.faxNumbers);
+
+        if (id != customer.id) return false;
+        if (name != null ? !name.equals(customer.name) : customer.name != null) return false;
+        if (forename != null ? !forename.equals(customer.forename) : customer.forename != null) return false;
+        if (street != null ? !street.equals(customer.street) : customer.street != null) return false;
+        if (houseNumber != null ? !houseNumber.equals(customer.houseNumber) : customer.houseNumber != null)
+            return false;
+        if (postCode != null ? !postCode.equals(customer.postCode) : customer.postCode != null) return false;
+        if (village != null ? !village.equals(customer.village) : customer.village != null) return false;
+        if (land != null ? !land.equals(customer.land) : customer.land != null) return false;
+        if (mailAddresses != null ? !mailAddresses.equals(customer.mailAddresses) : customer.mailAddresses != null)
+            return false;
+        if (phoneNumbers != null ? !phoneNumbers.equals(customer.phoneNumbers) : customer.phoneNumbers != null)
+            return false;
+        return faxNumbers != null ? faxNumbers.equals(customer.faxNumbers) : customer.faxNumbers == null;
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(id, name, forename, street, houseNumber, postCode, village, mailAddresses, phoneNumbers, faxNumbers);
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (forename != null ? forename.hashCode() : 0);
+        result = 31 * result + (street != null ? street.hashCode() : 0);
+        result = 31 * result + (houseNumber != null ? houseNumber.hashCode() : 0);
+        result = 31 * result + (postCode != null ? postCode.hashCode() : 0);
+        result = 31 * result + (village != null ? village.hashCode() : 0);
+        result = 31 * result + (land != null ? land.hashCode() : 0);
+        result = 31 * result + (mailAddresses != null ? mailAddresses.hashCode() : 0);
+        result = 31 * result + (phoneNumbers != null ? phoneNumbers.hashCode() : 0);
+        result = 31 * result + (faxNumbers != null ? faxNumbers.hashCode() : 0);
+        return result;
     }
 
     @Override
@@ -192,6 +210,7 @@ public class Customer {
                 ", houseNumber='" + houseNumber + '\'' +
                 ", postCode='" + postCode + '\'' +
                 ", village='" + village + '\'' +
+                ", land='" + land + '\'' +
                 ", mailAddresses=" + mailAddresses +
                 ", phoneNumbers=" + phoneNumbers +
                 ", faxNumbers=" + faxNumbers +

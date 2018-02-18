@@ -21,11 +21,7 @@ class Contacts {
      * @return Returns a new ArrayList of ContactDatas
      */
     public ArrayList<String> getContactDatas() {
-        ArrayList<String> returnContactDatas = new ArrayList<>();
-        for (String contact:contactDatas) {
-            returnContactDatas.add(contact);
-        }
-        return returnContactDatas;
+        return contactDatas;
     }
 
     public void addContact(String contact){

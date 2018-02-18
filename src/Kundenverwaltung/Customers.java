@@ -20,8 +20,19 @@ public class Customers {
         customers.add(customer);
     }
 
-    public boolean removeCustomer(Customer customer){
+    public Customer getCustomerById(int id){
         Iterator iterator = customers.iterator();
+        while (iterator.hasNext()){
+            Customer customer = (Customer) iterator.next();
+            if(id == customer.getId()){
+                return customer;
+            }
+        }
+        return null;
+    }
+
+    public boolean removeCustomer(Customer customer){
+        /*Iterator iterator = customers.iterator();
         while (iterator.hasNext()){
             Customer newCustomer = (Customer) iterator.next();
             if(newCustomer.equals(customer)){
@@ -29,7 +40,16 @@ public class Customers {
                 return true;
             }
         }
-        return false;
+        return false;*/
+        return customers.remove(customer);
+    }
+
+    public ArrayList<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(ArrayList<Customer> customers) {
+        this.customers = customers;
     }
 
     @Override
