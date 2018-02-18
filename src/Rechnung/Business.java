@@ -2,6 +2,7 @@ package Rechnung;
 
 public class Business {
 
+    private String id;
     private String name;
     private String proprietor;
     private String street;
@@ -10,13 +11,22 @@ public class Business {
     private LegalForm legalForm;
 
 
-    public Business(String name, String proprietor, String street, String streetNumber, String postcode, LegalForm legalForm) {
+    public Business(String id, String name, String proprietor, String street, String streetNumber, String postcode, LegalForm legalForm) {
+        this.id = id;
         this.name = name;
         this.proprietor = proprietor;
         this.street = street;
         this.streetNumber = streetNumber;
         this.postcode = postcode;
         this.legalForm = legalForm;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

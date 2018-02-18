@@ -1,5 +1,7 @@
 package Rechnung;
 
+import org.apache.poi.hsmf.datatypes.StringChunk;
+
 public interface BillEntry {
 
     double getTaxRateInPercent();

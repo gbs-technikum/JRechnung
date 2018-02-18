@@ -11,7 +11,18 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) {
-        new MainWindow();
+
+        Logger logger = Publisher.getLogger();
+
+        logger.loginfo("Start...");
+
+        SecurityProvider sp = Publisher.getSecurityProvider();
+
+
+        MainWindow mainWindow = new MainWindow();
+
+        ConfigDialog frame = new BusinessConfigDialog(mainWindow, "No min max buttons");
+        frame.setVisible(true);
     }
 
 }
