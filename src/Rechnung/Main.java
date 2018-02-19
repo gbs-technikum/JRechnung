@@ -18,7 +18,6 @@ public class Main {
 
         SecurityProvider sp = Publisher.getSecurityProvider();
 
-
         MainWindow mainWindow = new MainWindow();
 
         ConfigDialog frame = new BusinessConfigDialog(mainWindow, "No min max buttons");
