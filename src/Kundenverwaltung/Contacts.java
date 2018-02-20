@@ -6,7 +6,6 @@ package Kundenverwaltung;
 */
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 class Contacts {
 
@@ -33,15 +32,7 @@ class Contacts {
     }
 
     public boolean removeContact(String contact){
-        Iterator<String> iterator = contactDatas.iterator();
-        while (iterator.hasNext()){
-            String newContact = iterator.next();
-            if(newContact.equals(contact)){
-                iterator.remove();
-                return true;
-            }
-        }
-        return false;
+        return contactDatas.remove(contact);
     }
 
     @Override

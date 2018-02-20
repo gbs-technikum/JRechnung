@@ -32,16 +32,18 @@ public class Customers {
     }
 
     public boolean removeCustomer(Customer customer){
-        /*Iterator iterator = customers.iterator();
-        while (iterator.hasNext()){
-            Customer newCustomer = (Customer) iterator.next();
-            if(newCustomer.equals(customer)){
-                iterator.remove();
-                return true;
-            }
-        }
-        return false;*/
         return customers.remove(customer);
+    }
+
+    public void changeCustomer(Customer customer, int id, String name, String forename, String street, String houseNumber, String postCode, String village, String land){
+        customer.setId(id);
+        customer.setName(name);
+        customer.setForename(forename);
+        customer.setStreet(street);
+        customer.setHouseNumber(houseNumber);
+        customer.setPostCode(postCode);
+        customer.setVillage(village);
+        customer.setLand(land);
     }
 
     public ArrayList<Customer> getCustomers() {

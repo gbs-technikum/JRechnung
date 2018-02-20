@@ -15,6 +15,9 @@ public class CustomerMain {
             setCustomerService(new CustomerService());
             importCustomerData();
             setCustomerWindow(new CustomerWindow(this));
+            for (Customer customer:customers.getCustomers()) {
+                customerWindow.getCbKunden().addItem(CustomerHelper.getStringForCustomerComboBox(customer));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

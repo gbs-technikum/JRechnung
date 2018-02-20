@@ -3,6 +3,8 @@ package Kundenverwaltung.View;
 import Kundenverwaltung.Listener.ContactListener;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
 
 public class PanelContact extends JPanel{
 
@@ -15,14 +17,16 @@ public class PanelContact extends JPanel{
 
     private CustomerWindow customerWindow;
 
-    public PanelContact(String contactType, CustomerWindow customerWindow) {
+    public PanelContact(String title, CustomerWindow customerWindow) {
         super();
         this.customerWindow = customerWindow;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setBorder(new TitledBorder(title));
         tvContact = new JTextField();
         cbContact = new JComboBox<>();
-        panelUp = new JPanel();
+        panelUp = new JPanel(new GridLayout(1, 1));
         panelDown = new JPanel();
+        panelDown.setLayout(new GridLayout(2, 1));
         buttonAdd = new JButton("Hinzufügen");
         buttonDelete = new JButton("Löschen");
 

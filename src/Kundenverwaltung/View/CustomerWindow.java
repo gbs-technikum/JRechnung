@@ -4,6 +4,7 @@ import Kundenverwaltung.CustomerMain;
 import Kundenverwaltung.Listener.CustomerListener;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 
 public class CustomerWindow extends JFrame {
@@ -33,13 +34,21 @@ public class CustomerWindow extends JFrame {
         cbKunden = new JComboBox<>();
 
         tvId = new JTextField();
+        tvId.setBorder(new TitledBorder("Kundennummer"));
         tvName = new JTextField();
+        tvName.setBorder(new TitledBorder("Name"));
         tvForename = new JTextField();
+        tvForename.setBorder(new TitledBorder("Vorname"));
         tvStreet = new JTextField();
+        tvStreet.setBorder(new TitledBorder("Straße"));
         tvHouseNumber = new JTextField();
+        tvHouseNumber.setBorder(new TitledBorder("Hausnummer"));
         tvPostCode = new JTextField();
+        tvPostCode.setBorder(new TitledBorder("Postleitzahl"));
         tvVillage = new JTextField();
+        tvVillage.setBorder(new TitledBorder("Ort"));
         tvLand = new JTextField();
+        tvLand.setBorder(new TitledBorder("Land"));
 
         panelEmail = new PanelContact("E-Mail", this);
         panelPhone = new PanelContact("Telefon", this);
@@ -91,7 +100,7 @@ public class CustomerWindow extends JFrame {
         buttonChange.addActionListener(customerListener);
         buttonDelete.addActionListener(customerListener);
         buttonNew.addActionListener(customerListener);
-        cbKunden.addItemListener(customerListener);
+        cbKunden.addActionListener(customerListener);
     }
 
     public void reset(){

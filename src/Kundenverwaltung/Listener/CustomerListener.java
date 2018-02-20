@@ -8,11 +8,9 @@ import Kundenverwaltung.View.CustomerWindow;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.sql.SQLException;
 
-public class CustomerListener implements ActionListener, ItemListener{
+public class CustomerListener implements ActionListener{
 
     private CustomerWindow customerWindow;
     private Integer idFromSelectedCustomer;
@@ -29,10 +27,12 @@ public class CustomerListener implements ActionListener, ItemListener{
         if(e.getSource() == customerWindow.getButtonAdd()){
             try {
                 Customer customer = new Customer(new Integer(customerWindow.getTvId().getText()), customerWindow.getTvName().getText(), customerWindow.getTvForename().getText(), customerWindow.getTvStreet().getText(), customerWindow.getTvHouseNumber().getText(), customerWindow.getTvPostCode().getText(), customerWindow.getTvVillage().getText(), customerWindow.getTvLand().getText());
+                customer.setMailAddresses(CustomerHelper.getStringArrayListFromStringComboBox(customerWindow.getPanelEmail().getCbContact()));
+                customer.setPhoneNumbers(CustomerHelper.getStringArrayListFromStringComboBox(customerWindow.getPanelPhone().getCbContact()));
+                customer.setFaxNumbers(CustomerHelper.getStringArrayListFromStringComboBox(customerWindow.getPanelFax().getCbContact()));
                 customerMain.getCustomers().addCustomer(customer);
                 customerMain.getCustomerService().saveCustomer(customer);
                 customerWindow.getCbKunden().addItem(CustomerHelper.getStringForCustomerComboBox(customer));
-                reset();
             } catch (SQLException e1) {
                 e1.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Daten konnten nicht gespeichert werden!\nBitte überprüfen Sie, ob die Kundennummer vergeben ist!", "Fehlermeldung",  JOptionPane.ERROR_MESSAGE);
@@ -44,7 +44,20 @@ public class CustomerListener implements ActionListener, ItemListener{
             try {
                 if(idFromSelectedCustomer != null){
                     Customer customer = customerMain.getCustomers().getCustomerById(idFromSelectedCustomer);
+                    customerMain.getCustomers().changeCustomer(customer,
+                            new Integer(customerWindow.getTvId().getText()),
+                            customerWindow.getTvName().getText(),
+                            customerWindow.getTvForename().getText(),
+                            customerWindow.getTvStreet().getText(),
+                            customerWindow.getTvHouseNumber().getText(),
+                            customerWindow.getTvPostCode().getText(),
+                            customerWindow.getTvVillage().getText(),
+                            customerWindow.getTvLand().getText());
+                    customer.setMailAddresses(CustomerHelper.getStringArrayListFromStringComboBox(customerWindow.getPanelEmail().getCbContact()));
+                    customer.setPhoneNumbers(CustomerHelper.getStringArrayListFromStringComboBox(customerWindow.getPanelPhone().getCbContact()));
+                    customer.setFaxNumbers(CustomerHelper.getStringArrayListFromStringComboBox(customerWindow.getPanelFax().getCbContact()));
                     customerMain.getCustomerService().changeCustomer(idFromSelectedCustomer, customer);
+                    idFromSelectedCustomer = customer.getId();
                     customerWindow.getCbKunden().setSelectedItem(CustomerHelper.getStringForCustomerComboBox(customer));
                 }else{
                     JOptionPane.showMessageDialog(null, "Sie müssen einen Kunden auswählen!", "Fehlermeldung",  JOptionPane.ERROR_MESSAGE);
@@ -52,7 +65,7 @@ public class CustomerListener implements ActionListener, ItemListener{
             } catch (SQLException e1) {
                 e1.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Daten konnten nicht geändert werden!\nBitte überprüfen Sie, ob die evtl. neue Kundennummer vergeben ist!", "Fehlermeldung",  JOptionPane.ERROR_MESSAGE);
-            } catch (NullPointerException e1){
+            } catch (NumberFormatException e1){
                 JOptionPane.showMessageDialog(null, "Sie müssen eine Kundennummer als Zahl zwischen -2.147.483.648 und 2.147.483.647 eingeben!", "Fehlermeldung",  JOptionPane.ERROR_MESSAGE);
             }
         }else if(e.getSource() == customerWindow.getButtonDelete()){
@@ -60,6 +73,8 @@ public class CustomerListener implements ActionListener, ItemListener{
                 if(idFromSelectedCustomer != null){
                     customerWindow.getCbKunden().removeItem(customerWindow.getCbKunden().getSelectedItem());
                     customerMain.getCustomerService().removeCustomer(idFromSelectedCustomer);
+                    Customer customer = customerMain.getCustomers().getCustomerById(idFromSelectedCustomer);
+                    customerMain.getCustomers().removeCustomer(customer);
                     reset();
                 }else {
                     JOptionPane.showMessageDialog(null, "Sie müssen einen Kunden auswählen!", "Fehlermeldung",  JOptionPane.ERROR_MESSAGE);
@@ -69,12 +84,22 @@ public class CustomerListener implements ActionListener, ItemListener{
             }
         }else if(e.getSource() == customerWindow.getButtonNew()){
             reset();
+        }else if(e.getSource() == customerWindow.getCbKunden()){
+            reset();
+            idFromSelectedCustomer = CustomerHelper.getCustomerIdFromSelectedItem(customerWindow.getCbKunden().getSelectedItem().toString());
+            Customer customer = customerMain.getCustomers().getCustomerById(idFromSelectedCustomer);
+            customerWindow.getTvId().setText(String.valueOf(customer.getId()));
+            customerWindow.getTvName().setText(customer.getName());
+            customerWindow.getTvForename().setText(customer.getForename());
+            customerWindow.getTvStreet().setText(customer.getStreet());
+            customerWindow.getTvHouseNumber().setText(customer.getHouseNumber());
+            customerWindow.getTvPostCode().setText(customer.getPostCode());
+            customerWindow.getTvVillage().setText(customer.getVillage());
+            customerWindow.getTvLand().setText(customer.getLand());
+            CustomerHelper.addStringArrayListToStringComboBox(customerWindow.getPanelEmail().getCbContact(), customer.getMailAddresses());
+            CustomerHelper.addStringArrayListToStringComboBox(customerWindow.getPanelPhone().getCbContact(), customer.getPhoneNumbers());
+            CustomerHelper.addStringArrayListToStringComboBox(customerWindow.getPanelFax().getCbContact(), customer.getFaxNumbers());
         }
-    }
-
-    @Override
-    public void itemStateChanged(ItemEvent e) {
-
     }
 
     private void reset(){

@@ -29,13 +29,35 @@ public class CustomerService {
 
     public Customers readAllCustomers() throws SQLException {
         Customers customers = new Customers();
-        statement.executeQuery("SELECT id, surname, forename, street, housenumber, postcode, village, land from customer");
+        ResultSet resultSet = statement.executeQuery("SELECT id, surname, forename, street, housenumber, postcode, village, land FROM customer");
+        while (resultSet.next()){
+            Customer customer = new Customer(
+                    resultSet.getInt(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4),
+                    resultSet.getString(5),
+                    resultSet.getString(6),
+                    resultSet.getString(7),
+                    resultSet.getString(8)
+            );
+            customers.addCustomer(customer);
+        }
+        for (Customer customer:customers.getCustomers()) {
+            customer.setMailAddresses(readAllContactsFromCustomer("email", customer.getId()));
+            customer.setPhoneNumbers(readAllContactsFromCustomer("phone", customer.getId()));
+            customer.setFaxNumbers(readAllContactsFromCustomer("fax", customer.getId()));
+        }
         return customers;
     }
 
     public ArrayList<String> readAllContactsFromCustomer(String tableName, int customer_id) throws SQLException {
-        ResultSet resultSet = statement.executeQuery("SELECT address FROM " + tableName + ", WHERE customer_id=" + customer_id);
-        return null;
+        ArrayList<String> contacts = new ArrayList<>();
+        ResultSet resultSet = statement.executeQuery("SELECT address FROM " + tableName + " WHERE customer_id=" + customer_id);
+        while (resultSet.next()){
+            contacts.add(resultSet.getString(1));
+        }
+        return contacts;
     }
 
     public void saveCustomer(Customer customer) throws SQLException {
@@ -58,12 +80,13 @@ public class CustomerService {
 
     public void changeCustomer(int old_customer_id, Customer customer) throws SQLException {
         statement.executeUpdate("UPDATE customer set ID=" + customer.getId()
-                + ", surname=" + customer.getName() + ", "
-                + ", street=" + customer.getStreet()
-                + ", housenumber=" + customer.getHouseNumber()
-                + ", postcode=" + customer.getPostCode()
-                + ", village=" + customer.getVillage()
-                + ", land=" + customer.getLand() + "WHERE ID=" + old_customer_id + ";");
+                + ", surname='" + customer.getName()
+                + "', forename='" + customer.getForename()
+                + "', street='" + customer.getStreet()
+                + "', housenumber='" + customer.getHouseNumber()
+                + "', postcode='" + customer.getPostCode()
+                + "', village='" + customer.getVillage()
+                + "', land='" + customer.getLand() + "' WHERE ID=" + old_customer_id + ";");
         changeAllContactsFromCustomer("email", old_customer_id, customer.getId(), customer.getMailAddresses());
         changeAllContactsFromCustomer("phone", old_customer_id, customer.getId(), customer.getPhoneNumbers());
         changeAllContactsFromCustomer("fax", old_customer_id, customer.getId(), customer.getFaxNumbers());
