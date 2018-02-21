@@ -42,8 +42,9 @@ public class SecurityProvider {
     }
 
     public boolean firstInit(String password) throws InvalidKeySpecException, NoSuchAlgorithmException, SQLException {
-        KeySecurityHelper keySecurityHelper = new KeySecurityHelper();
-        this.secretKey = keySecurityHelper.firstInit(password);
+       // KeySecurityHelper keySecurityHelper = new KeySecurityHelper();
+     //   this.secretKey = keySecurityHelper.firstInit(password);
+        KeySecurityHelper.firstInit(password);
         if(this.secretKey != null){
             this.setLock(false);
             return true;
@@ -322,7 +323,7 @@ public class SecurityProvider {
                 return key;
             }
 
-            public SecretKey firstInit(String password) throws InvalidKeySpecException, NoSuchAlgorithmException, SQLException {
+            public static SecretKey firstInit(String password) throws InvalidKeySpecException, NoSuchAlgorithmException, SQLException {
                 try {
                     Cipher cipher = Cipher.getInstance(SecurityProvider.ALGORITHM);
 

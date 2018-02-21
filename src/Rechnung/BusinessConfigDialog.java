@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 public class BusinessConfigDialog extends ConfigDialog{
 
     private JPanel mainPanel;
+    private JTextField jtfName, jtfProprietor, jtfStreet, jtfStreetNumber, jtfPostcode;
+    private JComboBox<String> jcbxLegalform;
 
     public BusinessConfigDialog(JFrame frame, String str) {
         super(frame, str);
@@ -17,7 +19,7 @@ public class BusinessConfigDialog extends ConfigDialog{
         this.initEvents();
     }
 
-    private void initEvents() {
+    private void initEvents(){
         this.setOkayButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -42,6 +44,14 @@ public class BusinessConfigDialog extends ConfigDialog{
 
     private void initComponents() {
         this.mainPanel = new JPanel();
+        this.jtfName = new JTextField();
+        this.jtfProprietor = new JTextField();
+        this.jtfStreet = new JTextField();
+        this.jtfStreetNumber = new JTextField();
+        this.jtfPostcode = new JTextField();
+
+      //  this.jcbxLegalform = new
+
 
         this.addMainPanel(this.mainPanel);
     }

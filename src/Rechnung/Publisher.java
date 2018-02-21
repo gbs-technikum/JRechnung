@@ -1,14 +1,17 @@
 package Rechnung;
 
+import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class Publisher {
 
     private static Logger loggerInstance;
     private static SecurityProvider securityProviderInstance;
-    private static final String DB_CONNECTION_STRING = "jdbc:sqlite://home//mirko//jrechnung.sqlite";
     private static Connection dbConnectionInstance;
 
 
@@ -38,12 +41,20 @@ public class Publisher {
             }
         } catch (Exception e) {
             if(Debug.ON){
-                System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getStackTrace().toString());
+                System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getMessage());
             }
         }
 
         if(!(dbConnectionInstance instanceof Connection)){
-            dbConnectionInstance = DriverManager.getConnection(Publisher.DB_CONNECTION_STRING);
+            File f, dbFile = null;
+            String DB_CONNECTION_STRING = "jdbc:sqlite:";
+            f = new File(Publisher.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+            dbFile = new File(f.getPath() + "/jrechnung.sqlite");
+            if(!dbFile.exists() || !dbFile.canWrite()){
+                throw new SQLException("DB File Error");
+            }
+            DB_CONNECTION_STRING += dbFile.getAbsoluteFile();
+            dbConnectionInstance = DriverManager.getConnection(DB_CONNECTION_STRING);
         }
 
         return dbConnectionInstance;
