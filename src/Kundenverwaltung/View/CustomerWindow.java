@@ -25,9 +25,11 @@ public class CustomerWindow extends JFrame {
         super("Kundenverwaltung");
         this.customerMain = customerMain;
         initComponents();
-        this.pack();
+        this.setSize(800, 393);
+        this.setResizable(false);
         this.setVisible(true);
         initAction();
+        System.out.println("Höhe: " + this.getHeight());
     }
 
     public void initComponents(){

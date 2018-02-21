@@ -20,23 +20,23 @@ public class PanelContact extends JPanel{
     public PanelContact(String title, CustomerWindow customerWindow) {
         super();
         this.customerWindow = customerWindow;
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setLayout(new GridLayout(4, 1));
         this.setBorder(new TitledBorder(title));
         tvContact = new JTextField();
         cbContact = new JComboBox<>();
-        panelUp = new JPanel(new GridLayout(1, 1));
+        panelUp = new JPanel(new GridLayout(2, 1));
         panelDown = new JPanel();
         panelDown.setLayout(new GridLayout(2, 1));
         buttonAdd = new JButton("Hinzufügen");
         buttonDelete = new JButton("Löschen");
 
-        panelUp.add(tvContact);
-        panelUp.add(buttonAdd);
-        panelDown.add(cbContact);
-        panelDown.add(buttonDelete);
+        this.add(tvContact);
+        this.add(buttonAdd);
+        this.add(cbContact);
+        this.add(buttonDelete);
 
-        this.add(panelUp);
-        this.add(panelDown);
+        //this.add(panelUp);
+        //this.add(panelDown);
 
         contactListener = new ContactListener(this);
 

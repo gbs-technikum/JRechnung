@@ -58,6 +58,7 @@ public class CustomerListener implements ActionListener{
                     customer.setFaxNumbers(CustomerHelper.getStringArrayListFromStringComboBox(customerWindow.getPanelFax().getCbContact()));
                     customerMain.getCustomerService().changeCustomer(idFromSelectedCustomer, customer);
                     idFromSelectedCustomer = customer.getId();
+                    System.out.println(CustomerHelper.getStringForCustomerComboBox(customer));
                     customerWindow.getCbKunden().setSelectedItem(CustomerHelper.getStringForCustomerComboBox(customer));
                 }else{
                     JOptionPane.showMessageDialog(null, "Sie müssen einen Kunden auswählen!", "Fehlermeldung",  JOptionPane.ERROR_MESSAGE);
@@ -71,11 +72,10 @@ public class CustomerListener implements ActionListener{
         }else if(e.getSource() == customerWindow.getButtonDelete()){
             try {
                 if(idFromSelectedCustomer != null){
-                    customerWindow.getCbKunden().removeItem(customerWindow.getCbKunden().getSelectedItem());
                     customerMain.getCustomerService().removeCustomer(idFromSelectedCustomer);
                     Customer customer = customerMain.getCustomers().getCustomerById(idFromSelectedCustomer);
                     customerMain.getCustomers().removeCustomer(customer);
-                    reset();
+                    customerWindow.getCbKunden().removeItem(customerWindow.getCbKunden().getSelectedItem());
                 }else {
                     JOptionPane.showMessageDialog(null, "Sie müssen einen Kunden auswählen!", "Fehlermeldung",  JOptionPane.ERROR_MESSAGE);
                 }
@@ -87,7 +87,9 @@ public class CustomerListener implements ActionListener{
         }else if(e.getSource() == customerWindow.getCbKunden()){
             reset();
             idFromSelectedCustomer = CustomerHelper.getCustomerIdFromSelectedItem(customerWindow.getCbKunden().getSelectedItem().toString());
+            System.out.println(idFromSelectedCustomer);
             Customer customer = customerMain.getCustomers().getCustomerById(idFromSelectedCustomer);
+            System.out.println(customer);
             customerWindow.getTvId().setText(String.valueOf(customer.getId()));
             customerWindow.getTvName().setText(customer.getName());
             customerWindow.getTvForename().setText(customer.getForename());
