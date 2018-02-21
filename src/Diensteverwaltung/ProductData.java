@@ -25,8 +25,8 @@ public class ProductData {
         return productData;
     }
 
-    public void addProduct(String product){
-        productData.add(product);
+    public void addProduct(String Product){
+        productData.add(Product);
     }
 
     public void setProductData(ArrayList<String> productData) {
@@ -37,8 +37,6 @@ public class ProductData {
         return productData.remove(product);
     }
 
-    @Override
-    public String toString() {
-        return super.toString();
+
     }
-}
+

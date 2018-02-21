@@ -2,6 +2,12 @@ package Diensteverwaltung;
 
 import java.util.Objects;
 
+/**
+ * @author Richter Nadine
+ *
+ * Class with Prodcut information
+  **/
+
 public class Product {
 
     private int id;
@@ -50,6 +56,8 @@ public class Product {
     }
 
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -63,7 +71,15 @@ public class Product {
         return false;
     }
 
-  
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id: " + id +
+                "Name: " + name +
+                "Beschreibung: " + description +
+                "Preis: " + price;
+    }
+
 
 
 } // Ende Klasse
