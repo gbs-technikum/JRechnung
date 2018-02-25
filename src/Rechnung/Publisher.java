@@ -1,18 +1,19 @@
 package Rechnung;
 
+import Rechnung.model.Model;
+import Rechnung.model.SecurityProvider;
+
 import java.io.File;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class Publisher {
 
     private static Logger loggerInstance;
     private static SecurityProvider securityProviderInstance;
     private static Connection dbConnectionInstance;
+    private static Model modelInstance;
 
 
     public static Logger getLogger() {
@@ -50,6 +51,7 @@ public class Publisher {
             String DB_CONNECTION_STRING = "jdbc:sqlite:";
             f = new File(Publisher.class.getProtectionDomain().getCodeSource().getLocation().getPath());
             dbFile = new File(f.getPath() + "/jrechnung.sqlite");
+            System.out.println(dbFile.getAbsoluteFile());
             if(!dbFile.exists() || !dbFile.canWrite()){
                 throw new SQLException("DB File Error");
             }
@@ -58,6 +60,14 @@ public class Publisher {
         }
 
         return dbConnectionInstance;
+    }
+
+    public static Model getModel(){
+        if(!(modelInstance instanceof Model)){
+            modelInstance = new Model();
+        }
+
+        return modelInstance;
     }
 
 }
