@@ -59,7 +59,8 @@ public class CustomerListener implements ActionListener{
                     customerMain.getCustomerService().changeCustomer(idFromSelectedCustomer, customer);
                     idFromSelectedCustomer = customer.getId();
                     System.out.println(CustomerHelper.getStringForCustomerComboBox(customer));
-                    customerWindow.getCbKunden().setSelectedItem(CustomerHelper.getStringForCustomerComboBox(customer));
+                    //customerWindow.getCbKunden().setSelectedItem(CustomerHelper.getStringForCustomerComboBox(customer));
+
                 }else{
                     JOptionPane.showMessageDialog(null, "Sie müssen einen Kunden auswählen!", "Fehlermeldung",  JOptionPane.ERROR_MESSAGE);
                 }
