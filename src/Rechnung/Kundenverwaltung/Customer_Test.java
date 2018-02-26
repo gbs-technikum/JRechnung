@@ -1,5 +1,8 @@
 package Rechnung.Kundenverwaltung;
 
+import Rechnung.model.CustomerService;
+
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 
 public class Customer_Test {
@@ -28,9 +31,11 @@ public class Customer_Test {
         try {
             customerService = new CustomerService();
             customerService.saveAllCustomers(customers);
-            customerService.close();
+       //     customerService.close();
             System.out.println(customers);
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
     }

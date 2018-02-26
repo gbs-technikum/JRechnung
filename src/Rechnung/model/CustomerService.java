@@ -1,6 +1,8 @@
-package Rechnung.Kundenverwaltung;
+package Rechnung.model;
 
 import Rechnung.Debug;
+import Rechnung.Kundenverwaltung.Customer;
+import Rechnung.Kundenverwaltung.Customers;
 import Rechnung.Publisher;
 import Rechnung.model.SecurityProvider;
 
@@ -14,6 +16,8 @@ public class CustomerService {
     private static final String SQL_INSERT = "INSERT INTO customer (id, surname, forename, street, housenumber, postcode, village, land) VALUES (?,?,?,?,?,?,?,?);";
     private static final String SQL_UPDATE = "UPDATE customer set ID=?, surname=?, forename=?, street=?, housenumber=?, postcode=?, village=?, land=? WHERE ID=?";
     private static final String SQL_DELETE = "DELETE FROM customer WHERE id = ?";
+    private static final String SQL_INSERT_CONTACTS = "INSERT INTO ? (address, customer_id) VALUES (?,?)";
+    private static final String SQL_DELETE_CONTACTS =  "DELETE FROM ? WHERE customer_id = ?";
 
     public CustomerService() throws SQLException {
 
@@ -23,6 +27,7 @@ public class CustomerService {
         Connection connection = Publisher.getDBConnection();
         Statement statement = connection.createStatement();
         Customers customers = new Customers();
+        SecurityProvider securityProvider = Publisher.getSecurityProvider();
         try {
             ResultSet resultSet = statement.executeQuery(SQL_QUERY);
             while (resultSet.next()) {
@@ -185,11 +190,29 @@ public class CustomerService {
 
             }
         }
-
     }
 
     public void saveContactFromCustomer(String tableName, int customer_id, String address) throws SQLException {
-   //     statement.executeUpdate("INSERT INTO " + tableName + " (address, customer_id) VALUES ('" + address + "', " + customer_id + ");");
+        Connection connection = Publisher.getDBConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_CONTACTS);
+
+        try{
+            preparedStatement.setString(1,tableName);
+            preparedStatement.setString(2,address);
+            preparedStatement.setInt(3,customer_id);
+            preparedStatement.execute();
+        }finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    if (Debug.ON) {
+                        System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getStackTrace().toString());
+                    }
+                }
+
+            }
+        }
     }
 
     public void saveAllContactsFromCustomer(String tableName, int customer_id, ArrayList<String> addresses) throws SQLException {
@@ -204,7 +227,25 @@ public class CustomerService {
     }
 
     public void removeAllContactsFromCustomer(String tableName, int customer_id) throws SQLException {
-    //    statement.executeUpdate("DELETE FROM " + tableName + " WHERE customer_id=" + customer_id + ";");
+        Connection connection = Publisher.getDBConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_CONTACTS);
+
+        try{
+            preparedStatement.setString(1,tableName);
+            preparedStatement.setInt(2,customer_id);
+            preparedStatement.execute();
+        }finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    if (Debug.ON) {
+                        System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getStackTrace().toString());
+                    }
+                }
+
+            }
+        }
     }
 
 

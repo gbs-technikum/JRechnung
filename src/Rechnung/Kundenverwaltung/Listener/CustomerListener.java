@@ -8,6 +8,7 @@ import Rechnung.Kundenverwaltung.View.CustomerWindow;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 
 public class CustomerListener implements ActionListener{
@@ -33,12 +34,16 @@ public class CustomerListener implements ActionListener{
                 customerMain.getCustomers().addCustomer(customer);
                 customerMain.getCustomerService().saveCustomer(customer);
                 customerWindow.getCbKunden().addItem(CustomerHelper.getStringForCustomerComboBox(customer));
-            } catch (SQLException e1) {
+            } /*catch (SQLException e1) {
                 e1.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Daten konnten nicht gespeichert werden!\nBitte überprüfen Sie, ob die Kundennummer vergeben ist!", "Fehlermeldung",  JOptionPane.ERROR_MESSAGE);
-            } catch (NumberFormatException e1) {
+            }*/ catch (NumberFormatException e1) {
                 e1.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Sie müssen eine Kundennummer als Zahl zwischen -2.147.483.648 und 2.147.483.647 eingeben!", "Fehlermeldung",  JOptionPane.ERROR_MESSAGE);
+            } catch (UnsupportedEncodingException e1) {
+                e1.printStackTrace();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
             }
         }else if(e.getSource() == customerWindow.getButtonChange()){
             try {
@@ -63,11 +68,15 @@ public class CustomerListener implements ActionListener{
                 }else{
                     JOptionPane.showMessageDialog(null, "Sie müssen einen Kunden auswählen!", "Fehlermeldung",  JOptionPane.ERROR_MESSAGE);
                 }
-            } catch (SQLException e1) {
+            } /*catch (SQLException e1) {
                 e1.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Daten konnten nicht geändert werden!\nBitte überprüfen Sie, ob die evtl. neue Kundennummer vergeben ist!", "Fehlermeldung",  JOptionPane.ERROR_MESSAGE);
-            } catch (NumberFormatException e1){
+            } */catch (NumberFormatException e1){
                 JOptionPane.showMessageDialog(null, "Sie müssen eine Kundennummer als Zahl zwischen -2.147.483.648 und 2.147.483.647 eingeben!", "Fehlermeldung",  JOptionPane.ERROR_MESSAGE);
+            } catch (UnsupportedEncodingException e1) {
+                e1.printStackTrace();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
             }
         }else if(e.getSource() == customerWindow.getButtonDelete()){
             try {

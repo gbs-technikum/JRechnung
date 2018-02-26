@@ -1,6 +1,7 @@
 package Rechnung.Kundenverwaltung;
 
 import Rechnung.Kundenverwaltung.View.CustomerWindow;
+import Rechnung.model.CustomerService;
 
 import java.sql.SQLException;
 
