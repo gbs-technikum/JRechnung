@@ -1,14 +1,13 @@
 package Rechnung.model;
 
 import Rechnung.Debug;
-import Rechnung.Kundenverwaltung.Customer;
-import Rechnung.Kundenverwaltung.Customers;
 import Rechnung.Publisher;
 import Rechnung.model.SecurityProvider;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerService {
     private static final String SQL_QUERY = "SELECT id, surname, forename, street, housenumber, postcode, village, land FROM customer";
@@ -23,30 +22,51 @@ public class CustomerService {
 
     }
 
-    public Customers readAllCustomers() throws SQLException {
+    public List<Customer> readAllCustomers() throws SQLException, UnsupportedEncodingException {
         Connection connection = Publisher.getDBConnection();
         Statement statement = connection.createStatement();
-        Customers customers = new Customers();
+        List<Customer> customers = new ArrayList<>();
         SecurityProvider securityProvider = Publisher.getSecurityProvider();
         try {
             ResultSet resultSet = statement.executeQuery(SQL_QUERY);
             while (resultSet.next()) {
-                Customer customer = new Customer(
-                        resultSet.getInt("id"),
-                        resultSet.getString("surname"),
-                        resultSet.getString("forename"),
-                        resultSet.getString("street"),
-                        resultSet.getString("housenumber"),
-                        resultSet.getString("postcode"),
-                        resultSet.getString("village"),
-                        resultSet.getString("land")
-                );
-                customers.addCustomer(customer);
+                String id = resultSet.getString("id");
+                String surname = securityProvider.decryptAsString(resultSet.getBytes("surname"));
+                String forename = securityProvider.decryptAsString(resultSet.getBytes("forename"));
+                String street = securityProvider.decryptAsString(resultSet.getBytes("street"));
+                String housenumber = securityProvider.decryptAsString(resultSet.getBytes("housenumber"));
+                String postcode = securityProvider.decryptAsString(resultSet.getBytes("postcode"));
+                String village = securityProvider.decryptAsString(resultSet.getBytes("village"));
+                String land = securityProvider.decryptAsString(resultSet.getBytes("land"));
+
+
+                Customer customer = new Customer(id,surname,forename,street,housenumber,postcode,village,land);
+                customers.add(customer);
             }
-            for (Customer customer : customers.getCustomers()) {
-                customer.setMailAddresses(readAllContactsFromCustomer("email", customer.getId()));
-                customer.setPhoneNumbers(readAllContactsFromCustomer("phone", customer.getId()));
-                customer.setFaxNumbers(readAllContactsFromCustomer("fax", customer.getId()));
+            for (Customer customer : customers) {
+                List<Accessibility> list = AccessibilityService.loadCustomersEMailAccessibilitys(customer.getId());
+
+                for (Accessibility accessibility : list) {
+                    customer.addEMail((EMailAccessibility)accessibility);
+                }
+
+                list = null;
+
+                list = AccessibilityService.loadCustomersFaxAccessibilitys(customer.getId());
+
+                for (Accessibility accessibility : list) {
+                    customer.addFaxNumber((FaxAccessibility) accessibility);
+                }
+
+                list = null;
+
+                list = AccessibilityService.loadCustomersTelephoneAccessibilitys(customer.getId());
+
+                for (Accessibility accessibility : list) {
+                    customer.addPhoneNumber((TelephoneAccessibility) accessibility);
+                }
+
+                list = null;
             }
         } finally {
             if (statement != null) {
@@ -65,40 +85,14 @@ public class CustomerService {
         return customers;
     }
 
-    public ArrayList<String> readAllContactsFromCustomer(String tableName, int customer_id) throws SQLException {
-        Connection connection = Publisher.getDBConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_QUERY_WITH_ID);
-        ArrayList<String> contacts = new ArrayList<>();
-        try{
-            preparedStatement.setString(1, tableName);
-            preparedStatement.setInt(2, customer_id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                contacts.add(resultSet.getString(1));
-            }
-        }finally {
-            if (preparedStatement != null) {
-                try{
-                    preparedStatement.close();
-                }catch (SQLException e){
-                    if(Debug.ON){
-                        System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getStackTrace().toString());
-                    }
-                }
-
-            }
-            preparedStatement = null;
-            connection = null;
-        }
-        return contacts;
-    }
-
     public void saveCustomer(Customer customer) throws SQLException, UnsupportedEncodingException {
         Connection connection = Publisher.getDBConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT);
         SecurityProvider securityProvider = Publisher.getSecurityProvider();
+        String id = UUIDStringGenerator.generate();
+        customer.setId(id);
         try {
-            preparedStatement.setInt(1, customer.getId());
+            preparedStatement.setString(1, id);
             preparedStatement.setBytes(2,securityProvider.encrypt(customer.getName()));
             preparedStatement.setBytes(3,securityProvider.encrypt(customer.getForename()));
             preparedStatement.setBytes(4,securityProvider.encrypt(customer.getStreet()));
@@ -108,9 +102,9 @@ public class CustomerService {
             preparedStatement.setBytes(8,securityProvider.encrypt(customer.getLand()));
 
             if(preparedStatement.execute()) {
-                saveAllContactsFromCustomer("email", customer.getId(), customer.getMailAddresses());
-                saveAllContactsFromCustomer("phone", customer.getId(), customer.getPhoneNumbers());
-                saveAllContactsFromCustomer("fax", customer.getId(), customer.getFaxNumbers());
+                AccessibilityService.saveListOfAccessibilitys(customer.getMailAddresses(),id);
+                AccessibilityService.saveListOfAccessibilitys(customer.getFaxNumbers(),id);
+                AccessibilityService.saveListOfAccessibilitys(customer.getPhoneNumbers(),id);
             }
         }finally {
             if (preparedStatement != null) {
@@ -126,14 +120,13 @@ public class CustomerService {
         }
     }
 
-    public void saveAllCustomers(Customers customers) throws UnsupportedEncodingException, SQLException {
-        for (Customer customer : customers.getCustomers()) {
-                saveCustomer(customer);
-
+    public void saveAllCustomers(List<Customer> customers) throws UnsupportedEncodingException, SQLException {
+        for (Customer customer : customers) {
+            saveCustomer(customer);
         }
     }
 
-    public void changeCustomer(int old_customer_id, Customer customer) throws SQLException, UnsupportedEncodingException {
+/*    public void changeCustomer(int old_customer_id, Customer customer) throws SQLException, UnsupportedEncodingException {
         Connection connection = Publisher.getDBConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE);
         SecurityProvider securityProvider = Publisher.getSecurityProvider();
@@ -165,9 +158,9 @@ public class CustomerService {
 
             }
         }
-    }
+    }*/
 
-    public void removeCustomer(int customer_id) throws SQLException {
+  /* public void removeCustomer(int customer_id) throws SQLException {
         Connection connection = Publisher.getDBConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE);
 
@@ -190,63 +183,9 @@ public class CustomerService {
 
             }
         }
-    }
+    }*/
 
-    public void saveContactFromCustomer(String tableName, int customer_id, String address) throws SQLException {
-        Connection connection = Publisher.getDBConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_CONTACTS);
 
-        try{
-            preparedStatement.setString(1,tableName);
-            preparedStatement.setString(2,address);
-            preparedStatement.setInt(3,customer_id);
-            preparedStatement.execute();
-        }finally {
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    if (Debug.ON) {
-                        System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getStackTrace().toString());
-                    }
-                }
-
-            }
-        }
-    }
-
-    public void saveAllContactsFromCustomer(String tableName, int customer_id, ArrayList<String> addresses) throws SQLException {
-        for (String address : addresses) {
-            saveContactFromCustomer(tableName, customer_id, address);
-        }
-    }
-
-    public void changeAllContactsFromCustomer(String tableName, int old_customer_id, int new_customer_id, ArrayList<String> addresses) throws SQLException {
-        removeAllContactsFromCustomer(tableName, old_customer_id);
-        saveAllContactsFromCustomer(tableName, new_customer_id, addresses);
-    }
-
-    public void removeAllContactsFromCustomer(String tableName, int customer_id) throws SQLException {
-        Connection connection = Publisher.getDBConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_CONTACTS);
-
-        try{
-            preparedStatement.setString(1,tableName);
-            preparedStatement.setInt(2,customer_id);
-            preparedStatement.execute();
-        }finally {
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    if (Debug.ON) {
-                        System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getStackTrace().toString());
-                    }
-                }
-
-            }
-        }
-    }
 
 
 }

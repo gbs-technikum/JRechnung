@@ -2,6 +2,7 @@ package Rechnung.control;
 
 import Rechnung.control.BusinessConfigDialogController;
 import Rechnung.control.Controller;
+import Rechnung.view.CustomersConfigDialog;
 import Rechnung.view.MainWindow;
 
 import javax.swing.*;
@@ -46,5 +47,15 @@ public class MainWindowController implements Controller {
             }
         });
         this.mainWindow.setManageBusinessButtonEnabled(true);
+        this.mainWindow.setManageCustomersButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controllerReturnStatus = ControllerReturnStatus.OK;
+
+                Controller controller = new CustomersConfigDialogController(mainWindow);
+                controller.run();
+            }
+        });
+        this.mainWindow.setManageCustomersButtonEnabled(true);
     }
 }

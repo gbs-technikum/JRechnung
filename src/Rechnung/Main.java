@@ -2,6 +2,7 @@ package Rechnung;
 
 import Rechnung.model.SecurityProvider;
 import Rechnung.control.MainWindowController;
+
 import it.sauronsoftware.junique.AlreadyLockedException;
 import it.sauronsoftware.junique.JUnique;
 import it.sauronsoftware.junique.MessageHandler;
@@ -45,7 +46,6 @@ public class Main {
         logger.loginfo("Start...");
 
         SecurityProvider sp = Publisher.getSecurityProvider();
-
 
 
         mainWindowController.run();

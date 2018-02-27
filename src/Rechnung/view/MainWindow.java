@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 public class MainWindow extends JFrame {
 
-    private JButton jbtnCreateBill, jbtnManageBusiness;
+    private JButton jbtnCreateBill, jbtnManageBusiness, jbtnManageCustomers;
     private JPanel jpCenter;
     private JPanel jpWest;
     private JTable jtblBillList;
@@ -31,10 +31,13 @@ public class MainWindow extends JFrame {
         this.jbtnManageBusiness = new JButton();
         this.jbtnCreateBill.setText("Neue Rechnung");
         this.jbtnManageBusiness.setText("Unternehmmen verwalten");
+        this.jbtnManageCustomers = new JButton();
+        this.jbtnManageCustomers.setText("Kundenverwaltung");
 
         this.jbtnManageBusiness.setEnabled(false);
-
         this.jbtnManageBusiness.setVisible(false);
+        this.jbtnManageCustomers.setEnabled(false);
+        this.jbtnManageCustomers.setVisible(false);
 
         this.jpCenter = new JPanel();
         this.jpCenter.setLayout(new BorderLayout());
@@ -49,6 +52,7 @@ public class MainWindow extends JFrame {
 
         this.jpWest.add(this.jbtnCreateBill);
         this.jpWest.add(this.jbtnManageBusiness);
+        this.jpWest.add(this.jbtnManageCustomers);
 
         this.add(jpWest, BorderLayout.WEST);
 
@@ -65,6 +69,15 @@ public class MainWindow extends JFrame {
 
     public void setManageBusinessButtonEnabled(boolean enabled){
         this.jbtnManageBusiness.setEnabled(enabled);
+    }
+
+    public void setManageCustomersButtonListener(ActionListener listener){
+        this.jbtnManageCustomers.addActionListener(listener);
+        this.jbtnManageCustomers.setVisible(true);
+    }
+
+    public void setManageCustomersButtonEnabled(boolean enabled){
+        this.jbtnManageCustomers.setEnabled(enabled);
     }
 
 
