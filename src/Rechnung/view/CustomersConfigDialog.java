@@ -2,13 +2,18 @@ package Rechnung.view;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import java.awt.*;
+import java.awt.HeadlessException;
 import java.awt.event.ActionListener;
+import java.awt.Dimension;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.util.List;
+
 
 public class CustomersConfigDialog extends ConfigDialog {
 
     private JComboBox<String> jcbxCustomers;
-    private JTextField jtfId, jtfName, jtfForename, jtfStreet, jtfHouseNumber, jtfPostCode, jtfVillage, jtfLand;
+    private JTextField jtfNumber, jtfName, jtfForename, jtfStreet, jtfHouseNumber, jtfPostCode, jtfVillage, jtfLand;
     private PanelAccessibility panelEmail, panelPhone, panelFax;
     private JButton buttonDelete, buttonNew;
     private JPanel mainPanel;
@@ -31,8 +36,8 @@ public class CustomersConfigDialog extends ConfigDialog {
 
         jcbxCustomers = new JComboBox<>();
 
-        jtfId = new JTextField();
-        jtfId.setBorder(new TitledBorder("Kundennummer"));
+        jtfNumber = new JTextField();
+        jtfNumber.setBorder(new TitledBorder("Kundennummer"));
         jtfName = new JTextField();
         jtfName.setBorder(new TitledBorder("Name"));
         jtfForename = new JTextField();
@@ -66,7 +71,7 @@ public class CustomersConfigDialog extends ConfigDialog {
         jPanelNorth.add(buttonDelete);
         jPanelNorth.add(buttonNew);
 
-        jPanelCenterCustomer.add(jtfId);
+        jPanelCenterCustomer.add(jtfNumber);
         jPanelCenterCustomer.add(jtfName);
         jPanelCenterCustomer.add(jtfForename);
         jPanelCenterCustomer.add(jtfStreet);
@@ -88,62 +93,129 @@ public class CustomersConfigDialog extends ConfigDialog {
 
         this.addMainPanel(this.mainPanel);
 
-        this.jtfId.setEnabled(false);
+        this.jtfNumber.setEnabled(false);
         this.jtfForename.setEnabled(false);
-
         this.jtfStreet.setEnabled(false);
-
         this.jtfName.setEnabled(false);
-
         this.jtfHouseNumber.setEnabled(false);
-
         this.jtfPostCode.setEnabled(false);
-
         this.jtfVillage.setEnabled(false);
-
         this.jtfLand.setEnabled(false);
-
         this.buttonDelete.setEnabled(false);
         this.buttonNew.setEnabled(false);
-        this.buttonDelete.setEnabled(false);
-
-
     }
 
-    void setIdTextFieldEnabled(boolean enabled){
-        this.jtfId.setEnabled(enabled);
+    public void setNumberTextFieldEnabled(boolean enabled){
+        this.jtfNumber.setEnabled(enabled);
     }
 
-    void setForenameTextFieldEnabled(boolean enabled){
+    public void setForenameTextFieldEnabled(boolean enabled){
         this.jtfForename.setEnabled(enabled);
     }
 
-    void setStreetTextFieldEnabled(boolean enabled){
+    public void setStreetTextFieldEnabled(boolean enabled){
         this.jtfStreet.setEnabled(enabled);
     }
 
-    void setNameTextFieldEnabled(boolean enabled){
+    public void setNameTextFieldEnabled(boolean enabled){
         this.jtfName.setEnabled(enabled);
     }
 
-    void setHouseNumberTextFieldEnabled(boolean enabled){
+    public void setHouseNumberTextFieldEnabled(boolean enabled){
         this.jtfHouseNumber.setEnabled(enabled);
     }
 
-    void setPostCodeetJTextFieldEnabled(boolean enabled){
+    public void setPostCodeetJTextFieldEnabled(boolean enabled){
         this.jtfPostCode.setEnabled(enabled);
     }
 
-    void setVillageTextFieldEnabled(boolean enabled){
+    public void setVillageTextFieldEnabled(boolean enabled){
         this.jtfVillage.setEnabled(enabled);
     }
 
-    void setLandTextFieldEnabled(boolean enabled){
+    public void setLandTextFieldEnabled(boolean enabled){
         this.jtfLand.setEnabled(enabled);
     }
 
+    public String getNumberTextField() {
+        return this.jtfNumber.getText().toString();
+    }
 
-    void setDeleteButtonEnabled(boolean enabled){
+    public String getNameTextField() {
+        return this.jtfName.getText().toString();
+    }
+
+    public String getForennameTextField() {
+        return this.jtfForename.getText().toString();
+    }
+
+    public String getStreetTextField() {
+        return this.jtfStreet.getText().toString();
+    }
+
+    public String getHouseNumberTextField() {
+        return this.jtfHouseNumber.getText().toString();
+    }
+
+    public String getPostCodeTextField() {
+        return this.jtfPostCode.getText().toString();
+    }
+
+    public String getVillageTextField() {
+        return this.jtfVillage.getText().toString();
+    }
+
+    public String getLandTextField() {
+        return this.jtfLand.getText().toString();
+    }
+
+
+    public List<String> getEMailAcessibilityStringList(){
+        return this.panelEmail.getAcessibilityStringList();
+    }
+
+    public List<String> getPhoneAcessibilityStringList(){
+        return this.panelPhone.getAcessibilityStringList();
+    }
+
+    public List<String> getFaxAcessibilityStringList(){
+        return this.panelFax.getAcessibilityStringList();
+    }
+
+
+    public void setNumberTextField(String text) {
+        this.jtfNumber.setText(text);
+    }
+
+    public void setNameTextField(String text) {
+        this.jtfName.setText(text);
+    }
+
+    public void setForennameTextField(String text) {
+        this.jtfForename.setText(text);
+    }
+
+    public void setStreetTextField(String text) {
+        this.jtfStreet.setText(text);
+    }
+
+    public void setHouseNumberTextField(String text) {
+        this.jtfHouseNumber.setText(text);
+    }
+
+    public void setPostCodeTextField(String text) {
+        this.jtfPostCode.setText(text);
+    }
+
+    public void setVillageTextField(String text) {
+        this.jtfVillage.setText(text);
+    }
+
+    public void setLandTextField(String text) {
+        this.jtfLand.setText(text);
+    }
+
+    public void setDeleteButtonEnabled(boolean enabled){
         this.buttonDelete.setEnabled(enabled);
     }
 
@@ -151,6 +223,54 @@ public class CustomersConfigDialog extends ConfigDialog {
         this.buttonDelete.addActionListener(listener);
         this.buttonDelete.setVisible(true);
         this.pack();
+    }
+
+    public void setEMailDeleteButtonEnabled(boolean enabled){
+        this.panelEmail.setDeleteButtonEnabled(enabled);
+    }
+
+    public void setEMailDeleteButtonListener(ActionListener listener){
+        this.panelEmail.setDeleteButtonListener(listener);
+    }
+
+    public void setEMailAddButtonEnabled(boolean enabled){
+        this.panelEmail.setAddButtonEnabled(enabled);
+    }
+
+    public void setEMailAddButtonListener(ActionListener listener){
+        this.panelEmail.setAddButtonListener(listener);
+    }
+
+    public void setPhoneDeleteButtonEnabled(boolean enabled){
+        this.panelPhone.setDeleteButtonEnabled(enabled);
+    }
+
+    public void setPhoneDeleteButtonListener(ActionListener listener){
+        this.panelPhone.setDeleteButtonListener(listener);
+    }
+
+    public void setPhoneAddButtonEnabled(boolean enabled){
+        this.panelPhone.setAddButtonEnabled(enabled);
+    }
+
+    public void setPhoneAddButtonListener(ActionListener listener){
+        this.panelPhone.setAddButtonListener(listener);
+    }
+
+    public void setFaxDeleteButtonEnabled(boolean enabled){
+        this.panelPhone.setDeleteButtonEnabled(enabled);
+    }
+
+    public void setFaxDeleteButtonListener(ActionListener listener){
+        this.panelPhone.setDeleteButtonListener(listener);
+    }
+
+    public void setFaxAddButtonEnabled(boolean enabled){
+        this.panelPhone.setAddButtonEnabled(enabled);
+    }
+
+    public void setFaxAddButtonListener(ActionListener listener){
+        this.panelPhone.setAddButtonListener(listener);
     }
 
 }

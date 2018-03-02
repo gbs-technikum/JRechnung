@@ -14,6 +14,7 @@ import java.util.*;
 public class Customer {
 
     private String id;
+    private String number;
     private String name;
     private String forename;
     private String street;
@@ -24,8 +25,9 @@ public class Customer {
 
     private List<Accessibility> accessibilities;
 
-    public Customer(String  id, String name, String forename, String street, String houseNumber, String postCode, String village, String land) {
-        this.id = id;
+    public Customer(String id, String  number, String name, String forename, String street, String houseNumber, String postCode, String village, String land) {
+        this.id = "";
+        this.number = number;
         this.name = name;
         this.forename = forename;
         this.street = street;
@@ -35,7 +37,6 @@ public class Customer {
         this.land = land;
 
         this.accessibilities = new ArrayList<>();
-
     }
 
     public String getId() {
@@ -44,6 +45,14 @@ public class Customer {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String id) {
+        this.number = id;
     }
 
     public String getName() {

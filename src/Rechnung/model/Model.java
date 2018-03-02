@@ -30,4 +30,14 @@ public class Model {
         return false;
     }
 
+    public boolean removeCustomer(Customer customer){
+        return false;
+    }
+
+    public String getNewCustomerNumber(){
+        return UUIDStringGenerator.generate();
+    }
+
+
+
 }

@@ -2,7 +2,10 @@ package Rechnung.view;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import java.awt.*;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PanelAccessibility extends JPanel{
 
@@ -27,6 +30,12 @@ public class PanelAccessibility extends JPanel{
         buttonAdd = new JButton("Hinzufügen");
         buttonDelete = new JButton("Löschen");
 
+        buttonAdd.setEnabled(false);
+        buttonAdd.setVisible(false);
+
+        buttonDelete.setEnabled(false);
+        buttonDelete.setVisible(false);
+
         this.add(this.jtfAcessibility);
         this.add(this.buttonAdd);
         this.add(this.jcbxAcessibility);
@@ -36,6 +45,34 @@ public class PanelAccessibility extends JPanel{
     public void reset(){
         jcbxAcessibility.removeAllItems();
         jtfAcessibility.removeAll();
+    }
+
+    public List<String> getAcessibilityStringList(){
+        List<String> list = new ArrayList<>();
+
+        for(int i=0;i< jcbxAcessibility.getItemCount();i++){
+            list.add(jcbxAcessibility.getItemAt(i));
+        }
+
+        return list;
+    }
+
+    void setDeleteButtonEnabled(boolean enabled){
+        this.buttonDelete.setEnabled(enabled);
+    }
+
+    public void setDeleteButtonListener(ActionListener listener){
+        this.buttonDelete.addActionListener(listener);
+        this.buttonDelete.setVisible(true);
+    }
+
+    public void setAddButtonEnabled(boolean enabled){
+        this.buttonAdd.setEnabled(enabled);
+    }
+
+    public void setAddButtonListener(ActionListener listener){
+        this.buttonAdd.addActionListener(listener);
+        this.buttonAdd.setVisible(true);
     }
 
 }
