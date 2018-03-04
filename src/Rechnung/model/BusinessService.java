@@ -15,9 +15,7 @@ public class BusinessService {
 
     public static boolean writeBusiness(Business business) throws SQLException{
 
-        String id = UUIDStringGenerator.generate();
-
-        if(id != null && business != null){
+        if(business != null){
 
             Connection connection = Publisher.getDBConnection();
 
@@ -25,7 +23,7 @@ public class BusinessService {
             try {
                 preparedStatement = connection.prepareStatement(BusinessService.SQL_INSERT);
 
-                preparedStatement.setString(1, id);
+                preparedStatement.setString(1, business.getId());
                 preparedStatement.setString(2, business.getName());
                 preparedStatement.setString(3, business.getProprietor());
                 preparedStatement.setString(4, business.getStreet());
@@ -41,10 +39,7 @@ public class BusinessService {
                 }
 
 
-                if (preparedStatement.execute()) {
-                    business.setId(id);
-                    return true;
-                }
+                preparedStatement.execute();
             }finally {
                 if (preparedStatement != null) {
                     try{
@@ -86,7 +81,7 @@ public class BusinessService {
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            if (resultSet != null && resultSet.next()) {
+            if (resultSet != null && !resultSet.isClosed() && resultSet.next()) {
                 String dataset_id = resultSet.getString("id");
                 String name = resultSet.getString("name");
                 String proprietor = resultSet.getString("proprietor");

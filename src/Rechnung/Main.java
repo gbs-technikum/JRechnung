@@ -1,5 +1,7 @@
 package Rechnung;
 
+import Rechnung.control.Controller;
+import Rechnung.control.EncryptionConfigDialogController;
 import Rechnung.model.SecurityProvider;
 import Rechnung.control.MainWindowController;
 
@@ -8,6 +10,7 @@ import it.sauronsoftware.junique.JUnique;
 import it.sauronsoftware.junique.MessageHandler;
 
 
+import javax.swing.*;
 import java.sql.Connection;
 
 public class Main {
@@ -17,7 +20,6 @@ public class Main {
 
 
     public static void main(String[] args) throws Exception {
-
         MainWindowController mainWindowController = new MainWindowController();
 
         try {
@@ -36,24 +38,40 @@ public class Main {
             System.exit(0);
         }
 
+        SecurityProvider sp = Publisher.getSecurityProvider();
+
+        Controller.ControllerReturnStatus returnStatus = Controller.ControllerReturnStatus.ABORT;
+        JFrame tmpFrame = new JFrame();
+
+        if(!sp.isInitialized()){
+            do{
+                Controller controller = new EncryptionConfigDialogController(tmpFrame,false);
+                returnStatus = controller.run();
+            }while (returnStatus != Controller.ControllerReturnStatus.OK && returnStatus != Controller.ControllerReturnStatus.ABORT);
+            if(returnStatus == Controller.ControllerReturnStatus.ABORT){
+                System.exit(0);
+            }
+        }
+
+        do{
+            Controller controller = new EncryptionConfigDialogController(tmpFrame);
+            returnStatus = controller.run();
+        }while (returnStatus != Controller.ControllerReturnStatus.OK && returnStatus != Controller.ControllerReturnStatus.ABORT);
+
+        tmpFrame.dispose();
+        tmpFrame = null;
+
+        if(returnStatus == Controller.ControllerReturnStatus.ABORT){
+            System.exit(0);
+        }
 
         Logger logger = Publisher.getLogger();
 
-       Connection connection = Publisher.getDBConnection();
-
-        System.out.println("xxx" + connection);
+        Connection connection = Publisher.getDBConnection();
 
         logger.loginfo("Start...");
 
-        SecurityProvider sp = Publisher.getSecurityProvider();
-
-
         mainWindowController.run();
-
-
-
-
-
     }
 
 }

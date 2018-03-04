@@ -57,5 +57,15 @@ public class MainWindowController implements Controller {
             }
         });
         this.mainWindow.setManageCustomersButtonEnabled(true);
+
+        this.mainWindow.setEncPasswortResetButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Controller controller = new EncryptionConfigDialogController(mainWindow,true);
+                controller.run();
+            }
+        });
+
+        this.mainWindow.setEncPasswortResetButtonEnabled(true);
     }
 }

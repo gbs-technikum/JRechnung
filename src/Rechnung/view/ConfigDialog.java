@@ -20,6 +20,7 @@ public abstract class ConfigDialog extends JDialog {
     public ConfigDialog(JFrame frame, String str){
         super(frame, str);
         this.initComponents();
+        this.setLocationRelativeTo(frame);
     }
 
     public void addMainPanel(JPanel mainPanel){

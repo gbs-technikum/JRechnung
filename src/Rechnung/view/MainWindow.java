@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 public class MainWindow extends JFrame {
 
-    private JButton jbtnCreateBill, jbtnManageBusiness, jbtnManageCustomers;
+    private JButton jbtnCreateBill, jbtnManageBusiness, jbtnManageCustomers, jbtnEncPasswortReset;
     private JPanel jpCenter;
     private JPanel jpWest;
     private JTable jtblBillList;
@@ -33,11 +33,16 @@ public class MainWindow extends JFrame {
         this.jbtnManageBusiness.setText("Unternehmmen verwalten");
         this.jbtnManageCustomers = new JButton();
         this.jbtnManageCustomers.setText("Kundenverwaltung");
+        this.jbtnEncPasswortReset = new JButton();
+        this.jbtnEncPasswortReset.setText("Passwort ändern");
+
 
         this.jbtnManageBusiness.setEnabled(false);
         this.jbtnManageBusiness.setVisible(false);
         this.jbtnManageCustomers.setEnabled(false);
         this.jbtnManageCustomers.setVisible(false);
+        this.jbtnEncPasswortReset.setEnabled(false);
+        this.jbtnEncPasswortReset.setVisible(false);
 
         this.jpCenter = new JPanel();
         this.jpCenter.setLayout(new BorderLayout());
@@ -53,6 +58,7 @@ public class MainWindow extends JFrame {
         this.jpWest.add(this.jbtnCreateBill);
         this.jpWest.add(this.jbtnManageBusiness);
         this.jpWest.add(this.jbtnManageCustomers);
+        this.jpWest.add(this.jbtnEncPasswortReset);
 
         this.add(jpWest, BorderLayout.WEST);
 
@@ -78,6 +84,15 @@ public class MainWindow extends JFrame {
 
     public void setManageCustomersButtonEnabled(boolean enabled){
         this.jbtnManageCustomers.setEnabled(enabled);
+    }
+
+    public void setEncPasswortResetButtonListener(ActionListener listener){
+        this.jbtnEncPasswortReset.addActionListener(listener);
+        this.jbtnEncPasswortReset.setVisible(true);
+    }
+
+    public void setEncPasswortResetButtonEnabled(boolean enabled){
+        this.jbtnEncPasswortReset.setEnabled(enabled);
     }
 
 

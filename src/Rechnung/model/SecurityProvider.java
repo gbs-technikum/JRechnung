@@ -3,6 +3,7 @@ package Rechnung.model;
 import Rechnung.Debug;
 import Rechnung.Logger;
 import Rechnung.Publisher;
+import org.apache.poi.hssf.record.BOFRecord;
 
 import javax.crypto.*;
 import javax.crypto.spec.PBEKeySpec;
@@ -41,15 +42,33 @@ public class SecurityProvider {
     }
 
     public boolean firstInit(String password) throws InvalidKeySpecException, NoSuchAlgorithmException, SQLException {
-       // KeySecurityHelper keySecurityHelper = new KeySecurityHelper();
-     //   this.secretKey = keySecurityHelper.firstInit(password);
-        KeySecurityHelper.firstInit(password);
+        System.out.printf("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        this.secretKey = KeySecurityHelper.firstInit(password);
         if(this.secretKey != null){
             this.setLock(false);
             return true;
         }
 
         return false;
+    }
+
+    public boolean isInitialized(){
+        try {
+            SecurityDataBaseHelper sdbh = new SecurityDataBaseHelper();
+            return (sdbh.getReferenzeTextData() != null && sdbh.getSecretKeyData() != null && sdbh.getSalt() != null);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return true;
+    }
+
+    public boolean reInit(String newPassword) throws InvalidKeySpecException, NoSuchAlgorithmException, SQLException {
+        if(this.isLocked()){
+            return false;
+        }
+
+        return KeySecurityHelper.reInit(newPassword,this.secretKey);
     }
 
     private boolean initCipher() throws NoSuchPaddingException, NoSuchAlgorithmException {
@@ -165,6 +184,7 @@ public class SecurityProvider {
             private byte[] salt;
             private static final String SQL_QUERY = "SELECT decrypt_password, reference_text, salt FROM security WHERE id  = 0";
             private static final String SQL_INSERT = "INSERT INTO security VALUES (?,?,?,?)";
+            private static final String SQL_UPDATE = "UPDATE security set decrypt_password = ?, reference_text = ?, salt = ? WHERE id = 0";
             private boolean externalData;
 
             public SecurityDataBaseHelper(byte[] secretKeyData, byte[] referenzeTextData, byte[] salt) {
@@ -175,6 +195,7 @@ public class SecurityProvider {
             }
 
             public SecurityDataBaseHelper() throws SQLException {
+                this.externalData = true;
                 this.loadDataFromDB();
             }
 
@@ -190,6 +211,35 @@ public class SecurityProvider {
                 return salt;
             }
 
+            private boolean securityDataExist() throws SQLException {
+                Connection con = Publisher.getDBConnection();
+                if(con != null) {
+                    Statement statement = null;
+                    ResultSet resultSet = null;
+                    try {
+                        statement = con.createStatement();
+                        resultSet = statement.executeQuery(SecurityDataBaseHelper.SQL_QUERY);
+                        return (resultSet != null && !resultSet.isClosed() && resultSet.next());
+                    } catch (SQLException e) {
+                        System.out.println("BLA: " + e.getMessage());
+                    } finally {
+                        if (statement != null) {
+                            try {
+                                statement.close();
+                            } catch (SQLException e) {
+                                if (Debug.ON) {
+                                    System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getStackTrace().toString());
+                                }
+                            }
+
+                        }
+                        statement = null;
+                    }
+                }
+
+                return false;
+            }
+
             private void loadDataFromDB() throws SQLException {
 
                 Connection con = Publisher.getDBConnection();
@@ -199,8 +249,7 @@ public class SecurityProvider {
                     try {
                         statement = con.createStatement();
                         ResultSet resultSet = statement.executeQuery(SecurityDataBaseHelper.SQL_QUERY);
-
-                        if(resultSet != null){
+                        if(resultSet != null && !resultSet.isClosed()){
                             this.salt = resultSet.getBytes("salt");
                             this.referenzeTextData = resultSet.getBytes("reference_text");
                             this.secretKeyData = resultSet.getBytes("decrypt_password");
@@ -223,49 +272,24 @@ public class SecurityProvider {
                 }
             }
 
-            public boolean saveDataToDB() throws SQLException {
+            public boolean modifyDataOnDB() throws SQLException {
                 if(!this.externalData) {
                     return false;
                 }
 
                 Connection con = Publisher.getDBConnection();
                 if(con != null) {
-                    Statement statement = null;
-                    ResultSet resultSet = null;
-
-                    try {
-                        statement = con.createStatement();
-                        resultSet = statement.executeQuery(SecurityDataBaseHelper.SQL_QUERY);
-                    }catch (SQLException e) {
-
-                    }finally {
-                        if (statement != null) {
-                            try{
-                                statement.close();
-                            }catch (SQLException e){
-                                if(Debug.ON){
-                                    System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getStackTrace().toString());
-                                }
-                            }
-
-                        }
-                        statement = null;
-                    }
-
-                    if(resultSet == null){
+                    if(this.securityDataExist()){
                         PreparedStatement preparedStatement = null;
                         try {
-                            preparedStatement = con.prepareStatement(SecurityDataBaseHelper.SQL_INSERT);
+                            System.out.println("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+                            preparedStatement = con.prepareStatement(SecurityDataBaseHelper.SQL_UPDATE);
 
-                            preparedStatement.setInt(1, 0);
-                            preparedStatement.setBytes(2, this.secretKeyData);
-                            preparedStatement.setBytes(3, this.referenzeTextData);
-                            preparedStatement.setBytes(4, this.salt);
-
-                            if (preparedStatement.execute()) {
-                                this.externalData = false;
-                                return true;
-                            }
+                            preparedStatement.setBytes(1, this.secretKeyData);
+                            preparedStatement.setBytes(2, this.referenzeTextData);
+                            preparedStatement.setBytes(3, this.salt);
+                            preparedStatement.execute();
+                            return true;
                         }finally {
                             if (preparedStatement != null) {
                                 try{
@@ -286,8 +310,46 @@ public class SecurityProvider {
 
                 return false;
             }
-        }
 
+            public boolean saveDataToDB() throws SQLException {
+                if(!this.externalData) {
+                    return false;
+                }
+
+                Connection con = Publisher.getDBConnection();
+                if(con != null) {
+                    if(!this.securityDataExist()){
+                        PreparedStatement preparedStatement = null;
+                        try {
+                            System.out.printf("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+                            preparedStatement = con.prepareStatement(SecurityDataBaseHelper.SQL_INSERT);
+
+                            preparedStatement.setInt(1, 0);
+                            preparedStatement.setBytes(2, this.secretKeyData);
+                            preparedStatement.setBytes(3, this.referenzeTextData);
+                            preparedStatement.setBytes(4, this.salt);
+                            preparedStatement.execute();
+                            return true;
+                        }finally {
+                            if (preparedStatement != null) {
+                                try{
+                                    preparedStatement.close();
+                                }catch (SQLException e){
+                                    if(Debug.ON){
+                                        System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getStackTrace().toString());
+                                    }
+                                }
+
+                            }
+                            preparedStatement = null;
+                            con = null;
+                        }
+                    }
+                }
+
+                return false;
+            }
+        }
 
         private static class KeySecurityHelper{
 
@@ -322,10 +384,46 @@ public class SecurityProvider {
                 return key;
             }
 
-            public static SecretKey firstInit(String password) throws InvalidKeySpecException, NoSuchAlgorithmException, SQLException {
+            public static boolean reInit(String newPassword, SecretKey currentSecretKey) throws InvalidKeySpecException, NoSuchAlgorithmException, SQLException {
                 try {
                     Cipher cipher = Cipher.getInstance(SecurityProvider.ALGORITHM);
 
+                    byte[] salt = generateSalt();
+                    SecretKey secret = prepareKey(newPassword,salt);
+
+                    SecretKey secretKey = currentSecretKey;
+
+                    cipher.init(Cipher.ENCRYPT_MODE,secret);
+                    byte[] dbKeyEncrypted = cipher.doFinal(secretKey.getEncoded());
+                    byte[] refTextEncrypted = cipher.doFinal(SecurityProvider.REFERENCE_TEXT.getBytes(StandardCharsets.UTF_8));
+
+                    SecurityDataBaseHelper sdb = new SecurityProvider.SecurityDataBaseHelper(dbKeyEncrypted,refTextEncrypted, salt);
+                    return  sdb.modifyDataOnDB();
+                } catch (IllegalBlockSizeException e) {
+                    if(Debug.ON){
+                        System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getStackTrace().toString());
+                    }
+                } catch (InvalidKeyException e) {
+                    if(Debug.ON){
+                        System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getStackTrace().toString());
+                    }
+                } catch (NoSuchPaddingException e){
+                    if(Debug.ON){
+                        System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getStackTrace().toString());
+                    }
+                } catch (BadPaddingException e) {
+                    if(Debug.ON){
+                        System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getStackTrace().toString());
+                    }
+                }
+
+                return false;
+            }
+
+            public static SecretKey firstInit(String password) throws InvalidKeySpecException, NoSuchAlgorithmException, SQLException {
+                try {
+                    Cipher cipher = Cipher.getInstance(SecurityProvider.ALGORITHM);
+                    System.out.printf("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
                     byte[] salt = generateSalt();
                     SecretKey secret = prepareKey(password,salt);
 
@@ -336,7 +434,6 @@ public class SecurityProvider {
                     byte[] refTextEncrypted = cipher.doFinal(SecurityProvider.REFERENCE_TEXT.getBytes(StandardCharsets.UTF_8));
 
                     SecurityDataBaseHelper sdb = new SecurityProvider.SecurityDataBaseHelper(dbKeyEncrypted,refTextEncrypted, salt);
-
                     if(sdb.saveDataToDB()){
                         return secretKey;
                     }
@@ -414,50 +511,5 @@ public class SecurityProvider {
                 return result;
             }
         }
-
-    public static void main(String[] args) throws SQLException, IOException {
-
-/*SecurityProvider sp = new SecurityProvider();
-sp.firstInit("txla13/$Z");*/
-
-
- //    SecurityProvider sp = new SecurityProvider("txla13/$Z");
-/*
-
-        sp.unlock("txla13/$Z");
-        System.out.println(sp.isLocked());
-
-
-        Connection con = DatabaseConnectionFactory.createNewConnectionInstance();
-
-        String text = "Dies ist ein Text2!";
-        int zahl = 65;
-        double kommazahl = 7.145;
-
-      PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO test1 VALUES (?,?,?,?)");
-
-        preparedStatement.setInt(1,0);
-        preparedStatement.setBytes(2, sp.encrypt(text));
-        preparedStatement.setBytes(3, sp.encrypt(zahl));
-        preparedStatement.setBytes(4, sp.encrypt(kommazahl));
-
-        preparedStatement.execute();
-
-        Statement statement = con.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT text, zahl, kommazahl FROM test1 WHERE id  = 0");
-
-        String text_d = sp.decryptAsString(resultSet.getBytes("text"));
-        int zahl_d = sp.decryptAsInt(resultSet.getBytes("zahl"));
-        double kommazahl_d = sp.decryptAsDouble(resultSet.getBytes("kommazahl"));
-
-        System.out.println(text_d + "\n");
-        System.out.println(zahl_d + "\n");
-        System.out.println(kommazahl_d + "\n");
-*/
-
-
-
-
-    }
 }
 

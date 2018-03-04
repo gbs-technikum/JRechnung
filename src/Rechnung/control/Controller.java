@@ -10,7 +10,8 @@ public interface Controller {
     enum ControllerReturnStatus {
         OK,
         ABORT,
-        CLOSED
+        CLOSED,
+        ERROR
     }
 
 

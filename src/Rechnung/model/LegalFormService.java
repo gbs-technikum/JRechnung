@@ -26,7 +26,7 @@ public class LegalFormService {
 
                 ResultSet resultSet = preparedStatement.executeQuery();
 
-                if (resultSet != null && resultSet.next()) {
+                if (resultSet != null && !resultSet.isClosed() && resultSet.next()) {
                     String name = resultSet.getString("name");
                     String shortname = resultSet.getString("shortname");
                     boolean postfix = (resultSet.getInt("postfix") != 0);
@@ -66,7 +66,7 @@ public class LegalFormService {
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            if (resultSet != null){
+            if (resultSet != null && !resultSet.isClosed()){
 
                 while(resultSet.next()) {
                     String name = resultSet.getString("name");

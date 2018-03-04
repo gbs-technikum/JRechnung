@@ -16,12 +16,16 @@ public class AccessibilityService {
     public static final String SQL_INSERT_MAIL = "INSERT INTO fax VALUES (?,?,?)";
     public static final String SQL_INSERT_FAX = "INSERT INTO email VALUES (?,?,?)";
     public static final String SQL_INSERT_PHONE = "INSERT INTO phone VALUES (?,?,?)";
-    public static final String SQL_QUERY_MAIL = "SELECT * FROM email WHERE customers_id = ?";
-    public static final String SQL_QUERY_FAX = "SELECT * FROM fax WHERE customers_id = ?";
-    public static final String SQL_QUERY_PHONE = "SELECT * FROM phone WHERE customers_id = ?";
+    public static final String SQL_QUERY_MAIL = "SELECT * FROM email WHERE customer_id = ?";
+    public static final String SQL_QUERY_FAX = "SELECT * FROM fax WHERE customer_id = ?";
+    public static final String SQL_QUERY_PHONE = "SELECT * FROM phone WHERE customer_id = ?";
     public static final String SQL_DELETE_MAIL = "DELETE FROM email WHERE id = ?";
     public static final String SQL_DELETE_FAX = "DELETE FROM fax WHERE id = ?";
     public static final String SQL_DELETE_PHONE = "DELETE FROM phone WHERE id = ?";
+
+    public static final String SQL_DELETE_MAIL_BY_CUSTOMER = "DELETE FROM email WHERE customer_id = ?";
+    public static final String SQL_DELETE_FAX_BY_CUSTOMER = "DELETE FROM fax WHERE customer_id = ?";
+    public static final String SQL_DELETE_PHONE_BY_CUSTOMER = "DELETE FROM phone WHERE customer_id = ?";
 
 
 
@@ -36,8 +40,6 @@ public class AccessibilityService {
 
         PreparedStatement preparedStatement = null;
 
-        String id = UUIDStringGenerator.generate();
-
         SecurityProvider securityProvider = Publisher.getSecurityProvider();
         try {
 
@@ -49,7 +51,7 @@ public class AccessibilityService {
                 preparedStatement = connection.prepareStatement(SQL_INSERT_PHONE);
             }
 
-            preparedStatement.setString(1,id);
+            preparedStatement.setString(1,accessibility.getId());
             preparedStatement.setString(2,customer_id);
             preparedStatement.setBytes(3,securityProvider.encrypt(accessibility.getEntry()));
 
@@ -98,6 +100,62 @@ public class AccessibilityService {
         }
     }
 
+    public static void removeCustomerAccessibilities(String customer_id) throws SQLException, UnsupportedEncodingException {
+        Connection connection = Publisher.getDBConnection();
+        PreparedStatement preparedStatementMail = null;
+        PreparedStatement preparedStatementFax = null;
+        PreparedStatement preparedStatementPhone = null;
+        try {
+
+                preparedStatementMail = connection.prepareStatement(SQL_DELETE_MAIL_BY_CUSTOMER);
+                preparedStatementFax = connection.prepareStatement(SQL_DELETE_FAX_BY_CUSTOMER);
+                preparedStatementPhone = connection.prepareStatement(SQL_DELETE_PHONE_BY_CUSTOMER);
+
+                preparedStatementMail.setString(1,customer_id);
+                preparedStatementFax.setString(1,customer_id);
+                preparedStatementPhone.setString(1,customer_id);
+
+                preparedStatementMail.execute();
+                preparedStatementFax.execute();
+                preparedStatementPhone.execute();
+
+        } finally {
+            if (preparedStatementMail != null) {
+                try {
+                    preparedStatementMail.close();
+                } catch (SQLException e) {
+                    if (Debug.ON) {
+                        System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getStackTrace().toString());
+                    }
+                }
+
+            }
+
+            if (preparedStatementFax != null) {
+                try {
+                    preparedStatementFax.close();
+                } catch (SQLException e) {
+                    if (Debug.ON) {
+                        System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getStackTrace().toString());
+                    }
+                }
+
+            }
+
+            if (preparedStatementPhone != null) {
+                try {
+                    preparedStatementPhone.close();
+                } catch (SQLException e) {
+                    if (Debug.ON) {
+                        System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getStackTrace().toString());
+                    }
+                }
+
+            }
+        }
+    }
+
+
     public static List<Accessibility> loadCustomersEMailAccessibilitys(String customer_id) throws SQLException, UnsupportedEncodingException {
         List<Accessibility> eMailAccessibilityList = new ArrayList<>();
         Connection connection = Publisher.getDBConnection();
@@ -108,7 +166,7 @@ public class AccessibilityService {
         try {
             preparedStatement.setString(1,customer_id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet != null){
+            if (resultSet != null && !resultSet.isClosed()){
 
                 while(resultSet.next()) {
                     String id = resultSet.getString("id");
@@ -144,7 +202,7 @@ public class AccessibilityService {
         try {
             preparedStatement.setString(1,customer_id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet != null){
+            if (resultSet != null && !resultSet.isClosed()){
 
                 while(resultSet.next()) {
                     String id = resultSet.getString("id");
@@ -180,7 +238,7 @@ public class AccessibilityService {
         try {
             preparedStatement.setString(1,customer_id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet != null){
+            if (resultSet != null && !resultSet.isClosed()){
 
                 while(resultSet.next()) {
                     String id = resultSet.getString("id");

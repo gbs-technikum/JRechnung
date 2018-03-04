@@ -26,7 +26,7 @@ public class Customer {
     private List<Accessibility> accessibilities;
 
     public Customer(String id, String  number, String name, String forename, String street, String houseNumber, String postCode, String village, String land) {
-        this.id = "";
+        this.id = id;
         this.number = number;
         this.name = name;
         this.forename = forename;
