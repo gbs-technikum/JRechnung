@@ -9,6 +9,7 @@
       <root url="jar://$PROJECT_DIR$/lib/poi-ooxml-schemas-3.17.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/rtfkit_nosrc.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/junique-1.0.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.mail.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

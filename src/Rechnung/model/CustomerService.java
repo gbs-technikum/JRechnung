@@ -48,6 +48,8 @@ public class CustomerService {
             for (Customer customer : customers) {
                 List<Accessibility> list = AccessibilityService.loadCustomersEMailAccessibilitys(customer.getId());
 
+                System.out.println("list.size()" + list.size());
+
                 for (Accessibility accessibility : list) {
                     customer.addEMail((EMailAccessibility)accessibility);
                 }

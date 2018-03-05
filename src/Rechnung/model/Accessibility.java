@@ -5,7 +5,7 @@ public abstract class Accessibility {
     private String entry;
     private String id;
 
-    public Accessibility(String Id, String entry) {
+    public Accessibility(String id, String entry) {
         this.setId(id);
         this.setEntry(entry);
     }

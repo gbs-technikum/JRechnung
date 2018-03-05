@@ -10,6 +10,9 @@ import java.util.List;
 public class PanelAccessibility extends JPanel{
 
     private JTextField jtfAcessibility;
+
+
+
     private JComboBox<String> jcbxAcessibility;
     private JPanel panelUp, panelDown;
     private JButton buttonAdd, buttonDelete;
@@ -47,6 +50,22 @@ public class PanelAccessibility extends JPanel{
         jtfAcessibility.removeAll();
     }
 
+    public void addToAcessibilityStringList(String entry){
+        if(entry != null){
+            this.jcbxAcessibility.addItem(entry);
+        }
+    }
+
+    public int getIndexOfSelectedAcessibility(){
+        return this.jcbxAcessibility.getSelectedIndex();
+    }
+
+    public void removeItemFromAcessibilityStringList(int index){
+        if(index >= 0 && index < this.jcbxAcessibility.getItemCount()){
+            this.jcbxAcessibility.removeItemAt(index);
+        }
+    }
+
     public List<String> getAcessibilityStringList(){
         List<String> list = new ArrayList<>();
 
@@ -55,6 +74,10 @@ public class PanelAccessibility extends JPanel{
         }
 
         return list;
+    }
+
+    public String getAcessibilityText() {
+        return jtfAcessibility.getText().toString();
     }
 
     void setDeleteButtonEnabled(boolean enabled){

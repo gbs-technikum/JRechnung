@@ -1,5 +1,7 @@
 package Rechnung.model;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -75,5 +77,28 @@ public class Model {
         return  (password != null && password.length() > 7);
     }
 
+    public boolean isFaxOrPhoneNumberValid(String number){
+        return (number != null && number.length() > 5 && number.matches("[0-9]+"));
+    }
 
+    public boolean isStringInList(List<String> list, String needle){
+        for (String s : list) {
+            if(s.equals(needle)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isValidEmailAddress(String email) {
+        boolean result = true;
+        try {
+            InternetAddress emailAddr = new InternetAddress(email);
+            emailAddr.validate();
+        } catch (AddressException ex) {
+            result = false;
+        }
+        return result;
+    }
 }

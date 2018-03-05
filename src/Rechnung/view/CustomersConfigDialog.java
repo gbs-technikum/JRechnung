@@ -258,19 +258,66 @@ public class CustomersConfigDialog extends ConfigDialog {
     }
 
     public void setFaxDeleteButtonEnabled(boolean enabled){
-        this.panelPhone.setDeleteButtonEnabled(enabled);
+        this.panelFax.setDeleteButtonEnabled(enabled);
     }
 
     public void setFaxDeleteButtonListener(ActionListener listener){
-        this.panelPhone.setDeleteButtonListener(listener);
+        this.panelFax.setDeleteButtonListener(listener);
     }
 
     public void setFaxAddButtonEnabled(boolean enabled){
-        this.panelPhone.setAddButtonEnabled(enabled);
+        this.panelFax.setAddButtonEnabled(enabled);
     }
 
     public void setFaxAddButtonListener(ActionListener listener){
-        this.panelPhone.setAddButtonListener(listener);
+        this.panelFax.setAddButtonListener(listener);
     }
 
+    public void addToFaxList(String entry){
+        this.panelFax.addToAcessibilityStringList(entry);
+    }
+
+    public void addToPhoneList(String entry){
+        this.panelPhone.addToAcessibilityStringList(entry);
+    }
+
+    public void addToEMailList(String entry){
+        this.panelEmail.addToAcessibilityStringList(entry);
+    }
+
+    public void removeEMailFromList(int index){
+        this.panelEmail.removeItemFromAcessibilityStringList(index);
+    }
+
+    public void removeFaxFromList(int index){
+        this.panelFax.removeItemFromAcessibilityStringList(index);
+    }
+
+    public void removePhoneFromList(int index){
+        this.panelPhone.removeItemFromAcessibilityStringList(index);
+    }
+
+    public String getEMailInputText(){
+        return this.panelEmail.getAcessibilityText();
+    }
+
+    public String getFaxInputText(){
+        return this.panelFax.getAcessibilityText();
+    }
+
+    public String getPhoneInputText(){
+        return this.panelPhone.getAcessibilityText();
+    }
+
+    public int getIndexOfSelectedEMail(){
+        return this.panelEmail.getIndexOfSelectedAcessibility();
+    }
+
+    public int getIndexOfSelectedFax(){
+        return this.panelFax.getIndexOfSelectedAcessibility();
+    }
+
+    public int getIndexOfSelectedPhone(){
+        return this.panelPhone.getIndexOfSelectedAcessibility();
+    }
 }

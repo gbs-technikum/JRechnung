@@ -44,12 +44,15 @@ public class AccessibilityService {
         try {
 
             if(accessibility instanceof EMailAccessibility){
+                System.out.println("EMailAccessibility");
                 preparedStatement = connection.prepareStatement(SQL_INSERT_MAIL);
             } else if(accessibility instanceof FaxAccessibility){
                 preparedStatement = connection.prepareStatement(SQL_INSERT_FAX);
             }else if(accessibility instanceof TelephoneAccessibility){
                 preparedStatement = connection.prepareStatement(SQL_INSERT_PHONE);
             }
+
+            System.out.println("accessibility id : " + accessibility.getId() + "\n");
 
             preparedStatement.setString(1,accessibility.getId());
             preparedStatement.setString(2,customer_id);
@@ -208,8 +211,8 @@ public class AccessibilityService {
                     String id = resultSet.getString("id");
                     String number = securityProvider.decryptAsString(resultSet.getBytes("number"));
 
-                    Accessibility eMailAccessibility = new FaxAccessibility(id,number);
-                    accessibilityList.add(eMailAccessibility);
+                    Accessibility faxAccessibility = new FaxAccessibility(id,number);
+                    accessibilityList.add(faxAccessibility);
                 }
             }
         } finally {
@@ -244,8 +247,8 @@ public class AccessibilityService {
                     String id = resultSet.getString("id");
                     String number = securityProvider.decryptAsString(resultSet.getBytes("number"));
 
-                    Accessibility eMailAccessibility = new TelephoneAccessibility(id,number);
-                    accessibilityList.add(eMailAccessibility);
+                    Accessibility telephoneAccessibility = new TelephoneAccessibility(id,number);
+                    accessibilityList.add(telephoneAccessibility);
                 }
             }
         } finally {

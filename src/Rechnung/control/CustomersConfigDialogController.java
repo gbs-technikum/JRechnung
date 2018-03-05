@@ -75,7 +75,77 @@ public class CustomersConfigDialogController implements Controller {
         });
         this.customersConfigDialog.setDeleteButtonEnabled(true);
 
+        this.customersConfigDialog.setFaxAddButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String number = customersConfigDialog.getFaxInputText();
 
+                if(Publisher.getModel().isFaxOrPhoneNumberValid(number) &&
+                   !Publisher.getModel().isStringInList(customersConfigDialog.getFaxAcessibilityStringList(),number.trim())){
+                    customersConfigDialog.addToFaxList(number.trim());
+                }
+
+            }
+        });
+
+        this.customersConfigDialog.setFaxDeleteButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int index = customersConfigDialog.getIndexOfSelectedFax();
+                customersConfigDialog.removeFaxFromList(index);
+            }
+        });
+
+        this.customersConfigDialog.setFaxAddButtonEnabled(true);
+        this.customersConfigDialog.setFaxDeleteButtonEnabled(true);
+
+        this.customersConfigDialog.setPhoneAddButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String number = customersConfigDialog.getPhoneInputText();
+
+                if(Publisher.getModel().isFaxOrPhoneNumberValid(number) &&
+                        !Publisher.getModel().isStringInList(customersConfigDialog.getPhoneAcessibilityStringList(),number.trim())){
+                    customersConfigDialog.addToPhoneList(number.trim());
+                }
+
+            }
+        });
+
+        this.customersConfigDialog.setPhoneDeleteButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int index = customersConfigDialog.getIndexOfSelectedPhone();
+                customersConfigDialog.removePhoneFromList(index);
+            }
+        });
+
+        this.customersConfigDialog.setPhoneAddButtonEnabled(true);
+        this.customersConfigDialog.setPhoneDeleteButtonEnabled(true);
+
+        this.customersConfigDialog.setEMailAddButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String mail = customersConfigDialog.getEMailInputText();
+
+                if(Publisher.getModel().isValidEmailAddress(mail) &&
+                        !Publisher.getModel().isStringInList(customersConfigDialog.getEMailAcessibilityStringList(),mail.trim())){
+                    customersConfigDialog.addToEMailList(mail.trim());
+                }
+
+            }
+        });
+
+        this.customersConfigDialog.setEMailDeleteButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int index = customersConfigDialog.getIndexOfSelectedEMail();
+                customersConfigDialog.removeEMailFromList(index);
+            }
+        });
+
+        this.customersConfigDialog.setEMailAddButtonEnabled(true);
+        this.customersConfigDialog.setEMailDeleteButtonEnabled(true);
 
     }
 
@@ -109,8 +179,17 @@ public class CustomersConfigDialogController implements Controller {
             this.customersConfigDialog.setVillageTextField(customer.getVillage());
             this.customersConfigDialog.setLandTextField(customer.getLand());
 
-            System.out.println("id neu : " + customer.getId());
+            for (Accessibility accessibility : customer.getMailAddresses()) {
+                this.customersConfigDialog.addToEMailList(accessibility.getEntry());
+            }
 
+            for (Accessibility accessibility : customer.getFaxNumbers()) {
+                this.customersConfigDialog.addToFaxList(accessibility.getEntry());
+            }
+
+            for (Accessibility accessibility : customer.getPhoneNumbers()) {
+                this.customersConfigDialog.addToPhoneList(accessibility.getEntry());
+            }
         }
 
 
