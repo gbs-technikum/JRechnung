@@ -10,25 +10,25 @@ import java.util.Objects;
 
 public class Product {
 
-    private int id;
+    private int position;
     private String name;
     private String description;
     private int price;
 
 
-    public Product (int id, String name, String description, int price) {
-        this.id = id;
+    public Product (int position, String name, String description, int price) {
+        this.position = position;
         this.name = name;
         this. description = description;
         this.price = price;
     }
 
-    public int getId() {
-        return id;
+    public int getPosition() {
+        return position;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPosition(int id) {
+        this.position = id;
     }
 
     public String getName() {
@@ -64,7 +64,7 @@ public class Product {
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
 
-        if (id != product.id) return false;
+        if (position != product.position) return false;
         if (name != product.name) return false;
         if (description != product.description) return false;
         if (price != product.price) return false;
@@ -74,7 +74,7 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" +
-                "id: " + id +
+                "Position: " + position +
                 "Name: " + name +
                 "Beschreibung: " + description +
                 "Preis: " + price;

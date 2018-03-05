@@ -11,28 +11,27 @@ import java.sql.*;
 
 public class ProductService {
 
-    private static final String URL = "jdbc:sqlite:src\\Diensteverwaltung\\product.sqlite";
+    private static final String URL = "jdbc:sqlite:\\src\\Diensteverwaltung\\product.sqlite";
 
     private Connection connection;
-    private Statement statment;
+    private Statement statement;
 
     public ProductService() throws SQLException {
         this.connection = DriverManager.getConnection(URL);
-        this.statment = connection.createStatement();
+        this.statement = connection.createStatement();
     }
 
     public void close() throws SQLException {
-        if (statment != null) {
-            statment.close();
+        if (statement != null) {
+            statement.close();
         }
-        statment = null;
+        statement = null;
 
         if (connection != null) {
             connection.close();
         }
         connection = null;
     }
-
 
 
 
