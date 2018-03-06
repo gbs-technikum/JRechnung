@@ -19,10 +19,10 @@ public class CustomersConfigDialogController implements Controller {
 
     public CustomersConfigDialogController(JFrame window) {
         this.customersConfigDialog = new CustomersConfigDialog(window);
+        this.customer = null;
         this.fillWindowComponents();
         this.initEvents();
         this.controllerReturnStatus = ControllerReturnStatus.OK;
-        this.customer = null;
     }
 
     @Override
@@ -190,9 +190,49 @@ public class CustomersConfigDialogController implements Controller {
             for (Accessibility accessibility : customer.getPhoneNumbers()) {
                 this.customersConfigDialog.addToPhoneList(accessibility.getEntry());
             }
+
+            this.customersConfigDialog.addToCustomerList(customer.getName() + " - " + customer.getNumber());
         }
 
+        for(int i=1;i<customers.size();i++){
+            this.customersConfigDialog.addToCustomerList(customers.get(i).getName() + " - " + customers.get(i).getNumber());
+        }
+    }
 
+    private void reFillWindowComponents() {
+
+
+
+        List<Customer> customers = Publisher.getModel().readCustomers();
+
+        if(customers.size() > 0){
+            this.customer = customers.get(0);
+
+            this.customersConfigDialog.setNumberTextField(customer.getNumber());
+            this.customersConfigDialog.setNameTextField(customer.getName());
+            this.customersConfigDialog.setForennameTextField(customer.getForename());
+            this.customersConfigDialog.setStreetTextField(customer.getStreet());
+            this.customersConfigDialog.setHouseNumberTextField(customer.getHouseNumber());
+            this.customersConfigDialog.setPostCodeTextField(customer.getPostCode());
+            this.customersConfigDialog.setVillageTextField(customer.getVillage());
+            this.customersConfigDialog.setLandTextField(customer.getLand());
+
+            for (Accessibility accessibility : customer.getMailAddresses()) {
+                this.customersConfigDialog.addToEMailList(accessibility.getEntry());
+            }
+
+            for (Accessibility accessibility : customer.getFaxNumbers()) {
+                this.customersConfigDialog.addToFaxList(accessibility.getEntry());
+            }
+
+            for (Accessibility accessibility : customer.getPhoneNumbers()) {
+                this.customersConfigDialog.addToPhoneList(accessibility.getEntry());
+            }
+        }
+
+        for(int i=1;i<customers.size();i++){
+            this.customersConfigDialog.addToCustomerList(customers.get(i).getName() + " - " + customers.get(i).getNumber());
+        }
     }
 
     private void createCustomerFromWindowData(){
@@ -200,11 +240,15 @@ public class CustomersConfigDialogController implements Controller {
         Customer customer = null;
 
         String id = null;
+        System.out.println(this.customer);
         if(this.customer != null){
             id = this.customer.getId();
+            System.out.println("alte id");
         }else {
             id = Publisher.getModel().getNewObjectId();
+            System.out.println("neue id");
         }
+
         String number = this.customersConfigDialog.getNumberTextField();
         String forenname = this.customersConfigDialog.getForennameTextField();
         String name = this.customersConfigDialog.getNameTextField();

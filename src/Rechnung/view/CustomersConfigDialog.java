@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CustomersConfigDialog extends ConfigDialog {
 
-    private JComboBox<String> jcbxCustomers;
+    private JComboBox<String> jcbxCustomer;
     private JTextField jtfNumber, jtfName, jtfForename, jtfStreet, jtfHouseNumber, jtfPostCode, jtfVillage, jtfLand;
     private PanelAccessibility panelEmail, panelPhone, panelFax;
     private JButton buttonDelete, buttonNew;
@@ -34,7 +34,7 @@ public class CustomersConfigDialog extends ConfigDialog {
         this.mainPanel = new JPanel();
         this.mainPanel.setLayout(new BorderLayout());
 
-        jcbxCustomers = new JComboBox<>();
+        jcbxCustomer = new JComboBox<>();
 
         jtfNumber = new JTextField();
         jtfNumber.setBorder(new TitledBorder("Kundennummer"));
@@ -67,7 +67,7 @@ public class CustomersConfigDialog extends ConfigDialog {
         jPanelCenterCustomer = new JPanel(new GridLayout(4, 2));
         jPanelCenterContacts = new JPanel(new GridLayout(1, 3));
 
-        jPanelNorth.add(jcbxCustomers);
+        jPanelNorth.add(jcbxCustomer);
         jPanelNorth.add(buttonDelete);
         jPanelNorth.add(buttonNew);
 
@@ -320,4 +320,19 @@ public class CustomersConfigDialog extends ConfigDialog {
     public int getIndexOfSelectedPhone(){
         return this.panelPhone.getIndexOfSelectedAcessibility();
     }
+
+    public void addToCustomerList(String entry){
+        this.jcbxCustomer.addItem(entry);
+    }
+
+    public void removeCustomerFromList(int index){
+        if(index >= 0 && index < this.jcbxCustomer.getItemCount()){
+            this.jcbxCustomer.removeItemAt(index);
+        }
+    }
+
+    public void setCustomerComboBoxListener(ActionListener listener){
+        this.jcbxCustomer.addActionListener(listener);
+    }
+
 }

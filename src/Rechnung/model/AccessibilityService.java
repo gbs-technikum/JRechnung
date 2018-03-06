@@ -13,8 +13,8 @@ import java.util.List;
 
 public class AccessibilityService {
 
-    public static final String SQL_INSERT_MAIL = "INSERT INTO fax VALUES (?,?,?)";
-    public static final String SQL_INSERT_FAX = "INSERT INTO email VALUES (?,?,?)";
+    public static final String SQL_INSERT_MAIL = "INSERT INTO email VALUES (?,?,?)";
+    public static final String SQL_INSERT_FAX = "INSERT INTO  fax VALUES (?,?,?)";
     public static final String SQL_INSERT_PHONE = "INSERT INTO phone VALUES (?,?,?)";
     public static final String SQL_QUERY_MAIL = "SELECT * FROM email WHERE customer_id = ?";
     public static final String SQL_QUERY_FAX = "SELECT * FROM fax WHERE customer_id = ?";
@@ -44,15 +44,15 @@ public class AccessibilityService {
         try {
 
             if(accessibility instanceof EMailAccessibility){
-                System.out.println("EMailAccessibility");
+                System.out.println("EMailAccessibility : " + accessibility.getEntry() );
                 preparedStatement = connection.prepareStatement(SQL_INSERT_MAIL);
             } else if(accessibility instanceof FaxAccessibility){
+                System.out.println("FaxAccessibility : " + accessibility.getEntry() );
                 preparedStatement = connection.prepareStatement(SQL_INSERT_FAX);
             }else if(accessibility instanceof TelephoneAccessibility){
+                System.out.println("TelephoneAccessibility : " + accessibility.getEntry() );
                 preparedStatement = connection.prepareStatement(SQL_INSERT_PHONE);
             }
-
-            System.out.println("accessibility id : " + accessibility.getId() + "\n");
 
             preparedStatement.setString(1,accessibility.getId());
             preparedStatement.setString(2,customer_id);
@@ -175,6 +175,7 @@ public class AccessibilityService {
                     String id = resultSet.getString("id");
                     String address = securityProvider.decryptAsString(resultSet.getBytes("address"));
 
+                    System.out.println("EMIAL ID " +  id + "EMIAL : " + address);
                     Accessibility eMailAccessibility = new EMailAccessibility(id,address);
                     eMailAccessibilityList.add(eMailAccessibility);
                 }

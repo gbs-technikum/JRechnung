@@ -30,6 +30,11 @@ public abstract class Accessibility {
         }
     }
 
-
-
+    @Override
+    public String toString() {
+        return "{" +
+                "entry='" + entry + '\'' +
+                ", id='" + id + '\'' +
+                '}';
+    }
 }

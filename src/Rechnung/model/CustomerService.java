@@ -31,7 +31,6 @@ public class CustomerService {
             ResultSet resultSet = statement.executeQuery(SQL_QUERY);
             while (resultSet.next()) {
                 String id = resultSet.getString("id");
-                System.out.println("id xxxxx :: " + id);
                 String number = securityProvider.decryptAsString(resultSet.getBytes("number"));
                 String surname = securityProvider.decryptAsString(resultSet.getBytes("surname"));
                 String forename = securityProvider.decryptAsString(resultSet.getBytes("forename"));
@@ -48,9 +47,8 @@ public class CustomerService {
             for (Customer customer : customers) {
                 List<Accessibility> list = AccessibilityService.loadCustomersEMailAccessibilitys(customer.getId());
 
-                System.out.println("list.size()" + list.size());
-
                 for (Accessibility accessibility : list) {
+
                     customer.addEMail((EMailAccessibility)accessibility);
                 }
 
@@ -191,8 +189,6 @@ public class CustomerService {
         }
 
     public static boolean saveCustomer(Customer customer) throws SQLException, UnsupportedEncodingException {
-
-        System.out.println("id des Neuen Kunden: " + customer.getId());
 
         if(customer != null && CustomerService.readCustomer(customer.getId()) != null){
             return CustomerService.modifyCustomer(customer);

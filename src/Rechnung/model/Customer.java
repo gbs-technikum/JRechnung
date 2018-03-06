@@ -218,4 +218,20 @@ public class Customer {
         return null;
     }
 
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Customer{");
+        sb.append("id='").append(id).append('\'').append("\n");
+        sb.append(", number='").append(number).append('\'').append("\n");
+        sb.append(", name='").append(name).append('\'').append("\n");
+        sb.append(", forename='").append(forename).append('\'').append("\n");
+        sb.append(", street='").append(street).append('\'').append("\n");
+        sb.append(", houseNumber='").append(houseNumber).append('\'').append("\n");
+        sb.append(", postCode='").append(postCode).append('\'').append("\n");
+        sb.append(", village='").append(village).append('\'').append("\n");
+        sb.append(", land='").append(land).append('\'').append("\n");
+        sb.append(", accessibilities=").append(accessibilities);
+        sb.append('}');
+        return sb.toString();
+    }
 }
