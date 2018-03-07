@@ -15,8 +15,6 @@ public class CustomerService {
     private static final String SQL_INSERT = "INSERT INTO customer (id, number, surname, forename, street, housenumber, postcode, village, land) VALUES (?,?,?,?,?,?,?,?,?);";
     private static final String SQL_UPDATE = "UPDATE customer set number=?, surname=?, forename=?, street=?, housenumber=?, postcode=?, village=?, land=? WHERE ID=?";
     private static final String SQL_DELETE = "DELETE FROM customer WHERE id = ?";
-    private static final String SQL_INSERT_CONTACTS = "INSERT INTO ? (address, customer_id) VALUES (?,?)";
-    private static final String SQL_DELETE_CONTACTS =  "DELETE FROM ? WHERE customer_id = ?";
 
     public CustomerService() throws SQLException {
 
@@ -234,64 +232,30 @@ public class CustomerService {
         }
     }
 
-/*    public void changeCustomer(int old_customer_id, Customer customer) throws SQLException, UnsupportedEncodingException {
-        Connection connection = Publisher.getDBConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE);
-        SecurityProvider securityProvider = Publisher.getSecurityProvider();
-        try {
-            preparedStatement.setInt(1, customer.getId());
-            preparedStatement.setBytes(2,securityProvider.encrypt(customer.getName()));
-            preparedStatement.setBytes(3,securityProvider.encrypt(customer.getForename()));
-            preparedStatement.setBytes(4,securityProvider.encrypt(customer.getStreet()));
-            preparedStatement.setBytes(5,securityProvider.encrypt(customer.getHouseNumber()));
-            preparedStatement.setBytes(6,securityProvider.encrypt(customer.getPostCode()));
-            preparedStatement.setBytes(7,securityProvider.encrypt(customer.getVillage()));
-            preparedStatement.setBytes(8,securityProvider.encrypt(customer.getLand()));
-            preparedStatement.setInt(9,old_customer_id);
+   public static boolean removeCustomer(Customer customer) throws SQLException {
+       Connection connection = Publisher.getDBConnection();
+       PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE);
+       try {
+           preparedStatement.setString(1,customer.getId());
 
-            if(preparedStatement.execute()) {
-                changeAllContactsFromCustomer("email", old_customer_id, customer.getId(), customer.getMailAddresses());
-                changeAllContactsFromCustomer("phone", old_customer_id, customer.getId(), customer.getPhoneNumbers());
-                changeAllContactsFromCustomer("fax", old_customer_id, customer.getId(), customer.getFaxNumbers());
-            }
-        }finally {
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    if (Debug.ON) {
-                        System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getStackTrace().toString());
-                    }
-                }
+           preparedStatement.execute();
 
-            }
-        }
-    }*/
+           AccessibilityService.removeCustomerAccessibilities(customer.getId());
 
-  /* public void removeCustomer(int customer_id) throws SQLException {
-        Connection connection = Publisher.getDBConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE);
+           return true;
+       }finally {
+           if (preparedStatement != null) {
+               try {
+                   preparedStatement.close();
+               } catch (SQLException e) {
+                   if (Debug.ON) {
+                       System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getStackTrace().toString());
+                   }
+               }
 
-        try{
-            preparedStatement.setInt(1, customer_id);
-            if(preparedStatement.execute()){
-                removeAllContactsFromCustomer("email", customer_id);
-                removeAllContactsFromCustomer("phone", customer_id);
-                removeAllContactsFromCustomer("fax", customer_id);
-            }
-        }finally {
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    if (Debug.ON) {
-                        System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getStackTrace().toString());
-                    }
-                }
-
-            }
-        }
-    }*/
+           }
+       }
+    }
 
 
 

@@ -20,7 +20,7 @@ public class CustomersConfigDialogController implements Controller {
     public CustomersConfigDialogController(JFrame window) {
         this.customersConfigDialog = new CustomersConfigDialog(window);
         this.customer = null;
-        this.fillWindowComponents();
+        this.fillWindowComponents(false);
         this.initEvents();
         this.controllerReturnStatus = ControllerReturnStatus.OK;
     }
@@ -50,6 +50,7 @@ public class CustomersConfigDialogController implements Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 saveComponentData();
+                fillWindowComponents(false);
             }
         });
         this.customersConfigDialog.setApplyButtonEnabled(true);
@@ -69,8 +70,11 @@ public class CustomersConfigDialogController implements Controller {
         this.customersConfigDialog.setDeleteButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                createCustomerFromWindowData();
-                Publisher.getModel().removeCustomer(customer);
+              //  createCustomerFromWindowData();
+                if(customersConfigDialog.getIndexOfSelectedCustomer() >= 0) {
+                    Publisher.getModel().removeCustomer(customer);
+                    fillWindowComponents(false);
+                }
             }
         });
         this.customersConfigDialog.setDeleteButtonEnabled(true);
@@ -147,6 +151,22 @@ public class CustomersConfigDialogController implements Controller {
         this.customersConfigDialog.setEMailAddButtonEnabled(true);
         this.customersConfigDialog.setEMailDeleteButtonEnabled(true);
 
+        this.customersConfigDialog.setCustomerComboBoxListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               fillWindowComponents(true);
+            }
+        });
+
+        this.customersConfigDialog.setNewButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                customersConfigDialog.clearComponentData();
+                customer = null;
+                customersConfigDialog.setNumberTextField(Publisher.getModel().generateCustomerNumber());
+            }
+        });
+        this.customersConfigDialog.setNewButtonEnabled(true);
     }
 
     private void saveComponentData() {
@@ -155,83 +175,70 @@ public class CustomersConfigDialogController implements Controller {
     }
 
 
-    private void fillWindowComponents() {
-        this.customersConfigDialog.setForenameTextFieldEnabled(true);
-        this.customersConfigDialog.setNameTextFieldEnabled(true);
-        this.customersConfigDialog.setStreetTextFieldEnabled(true);
-        this.customersConfigDialog.setHouseNumberTextFieldEnabled(true);
-        this.customersConfigDialog.setVillageTextFieldEnabled(true);
-        this.customersConfigDialog.setLandTextFieldEnabled(true);
-        this.customersConfigDialog.setForenameTextFieldEnabled(true);
-        this.customersConfigDialog.setPostCodeetJTextFieldEnabled(true);
-
+    private void fillWindowComponents(boolean refill) {
         List<Customer> customers = Publisher.getModel().readCustomers();
+        Customer selectedCustomer = null;
 
-        if(customers.size() > 0){
-            this.customer = customers.get(0);
+        if(refill){
+            int index = this.customersConfigDialog.getIndexOfSelectedCustomer();
+            selectedCustomer = this.customersConfigDialog.getCustomerFromList(index);
+        }else{
+            this.customersConfigDialog.setForenameTextFieldEnabled(true);
+            this.customersConfigDialog.setNameTextFieldEnabled(true);
+            this.customersConfigDialog.setStreetTextFieldEnabled(true);
+            this.customersConfigDialog.setHouseNumberTextFieldEnabled(true);
+            this.customersConfigDialog.setVillageTextFieldEnabled(true);
+            this.customersConfigDialog.setLandTextFieldEnabled(true);
+            this.customersConfigDialog.setForenameTextFieldEnabled(true);
+            this.customersConfigDialog.setPostCodeetJTextFieldEnabled(true);
 
-            this.customersConfigDialog.setNumberTextField(customer.getNumber());
-            this.customersConfigDialog.setNameTextField(customer.getName());
-            this.customersConfigDialog.setForennameTextField(customer.getForename());
-            this.customersConfigDialog.setStreetTextField(customer.getStreet());
-            this.customersConfigDialog.setHouseNumberTextField(customer.getHouseNumber());
-            this.customersConfigDialog.setPostCodeTextField(customer.getPostCode());
-            this.customersConfigDialog.setVillageTextField(customer.getVillage());
-            this.customersConfigDialog.setLandTextField(customer.getLand());
+            if(customers.size() > 0){
+                selectedCustomer = customers.get(0);
+            }
+        }
 
-            for (Accessibility accessibility : customer.getMailAddresses()) {
+        this.customersConfigDialog.clearComponentData();
+
+        if(selectedCustomer != null) {
+            this.customersConfigDialog.setNumberTextField(selectedCustomer.getNumber());
+            this.customersConfigDialog.setNameTextField(selectedCustomer.getName());
+            this.customersConfigDialog.setForennameTextField(selectedCustomer.getForename());
+            this.customersConfigDialog.setStreetTextField(selectedCustomer.getStreet());
+            this.customersConfigDialog.setHouseNumberTextField(selectedCustomer.getHouseNumber());
+            this.customersConfigDialog.setPostCodeTextField(selectedCustomer.getPostCode());
+            this.customersConfigDialog.setVillageTextField(selectedCustomer.getVillage());
+            this.customersConfigDialog.setLandTextField(selectedCustomer.getLand());
+
+            for (Accessibility accessibility : selectedCustomer.getMailAddresses()) {
                 this.customersConfigDialog.addToEMailList(accessibility.getEntry());
             }
 
-            for (Accessibility accessibility : customer.getFaxNumbers()) {
+            for (Accessibility accessibility : selectedCustomer.getFaxNumbers()) {
                 this.customersConfigDialog.addToFaxList(accessibility.getEntry());
             }
 
-            for (Accessibility accessibility : customer.getPhoneNumbers()) {
+            for (Accessibility accessibility : selectedCustomer.getPhoneNumbers()) {
                 this.customersConfigDialog.addToPhoneList(accessibility.getEntry());
             }
 
-            this.customersConfigDialog.addToCustomerList(customer.getName() + " - " + customer.getNumber());
-        }
-
-        for(int i=1;i<customers.size();i++){
-            this.customersConfigDialog.addToCustomerList(customers.get(i).getName() + " - " + customers.get(i).getNumber());
-        }
-    }
-
-    private void reFillWindowComponents() {
-
-
-
-        List<Customer> customers = Publisher.getModel().readCustomers();
-
-        if(customers.size() > 0){
-            this.customer = customers.get(0);
-
-            this.customersConfigDialog.setNumberTextField(customer.getNumber());
-            this.customersConfigDialog.setNameTextField(customer.getName());
-            this.customersConfigDialog.setForennameTextField(customer.getForename());
-            this.customersConfigDialog.setStreetTextField(customer.getStreet());
-            this.customersConfigDialog.setHouseNumberTextField(customer.getHouseNumber());
-            this.customersConfigDialog.setPostCodeTextField(customer.getPostCode());
-            this.customersConfigDialog.setVillageTextField(customer.getVillage());
-            this.customersConfigDialog.setLandTextField(customer.getLand());
-
-            for (Accessibility accessibility : customer.getMailAddresses()) {
-                this.customersConfigDialog.addToEMailList(accessibility.getEntry());
+            if(this.customer == null){
+                this.customer = selectedCustomer;
             }
 
-            for (Accessibility accessibility : customer.getFaxNumbers()) {
-                this.customersConfigDialog.addToFaxList(accessibility.getEntry());
+            int selectedIndex = 0;
+
+            for (int i = 0; i < customers.size(); i++) {
+                Customer currentCustomer = customers.get(i);
+                this.customersConfigDialog.addToCustomerList(currentCustomer);
+                if (selectedCustomer.equals(currentCustomer)) {
+                    selectedIndex = i;
+                    this.customer = currentCustomer;
+                }
             }
 
-            for (Accessibility accessibility : customer.getPhoneNumbers()) {
-                this.customersConfigDialog.addToPhoneList(accessibility.getEntry());
-            }
-        }
-
-        for(int i=1;i<customers.size();i++){
-            this.customersConfigDialog.addToCustomerList(customers.get(i).getName() + " - " + customers.get(i).getNumber());
+            this.customersConfigDialog.setIndexOfSelectedCustomer(selectedIndex);
+        }else {
+            this.customersConfigDialog.setNumberTextField(Publisher.getModel().generateCustomerNumber());
         }
     }
 

@@ -4,6 +4,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,6 +66,13 @@ public class Model {
     }
 
     public boolean removeCustomer(Customer customer){
+        try {
+            return CustomerService.removeCustomer(customer);
+        } catch (SQLException e) {
+            //TODO
+            e.printStackTrace();
+        }
+
         return false;
     }
 
@@ -100,5 +108,9 @@ public class Model {
             result = false;
         }
         return result;
+    }
+
+    public String generateCustomerNumber(){
+        return Long.toString(System.currentTimeMillis());
     }
 }
