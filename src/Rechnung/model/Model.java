@@ -74,7 +74,7 @@ public class Model {
 
     public boolean isPasswordValid(String password){
 
-        return  (password != null && password.length() > 7);
+        return  (password != null && password.length() > 7 && charsCorrespondPasswordPolicy(password));
     }
 
     public boolean isFaxOrPhoneNumberValid(String number){
@@ -100,5 +100,30 @@ public class Model {
             result = false;
         }
         return result;
+    }
+
+    public boolean charsCorrespondPasswordPolicy(String password){
+        boolean containUpperCase = false;
+        boolean containLowerCase = false;
+        boolean containNumber = false;
+        for (int i=0; i<password.length(); i++) {
+            if(containUpperCase && containLowerCase && containNumber){
+                return true;
+            }
+            char c = password.charAt(i);
+            if(Character.isUpperCase(c)){
+                containUpperCase = true;
+                continue;
+            }
+            if(Character.isLowerCase(c)){
+                containLowerCase = true;
+                continue;
+            }
+            if(Character.isDigit(c)){
+                containNumber = true;
+                continue;
+            }
+        }
+        return (containUpperCase && containLowerCase && containNumber);
     }
 }

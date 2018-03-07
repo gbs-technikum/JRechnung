@@ -85,7 +85,7 @@ public class EncryptionConfigDialogController implements Controller {
 
         if(this.passwordCheckOnly){
             try {
-                return (Publisher.getModel().isPasswordValid(password) && sp.unlock(password));
+                return (sp.unlock(password));
             } catch (InvalidKeySpecException e) {
                 e.printStackTrace();
             } catch (NoSuchAlgorithmException e) {
