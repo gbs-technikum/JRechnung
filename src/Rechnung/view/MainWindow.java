@@ -68,6 +68,15 @@ public class MainWindow extends JFrame {
 
     }
 
+    public void setCreateBillButtonListener(ActionListener listener){
+        this.jbtnCreateBill.addActionListener(listener);
+        this.jbtnCreateBill.setVisible(true);
+    }
+
+    public void setCreateBillButtonEnabled(boolean enabled){
+        this.jbtnCreateBill.setEnabled(enabled);
+    }
+
     public void setManageBusinessButtonListener(ActionListener listener){
         this.jbtnManageBusiness.addActionListener(listener);
         this.jbtnManageBusiness.setVisible(true);

@@ -37,6 +37,17 @@ public class MainWindowController implements Controller {
     };
 
     private void initEvents() {
+        this.mainWindow.setCreateBillButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controllerReturnStatus = ControllerReturnStatus.OK;
+
+                Controller controller = new BillConfigDialogController(mainWindow);
+                controller.run();
+            }
+        });
+        this.mainWindow.setCreateBillButtonEnabled(true);
+
         this.mainWindow.setManageBusinessButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -47,6 +58,7 @@ public class MainWindowController implements Controller {
             }
         });
         this.mainWindow.setManageBusinessButtonEnabled(true);
+
         this.mainWindow.setManageCustomersButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
