@@ -7,7 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="poi-3.17" level="project" />
-    <orderEntry type="library" name="poi-ooxml-3.17" level="project" />
+    <orderEntry type="library" name="org.xerial:sqlite-jdbc:3.21.0.1" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>

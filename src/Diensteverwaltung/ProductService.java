@@ -11,7 +11,7 @@ import java.sql.*;
 
 public class ProductService {
 
-    private static final String URL = "jdbc:sqlite:\\src\\Diensteverwaltung\\product.sqlite";
+    private static final String URL = "jdbc:sqlite:\\D:\\Richter\\3. Semester\\Programmierung\\IdeaProjects\\JRechnung\\src\\Diensteverwaltung\\product.sqlite";
 
     private Connection connection;
     private Statement statement;

@@ -26,8 +26,8 @@ public class Productlist {
         products.remove(product);
     }
 
-    public void changeProduct ( Product product, int id, String name, String description, int price){
-        product.setId(id);
+    public void changeProduct ( Product product, int position, String name, String description, int price){
+        product.setPosition(position);
         product.setName(name);
         product.setDescription(description);
         product.setPrice(price);
@@ -45,7 +45,7 @@ public class Productlist {
         Iterator iterator = products.iterator();
         while (iterator.hasNext()){
             Product product = (Product) iterator.next();
-            if(id == product.getId()){
+            if(id == product.getPosition()){
                 return product;
             }
         }
