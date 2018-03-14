@@ -1,5 +1,6 @@
 package Rechnung.control;
 
+import Allgemein.Message;
 import Rechnung.Publisher;
 import Rechnung.model.*;
 import Rechnung.view.BusinessConfigDialog;
@@ -49,8 +50,10 @@ public class CustomersConfigDialogController implements Controller {
         this.customersConfigDialog.setApplyButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                saveComponentData();
-                fillWindowComponents(false);
+                if(Publisher.getModel().isPostCodeValid(customersConfigDialog.getPostCodeTextField())){
+                    saveComponentData();
+                    fillWindowComponents(false);
+                }
             }
         });
         this.customersConfigDialog.setApplyButtonEnabled(true);

@@ -20,6 +20,14 @@ public class Message {
         showErrorMessage("Sie müssen eine Kundennummer als Zahl zwischen -2.147.483.648 und 2.147.483.647 eingeben!");
     }
 
+    public static void showErrorMessageNoGuiltyNameOrForenameOrStreetOrVillage(){
+        showErrorMessage("Name, Vorname, Straße und Ort sind Pflichtfelder und dürfen keine Zahl enthalten!");
+    }
+
+    public static void showErrorMessageNoGuiltyPostCode(){
+        showErrorMessage("Postleitzahl ist ein Pflichtfeld und muss als Zahl eingegeben werden!");
+    }
+
     public static void main(String[] args) {
         showErrorMessageNoCustomerSelected();
         showErrorMessageCustomerCouldNotAccepted();

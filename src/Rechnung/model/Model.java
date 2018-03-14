@@ -1,11 +1,14 @@
 package Rechnung.model;
 
+import Allgemein.Message;
+
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Model {
 
@@ -75,6 +78,35 @@ public class Model {
     public boolean isPasswordValid(String password){
 
         return  (password != null && password.length() > 7 && charsCorrespondPasswordPolicy(password));
+    }
+
+    public boolean isNameOrForenameOrStreetOrVillageValid(String worth){
+        if(Pattern.compile( "[0-9]" ).matcher(worth).find() || worth.isEmpty()){
+            Message.showErrorMessageNoGuiltyNameOrForenameOrStreetOrVillage();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isHouseNumberValid(String houseNumber){
+        if(!Pattern.compile( "[0-9]" ).matcher(houseNumber).find() || houseNumber.isEmpty() || houseNumber.contains(" ")){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isPostCodeValid(String number){
+        try{
+            Integer.parseInt(number);
+        }catch (NumberFormatException e){
+            Message.showErrorMessageNoGuiltyPostCode();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isLandValid(String land){
+        return !(Pattern.compile( "[0-9]" ).matcher(land).find());
     }
 
     public boolean isFaxOrPhoneNumberValid(String number){
