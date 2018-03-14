@@ -126,4 +126,8 @@ public class Model {
         }
         return (containUpperCase && containLowerCase && containNumber);
     }
+
+    public String generateCustomerNumber(){
+        return Long.toString(System.currentTimeMillis());
+    }
 }
