@@ -12,8 +12,8 @@ import java.util.List;
 public class TestKlasse {
 
     public static void main(String[] args) throws NoSuchAlgorithmException, SQLException, InvalidKeySpecException, NoSuchPaddingException, UnsupportedEncodingException {
-        Customer customer = new Customer(UUIDStringGenerator.generate(), "YYYYYYYYYY","Mustermann", "Max", "Musterstraße", "23", "433564", "Musterhausen", "Deutschland");
-        Customer customer2 = new Customer(UUIDStringGenerator.generate(),"xxxxxxx", "Musterfrau", "Michael", "Mustergasse", "53", "43253", "Musterdorf", "");
+        //Customer customer = new Customer(UUIDStringGenerator.generate(), "YYYYYYYYYY","Mustermann", "Max", "Musterstraße", "23", "433564", "Musterhausen", "Deutschland");
+        Customer customer = new Customer(UUIDStringGenerator.generate(),"AAAAAAAAAAA", "Musterfrau", "Michael", "Mustergasse", "53", "43253", "Musterdorf", "");
         Customer customer3 = new Customer(UUIDStringGenerator.generate(), "xxxx","Mustermensch", "Monika", "Musteranger", "43", "34234,", "Musterstedt", "England");
         customer.addEMail(new EMailAccessibility(UUIDStringGenerator.generate(),"test1.gmx.de"));
         customer.addEMail(new EMailAccessibility(UUIDStringGenerator.generate(),"test2.gmx.de"));

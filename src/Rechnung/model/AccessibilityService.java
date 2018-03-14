@@ -73,7 +73,7 @@ public class AccessibilityService {
         }
     }
 
-    public static void removeAccessibility(Accessibility accessibility) throws SQLException, UnsupportedEncodingException {
+    public static void removeAccessibility(Accessibility accessibility) throws SQLException {
         Connection connection = Publisher.getDBConnection();
         PreparedStatement preparedStatement = null;
         try {
@@ -103,7 +103,7 @@ public class AccessibilityService {
         }
     }
 
-    public static void removeCustomerAccessibilities(String customer_id) throws SQLException, UnsupportedEncodingException {
+    public static void removeCustomerAccessibilities(String customer_id) throws SQLException {
         Connection connection = Publisher.getDBConnection();
         PreparedStatement preparedStatementMail = null;
         PreparedStatement preparedStatementFax = null;

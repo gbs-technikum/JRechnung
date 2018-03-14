@@ -1,5 +1,7 @@
 package Rechnung.view;
 
+import Rechnung.model.Customer;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.HeadlessException;
@@ -12,7 +14,7 @@ import java.util.List;
 
 public class CustomersConfigDialog extends ConfigDialog {
 
-    private JComboBox<String> jcbxCustomer;
+    private JComboBox<Customer> jcbxCustomer;
     private JTextField jtfNumber, jtfName, jtfForename, jtfStreet, jtfHouseNumber, jtfPostCode, jtfVillage, jtfLand;
     private PanelAccessibility panelEmail, panelPhone, panelFax;
     private JButton buttonDelete, buttonNew;
@@ -215,9 +217,20 @@ public class CustomersConfigDialog extends ConfigDialog {
         this.jtfLand.setText(text);
     }
 
+    public void setNewButtonListener(ActionListener listener){
+        this.buttonNew.addActionListener(listener);
+        this.buttonNew.setVisible(true);
+        this.pack();
+    }
+
+    public void setNewButtonEnabled(boolean enabled){
+        this.buttonNew.setEnabled(enabled);
+    }
+
     public void setDeleteButtonEnabled(boolean enabled){
         this.buttonDelete.setEnabled(enabled);
     }
+
 
     public void setDeleteButtonListener(ActionListener listener){
         this.buttonDelete.addActionListener(listener);
@@ -321,8 +334,10 @@ public class CustomersConfigDialog extends ConfigDialog {
         return this.panelPhone.getIndexOfSelectedAcessibility();
     }
 
-    public void addToCustomerList(String entry){
-        this.jcbxCustomer.addItem(entry);
+    public void addToCustomerList(Customer customer){
+        if(customer != null){
+            this.jcbxCustomer.addItem(customer);
+        }
     }
 
     public void removeCustomerFromList(int index){
@@ -335,4 +350,46 @@ public class CustomersConfigDialog extends ConfigDialog {
         this.jcbxCustomer.addActionListener(listener);
     }
 
+    public int getIndexOfSelectedCustomer(){
+        return this.jcbxCustomer.getSelectedIndex();
+    }
+
+
+    public void setIndexOfSelectedCustomer(int index){
+        if(index >= 0 && index < this.jcbxCustomer.getItemCount()) {
+            this.jcbxCustomer.setSelectedIndex(index);
+        }
+    }
+
+    public Customer getCustomerFromList(int index){
+        if(index >= 0 && index < this.jcbxCustomer.getItemCount()){
+            return this.jcbxCustomer.getItemAt(index);
+        }
+
+        return null;
+    }
+
+/*
+    public void clearCustomerList(){
+        this.jcbxCustomer.removeAllItems();
+    }
+*/
+
+
+    public void clearComponentData(){
+        this.jcbxCustomer.removeAllItems();
+
+        this.panelFax.clearComponentData();
+        this.panelPhone.clearComponentData();
+        this.panelEmail.clearComponentData();
+
+        this.jtfNumber.setText("");
+        this.jtfForename.setText("");
+        this.jtfStreet.setText("");
+        this.jtfName.setText("");
+        this.jtfHouseNumber.setText("");
+        this.jtfPostCode.setText("");
+        this.jtfVillage.setText("");
+        this.jtfLand.setText("");
+    }
 }

@@ -220,18 +220,17 @@ public class Customer {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Customer{");
-        sb.append("id='").append(id).append('\'').append("\n");
-        sb.append(", number='").append(number).append('\'').append("\n");
-        sb.append(", name='").append(name).append('\'').append("\n");
-        sb.append(", forename='").append(forename).append('\'').append("\n");
-        sb.append(", street='").append(street).append('\'').append("\n");
-        sb.append(", houseNumber='").append(houseNumber).append('\'').append("\n");
-        sb.append(", postCode='").append(postCode).append('\'').append("\n");
-        sb.append(", village='").append(village).append('\'').append("\n");
-        sb.append(", land='").append(land).append('\'').append("\n");
-        sb.append(", accessibilities=").append(accessibilities);
-        sb.append('}');
+        final StringBuffer sb = new StringBuffer();
+        sb.append(this.getName() + " " + this.getNumber());
         return sb.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return this.id.equals(customer.getId());
+    }
+
 }

@@ -45,9 +45,9 @@ public class PanelAccessibility extends JPanel{
         this.add(this.buttonDelete);
     }
 
-    public void reset(){
+    public void clearComponentData(){
         jcbxAcessibility.removeAllItems();
-        jtfAcessibility.removeAll();
+        jtfAcessibility.setText("");
     }
 
     public void addToAcessibilityStringList(String entry){
