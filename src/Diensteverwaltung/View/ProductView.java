@@ -1,9 +1,13 @@
 package Diensteverwaltung.View;
 
 import Diensteverwaltung.Main;
+import Diensteverwaltung.Product;
+import Diensteverwaltung.Products;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 
 /*
@@ -21,12 +25,15 @@ public class ProductView extends JFrame{
 
     private Main main;
 
-    private JTable jTable;
+    private JTable jTableProductlist;
     private JScrollPane jScrollPane;
     private JFrame jFrame = new JFrame();
 
 
-   public ProductView(Main main){
+
+
+
+    public ProductView(Main main){
        this.main = main;
        initComponents();
        this.setSize(900, 400);
@@ -35,51 +42,152 @@ public class ProductView extends JFrame{
    }
 
 
-
     private void initComponents() {
-       jComboBox = new JComboBox();
-
-       jbAdd = new JButton("Dienstleistung hinzufügen");
-       jbNew= new JButton("Neue Dienstleistung");
-       jbRemove= new JButton("Dienstleistung löschen");
-       jbUpdate = new JButton("Dienstleistung verändern");
-
-
-       tvPosition = new JTextField("Position");
-       tvName = new JTextField("Name");
-       tvDescription = new JTextField("Beschreibung");
-       tvPrice = new JTextField("Preis");
-       jpTable = new JPanel();
+       this.jComboBox = new JComboBox();
 
 
 
-       jpCenter = new JPanel();
-       jpCenter.setLayout(new BoxLayout(jpCenter, BoxLayout.X_AXIS));
-       this.add(jpCenter);
-       jpNorth = new JPanel();
+        this.jbAdd = new JButton("Dienstleistung hinzufügen");
+        this.jbNew= new JButton("Neue Dienstleistung");
+        this.jbRemove= new JButton("Dienstleistung löschen");
+        this.jbUpdate = new JButton("Dienstleistung verändern");
+
+
+        this.tvPosition = new JTextField("Position");
+        this.tvName = new JTextField("Name");
+        this.tvDescription = new JTextField("Beschreibung");
+        this.tvPrice = new JTextField("Preis");
+        this.jpTable = new JPanel();
+
+
+
+
+        this.jpNorth = new JPanel();
        this.add(jpNorth, BorderLayout.NORTH);
-       jpSouth = new JPanel();
+        this.jpSouth = new JPanel();
        this.add(jpSouth,BorderLayout.SOUTH);
 
-       jpCenter.add(new JPanel());
-       jpCenter.add(tvPosition);
-       jpCenter.add(tvName);
-       jpCenter.add(tvDescription);
-       jpCenter.add(tvPrice);
-
-
-       jpNorth.add(jComboBox);
-       jpNorth.add(jbNew);
-       jpNorth.add(jbRemove);
-
-       jpSouth.add(jbAdd);
-       jpSouth.add(jbUpdate);
+       this.jpCenter = new JPanel();
+       this.jpCenter.setLayout(new BorderLayout());
+       this.jTableProductlist = new ProductList();
+       this.jScrollPane = new JScrollPane(this.jTableProductlist);
+       this.jpCenter.add(jScrollPane, BorderLayout.CENTER);
+        this.add(jpCenter);
 
 
 
+        this.jpNorth.add(jComboBox);
+        this.jpNorth.add(jbNew);
+        this.jpNorth.add(jbRemove);
 
+        this.jpSouth.add(jbAdd);
+        this.jpSouth.add(jbUpdate);
 
+        this.tvPosition.setEnabled(false);
+        this.tvName.setEnabled(false);
+        this.tvDescription.setEnabled(false);
+        this.tvPrice.setEnabled(false);
+
+        this.jbAdd.setEnabled(false);
+        this.jbNew.setEnabled(false);
+        this.jbRemove.setEnabled(false);
+        this.jbUpdate.setEnabled(false);
     }
+
+
+
+        public void setTextFieldPositionEnabled (boolean enabled){
+            this.tvPosition.setEnabled(enabled);
+        }
+
+        public void setTextFieldNameEnabled(boolean enabled){
+            this.tvName.setEnabled(enabled);
+        }
+
+        public void setTextFieldDescriptionEnabled(boolean enabled){
+       this.tvDescription.setEnabled(enabled);
+        }
+
+        public void setTextFieldPriceEnabled(boolean enabled){
+       this.tvPrice.setEnabled(enabled);
+        }
+
+        public void setTextFieldName(String name){
+       this.tvName.setText(name);
+        }
+
+        public void getTextFieldName (){
+       this.tvName.getText().toString();
+        }
+
+    public void setTextFieldDescription(String description){
+        this.tvDescription.setText(description);
+    }
+
+    public void getTextFieldDescription (){
+        this.tvDescription.getText().toString();
+    }
+    public void setTextFieldPrice(String price){
+        this.tvPrice.setText(price);
+    }
+
+    public void getTextFieldPrice (){
+        this.tvPrice.getText().toString();
+    }
+
+    public void setNewButtonListen(ActionListener listener){
+       this.jbNew.addActionListener(listener);
+       this.jbNew.setEnabled(true);
+       this.pack();
+    }
+
+    public void setNewButtonEnabled (boolean enabled){
+       this.jbNew.setEnabled(enabled);
+    }
+
+    public void setRemoveButtonListen(ActionListener listener){
+        this.jbRemove.addActionListener(listener);
+        this.jbRemove.setEnabled(true);
+        this.pack();
+    }
+
+    public void setRemoveButtonEnabled (boolean enabled){
+        this.jbRemove.setEnabled(enabled);
+    }
+
+    public void addToProductList (Product product){
+       if (product != null) {
+           this.jComboBox.addItem(product);
+       }
+    }
+
+    public void removeProductFromListbyName (String name){
+       this.jComboBox.removeItem(name);
+    }
+
+    public void removeProductFromListbyPosition (int position){
+       if (position >= 0 && position < this.jComboBox.getItemCount()){
+           this.jComboBox.removeItemAt(position);
+       }
+    }
+
+    public Product getProductfromList(int position){
+       if (position >= 0 && position < this.jComboBox.getItemCount()){
+           return (Product) this.jComboBox.getItemAt(position);
+       }
+       return null;
+    }
+
+    public void setComboBoxListener (ActionListener listener){
+       this.jComboBox.addActionListener(listener);
+    }
+
+
+
+
+
+
+
 
 
 }
