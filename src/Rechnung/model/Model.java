@@ -4,7 +4,6 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,13 +65,6 @@ public class Model {
     }
 
     public boolean removeCustomer(Customer customer){
-        try {
-            return CustomerService.removeCustomer(customer);
-        } catch (SQLException e) {
-            //TODO
-            e.printStackTrace();
-        }
-
         return false;
     }
 
@@ -82,7 +74,7 @@ public class Model {
 
     public boolean isPasswordValid(String password){
 
-        return  (password != null && password.length() > 7);
+        return  (password != null && password.length() > 7 && charsCorrespondPasswordPolicy(password));
     }
 
     public boolean isFaxOrPhoneNumberValid(String number){
@@ -110,7 +102,28 @@ public class Model {
         return result;
     }
 
-    public String generateCustomerNumber(){
-        return Long.toString(System.currentTimeMillis());
+    public boolean charsCorrespondPasswordPolicy(String password){
+        boolean containUpperCase = false;
+        boolean containLowerCase = false;
+        boolean containNumber = false;
+        for (int i=0; i<password.length(); i++) {
+            if(containUpperCase && containLowerCase && containNumber){
+                return true;
+            }
+            char c = password.charAt(i);
+            if(Character.isUpperCase(c)){
+                containUpperCase = true;
+                continue;
+            }
+            if(Character.isLowerCase(c)){
+                containLowerCase = true;
+                continue;
+            }
+            if(Character.isDigit(c)){
+                containNumber = true;
+                continue;
+            }
+        }
+        return (containUpperCase && containLowerCase && containNumber);
     }
 }
