@@ -20,12 +20,20 @@ public class Message {
         showErrorMessage("Sie müssen eine Kundennummer als Zahl zwischen -2.147.483.648 und 2.147.483.647 eingeben!");
     }
 
-    public static void showErrorMessageNoGuiltyNameOrForenameOrStreetOrVillage(){
-        showErrorMessage("Name, Vorname, Straße und Ort sind Pflichtfelder und dürfen keine Zahl enthalten!");
+    public static void showErrorMessageNoGuiltyNameOrForenameOrStreetOrVillage(String fieldname){
+        showErrorMessage(fieldname + " ist ein Pflichtfeld und darf keine Zahl enthalten!");
     }
 
     public static void showErrorMessageNoGuiltyPostCode(){
         showErrorMessage("Postleitzahl ist ein Pflichtfeld und muss als Zahl eingegeben werden!");
+    }
+
+    public static void showErrorMessageNoGuiltyMailAddress(){
+        showErrorMessage("Mailadresse ist ungültig!");
+    }
+
+    public static void showErrorMessageNoGuiltyPhoneOrFaxNumber(){
+        showErrorMessage("Nummer ist ungültig!");
     }
 
     public static void main(String[] args) {

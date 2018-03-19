@@ -50,7 +50,14 @@ public class CustomersConfigDialogController implements Controller {
         this.customersConfigDialog.setApplyButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(Publisher.getModel().isPostCodeValid(customersConfigDialog.getPostCodeTextField())){
+                Model model = Publisher.getModel();
+                if(model.isNameOrForenameOrStreetOrVillageValid("Name", customersConfigDialog.getNameTextField()) &&
+                        model.isNameOrForenameOrStreetOrVillageValid("Vorname", customersConfigDialog.getForennameTextField()) &&
+                        model.isNameOrForenameOrStreetOrVillageValid("Name", customersConfigDialog.getStreetTextField()) &&
+                        model.isNameOrForenameOrStreetOrVillageValid("Name", customersConfigDialog.getVillageTextField()) &&
+                        model.isHouseNumberValid(customersConfigDialog.getHouseNumberTextField()) &&
+                        model.isPostCodeValid(customersConfigDialog.getPostCodeTextField()) &&
+                        model.isLandValid(customersConfigDialog.getLandTextField())){
                     saveComponentData();
                     fillWindowComponents(false);
                 }

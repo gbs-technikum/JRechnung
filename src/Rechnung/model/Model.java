@@ -80,12 +80,8 @@ public class Model {
         return  (password != null && password.length() > 7 && charsCorrespondPasswordPolicy(password));
     }
 
-    public boolean isNameOrForenameOrStreetOrVillageValid(String worth){
-        if(Pattern.compile( "[0-9]" ).matcher(worth).find() || worth.isEmpty()){
-            Message.showErrorMessageNoGuiltyNameOrForenameOrStreetOrVillage();
-            return false;
-        }
-        return true;
+    public boolean isNameOrForenameOrStreetOrVillageValid(String fieldname, String worth){
+        return !(Pattern.compile( "[0-9]" ).matcher(worth).find() || worth.isEmpty());
     }
 
     public boolean isHouseNumberValid(String houseNumber){
@@ -110,7 +106,11 @@ public class Model {
     }
 
     public boolean isFaxOrPhoneNumberValid(String number){
-        return (number != null && number.length() > 5 && number.matches("[0-9]+"));
+        if(number != null && number.length() > 5 && number.matches("[0-9]+")){
+            return true;
+        }
+        Message.showErrorMessageNoGuiltyPhoneOrFaxNumber();
+        return false;
     }
 
     public boolean isStringInList(List<String> list, String needle){
@@ -129,6 +129,7 @@ public class Model {
             InternetAddress emailAddr = new InternetAddress(email);
             emailAddr.validate();
         } catch (AddressException ex) {
+            Message.showErrorMessageNoGuiltyMailAddress();
             result = false;
         }
         return result;
