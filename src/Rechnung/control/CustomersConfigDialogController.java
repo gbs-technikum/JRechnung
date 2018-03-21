@@ -51,13 +51,14 @@ public class CustomersConfigDialogController implements Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Model model = Publisher.getModel();
-                if(model.isNameOrForenameOrStreetOrVillageValid("Name", customersConfigDialog.getNameTextField()) &&
-                        model.isNameOrForenameOrStreetOrVillageValid("Vorname", customersConfigDialog.getForennameTextField()) &&
-                        model.isNameOrForenameOrStreetOrVillageValid("Name", customersConfigDialog.getStreetTextField()) &&
-                        model.isNameOrForenameOrStreetOrVillageValid("Name", customersConfigDialog.getVillageTextField()) &&
-                        model.isHouseNumberValid(customersConfigDialog.getHouseNumberTextField()) &&
-                        model.isPostCodeValid(customersConfigDialog.getPostCodeTextField()) &&
-                        model.isLandValid(customersConfigDialog.getLandTextField())){
+                boolean isNameValid = model.isNameOrForenameOrStreetOrVillageValid("Name", customersConfigDialog.getNameTextField());
+                boolean isForenameValid = model.isNameOrForenameOrStreetOrVillageValid("Vorname", customersConfigDialog.getForennameTextField());
+                boolean isStreetValid = model.isNameOrForenameOrStreetOrVillageValid("Straße", customersConfigDialog.getStreetTextField());
+                boolean isHouseNumberValid = model.isHouseNumberValid(customersConfigDialog.getHouseNumberTextField());
+                boolean isPostCodeValid = model.isPostCodeValid(customersConfigDialog.getPostCodeTextField());
+                boolean isVillageValid = model.isNameOrForenameOrStreetOrVillageValid("Ort", customersConfigDialog.getVillageTextField());
+                boolean isLandValid = model.isLandValid(customersConfigDialog.getLandTextField());
+                if(isNameValid && isForenameValid && isStreetValid && isHouseNumberValid && isPostCodeValid && isVillageValid && isLandValid){
                     saveComponentData();
                     fillWindowComponents(false);
                 }

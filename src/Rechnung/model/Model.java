@@ -81,11 +81,16 @@ public class Model {
     }
 
     public boolean isNameOrForenameOrStreetOrVillageValid(String fieldname, String worth){
-        return !(Pattern.compile( "[0-9]" ).matcher(worth).find() || worth.isEmpty());
+        if (Pattern.compile( "[0-9]" ).matcher(worth).find() || worth.isEmpty()){
+            Message.showErrorMessageNoGuiltyNameOrForenameOrStreetOrVillage(fieldname);
+            return false;
+        }
+        return true;
     }
 
     public boolean isHouseNumberValid(String houseNumber){
         if(!Pattern.compile( "[0-9]" ).matcher(houseNumber).find() || houseNumber.isEmpty() || houseNumber.contains(" ")){
+            Message.showErrorMessageNoGuiltyHouseNumber();
             return false;
         }
         return true;
@@ -102,7 +107,11 @@ public class Model {
     }
 
     public boolean isLandValid(String land){
-        return !(Pattern.compile( "[0-9]" ).matcher(land).find());
+        if(Pattern.compile( "[0-9]" ).matcher(land).find()){
+            Message.showErrorMessageNoGuiltyLand();
+            return false;
+        }
+        return true;
     }
 
     public boolean isFaxOrPhoneNumberValid(String number){

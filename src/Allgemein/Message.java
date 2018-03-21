@@ -24,6 +24,14 @@ public class Message {
         showErrorMessage(fieldname + " ist ein Pflichtfeld und darf keine Zahl enthalten!");
     }
 
+    public static void showErrorMessageNoGuiltyHouseNumber() {
+        showErrorMessage("Hausnummer ist ein Pflichtfeld, muss mindestens eine Zahl enthalten und darf kein Leerzeichen enthalten!");
+    }
+
+    public static void showErrorMessageNoGuiltyLand(){
+        showErrorMessage("Land darf keine Zahlen enthalten!");
+    }
+
     public static void showErrorMessageNoGuiltyPostCode(){
         showErrorMessage("Postleitzahl ist ein Pflichtfeld und muss als Zahl eingegeben werden!");
     }
