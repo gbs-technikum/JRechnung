@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.*;
 
 public class Bill {
-    private Kunde debtor;
+    private Customer debtor;
     private String titel;
     private Date creationDate;
     private Date toPayToDate;
@@ -29,11 +29,11 @@ public class Bill {
         this.taxIncluded = taxIncluded;
     }
 
-    public Kunde getDebtor() {
+    public Customer getDebtor() {
         return debtor;
     }
 
-    public void setDebtor(Kunde debtor) {
+    public void setDebtor(Customer debtor) {
         this.debtor = debtor;
     }
 

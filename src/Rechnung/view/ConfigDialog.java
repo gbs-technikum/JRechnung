@@ -20,6 +20,7 @@ public abstract class ConfigDialog extends JDialog {
     public ConfigDialog(JFrame frame, String str){
         super(frame, str);
         this.initComponents();
+        this.setSize(800,600);
         this.setLocationRelativeTo(frame);
     }
 

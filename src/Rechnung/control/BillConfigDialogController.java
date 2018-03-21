@@ -3,6 +3,8 @@ package Rechnung.control;
 import Rechnung.view.BillConfigDialog;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class BillConfigDialogController implements Controller {
 
@@ -25,7 +27,34 @@ public class BillConfigDialogController implements Controller {
     }
 
     private void initEvents() {
+        this.billConfigDialog.setOkayButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controllerReturnStatus = ControllerReturnStatus.OK;
+             //   saveComponentData();
+                billConfigDialog.setVisible(false);
+                billConfigDialog.dispose();
+            }
+        });
+        this.billConfigDialog.setOkayButtonEnabled(true);
 
+        this.billConfigDialog.setApplyButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            //    saveComponentData();
+            }
+        });
+        this.billConfigDialog.setApplyButtonEnabled(true);
+
+        this.billConfigDialog.setCancelButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controllerReturnStatus = ControllerReturnStatus.ABORT;
+                billConfigDialog.setVisible(false);
+                billConfigDialog.dispose();
+            }
+        });
+        this.billConfigDialog.setCancelButtonEnabled(true);
     }
 
 }

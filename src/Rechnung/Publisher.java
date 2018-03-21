@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Publisher {
+public final class Publisher {
 
     private static Logger loggerInstance;
     private static SecurityProvider securityProviderInstance;
