@@ -12,6 +12,8 @@ import javax.swing.*;
 public abstract class ConfigDialog extends JDialog {
 
     private JPanel bottomPanel;
+    private JLabel labelMandatory;
+    private JPanel jpMandatory;
     private JButton btnOkay;
     private JButton btnCancel;
     private JButton btnApply;
@@ -30,6 +32,7 @@ public abstract class ConfigDialog extends JDialog {
 
     private void initComponents() {
         this.bottomPanel = new JPanel();
+
         this.jpButtons = new JPanel();
 
         this.btnOkay = new JButton("OK");
@@ -56,6 +59,13 @@ public abstract class ConfigDialog extends JDialog {
         this.setModal(true);
 
         this.pack();
+    }
+
+    public void initComponentsMandatory(){
+        this.jpMandatory = new JPanel();
+        this.labelMandatory = new JLabel("* Pflichtfeld");
+        this.jpMandatory.add(this.labelMandatory);
+        this.bottomPanel.add(this.jpMandatory);
     }
 
     public void setCancelButtonListener(ActionListener listener){

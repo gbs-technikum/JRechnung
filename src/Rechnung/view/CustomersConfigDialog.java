@@ -26,6 +26,7 @@ public class CustomersConfigDialog extends ConfigDialog {
 
     public CustomersConfigDialog(JFrame frame) throws HeadlessException {
         super(frame,"Kundenverwaltung");
+        super.initComponentsMandatory();
         this.initComponents();
         this.setPreferredSize(new Dimension(800,600));
         this.pack();
@@ -39,19 +40,19 @@ public class CustomersConfigDialog extends ConfigDialog {
         jcbxCustomer = new JComboBox<>();
 
         jtfNumber = new JTextField();
-        jtfNumber.setBorder(new TitledBorder("Kundennummer"));
+        jtfNumber.setBorder(new TitledBorder("Kundennummer*"));
         jtfName = new JTextField();
-        jtfName.setBorder(new TitledBorder("Name"));
+        jtfName.setBorder(new TitledBorder("Name*"));
         jtfForename = new JTextField();
-        jtfForename.setBorder(new TitledBorder("Vorname"));
+        jtfForename.setBorder(new TitledBorder("Vorname*"));
         jtfStreet = new JTextField();
-        jtfStreet.setBorder(new TitledBorder("Straße"));
+        jtfStreet.setBorder(new TitledBorder("Straße*"));
         jtfHouseNumber = new JTextField();
-        jtfHouseNumber.setBorder(new TitledBorder("Hausnummer"));
+        jtfHouseNumber.setBorder(new TitledBorder("Hausnummer*"));
         jtfPostCode = new JTextField();
-        jtfPostCode.setBorder(new TitledBorder("Postleitzahl"));
+        jtfPostCode.setBorder(new TitledBorder("Postleitzahl*"));
         jtfVillage = new JTextField();
-        jtfVillage.setBorder(new TitledBorder("Ort"));
+        jtfVillage.setBorder(new TitledBorder("Ort*"));
         jtfLand = new JTextField();
         jtfLand.setBorder(new TitledBorder("Land"));
 
