@@ -79,5 +79,15 @@ public class MainWindowController implements Controller {
         });
 
         this.mainWindow.setEncPasswortResetButtonEnabled(true);
+
+        this.mainWindow.setManageProductOrServiceButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Controller controller = new ProductOrServiceConfigDialogController(mainWindow);
+                controller.run();
+            }
+        });
+
+        this.mainWindow.setManageProductOrServiceButtonEnabled(true);
     }
 }

@@ -76,6 +76,41 @@ public class Model {
         return false;
     }
 
+    public List<ProductOrService> readProductsOrServices(){
+        List<ProductOrService> result = new ArrayList<>();
+
+        try {
+            result = ProductOrServiceService.read();
+        } catch (SQLException e) {
+            e.printStackTrace(); //TODO
+        }
+
+        return result;
+    }
+
+    public boolean saveProductOrService(ProductOrService productOrService){
+        try {
+            return ProductOrServiceService.write(productOrService);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            //TODO
+        }
+
+        return false;
+    }
+
+    public boolean removeProductOrService(ProductOrService productOrService){
+/*        try {
+           // return ProductOrServiceService.remove(productOrService);
+            return true;
+        } catch (SQLException e) {
+            //TODO
+            e.printStackTrace();
+        }*/
+
+        return false;
+    }
+
     public String getNewObjectId(){
         return UUIDStringGenerator.generate();
     }
