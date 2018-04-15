@@ -40,7 +40,7 @@ public class ProductView extends JFrame{
        jbRemove= new JButton("Dienstleistung löschen");
        jbUpdate = new JButton("Dienstleistung verändern");
 
-       tvPosition = new JTextField("Position");
+       tvPosition = new JTextField("ID");
        tvName = new JTextField("Name");
        tvDescription = new JTextField("Beschreibung");
        tvPrice = new JTextField("Preis");
