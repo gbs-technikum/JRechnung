@@ -223,6 +223,7 @@ public class CustomersConfigDialog extends ConfigDialog {
         this.pack();
     }
 
+
     public void setNewButtonEnabled(boolean enabled){
         this.buttonNew.setEnabled(enabled);
     }
@@ -349,6 +350,23 @@ public class CustomersConfigDialog extends ConfigDialog {
     public void setCustomerComboBoxListener(ActionListener listener){
         this.jcbxCustomer.addActionListener(listener);
     }
+
+    public void removeCustomerComboBoxListener(){
+
+        for(int i=0;i< this.jcbxCustomer.getActionListeners().length;i++){
+            this.jcbxCustomer.removeActionListener(this.jcbxCustomer.getActionListeners()[i]);
+        }
+
+    }
+
+    public ActionListener getCustomerComboBoxListener(){
+        if(this.jcbxCustomer.getActionListeners().length > 0) {
+            return this.jcbxCustomer.getActionListeners()[0];
+        }
+
+        return null;
+    }
+
 
     public int getIndexOfSelectedCustomer(){
         return this.jcbxCustomer.getSelectedIndex();

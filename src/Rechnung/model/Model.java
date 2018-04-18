@@ -100,13 +100,12 @@ public class Model {
     }
 
     public boolean removeProductOrService(ProductOrService productOrService){
-/*        try {
-           // return ProductOrServiceService.remove(productOrService);
-            return true;
+        try {
+            return ProductOrServiceService.remove(productOrService);
         } catch (SQLException e) {
             //TODO
             e.printStackTrace();
-        }*/
+        }
 
         return false;
     }

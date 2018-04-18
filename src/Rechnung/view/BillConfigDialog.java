@@ -2,6 +2,7 @@ package Rechnung.view;
 
 import Rechnung.model.Customer;
 import Rechnung.model.LegalForm;
+import Rechnung.model.ProductOrService;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -19,6 +20,7 @@ public class BillConfigDialog extends ConfigDialog {
     private JPanel mainPanel;
     private JTextField jtfTitel;
     private JComboBox<Customer> jcbxDebtor;
+    private JComboBox<ProductOrService> jcbxProductOrService;
     private JTextField jtfToPayDate, jtfPaidOn;
     private JCheckBox jchkbxPaid, jchkbxTaxFree, jchkbxTaxIncluded;
     private JTable jtblEntries;
@@ -27,7 +29,8 @@ public class BillConfigDialog extends ConfigDialog {
     private JScrollPane jspEntryTable, jspComment;
     private JButton btnAddEntry;
     private JButton btnGenerateBillFile;
-    private JPanel leftButtunPanel;
+    private JPanel leftButtunPanel, leftPanel2;
+    private JPanel entryPanel;
 
 
     public BillConfigDialog(JFrame frame) {
@@ -36,7 +39,7 @@ public class BillConfigDialog extends ConfigDialog {
     }
 
     private void initComponents() {
-        this.setPreferredSize(new Dimension(700,580));
+        this.setPreferredSize(new Dimension(1024,768));
         this.mainPanel = new JPanel();
         this.mainPanel.setLayout(new BoxLayout(this.mainPanel, BoxLayout.Y_AXIS));
 
@@ -47,6 +50,13 @@ public class BillConfigDialog extends ConfigDialog {
 
         this.jPanelMiddle = new JPanel();
         this.jPanelMiddle.setLayout( new GridLayout(1,4));
+
+        this.entryPanel = new JPanel();
+        this.entryPanel.setLayout(new BorderLayout());
+
+        this.leftPanel2 = new JPanel();
+        this.leftPanel2.setLayout(new GridLayout(1,2));
+
 
         this.jcbxDebtor = new JComboBox();
         this.jcbxDebtor.setBorder(new TitledBorder("Schuldner"));
@@ -97,13 +107,23 @@ public class BillConfigDialog extends ConfigDialog {
 
         this.mainPanel.add(this.jPanelMiddle);
 
-        this.jPanelCheckboxes.add(this.btnAddEntry);
+
         this.jPanelCheckboxes.add(this.jchkbxPaid);
 
         this.jPanelCheckboxes.add(this.jchkbxTaxFree);
         this.jPanelCheckboxes.add(this.jchkbxTaxIncluded);
 
+        this.jcbxProductOrService = new JComboBox();
+        this.jcbxProductOrService.setBorder(new TitledBorder("Produkt/Dienstleistung"));
+
+        this.leftPanel2.setPreferredSize(new Dimension(450,50));
+        this.leftPanel2.add(this.btnAddEntry);
+        this.leftPanel2.add(this.jcbxProductOrService);
+        this.entryPanel.add(this.leftPanel2,BorderLayout.WEST);
+
+
         this.mainPanel.add(this.jPanelCheckboxes);
+        this.mainPanel.add(this.entryPanel);
 
 
 

@@ -164,6 +164,10 @@ public class CustomersConfigDialogController implements Controller {
                 customersConfigDialog.clearComponentData();
                 customer = null;
                 customersConfigDialog.setNumberTextField(Publisher.getModel().generateCustomerNumber());
+                ActionListener actionListener = customersConfigDialog.getCustomerComboBoxListener();
+                customersConfigDialog.removeCustomerComboBoxListener();
+                fillComboBox(null,null);
+                customersConfigDialog.setCustomerComboBoxListener(actionListener);
             }
         });
         this.customersConfigDialog.setNewButtonEnabled(true);
@@ -225,21 +229,31 @@ public class CustomersConfigDialogController implements Controller {
                 this.customer = selectedCustomer;
             }
 
-            int selectedIndex = 0;
-
-            for (int i = 0; i < customers.size(); i++) {
-                Customer currentCustomer = customers.get(i);
-                this.customersConfigDialog.addToCustomerList(currentCustomer);
-                if (selectedCustomer.equals(currentCustomer)) {
-                    selectedIndex = i;
-                    this.customer = currentCustomer;
-                }
-            }
+            int selectedIndex = fillComboBox(customers,selectedCustomer);
 
             this.customersConfigDialog.setIndexOfSelectedCustomer(selectedIndex);
         }else {
             this.customersConfigDialog.setNumberTextField(Publisher.getModel().generateCustomerNumber());
         }
+    }
+
+    private int fillComboBox(List<Customer> customers, Customer selectedCustomer){
+        int selectedIndex = 0;
+
+        if(customers == null){
+            customers = Publisher.getModel().readCustomers();
+        }
+
+        for (int i = 0; i < customers.size(); i++) {
+            Customer currentCustomer = customers.get(i);
+            this.customersConfigDialog.addToCustomerList(currentCustomer);
+            if (selectedCustomer != null && selectedCustomer.equals(currentCustomer)) {
+                selectedIndex = i;
+                this.customer = currentCustomer;
+            }
+        }
+
+        return selectedIndex;
     }
 
     private void createCustomerFromWindowData(){

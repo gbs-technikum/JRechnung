@@ -16,10 +16,19 @@ public class ProductOrServiceService {
     private static final String SQL_QUERY_WITH_ID = "SELECT * FROM product_srv WHERE id  = ?";
     private static final String SQL_QUERY = "SELECT * FROM product_srv";
     private static final String SQL_INSERT = "INSERT INTO product_srv VALUES (?,?,?,?)";
+    private static final String SQL_UPDATE = "UPDATE product_srv set title=?, price=?, description=? WHERE ID=?";
+    private static final String SQL_DELETE = "DELETE FROM product_srv WHERE id = ?";
 
     public static boolean write(ProductOrService productOrService) throws SQLException{
 
         if(productOrService != null){
+
+
+            System.out.println(productOrService.getId());
+
+            if(ProductOrServiceService.read(productOrService.getId()) != null){
+                return ProductOrServiceService.modify(productOrService);
+            }
 
             Connection connection = Publisher.getDBConnection();
 
@@ -31,6 +40,43 @@ public class ProductOrServiceService {
                 preparedStatement.setString(2, productOrService.getTitle());
                 preparedStatement.setBigDecimal(3, new BigDecimal(productOrService.getPrice()));
                 preparedStatement.setString(4, productOrService.getDescription());
+
+                preparedStatement.execute();
+            }finally {
+                if (preparedStatement != null) {
+                    try{
+                        preparedStatement.close();
+                    }catch (SQLException e){
+                        if(Debug.ON){
+                            System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getStackTrace().toString());
+                        }
+                    }
+
+                }
+                preparedStatement = null;
+                connection = null;
+            }
+
+        }
+
+        return false;
+    }
+
+    public static boolean modify(ProductOrService productOrService) throws SQLException {
+        if(productOrService != null){
+
+            Connection connection = Publisher.getDBConnection();
+
+            PreparedStatement preparedStatement = null;
+            try {
+                preparedStatement = connection.prepareStatement(ProductOrServiceService.SQL_UPDATE);
+
+
+                preparedStatement.setString(1, productOrService.getTitle());
+                preparedStatement.setBigDecimal(2, new BigDecimal(productOrService.getPrice()));
+                preparedStatement.setString(3, productOrService.getDescription());
+
+                preparedStatement.setString(4, productOrService.getId());
 
                 preparedStatement.execute();
             }finally {
@@ -97,7 +143,7 @@ public class ProductOrServiceService {
         ProductOrService result = null;
 
         try {
-            if (id != null) {
+            if (id == null) {
                 return result;
             }
 
@@ -131,6 +177,28 @@ public class ProductOrServiceService {
         }
 
         return result;
+    }
+
+    public static boolean remove(ProductOrService productOrService) throws SQLException {
+        Connection connection = Publisher.getDBConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE);
+        try {
+            preparedStatement.setString(1,productOrService.getId());
+
+            preparedStatement.execute();
+        }finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    if (Debug.ON) {
+                        System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getStackTrace().toString());
+                    }
+                }
+
+            }
+        }
+        return true;
     }
 
 }

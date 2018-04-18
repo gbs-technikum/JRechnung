@@ -2,19 +2,51 @@ package Rechnung.model;
 
 import org.apache.poi.hsmf.datatypes.StringChunk;
 
-public interface BillEntry {
+public class BillEntry {
 
-    double getTaxRateInPercent();
-    double getUnitPrice();
-    double getPerEntryPrice(boolean taxIncluded);
+    private String id;
+    private double taxRateInPercent;
+    private double unitPrice;
+    private int amount;
+    private String entryText;
 
-    int getAmount();
-    int setAmount();
 
-    void setTaxRateInPercent(double taxRateInPercent);
-    void setUnitPrice(double unitPrice);
+    public BillEntry(String id, double taxRateInPercent, double unitPrice, int amount, String entryText) {
+        this.taxRateInPercent = taxRateInPercent;
+        this.unitPrice = unitPrice;
+        this.amount = amount;
+        this.entryText = entryText;
+    }
 
-    String getEntryText();
-    String setEntryText();
+    public double getTaxRateInPercent() {
+        return taxRateInPercent;
+    }
 
+    public void setTaxRateInPercent(double taxRateInPercent) {
+        this.taxRateInPercent = taxRateInPercent;
+    }
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public String getEntryText() {
+        return entryText;
+    }
+
+    public void setEntryText(String entryText) {
+        this.entryText = entryText;
+    }
 }

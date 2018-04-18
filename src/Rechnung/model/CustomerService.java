@@ -160,7 +160,7 @@ public class CustomerService {
                 preparedStatement.setBytes(5,securityProvider.encrypt(customer.getHouseNumber()));
                 preparedStatement.setBytes(6,securityProvider.encrypt(customer.getPostCode()));
                 preparedStatement.setBytes(7,securityProvider.encrypt(customer.getVillage()));
-                preparedStatement.setBytes(8,securityProvider.encrypt(customer.getVillage()));
+                preparedStatement.setBytes(8,securityProvider.encrypt(customer.getLand()));
                 preparedStatement.setString(9,customer.getId());
 
                 preparedStatement.execute();

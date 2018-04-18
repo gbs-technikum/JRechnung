@@ -22,6 +22,25 @@ public class ProductOrServiceConfigDialogController implements Controller {
         this.controllerReturnStatus = ControllerReturnStatus.OK;
     }
 
+    private int fillComboBox(List<ProductOrService> productsOrServices, ProductOrService selectedProductOrService){
+        int selectedIndex = 0;
+
+        if(productsOrServices == null){
+            productsOrServices = Publisher.getModel().readProductsOrServices();
+        }
+
+        for (int i = 0; i < productsOrServices.size(); i++) {
+            ProductOrService currentProductOrService = productsOrServices.get(i);
+            this.productOrServiceConfigDialog.addToProductOrServiceList(currentProductOrService);
+            if (selectedProductOrService != null && selectedProductOrService.equals(currentProductOrService)) {
+                selectedIndex = i;
+                this.productOrService = currentProductOrService;
+            }
+        }
+
+        return selectedIndex;
+    }
+
     private void fillWindowComponents(boolean refill) {
         List<ProductOrService> productsOrServices = Publisher.getModel().readProductsOrServices();
         ProductOrService selectedProductOrService = null;
@@ -107,6 +126,11 @@ public class ProductOrServiceConfigDialogController implements Controller {
             public void actionPerformed(ActionEvent e) {
                 productOrServiceConfigDialog.clearComponentData();
                 productOrService = null;
+
+                ActionListener actionListener = productOrServiceConfigDialog.getProductOrServiceComboBoxListener();
+                productOrServiceConfigDialog.removeProductOrServiceComboBoxListener();
+                fillComboBox(null,null);
+                productOrServiceConfigDialog.setProductOrServiceComboBoxListener(actionListener);
             }
         });
         this.productOrServiceConfigDialog.setNewButtonEnabled(true);

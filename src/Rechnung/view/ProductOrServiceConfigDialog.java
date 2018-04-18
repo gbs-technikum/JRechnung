@@ -122,6 +122,24 @@ public class ProductOrServiceConfigDialog extends ConfigDialog {
         this.jcbxProductOrService.addActionListener(listener);
     }
 
+
+    public void removeProductOrServiceComboBoxListener(){
+
+        for(int i=0;i< this.jcbxProductOrService.getActionListeners().length;i++){
+            this.jcbxProductOrService.removeActionListener(this.jcbxProductOrService.getActionListeners()[i]);
+        }
+
+    }
+
+    public ActionListener getProductOrServiceComboBoxListener(){
+        if(this.jcbxProductOrService.getActionListeners().length > 0) {
+            return this.jcbxProductOrService.getActionListeners()[0];
+        }
+
+        return null;
+    }
+
+
     public int getIndexOfSelectedProductOrService(){
         return this.jcbxProductOrService.getSelectedIndex();
     }
