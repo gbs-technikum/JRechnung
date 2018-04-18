@@ -1,5 +1,6 @@
 package Rechnung.model;
 
+import Allgemein.Message;
 import Rechnung.Debug;
 import Rechnung.Logger;
 import Rechnung.Publisher;
@@ -173,6 +174,7 @@ public class SecurityProvider {
             return this.initCipher();
         }
 
+        Message.showErrorMessagePasswordFalse();
         return false;
     }
 

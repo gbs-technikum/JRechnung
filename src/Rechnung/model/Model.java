@@ -77,12 +77,24 @@ public class Model {
 
     public boolean isPasswordValid(String password){
 
-        return  (password != null && password.length() > 7 && charsCorrespondPasswordPolicy(password));
+        if(password != null && password.length() > 7 && charsCorrespondPasswordPolicy(password)){
+            return true;
+        }
+        Message.showErrorMessageNoValidPassword();
+        return false;
+    }
+
+    public boolean isPasswordEqualsPassword2(String password, String password2){
+        if(password.equals(password2)){
+            return true;
+        }
+        Message.showErrorMessagePasswordNotEqualPassword2();
+        return false;
     }
 
     public boolean isNameOrForenameOrStreetOrVillageValid(String fieldname, String worth){
         if (Pattern.compile( "[0-9]" ).matcher(worth).find() || worth.isEmpty()){
-            Message.showErrorMessageNoGuiltyNameOrForenameOrStreetOrVillage(fieldname);
+            Message.showErrorMessageNoValidNameOrForenameOrStreetOrVillage(fieldname);
             return false;
         }
         return true;
@@ -90,7 +102,7 @@ public class Model {
 
     public boolean isHouseNumberValid(String houseNumber){
         if(!Pattern.compile( "[0-9]" ).matcher(houseNumber).find() || houseNumber.isEmpty() || houseNumber.contains(" ")){
-            Message.showErrorMessageNoGuiltyHouseNumber();
+            Message.showErrorMessageNoValidHouseNumber();
             return false;
         }
         return true;
@@ -100,7 +112,7 @@ public class Model {
         try{
             Integer.parseInt(number);
         }catch (NumberFormatException e){
-            Message.showErrorMessageNoGuiltyPostCode();
+            Message.showErrorMessageNoValidPostCode();
             return false;
         }
         return true;
@@ -108,7 +120,7 @@ public class Model {
 
     public boolean isLandValid(String land){
         if(Pattern.compile( "[0-9]" ).matcher(land).find()){
-            Message.showErrorMessageNoGuiltyLand();
+            Message.showErrorMessageNoValidLand();
             return false;
         }
         return true;
@@ -118,7 +130,7 @@ public class Model {
         if(number != null && number.length() > 5 && number.matches("[0-9]+")){
             return true;
         }
-        Message.showErrorMessageNoGuiltyPhoneOrFaxNumber();
+        Message.showErrorMessageNoValidPhoneOrFaxNumber();
         return false;
     }
 
@@ -138,7 +150,7 @@ public class Model {
             InternetAddress emailAddr = new InternetAddress(email);
             emailAddr.validate();
         } catch (AddressException ex) {
-            Message.showErrorMessageNoGuiltyMailAddress();
+            Message.showErrorMessageNoValidMailAddress();
             result = false;
         }
         return result;
@@ -148,9 +160,11 @@ public class Model {
         boolean containUpperCase = false;
         boolean containLowerCase = false;
         boolean containNumber = false;
-        for (int i=0; i<password.length(); i++) {
+        for (int i=0; i<=password.length(); i++) {
             if(containUpperCase && containLowerCase && containNumber){
                 return true;
+            }else if(i==password.length()){
+                return false;
             }
             char c = password.charAt(i);
             if(Character.isUpperCase(c)){
@@ -166,7 +180,7 @@ public class Model {
                 continue;
             }
         }
-        return (containUpperCase && containLowerCase && containNumber);
+        return false;
     }
 
     public String generateCustomerNumber(){
