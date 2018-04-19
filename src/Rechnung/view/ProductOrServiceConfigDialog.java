@@ -1,7 +1,6 @@
 package Rechnung.view;
 
-import Rechnung.model.Customer;
-import Rechnung.model.ProductOrService;
+import Rechnung.model.objects.ProductOrService;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;

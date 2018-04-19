@@ -1,17 +1,12 @@
 package Rechnung.view;
 
-import Rechnung.model.Customer;
-import Rechnung.model.LegalForm;
-import Rechnung.model.ProductOrService;
+import Rechnung.model.objects.Customer;
+import Rechnung.model.objects.ProductOrService;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 public class BillConfigDialog extends ConfigDialog {
 

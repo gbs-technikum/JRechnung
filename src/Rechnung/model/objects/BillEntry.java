@@ -1,4 +1,4 @@
-package Rechnung.model;
+package Rechnung.model.objects;
 
 import org.apache.poi.hsmf.datatypes.StringChunk;
 
@@ -16,6 +16,10 @@ public class BillEntry {
         this.unitPrice = unitPrice;
         this.amount = amount;
         this.entryText = entryText;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public double getTaxRateInPercent() {

@@ -1,15 +1,12 @@
 package Rechnung.control;
 
 import Rechnung.Publisher;
-import Rechnung.model.*;
-import Rechnung.view.BusinessConfigDialog;
+import Rechnung.model.objects.*;
 import Rechnung.view.CustomersConfigDialog;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CustomersConfigDialogController implements Controller {

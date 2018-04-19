@@ -1,6 +1,6 @@
 package Rechnung.view;
 
-import Rechnung.model.Bill;
+import Rechnung.model.objects.Bill;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class BillList extends JTable {
 
-    private static final String[] TABLE_COLUMN_NAMES = {"Rechnung","Rechnungsempfänger","Datum","zu begleichen bis","beglichen","beglichen am"};
+    private static final String[] TABLE_COLUMN_NAMES = {"Rechnung","Rechnungsempfänger","Datum","zu begleichen bis","beglichen","beglichen am","Betrag"};
     private static final Color ALTERNATE_ROW_COLOR = new Color(255,255,200);
     private static final Color ROW_COLOR = Color.WHITE;
     private static final Color GRID_COLOR = Color.BLACK;

@@ -1,10 +1,16 @@
 package Rechnung.model;
 
+import Rechnung.model.db.BusinessService;
+import Rechnung.model.db.CustomerService;
+import Rechnung.model.db.ProductOrServiceService;
+import Rechnung.model.objects.Business;
+import Rechnung.model.objects.Customer;
+import Rechnung.model.objects.ProductOrService;
+
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 

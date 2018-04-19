@@ -1,7 +1,8 @@
-package Rechnung.model;
+package Rechnung.model.db;
 
 import Rechnung.Debug;
 import Rechnung.Publisher;
+import Rechnung.model.objects.ProductOrService;
 
 import java.math.BigDecimal;
 import java.sql.Connection;

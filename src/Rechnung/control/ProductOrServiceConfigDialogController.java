@@ -1,6 +1,6 @@
 package Rechnung.control;
 import Rechnung.Publisher;
-import Rechnung.model.*;
+import Rechnung.model.objects.ProductOrService;
 import Rechnung.view.ProductOrServiceConfigDialog;
 
 import javax.swing.*;

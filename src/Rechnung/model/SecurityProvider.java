@@ -3,12 +3,10 @@ package Rechnung.model;
 import Rechnung.Debug;
 import Rechnung.Logger;
 import Rechnung.Publisher;
-import org.apache.poi.hssf.record.BOFRecord;
 
 import javax.crypto.*;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
@@ -128,6 +126,10 @@ public class SecurityProvider {
         return this.encrypt(ByteBuffer.allocate(4).putInt(data).array());
     }
 
+    public byte[] encrypt(Long data){
+        return this.encrypt(ByteBuffer.allocate(8).putLong(data).array());
+    }
+
     public byte[] encrypt(double data){
         return this.encrypt(ByteBuffer.allocate(8).putDouble(data).array());
     }
@@ -135,6 +137,10 @@ public class SecurityProvider {
 
     public int decryptAsInt(byte[] data){
         return ByteBuffer.wrap(this.decrypt(data)).getInt();
+    }
+
+    public long decryptAsLong(byte[] data){
+        return ByteBuffer.wrap(this.decrypt(data)).getLong();
     }
 
     public double decryptAsDouble(byte[] data){

@@ -1,6 +1,8 @@
 package Rechnung;
 
 import Rechnung.model.*;
+import Rechnung.model.db.CustomerService;
+import Rechnung.model.objects.*;
 
 import javax.crypto.NoSuchPaddingException;
 import java.io.UnsupportedEncodingException;

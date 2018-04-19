@@ -1,9 +1,10 @@
-package Rechnung.model;
+package Rechnung.model.objects;
 
 import java.io.File;
 import java.util.*;
 
 public class Bill {
+    private String id;
     private Customer debtor;
     private String titel;
     private Date creationDate;
@@ -17,6 +18,22 @@ public class Bill {
     private boolean taxIncluded;
 
 
+    public Bill(String id, Customer debtor, String titel, Date creationDate, Date toPayToDate, Date paidOnDate, boolean paid, String comment, File billFile, boolean taxFree, boolean taxIncluded) {
+        this.debtor = debtor;
+        this.titel = titel;
+        this.creationDate = creationDate;
+        this.toPayToDate = toPayToDate;
+        this.paidOnDate = paidOnDate;
+        this.paid = paid;
+        this.comment = comment;
+        this.billFile = billFile;
+        this.taxFree = taxFree;
+        this.taxIncluded = taxIncluded;
+    }
+
+    public String getId() {
+        return id;
+    }
     private boolean isEntryIndexValid(int index){
         return !(index < 0 || index >= this.entries.size());
     }
@@ -200,6 +217,15 @@ public class Bill {
         return result;
     }
 
+    public List<BillEntry> getBillEntries() {
+        List<BillEntry> billEntries = new ArrayList<>();
+
+        for (BillEntry billEntry: this.entries) {
+            billEntries.add(billEntry);
+        }
+
+        return billEntries;
+    }
 
 
 

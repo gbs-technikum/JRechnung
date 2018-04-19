@@ -1,4 +1,4 @@
-package Rechnung.model;
+package Rechnung.model.objects;
 
 public class EMailAccessibility extends Accessibility {
 
