@@ -5,6 +5,7 @@ import java.util.*;
 
 public class Bill {
     private String id;
+    private String number;
     private Customer debtor;
     private String titel;
     private Date creationDate;
@@ -18,7 +19,9 @@ public class Bill {
     private boolean taxIncluded;
 
 
-    public Bill(String id, Customer debtor, String titel, Date creationDate, Date toPayToDate, Date paidOnDate, boolean paid, String comment, File billFile, boolean taxFree, boolean taxIncluded) {
+    public Bill(String id, String number, Customer debtor, String titel, Date creationDate, Date toPayToDate, Date paidOnDate, boolean paid, String comment, File billFile, boolean taxFree, boolean taxIncluded) {
+        this.id = id;
+        this.number = number;
         this.debtor = debtor;
         this.titel = titel;
         this.creationDate = creationDate;
@@ -29,11 +32,17 @@ public class Bill {
         this.billFile = billFile;
         this.taxFree = taxFree;
         this.taxIncluded = taxIncluded;
+        this.entries = new ArrayList<>();
     }
 
     public String getId() {
         return id;
     }
+
+    public String getNumber() {
+        return number;
+    }
+
     private boolean isEntryIndexValid(int index){
         return !(index < 0 || index >= this.entries.size());
     }

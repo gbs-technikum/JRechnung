@@ -117,4 +117,8 @@ public class MainWindow extends JFrame {
         this.jbtnManageProductOrService.setEnabled(enabled);
     }
 
+    public void setBillTitel(int rowIndex, String text){
+        this.jtblBillList.setValueAt(text,rowIndex,0);
+    }
+
 }
