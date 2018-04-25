@@ -11,8 +11,8 @@ public class EncryptionConfigDialog extends ConfigDialog{
     private JPasswordField jpswfFirst, jpswSecond;
     private JPasswordField jpswfPrevious;
 
-    public EncryptionConfigDialog(JFrame frame) {
-        super(frame, "Verschlüsselungspasswort setzen");
+    public EncryptionConfigDialog(JFrame frame, String title) {
+        super(frame, title);
         this.initComponents();
     }
 

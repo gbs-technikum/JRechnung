@@ -23,7 +23,7 @@ public class EncryptionConfigDialogController implements Controller {
     public EncryptionConfigDialogController(JFrame window,boolean reinit) {
         this.reinitMode = reinit;
         this.passwordCheckOnly = false;
-        this.encryptionConfigDialog = new EncryptionConfigDialog(window);
+        this.encryptionConfigDialog = new EncryptionConfigDialog(window, "Passwort setzen");
         this.encryptionConfigDialog.setSecondPasswordFieldVisible(true);
         this.encryptionConfigDialog.setPreviousPasswordFieldVisible(reinit);
         this.initEvents();
@@ -33,7 +33,7 @@ public class EncryptionConfigDialogController implements Controller {
     public EncryptionConfigDialogController(JFrame window) {
         this.reinitMode = false;
         this.passwordCheckOnly = true;
-        this.encryptionConfigDialog = new EncryptionConfigDialog(window);
+        this.encryptionConfigDialog = new EncryptionConfigDialog(window, "Passwort eingeben");
         this.initEvents();
         this.controllerReturnStatus = ControllerReturnStatus.ABORT;
     }
