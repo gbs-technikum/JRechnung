@@ -277,4 +277,16 @@ public class Model {
     public String getDataBaseFileName(){
         return Model.DB_NAME;
     }
+
+    public static boolean isCompletePriceDataValid(String[] completePriceData){
+        int x = 0;
+
+        for (String completePrice : completePriceData) {
+            if(completePrice != null && completePrice.length() > 0){
+                x ++;
+            }
+        }
+
+        return x == completePriceData.length;
+    }
 }

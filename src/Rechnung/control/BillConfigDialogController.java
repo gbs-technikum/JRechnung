@@ -74,11 +74,16 @@ public class BillConfigDialogController implements Controller {
         this.billConfigDialog.setAddEntryButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                billConfigDialog.addRowsToEntryTable(1);
+                billConfigDialog.setTableModelListenerEnabled(false);
+                if(Publisher.getModel().isCompletePriceDataValid(billConfigDialog.getTableColumnData(4))){
+                    billConfigDialog.addRowsToEntryTable(1);
+                }
+
+                billConfigDialog.setTableModelListenerEnabled(true);
             }
         });
 
-        this.billConfigDialog.setTableChangeListener(new TableModelListener() {
+        this.billConfigDialog.setTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(TableModelEvent e) {
 
@@ -217,6 +222,7 @@ public class BillConfigDialogController implements Controller {
 
         return selectedIndex;
     }
+
 
 }
 
