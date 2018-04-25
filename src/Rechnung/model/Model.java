@@ -11,7 +11,10 @@ import Rechnung.model.objects.ProductOrService;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.security.CodeSource;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -20,7 +23,9 @@ import java.util.*;
 
 public class Model {
 
-    Random random;
+    private static final String DB_NAME = "jrechnung.sqlite";
+
+    private Random random;
 
     public Model() {
         random = new Random();
@@ -250,5 +255,26 @@ public class Model {
         }
 
         return true;
+    }
+
+    public static String getJarContainingFolder(Class aclass) throws Exception {
+        CodeSource codeSource = aclass.getProtectionDomain().getCodeSource();
+
+        File jarFile;
+
+        if (codeSource.getLocation() != null) {
+            jarFile = new File(codeSource.getLocation().toURI());
+        }
+        else {
+            String path = aclass.getResource(aclass.getSimpleName() + ".class").getPath();
+            String jarFilePath = path.substring(path.indexOf(":") + 1, path.indexOf("!"));
+            jarFilePath = URLDecoder.decode(jarFilePath, "UTF-8");
+            jarFile = new File(jarFilePath);
+        }
+        return jarFile.getParentFile().getAbsolutePath();
+    }
+
+    public String getDataBaseFileName(){
+        return Model.DB_NAME;
     }
 }

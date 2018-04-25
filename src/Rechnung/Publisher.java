@@ -4,6 +4,9 @@ import Rechnung.model.Model;
 import Rechnung.model.SecurityProvider;
 
 import java.io.File;
+import java.lang.invoke.MethodHandles;
+import java.net.URLDecoder;
+import java.security.CodeSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -49,14 +52,18 @@ public final class Publisher {
         if(!(dbConnectionInstance instanceof Connection)){
             File f, dbFile = null;
             String DB_CONNECTION_STRING = "jdbc:sqlite:";
-            f = new File(Publisher.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-            dbFile = new File(f.getPath() + "/jrechnung.sqlite");
-            System.out.println(dbFile.getAbsoluteFile());
-            if(!dbFile.exists() || !dbFile.canWrite()){
-                throw new SQLException("DB File Error");
+            try {
+                f = new File(Publisher.getModel().getJarContainingFolder(Main.class));
+                dbFile = new File(f.getPath() + "/" + Publisher.getModel().getDataBaseFileName());
+
+                if(!dbFile.exists() || !dbFile.canWrite()){
+                    throw new SQLException("DB File Error");
+                }
+                DB_CONNECTION_STRING += dbFile.getAbsoluteFile();
+                dbConnectionInstance = DriverManager.getConnection(DB_CONNECTION_STRING);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            DB_CONNECTION_STRING += dbFile.getAbsoluteFile();
-            dbConnectionInstance = DriverManager.getConnection(DB_CONNECTION_STRING);
         }
 
         return dbConnectionInstance;
