@@ -1,7 +1,9 @@
-package Rechnung.model;
+package Rechnung.model.db;
 
 import Rechnung.Debug;
 import Rechnung.Publisher;
+import Rechnung.model.SecurityProvider;
+import Rechnung.model.objects.*;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.Connection;

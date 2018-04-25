@@ -1,8 +1,7 @@
 package Rechnung.control;
 
 import Rechnung.Publisher;
-import Rechnung.model.*;
-import Rechnung.view.BusinessConfigDialog;
+import Rechnung.model.SecurityProvider;
 import Rechnung.view.EncryptionConfigDialog;
 
 import javax.crypto.NoSuchPaddingException;
@@ -13,8 +12,6 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class EncryptionConfigDialogController implements Controller {
 

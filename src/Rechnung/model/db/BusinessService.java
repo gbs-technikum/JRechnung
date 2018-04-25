@@ -1,6 +1,8 @@
-package Rechnung.model;
+package Rechnung.model.db;
 
 import Rechnung.*;
+import Rechnung.model.objects.Business;
+import Rechnung.model.objects.LegalForm;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

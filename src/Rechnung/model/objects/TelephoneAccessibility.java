@@ -1,4 +1,4 @@
-package Rechnung.model;
+package Rechnung.model.objects;
 
 public class TelephoneAccessibility extends Accessibility{
     public TelephoneAccessibility(String Id, String entry) {

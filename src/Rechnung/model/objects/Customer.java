@@ -1,14 +1,10 @@
-package Rechnung.model;
+package Rechnung.model.objects;
 
 /*
     @author Gollmer 2018-01-31
     Class, which contents the strucutre for the custumer-data
  */
 
-import Rechnung.model.Accessibility;
-import Rechnung.model.EMailAccessibility;
-import Rechnung.model.FaxAccessibility;
-import Rechnung.model.TelephoneAccessibility;
 import java.util.*;
 
 public class Customer {
@@ -232,5 +228,6 @@ public class Customer {
         Customer customer = (Customer) o;
         return this.id.equals(customer.getId());
     }
+
 
 }

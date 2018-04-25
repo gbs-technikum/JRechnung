@@ -1,9 +1,11 @@
 package Rechnung.control;
 
 import Rechnung.Publisher;
-import Rechnung.model.*;
+import Rechnung.model.db.BusinessService;
+import Rechnung.model.db.LegalFormService;
+import Rechnung.model.objects.Business;
+import Rechnung.model.objects.LegalForm;
 import Rechnung.view.BusinessConfigDialog;
-import Rechnung.view.ConfigDialog;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

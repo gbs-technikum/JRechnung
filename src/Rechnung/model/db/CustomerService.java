@@ -1,8 +1,9 @@
-package Rechnung.model;
+package Rechnung.model.db;
 
 import Rechnung.Debug;
 import Rechnung.Publisher;
 import Rechnung.model.SecurityProvider;
+import Rechnung.model.objects.*;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.*;
@@ -15,10 +16,6 @@ public class CustomerService {
     private static final String SQL_INSERT = "INSERT INTO customer (id, number, surname, forename, street, housenumber, postcode, village, land) VALUES (?,?,?,?,?,?,?,?,?);";
     private static final String SQL_UPDATE = "UPDATE customer set number=?, surname=?, forename=?, street=?, housenumber=?, postcode=?, village=?, land=? WHERE ID=?";
     private static final String SQL_DELETE = "DELETE FROM customer WHERE id = ?";
-
-    public CustomerService() throws SQLException {
-
-    }
 
     public static List<Customer> readAllCustomers() throws SQLException, UnsupportedEncodingException {
         Connection connection = Publisher.getDBConnection();
@@ -160,7 +157,7 @@ public class CustomerService {
                 preparedStatement.setBytes(5,securityProvider.encrypt(customer.getHouseNumber()));
                 preparedStatement.setBytes(6,securityProvider.encrypt(customer.getPostCode()));
                 preparedStatement.setBytes(7,securityProvider.encrypt(customer.getVillage()));
-                preparedStatement.setBytes(8,securityProvider.encrypt(customer.getVillage()));
+                preparedStatement.setBytes(8,securityProvider.encrypt(customer.getLand()));
                 preparedStatement.setString(9,customer.getId());
 
                 preparedStatement.execute();

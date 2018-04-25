@@ -1,10 +1,12 @@
-package Rechnung.model;
+package Rechnung.model.objects;
 
 import java.io.File;
 import java.util.*;
 
 public class Bill {
-    private Kunde debtor;
+    private String id;
+    private String number;
+    private Customer debtor;
     private String titel;
     private Date creationDate;
     private Date toPayToDate;
@@ -16,6 +18,30 @@ public class Bill {
     private boolean taxFree;
     private boolean taxIncluded;
 
+
+    public Bill(String id, String number, Customer debtor, String titel, Date creationDate, Date toPayToDate, Date paidOnDate, boolean paid, String comment, File billFile, boolean taxFree, boolean taxIncluded) {
+        this.id = id;
+        this.number = number;
+        this.debtor = debtor;
+        this.titel = titel;
+        this.creationDate = creationDate;
+        this.toPayToDate = toPayToDate;
+        this.paidOnDate = paidOnDate;
+        this.paid = paid;
+        this.comment = comment;
+        this.billFile = billFile;
+        this.taxFree = taxFree;
+        this.taxIncluded = taxIncluded;
+        this.entries = new ArrayList<>();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getNumber() {
+        return number;
+    }
 
     private boolean isEntryIndexValid(int index){
         return !(index < 0 || index >= this.entries.size());
@@ -29,11 +55,11 @@ public class Bill {
         this.taxIncluded = taxIncluded;
     }
 
-    public Kunde getDebtor() {
+    public Customer getDebtor() {
         return debtor;
     }
 
-    public void setDebtor(Kunde debtor) {
+    public void setDebtor(Customer debtor) {
         this.debtor = debtor;
     }
 
@@ -200,6 +226,15 @@ public class Bill {
         return result;
     }
 
+    public List<BillEntry> getBillEntries() {
+        List<BillEntry> billEntries = new ArrayList<>();
+
+        for (BillEntry billEntry: this.entries) {
+            billEntries.add(billEntry);
+        }
+
+        return billEntries;
+    }
 
 
 
