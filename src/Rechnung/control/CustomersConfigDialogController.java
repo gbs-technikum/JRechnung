@@ -1,6 +1,5 @@
 package Rechnung.control;
 
-import Allgemein.Message;
 import Rechnung.Publisher;
 import Rechnung.model.Model;
 import Rechnung.model.objects.*;

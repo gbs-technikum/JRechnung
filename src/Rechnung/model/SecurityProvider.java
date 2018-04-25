@@ -1,6 +1,5 @@
 package Rechnung.model;
 
-import Allgemein.Message;
 import Rechnung.Debug;
 import Rechnung.Logger;
 import Rechnung.Publisher;

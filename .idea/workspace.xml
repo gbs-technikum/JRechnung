@@ -3,10 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="9a88aa8a-d265-455b-a94b-8aceaeaa507e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JRechnung/jrechnung.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JRechnung/jrechnung.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JRechnung/jrechnung.sqlite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Allgemein/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rechnung/model/Message.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Rechnung/control/CustomersConfigDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rechnung/control/CustomersConfigDialogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Rechnung/control/EncryptionConfigDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rechnung/control/EncryptionConfigDialogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Rechnung/view/EncryptionConfigDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rechnung/view/EncryptionConfigDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Rechnung/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rechnung/model/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Rechnung/model/SecurityProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rechnung/model/SecurityProvider.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,17 +27,8 @@
       <file leaf-file-name="Model.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Rechnung/model/Model.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="47">
-              <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Rechnung/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="176">
+              <caret line="140" column="19" selection-start-line="140" selection-start-column="19" selection-end-line="140" selection-end-column="19" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -44,35 +36,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Message.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Allgemein/Message.java">
+      <file leaf-file-name="CustomersConfigDialog.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Rechnung/view/CustomersConfigDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="27" column="74" selection-start-line="27" selection-start-column="74" selection-end-line="27" selection-end-column="74" />
-              <folding>
-                <element signature="e#284#285#0" expanded="true" />
-                <element signature="e#340#341#0" expanded="true" />
-                <element signature="e#1658#1659#0" expanded="true" />
-                <element signature="e#1727#1728#0" expanded="true" />
-                <element signature="e#1953#1954#0" expanded="true" />
-                <element signature="e#2014#2015#0" expanded="true" />
-                <element signature="e#2081#2082#0" expanded="true" />
-                <element signature="e#2137#2138#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-221">
+              <caret line="92" column="22" selection-start-line="92" selection-start-column="13" selection-end-line="92" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EncryptionConfigDialog.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Rechnung/view/EncryptionConfigDialog.java">
+      <file leaf-file-name="ProductOrServiceConfigDialog.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Rechnung/view/ProductOrServiceConfigDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1331#1332#0" expanded="true" />
-                <element signature="e#1398#1399#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-1838">
+              <caret line="19" column="49" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -80,41 +57,11 @@
       <file leaf-file-name="EncryptionConfigDialogController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Rechnung/control/EncryptionConfigDialogController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="25" column="92" lean-forward="true" selection-start-line="25" selection-start-column="92" selection-end-line="25" selection-end-column="92" />
+            <state relative-caret-position="1700">
+              <caret line="100" column="138" lean-forward="true" selection-start-line="100" selection-start-column="138" selection-end-line="100" selection-end-column="138" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CustomersConfigDialogController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Rechnung/control/CustomersConfigDialogController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SecurityProvider.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Rechnung/model/SecurityProvider.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2329">
-              <caret line="170" column="19" selection-start-line="170" selection-start-column="19" selection-end-line="170" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestKlasse.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Rechnung/TestKlasse.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="33" column="11" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -145,10 +92,10 @@
         <option value="$PROJECT_DIR$/src/Rechnung/view/CustomersConfigDialog.java" />
         <option value="$PROJECT_DIR$/src/Allgemein/Message.java" />
         <option value="$PROJECT_DIR$/src/Rechnung/model/SecurityProvider.java" />
-        <option value="$PROJECT_DIR$/src/Rechnung/model/Model.java" />
         <option value="$PROJECT_DIR$/src/Rechnung/control/CustomersConfigDialogController.java" />
         <option value="$PROJECT_DIR$/src/Rechnung/view/EncryptionConfigDialog.java" />
         <option value="$PROJECT_DIR$/src/Rechnung/control/EncryptionConfigDialogController.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/model/Model.java" />
       </list>
     </option>
   </component>
@@ -172,9 +119,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -204,12 +151,6 @@
               <item name="JRechnung" type="b2602c69:ProjectViewProjectNode" />
               <item name="JRechnung" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JRechnung" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JRechnung" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Allgemein" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="JRechnung" type="b2602c69:ProjectViewProjectNode" />
@@ -371,6 +312,8 @@
       <workItem from="1524031687608" duration="10200000" />
       <workItem from="1524639297190" duration="35000" />
       <workItem from="1524639404670" duration="3840000" />
+      <workItem from="1524679984304" duration="3000" />
+      <workItem from="1524679988970" duration="470000" />
     </task>
     <task id="LOCAL-00001" summary="Gültigkeitsprüfung von Groß angefangen zu erweitern!">
       <created>1521022721699</created>
@@ -411,14 +354,22 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38226000" />
+    <option name="totallyTimeSpent" value="38699000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32900432" />
       <window_info anchor="bottom" id="Messages" order="7" weight="0.32972974" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
@@ -426,22 +377,22 @@
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.33982685" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32972974" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.34054053" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29317698" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29957357" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32324323" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39243242" />
-      <window_info anchor="right" id="Coverage" order="4" side_tool="true" weight="0.32995737" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Coverage" order="4" side_tool="true" weight="0.32995737" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -467,13 +418,13 @@
       <breakpoints>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/Rechnung/control/CustomersConfigDialogController.java</url>
-          <line>51</line>
+          <line>50</line>
           <properties />
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/Rechnung/control/CustomersConfigDialogController.java</url>
-          <line>83</line>
+          <line>82</line>
           <properties />
           <option name="timeStamp" value="25" />
         </line-breakpoint>
@@ -485,7 +436,7 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/Rechnung/model/SecurityProvider.java</url>
-          <line>69</line>
+          <line>68</line>
           <properties />
           <option name="timeStamp" value="57" />
         </line-breakpoint>
@@ -495,12 +446,6 @@
           <properties />
           <option name="timeStamp" value="64" />
         </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/Rechnung/control/EncryptionConfigDialogController.java</url>
-          <line>98</line>
-          <properties />
-          <option name="timeStamp" value="65" />
-        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
@@ -509,16 +454,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Rechnung/control/EncryptionConfigDialogController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="25" lean-forward="true" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Rechnung/view/BillConfigDialog.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -550,27 +485,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Rechnung/model/Customer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3213">
-          <caret line="229" selection-start-line="229" selection-end-line="229" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Allgemein/Message.java">
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/model/Customer.java" />
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/model/Message.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="22" column="95" selection-start-line="22" selection-start-column="95" selection-end-line="22" selection-end-column="95" />
-          <folding>
-            <element signature="e#284#285#0" expanded="true" />
-            <element signature="e#340#341#0" expanded="true" />
-            <element signature="e#1658#1659#0" expanded="true" />
-            <element signature="e#1727#1728#0" expanded="true" />
-            <element signature="e#1953#1954#0" expanded="true" />
-            <element signature="e#2014#2015#0" expanded="true" />
-            <element signature="e#2081#2082#0" expanded="true" />
-            <element signature="e#2137#2138#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -587,8 +506,6 @@
           <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1331#1332#0" expanded="true" />
-            <element signature="e#1398#1399#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -651,20 +568,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Allgemein/Message.java">
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/model/Message.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
-          <folding>
-            <element signature="e#284#285#0" expanded="true" />
-            <element signature="e#340#341#0" expanded="true" />
-            <element signature="e#1658#1659#0" expanded="true" />
-            <element signature="e#1727#1728#0" expanded="true" />
-            <element signature="e#1953#1954#0" expanded="true" />
-            <element signature="e#2014#2015#0" expanded="true" />
-            <element signature="e#2081#2082#0" expanded="true" />
-            <element signature="e#2137#2138#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -716,20 +623,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Allgemein/Message.java">
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/model/Message.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
-          <folding>
-            <element signature="e#284#285#0" expanded="true" />
-            <element signature="e#340#341#0" expanded="true" />
-            <element signature="e#1658#1659#0" expanded="true" />
-            <element signature="e#1727#1728#0" expanded="true" />
-            <element signature="e#1953#1954#0" expanded="true" />
-            <element signature="e#2014#2015#0" expanded="true" />
-            <element signature="e#2081#2082#0" expanded="true" />
-            <element signature="e#2137#2138#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -842,48 +739,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Rechnung/Factory.java" />
-    <entry file="file://$PROJECT_DIR$/src/Rechnung/model/Kunde.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Rechnung/model/CustomerService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="23" selection-start-column="23" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Rechnung/view/CustomersConfigDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="20" lean-forward="true" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/model/Kunde.java" />
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/model/CustomerService.java" />
     <entry file="file://$PROJECT_DIR$/src/Rechnung/Publisher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Allgemein/Message.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="27" column="74" selection-start-line="27" selection-start-column="74" selection-end-line="27" selection-end-column="74" />
-          <folding>
-            <element signature="e#284#285#0" expanded="true" />
-            <element signature="e#340#341#0" expanded="true" />
-            <element signature="e#1658#1659#0" expanded="true" />
-            <element signature="e#1727#1728#0" expanded="true" />
-            <element signature="e#1953#1954#0" expanded="true" />
-            <element signature="e#2014#2015#0" expanded="true" />
-            <element signature="e#2081#2082#0" expanded="true" />
-            <element signature="e#2137#2138#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -907,7 +768,7 @@
     <entry file="file://$PROJECT_DIR$/src/Rechnung/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -921,13 +782,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Rechnung/model/Model.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="47">
-          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Rechnung/view/ConfigDialog.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -937,20 +791,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Rechnung/view/EncryptionConfigDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
+        <state relative-caret-position="238">
           <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1331#1332#0" expanded="true" />
-            <element signature="e#1398#1399#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/model/Message.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-308">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/view/ProductOrServiceConfigDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1838">
+          <caret line="19" column="49" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/view/CustomersConfigDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-221">
+          <caret line="92" column="22" selection-start-line="92" selection-start-column="13" selection-end-line="92" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/model/Model.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="140" column="19" selection-start-line="140" selection-start-column="19" selection-end-line="140" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Rechnung/control/EncryptionConfigDialogController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="25" column="92" lean-forward="true" selection-start-line="25" selection-start-column="92" selection-end-line="25" selection-end-column="92" />
+        <state relative-caret-position="1700">
+          <caret line="100" column="138" lean-forward="true" selection-start-line="100" selection-start-column="138" selection-end-line="100" selection-end-column="138" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

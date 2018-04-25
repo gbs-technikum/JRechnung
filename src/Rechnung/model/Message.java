@@ -1,4 +1,4 @@
-package Allgemein;
+package Rechnung.model;
 
 import javax.swing.*;
 

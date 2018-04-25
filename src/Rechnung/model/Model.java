@@ -1,7 +1,5 @@
 package Rechnung.model;
 
-import Allgemein.Message;
-
 import Rechnung.model.db.BillService;
 import Rechnung.model.db.BusinessService;
 import Rechnung.model.db.CustomerService;
