@@ -29,10 +29,12 @@ public class BillConfigDialog extends ConfigDialog {
     private JPanel leftButtunPanel, leftPanel2;
     private JPanel entryPanel, jPanelTop;
     private JLabel jlblFile;
+    private TableModelListener tableModelListener;
 
 
     public BillConfigDialog(JFrame frame) {
         super(frame, "Rechnung");
+        this.tableModelListener = null;
         this.initComponents();
     }
 
@@ -304,12 +306,36 @@ public class BillConfigDialog extends ConfigDialog {
         this.jtblEntries.setValueAt(text,rowIndex,0);
     }
 
-    public void setTableChangeListener(TableModelListener tableModelListener){
+    public void setTableModelListener(TableModelListener tableModelListener){
         this.jtblEntries.getModel().addTableModelListener(tableModelListener);
+        this.tableModelListener = tableModelListener;
+    }
+
+    public void setTableModelListenerEnabled(boolean enabled){
+        if(enabled){
+            this.jtblEntries.getModel().addTableModelListener(this.tableModelListener);
+        }else {
+            this.jtblEntries.getModel().removeTableModelListener(this.tableModelListener);
+        }
     }
 
     public void removeTableChangeListener(){
       //  this.jtblEntries.getModel().removeTableModelListener();
+    }
+
+    public String[] getTableColumnData(int columnIndex){
+        String[] columnData = new String[this.jtblEntries.getRowCount()];
+
+        if(columnIndex >= 0 && columnIndex < this.jtblEntries.getColumnCount()){
+            for(int i = 0; i < this.jtblEntries.getRowCount();i++){
+                Object cellObject = this.jtblEntries.getValueAt(i,columnIndex);
+                if(cellObject != null){
+                    columnData[i] = cellObject.toString();
+                }
+            }
+        }
+
+        return columnData;
     }
 
     public void clearComponentData(){
