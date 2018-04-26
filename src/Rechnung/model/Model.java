@@ -11,6 +11,7 @@ import Rechnung.model.objects.ProductOrService;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.swing.*;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -369,5 +370,28 @@ public class Model {
         }
 
         return x == completePriceData.length;
+    }
+
+    public File getFileFromResources(String fileName){
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource(fileName).getFile());
+
+        if(file.exists()){
+            return file;
+        }
+
+        return null;
+    }
+
+    public ImageIcon getImageIconFromResources(String iconFileName){
+
+        File f = this.getFileFromResources(iconFileName);
+
+        if(f != null) {
+            ImageIcon icon = new ImageIcon(f.getAbsolutePath());
+            return icon;
+        }
+
+        return null;
     }
 }

@@ -7,13 +7,15 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 public class BillConfigDialog extends ConfigDialog {
 
-    private static final String[] TABLE_COLUMN_NAMES = {"Produkt/Dienstleistung","Einheit","Anzahl","Einzelpreis(€)","Gesamtpreis(€)"};
-    private static final int PREDEFIND_TABLE_ROWCOUNT = 1;
+    private static final String[] TABLE_COLUMN_NAMES = {"Produkt/Dienstleistung","Einheit","Anzahl","Einzelpreis(€)","Gesamtpreis(€)",""};
+    private static final int PREDEFIND_TABLE_ROWCOUNT = 0;
     private JPanel mainPanel;
     private JTextField jtfTitel, jtfBillNumber;
     private JComboBox<Customer> jcbxDebtor;
@@ -30,10 +32,12 @@ public class BillConfigDialog extends ConfigDialog {
     private JPanel entryPanel, jPanelTop;
     private JLabel jlblFile;
     private TableModelListener tableModelListener;
+    private ImageIcon deleImage;
 
 
-    public BillConfigDialog(JFrame frame) {
+    public BillConfigDialog(JFrame frame, ImageIcon deleImage) {
         super(frame, "Rechnung");
+        this.deleImage = deleImage;
         this.tableModelListener = null;
         this.initComponents();
     }
@@ -81,18 +85,27 @@ public class BillConfigDialog extends ConfigDialog {
 
         this.btnAddEntry = new JButton("Eintrag hinzufügen");
 
-
-        DefaultTableModel tableModel = new DefaultTableModel(TABLE_COLUMN_NAMES, PREDEFIND_TABLE_ROWCOUNT)
+        DefaultTableModel tableModel = new DefaultTableModel(TABLE_COLUMN_NAMES,PREDEFIND_TABLE_ROWCOUNT)
         {
             @Override
             public boolean isCellEditable(int row, int column)
             {
-                return (column < TABLE_COLUMN_NAMES.length-1) ? true : false;
+                return (column < TABLE_COLUMN_NAMES.length-2) ? true : false;
+            }
+
+            @Override
+            public Class getColumnClass(int column)
+            {
+                return (column == 5) ? ImageIcon.class : Object.class;
             }
         };
 
 
+
+
         this.jtblEntries = new JTable(tableModel);
+        TableColumnModel columnModel = this.jtblEntries.getColumnModel();
+        columnModel.getColumn(5).setMaxWidth(20);
         this.jtblEntries.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         this.jtblEntries.getTableHeader().setReorderingAllowed(true);
         this.jtblEntries.setRowHeight(20);
@@ -164,6 +177,10 @@ public class BillConfigDialog extends ConfigDialog {
 
         this.addMainPanel(this.mainPanel);
         this.pack();
+    }
+
+    private void addDeleteButtonToRow(int rowCount){
+        this.jtblEntries.setValueAt(this.deleImage.getImage(), rowCount, 5);
     }
 
     public String getTitleTextField(){
@@ -298,8 +315,24 @@ public class BillConfigDialog extends ConfigDialog {
         DefaultTableModel model = (DefaultTableModel) this.jtblEntries.getModel();
         for (int i = 0; i < rowCount; i++) {
             model.addRow(new String[TABLE_COLUMN_NAMES.length]);
+         //   addDeleteButtonToRow(model.getRowCount()-1);
+            model.setValueAt(this.deleImage, model.getRowCount()-1, 5);
         }
+    }
 
+    public void addRowToEntryTable(String[] cellData){
+        if(cellData.length == (TABLE_COLUMN_NAMES.length-1)){
+            DefaultTableModel model = (DefaultTableModel) this.jtblEntries.getModel();
+            model.addRow(cellData);
+            //addDeleteButtonToRow(model.getRowCount()-1);
+            model.setValueAt(this.deleImage, model.getRowCount()-1, 5);
+        }
+    }
+
+    public void removeEntryRow(int rowIndex){
+        if(rowIndex >= 0 && rowIndex < this.jtblEntries.getRowCount()){
+            ((DefaultTableModel)this.jtblEntries.getModel()).removeRow(rowIndex);
+        }
     }
 
     public void setEntryTitel(int rowIndex, String text){
@@ -352,5 +385,45 @@ public class BillConfigDialog extends ConfigDialog {
         this.jtblEntries.selectAll();
         this.jtblEntries.clearSelection();
 
+    }
+
+    public void addToProductOrServiceList(ProductOrService productOrService){
+        this.jcbxProductOrService.addItem(productOrService);
+    }
+
+    public ProductOrService getProductOrServiceFromList(int index){
+        if(index >= 0 && index < this.jcbxProductOrService.getItemCount()){
+            return this.jcbxProductOrService.getItemAt(index);
+        }
+
+        return null;
+    }
+
+    public int getIndexOfSelectedProductOrService(){
+        return this.jcbxProductOrService.getSelectedIndex();
+    }
+
+    public void setProductOrService(int index){
+        if(index > 0 && index < this.jcbxProductOrService.getItemCount()) {
+            this.jcbxProductOrService.setSelectedIndex(index);
+        }
+    }
+
+    public void removeProductOrServiceFromList(int index){
+        if(index >= 0 && index < this.jcbxProductOrService.getItemCount()){
+            this.jcbxProductOrService.removeItemAt(index);
+        }
+    }
+
+    public void removeProductOrServiceComboBoxListener(){
+
+        for(int i=0;i< this.jcbxProductOrService.getActionListeners().length;i++){
+            this.jcbxProductOrService.removeActionListener(this.jcbxProductOrService.getActionListeners()[i]);
+        }
+
+    }
+
+    public void setTableMouseListener(MouseListener mouseListener){
+        this.jtblEntries.addMouseListener(mouseListener);
     }
 }

@@ -10,8 +10,11 @@ import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,12 +28,13 @@ public class BillConfigDialogController implements Controller {
     private Bill bill;
 
 
-    public BillConfigDialogController(JFrame window) {
-        this.billConfigDialog = new BillConfigDialog(window);
+    public BillConfigDialogController(JFrame window,Bill bill) {
+        ImageIcon imageIcon = Publisher.getModel().getImageIconFromResources("delete.png");
+        this.billConfigDialog = new BillConfigDialog(window,imageIcon);
         this.initEvents();
         this.controllerReturnStatus = Controller.ControllerReturnStatus.ABORT;
-        fillWindowComponents(null);
-        this.bill = null;
+        this.bill = bill;
+        fillWindowComponents(this.bill);
     }
 
     @Override
@@ -75,9 +79,16 @@ public class BillConfigDialogController implements Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 billConfigDialog.setTableModelListenerEnabled(false);
-                if(Publisher.getModel().isCompletePriceDataValid(billConfigDialog.getTableColumnData(4))){
-                    billConfigDialog.addRowsToEntryTable(1);
+
+                if(Publisher.getModel().isCompletePriceDataValid(billConfigDialog.getTableColumnData(4))) {
+                    ProductOrService selectedProductOrService = billConfigDialog.getProductOrServiceFromList(billConfigDialog.getIndexOfSelectedProductOrService());
+                    if (selectedProductOrService != null) {
+                        addRowWithProductOrServiceData(selectedProductOrService);
+                    } else {
+                        billConfigDialog.addRowsToEntryTable(1);
+                    }
                 }
+
 
                 billConfigDialog.setTableModelListenerEnabled(true);
             }
@@ -125,6 +136,22 @@ public class BillConfigDialogController implements Controller {
                 tableModel.addTableModelListener(this);
             }
         });
+
+        this.billConfigDialog.setTableMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                super.mouseClicked(mouseEvent);
+                JTable table =(JTable) mouseEvent.getSource();
+                Point point = mouseEvent.getPoint();
+                int row = table.rowAtPoint(point);
+                int column = table.columnAtPoint(point);
+                if (column == 5) {
+                    billConfigDialog.setTableModelListenerEnabled(false);
+                    billConfigDialog.removeEntryRow(row);
+                    billConfigDialog.setTableModelListenerEnabled(true);
+                }
+            }
+        });
     }
 
     private void saveComponentData() {
@@ -149,7 +176,7 @@ public class BillConfigDialogController implements Controller {
 
             List<BillEntry> billEntries = bill.getBillEntries();
             for (int i = 0; i < billEntries.size(); i++) {
-                this.billConfigDialog.setEntryTitel(i, billEntries.get(i).getEntryText());
+                fillRowWithBillEntry(i, billEntries.get(i));
             }
 
             if (this.bill == null) {
@@ -160,7 +187,19 @@ public class BillConfigDialogController implements Controller {
             this.billConfigDialog.setBillNumberTextField(Publisher.getModel().generateBillNumber());
             this.billConfigDialog.setTitleTextField(Publisher.getModel().generateBillDefaultName());
             fillDebtorComboBox(null,null);
+            fillProductOrServiceComboBox();
         }
+    }
+
+    private void fillRowWithBillEntry(int rowIndex, BillEntry billEntry){
+        this.billConfigDialog.setEntryTitel(rowIndex, billEntry.getEntryText());
+
+    }
+
+    private void addRowWithProductOrServiceData(ProductOrService productOrService){
+        String[] cellData = new String[]{productOrService.getTitle(),"","",String.format(Locale.GERMANY,"%.2f",productOrService.getPrice()),""};
+
+        this.billConfigDialog.addRowToEntryTable(cellData);
     }
 
     private void createBillFromWindowData(){
@@ -222,6 +261,19 @@ public class BillConfigDialogController implements Controller {
 
         return selectedIndex;
     }
+
+    private void fillProductOrServiceComboBox(){
+
+        List<ProductOrService> productsOrServices = Publisher.getModel().readProductsOrServices();
+
+        this.billConfigDialog.addToProductOrServiceList(null);
+
+        for (int i = 0; i < productsOrServices.size(); i++) {
+            ProductOrService productOrService = productsOrServices.get(i);
+            this.billConfigDialog.addToProductOrServiceList(productOrService);
+        }
+    }
+
 
 
 }
