@@ -1,11 +1,13 @@
 package Rechnung.model;
 
+import Rechnung.view.MessageIndicator;
+
 import javax.swing.*;
 
 public class Message {
 
     public static void showErrorMessage(String message){
-        JOptionPane.showMessageDialog(null, message, "Fehlermeldung",  JOptionPane.ERROR_MESSAGE);
+        MessageIndicator.showErrorMessage(message);
     }
 
     public static void showErrorMessagePasswordFalse(){
