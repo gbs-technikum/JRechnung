@@ -28,6 +28,7 @@ public class BillConfigDialog extends ConfigDialog {
     private JScrollPane jspEntryTable, jspComment;
     private JButton btnAddEntry;
     private JButton btnGenerateBillFile;
+    private JButton btnBillOverview;
     private JPanel leftButtunPanel, leftPanel2;
     private JPanel entryPanel, jPanelTop;
     private JLabel jlblFile;
@@ -126,6 +127,8 @@ public class BillConfigDialog extends ConfigDialog {
         this.leftButtunPanel.setLayout(new BorderLayout());
 
         this.btnGenerateBillFile = new JButton("Rechnung generieren");
+        this.btnBillOverview = new JButton("Rechnung Anzeigen");
+        this.btnBillOverview.setEnabled(false);
 
 
         this.jPanelTop.add(this.jtfTitel);
@@ -169,6 +172,8 @@ public class BillConfigDialog extends ConfigDialog {
         this.mainPanel.add(leftButtunPanel);
 
         this.mainPanel.add(this.btnGenerateBillFile);
+        this.mainPanel.add(this.btnBillOverview);
+
 
         this.leftButtunPanel.add(this.btnGenerateBillFile,BorderLayout.WEST);
         this.leftButtunPanel.add(this.jlblFile,BorderLayout.CENTER);
@@ -307,9 +312,19 @@ public class BillConfigDialog extends ConfigDialog {
         this.jlblFile.setText(text);
     }
 
+    public void setBillOverviewButtonListener(ActionListener actionListener){
+        this.btnBillOverview.addActionListener(actionListener);
+    }
+
+    public void setBillOverviewButtonEnabled(Boolean enabled){
+        this.btnBillOverview.setEnabled(enabled);
+    }
+
+
     public void setAddEntryButtonListener(ActionListener actionListener){
         this.btnAddEntry.addActionListener(actionListener);
     }
+
 
     public void addRowsToEntryTable(int rowCount){
         DefaultTableModel model = (DefaultTableModel) this.jtblEntries.getModel();
@@ -369,6 +384,25 @@ public class BillConfigDialog extends ConfigDialog {
         }
 
         return columnData;
+    }
+
+    public int getEntryTableRowCount(){
+        return this.jtblEntries.getRowCount();
+    }
+
+    public int getEntryTableColumnCount(){
+        return this.jtblEntries.getColumnCount();
+    }
+
+    public String getCellValue(int row, int column){
+        int rowCount = this.getEntryTableRowCount();
+        int columnCount = this.getEntryTableColumnCount();
+
+        if(row >= 0 && row < rowCount && column >= 0 && column < columnCount){
+            return this.jtblEntries.getValueAt(row,column).toString();
+        }
+
+        return null;
     }
 
     public void clearComponentData(){

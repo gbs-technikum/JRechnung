@@ -11,7 +11,7 @@ import java.util.List;
 public class BusinessConfigDialog extends ConfigDialog{
 
     private JPanel mainPanel;
-    private JTextField jtfName, jtfProprietor, jtfStreet, jtfStreetNumber, jtfPostcode;
+    private JTextField jtfName, jtfProprietor, jtfStreet, jtfStreetNumber, jtfPostcode,jtfLocation;
     private JComboBox<String> jcbxLegalform;
 
     public BusinessConfigDialog(JFrame frame) {
@@ -38,6 +38,9 @@ public class BusinessConfigDialog extends ConfigDialog{
         this.jtfPostcode = new JTextField();
         this.jtfPostcode.setBorder(new TitledBorder("Postleitzahl"));
 
+        this.jtfLocation = new JTextField();
+        this.jtfLocation.setBorder(new TitledBorder("Ort"));
+
         this.jcbxLegalform = new JComboBox<String>();
 
 
@@ -46,6 +49,7 @@ public class BusinessConfigDialog extends ConfigDialog{
         this.mainPanel.add(this.jtfStreet);
         this.mainPanel.add(this.jtfStreetNumber);
         this.mainPanel.add(this.jtfPostcode);
+        this.mainPanel.add(this.jtfLocation);
         this.mainPanel.add(this.jcbxLegalform);
 
         this.addMainPanel(this.mainPanel);
@@ -71,6 +75,11 @@ public class BusinessConfigDialog extends ConfigDialog{
         this.jtfPostcode.setText(postcode);
     }
 
+    public void setTextLocation(String location){
+        this.jtfLocation.setText(location);
+    }
+
+
     public void selectLegalform(int index){
         this.jcbxLegalform.setSelectedIndex(index);
     }
@@ -94,24 +103,29 @@ public class BusinessConfigDialog extends ConfigDialog{
     }
 
     public String getTextName(){
-        return this.jtfName.getText().toString();
+        return this.jtfName.getText();
     }
 
     public String getTextProprietor(){
-        return this.jtfProprietor.getText().toString();
+        return this.jtfProprietor.getText();
     }
 
     public String getTextStreet(){
-        return this.jtfStreet.getText().toString();
+        return this.jtfStreet.getText();
     }
 
     public String getTextStreetNumber(){
-        return this.jtfStreetNumber.getText().toString();
+        return this.jtfStreetNumber.getText();
     }
 
     public String getTextPostcode(){
-        return this.jtfPostcode.getText().toString();
+        return this.jtfPostcode.getText();
     }
+
+    public String getTextLocation(){
+        return this.jtfLocation.getText();
+    }
+
 
     public String getSelectedLegalFormText(){
         return this.jcbxLegalform.getItemAt(this.jcbxLegalform.getSelectedIndex());

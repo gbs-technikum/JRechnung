@@ -20,6 +20,11 @@ public class Main {
 
 
     public static void main(String[] args) throws Exception {
+
+        if(!Publisher.getModel().loadConfigFile()){
+            System.exit(0);
+        }
+
         MainWindowController mainWindowController = new MainWindowController();
 
         try {

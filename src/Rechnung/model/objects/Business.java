@@ -7,11 +7,12 @@ public class Business {
     private String proprietor;
     private String street;
     private String streetNumber;
+    private String location;
     private String postcode;
     private LegalForm legalForm;
 
 
-    public Business(String id, String name, String proprietor, String street, String streetNumber, String postcode, LegalForm legalForm) {
+    public Business(String id, String name, String proprietor, String street, String streetNumber, String postcode, String location, LegalForm legalForm) {
         this.id = id;
         this.name = name;
         this.proprietor = proprietor;
@@ -19,6 +20,7 @@ public class Business {
         this.streetNumber = streetNumber;
         this.postcode = postcode;
         this.legalForm = legalForm;
+        this.location = location;
     }
 
     public String getId() {
@@ -63,6 +65,14 @@ public class Business {
 
     public String getPostcode() {
         return postcode;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public void setPostcode(String postcode) {

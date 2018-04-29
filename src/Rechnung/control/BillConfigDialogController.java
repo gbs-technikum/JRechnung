@@ -5,6 +5,13 @@ import Rechnung.model.db.BillEntryService;
 import Rechnung.model.db.CustomerService;
 import Rechnung.model.objects.*;
 import Rechnung.view.BillConfigDialog;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.awt.SWT_AWT;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.ole.win32.*;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Shell;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
@@ -26,11 +33,16 @@ public class BillConfigDialogController implements Controller {
     private BillConfigDialog billConfigDialog ;
     private Controller.ControllerReturnStatus controllerReturnStatus;
     private Bill bill;
+    private JFrame parentWindow;
+
+    private static OleFrame oleFrame1;
+    private static OleClientSite clientSite;
 
 
     public BillConfigDialogController(JFrame window,Bill bill) {
         ImageIcon imageIcon = Publisher.getModel().getImageIconFromResources("delete.png");
         this.billConfigDialog = new BillConfigDialog(window,imageIcon);
+        this.parentWindow = window;
         this.initEvents();
         this.controllerReturnStatus = Controller.ControllerReturnStatus.ABORT;
         this.bill = bill;
@@ -152,6 +164,184 @@ public class BillConfigDialogController implements Controller {
                 }
             }
         });
+
+        final Display display = new Display();
+
+        this.billConfigDialog.setBillOverviewButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+/*                controllerReturnStatus = ControllerReturnStatus.OK;
+
+                Controller controller = new BillOverviewConfigDialogController(parentWindow);
+                controller.run();*/
+
+                billConfigDialog.dispose();
+
+                JFrame childFrame = new JFrame("Word Viewer Window");
+                childFrame.setSize(850, 690);
+
+                JPanel childPanel = new JPanel();
+                childPanel.setSize(850, 40);
+                final JButton selectAllButton = new JButton("Select All");
+                final JButton copyButton = new JButton("Copy");
+                final JButton copyPasteButton = new JButton("Copy & Paste");
+                childPanel.add(selectAllButton);
+                childPanel.add(copyButton);
+                childPanel.add(copyPasteButton);
+
+                final Canvas canvas = new Canvas();
+                canvas.setSize(850, 650);
+
+                childFrame.getContentPane().add(childPanel, BorderLayout.NORTH);
+                childFrame.getContentPane().add(canvas,BorderLayout.SOUTH);
+                childFrame.pack();
+                childFrame.setVisible(true);
+
+                System.out.println("init fertig");
+
+                display.asyncExec(new Runnable() {
+
+                    public void run() {
+                        System.out.println("RUN");
+                        FillLayout thisLayout = new FillLayout(
+                                org.eclipse.swt.SWT.HORIZONTAL);
+                        Shell shell = SWT_AWT.new_Shell(display, canvas);
+                        shell.setLayout(thisLayout);
+                        shell.setSize(800, 600);
+
+                        try {
+                            oleFrame1 = new OleFrame(shell, SWT.NONE);
+                            clientSite = new OleClientSite(oleFrame1, SWT.NULL, new File("C:\\Users\\Mirko\\Documents\\test128.docx"));
+                            clientSite.setBounds(0, 0, 104, 54);
+                            clientSite.doVerb(OLE.OLEIVERB_INPLACEACTIVATE);
+                            System.out.println("Complete process OLE Client Site");
+
+                        } catch (Exception e2) {
+                            String str = "Create OleClientSite Error:" + e2.toString();
+                            System.out.println(str);
+                            return;
+                        }
+                        shell.layout();
+                        shell.open();
+
+                        selectAllButton.addActionListener(new ActionListener() {
+
+                            public void actionPerformed(ActionEvent e) {
+                                display.asyncExec(new Runnable() {
+                                    public void run() {
+                                        try {
+                                            doPrint();
+                                        } catch (Exception e2) {
+                                            String str = "OleAutomation Error:" + e2.toString();
+                                            System.out.println(str);
+                                            return;
+                                        }
+                                    }
+                                });
+                            }
+                        });
+
+                        copyButton.addActionListener(new ActionListener() {
+
+                            public void actionPerformed(ActionEvent e) {
+                                display.asyncExec(new Runnable() {
+
+                                    public void run() {
+                                        try {
+                                            copySelection();
+                                        } catch (Exception e2) {
+                                            String str = "OleAutomation Error:" + e2.toString();
+                                            System.out.println(str);
+                                            return;
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    }
+
+                    OleAutomation document;
+                    int[] ids;
+                    Variant result;
+
+                    private void doPrint() {
+                        if(clientSite == null)
+                            return;
+
+
+                        int result = clientSite.exec(OLE.OLECMDID_PRINT,
+                                OLE.OLECMDEXECOPT_PROMPTUSER, null, null);
+                        if(result != OLE.S_OK)
+                            System.out.println("Cann't print!!!" + result);
+
+
+                    }
+
+                    private void selectAll() {
+                        document = new OleAutomation(clientSite);
+                        System.out.println("Instantiated document");
+                        ids = document.getIDsOfNames(new String[] {"wdDialogFilePrint"});
+                        result = document.invoke(ids[0]);
+
+                        document.dispose();
+
+                        System.out.println("Invoked select");
+                    }
+
+                    private void copySelection() {
+                        document = new OleAutomation(clientSite);
+                        ids = document.getIDsOfNames(new String[] {"Application"});
+                        result = document.getProperty(ids[0]);
+                        document.dispose();
+
+                        System.out.println("Got application");
+
+                        OleAutomation application = result.getAutomation();
+
+                        result.dispose();
+                        ids = application.getIDsOfNames(new String[] {"Selection"});
+                        result = application.getProperty(ids[0]);
+                        application.dispose();
+
+                        System.out.println("Got selection");
+
+                        OleAutomation selection = result.getAutomation();
+                        result.dispose();
+                        ids = selection.getIDsOfNames(new String[] {"Copy"});
+                        result = selection.invoke(ids[0]);
+                        result.dispose();
+
+                        System.out.println("Invoked Copy");
+
+                        result.dispose();
+                        ids = selection.getIDsOfNames(new String[] {"Move"});
+                        result = selection.invoke(ids[0]);
+                        result.dispose();
+
+                        System.out.println("Invoked Move to deselect");
+                    }
+                });
+
+
+            }
+        });
+
+        display.addListener(SWT.CLOSE, new Listener() {
+
+            public void handleEvent(org.eclipse.swt.widgets.Event event) {
+                EventQueue.invokeLater(new Runnable() {
+
+                    public void run() {
+                        Frame[] frames = JFrame.getFrames();
+                        for (int i = 0; i < frames.length; i++) {
+                            frames[i].dispose();
+                        }
+                    }
+                });
+            }
+        });
+
+        this.billConfigDialog.setBillOverviewButtonEnabled(true);
     }
 
     private void saveComponentData() {
@@ -161,7 +351,17 @@ public class BillConfigDialogController implements Controller {
     private List<BillEntry> createBillEntriesFromWindowData(){
         List<BillEntry> billEntries = new ArrayList<>();
 
+        int rowCount = this.billConfigDialog.getEntryTableRowCount();
 
+        for(int i=0; i < rowCount;i++){
+            String id = Publisher.getModel().getNewObjectId();
+            String entryText = this.billConfigDialog.getCellValue(i,0);
+            double unitPrice =  Double.parseDouble(this.billConfigDialog.getCellValue(i,3).replace(",","."));
+            int amount = Integer.parseInt(this.billConfigDialog.getCellValue(i,2));
+
+            BillEntry billEntry = new BillEntry(id,19,unitPrice,amount,entryText);
+            billEntries.add(billEntry);
+        }
 
         return billEntries;
     }
@@ -240,6 +440,8 @@ public class BillConfigDialogController implements Controller {
         for (BillEntry entry : list){
             bill.addEntry(entry);
         }
+
+        System.out.println(bill.toString());
 
         this.bill = bill;
     }

@@ -13,6 +13,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.swing.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.security.CodeSource;
@@ -30,9 +31,11 @@ public class Model {
     private static final String DB_NAME = "jrechnung.sqlite";
 
     private Random random;
+    private Configuration config;
 
     public Model() {
-        random = new Random();
+        this.config = new Configuration();
+        this.random = new Random();
     }
 
     public Business getBusiness(){
@@ -290,6 +293,21 @@ public class Model {
         return result;
     }
 
+    public Bill readBill(String id){
+        Bill bill = null;
+        try {
+            bill = BillService.read(id);
+        } catch (SQLException e) {
+            e.printStackTrace(); //TODO
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            //TODO
+        }
+
+        return bill;
+    }
+
+
     public Date convert(String germanDateText){
         DateFormat format = new SimpleDateFormat("dd.mm.yyyy", Locale.GERMANY);
         Date date = null;
@@ -393,5 +411,31 @@ public class Model {
         }
 
         return null;
+    }
+
+    public File getWordExportPath(){
+        return new File(this.config.getWordFileExportPath());
+    }
+
+    public File getWordTemaple(){
+        return new File(this.config.getWordTemplate());
+    }
+
+    public static File changeFileName(File file){
+        if(!file.exists()){
+            return file;
+        }
+
+        return changeFileName(new File(file.getPath() + file.getParentFile() + "0" + ".docx"));
+    }
+
+    public boolean loadConfigFile(){
+        try {
+            this.config.loadConfigFile();
+        } catch (FileNotFoundException e) {
+            return false;
+        }
+
+        return true;
     }
 }
