@@ -14,7 +14,7 @@ import java.awt.event.MouseListener;
 
 public class BillConfigDialog extends ConfigDialog {
 
-    private static final String[] TABLE_COLUMN_NAMES = {"Produkt/Dienstleistung","Einheit","Anzahl","Einzelpreis(€)","Gesamtpreis(€)",""};
+    private static final String[] TABLE_COLUMN_NAMES = {"Produkt/Dienstleistung","MwSt(%)","Anzahl","Einzelpreis(€)","Gesamtpreis(€)",""};
     private static final int PREDEFIND_TABLE_ROWCOUNT = 0;
     private JPanel mainPanel;
     private JTextField jtfTitel, jtfBillNumber;
@@ -47,8 +47,6 @@ public class BillConfigDialog extends ConfigDialog {
         this.setPreferredSize(new Dimension(1024,768));
         this.mainPanel = new JPanel();
         this.mainPanel.setLayout(new BoxLayout(this.mainPanel, BoxLayout.Y_AXIS));
-
-     //   this.chkBxButtonGroup = new ButtonGroup();
 
         this.jtfTitel = new JTextField();
         this.jtfTitel.setBorder(new TitledBorder("Bezeichnung"));
@@ -101,9 +99,6 @@ public class BillConfigDialog extends ConfigDialog {
             }
         };
 
-
-
-
         this.jtblEntries = new JTable(tableModel);
         TableColumnModel columnModel = this.jtblEntries.getColumnModel();
         columnModel.getColumn(5).setMaxWidth(20);
@@ -127,6 +122,7 @@ public class BillConfigDialog extends ConfigDialog {
         this.leftButtunPanel.setLayout(new BorderLayout());
 
         this.btnGenerateBillFile = new JButton("Rechnung generieren");
+        this.btnGenerateBillFile.setEnabled(false);
         this.btnBillOverview = new JButton("Rechnung Anzeigen");
         this.btnBillOverview.setEnabled(false);
 
@@ -330,7 +326,6 @@ public class BillConfigDialog extends ConfigDialog {
         DefaultTableModel model = (DefaultTableModel) this.jtblEntries.getModel();
         for (int i = 0; i < rowCount; i++) {
             model.addRow(new String[TABLE_COLUMN_NAMES.length]);
-         //   addDeleteButtonToRow(model.getRowCount()-1);
             model.setValueAt(this.deleImage, model.getRowCount()-1, 5);
         }
     }
@@ -339,7 +334,6 @@ public class BillConfigDialog extends ConfigDialog {
         if(cellData.length == (TABLE_COLUMN_NAMES.length-1)){
             DefaultTableModel model = (DefaultTableModel) this.jtblEntries.getModel();
             model.addRow(cellData);
-            //addDeleteButtonToRow(model.getRowCount()-1);
             model.setValueAt(this.deleImage, model.getRowCount()-1, 5);
         }
     }
@@ -460,4 +454,14 @@ public class BillConfigDialog extends ConfigDialog {
     public void setTableMouseListener(MouseListener mouseListener){
         this.jtblEntries.addMouseListener(mouseListener);
     }
+
+    public void setBillGenerationButtonListener(ActionListener actionListener){
+        this.btnGenerateBillFile.addActionListener(actionListener);
+    }
+
+    public void setBillGenerationEnabled(Boolean enabled){
+        this.btnGenerateBillFile.setEnabled(enabled);
+    }
+
+
 }

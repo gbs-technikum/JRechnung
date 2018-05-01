@@ -8,6 +8,7 @@ import Rechnung.model.objects.Bill;
 import Rechnung.model.objects.Business;
 import Rechnung.model.objects.Customer;
 import Rechnung.model.objects.ProductOrService;
+import Rechnung.view.WordFileExportDailog;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -267,6 +268,19 @@ public class Model {
         return false;
     }
 
+    public boolean saveBillWithNewFile(Bill bill){
+        try {
+            return BillService.modifyBillFile(bill);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            //TODO
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
     public boolean removeBill(Bill bill){
         try {
             return BillService.remove(bill);
@@ -437,5 +451,17 @@ public class Model {
         }
 
         return true;
+    }
+
+    public File generateWordFile(Bill bill){
+        if(bill != null) {
+            File file = new File(this.getWordExportPath() + "/" + bill.getTitel() + ".docx");
+
+            if (WordFileGenerator.generate(this.getWordTemaple(), file, bill, this.getBusiness())) {
+                return file;
+            }
+        }
+
+        return null;
     }
 }
