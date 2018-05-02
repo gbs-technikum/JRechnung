@@ -18,11 +18,13 @@ public class BusinessConfigDialogController implements Controller {
 
     private BusinessConfigDialog businessConfigDialog;
     private ControllerReturnStatus controllerReturnStatus;
+    private Business business;
 
     public BusinessConfigDialogController(JFrame window) {
         this.businessConfigDialog = new BusinessConfigDialog(window);
         this.fillWindowComponents();
         this.initEvents();
+        this.business = null;
         this.controllerReturnStatus = ControllerReturnStatus.OK;
     }
 
@@ -39,6 +41,7 @@ public class BusinessConfigDialogController implements Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controllerReturnStatus = ControllerReturnStatus.OK;
+                createBussinesFromWindowData();
                 saveComponentData();
                 businessConfigDialog.setVisible(false);
                 businessConfigDialog.dispose();
@@ -49,6 +52,7 @@ public class BusinessConfigDialogController implements Controller {
         this.businessConfigDialog.setApplyButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                createBussinesFromWindowData();
                 saveComponentData();
             }
         });
@@ -87,6 +91,7 @@ public class BusinessConfigDialogController implements Controller {
             this.businessConfigDialog.setTextStreet(business.getStreet());
             this.businessConfigDialog.setTextStreetNumber(business.getStreetNumber());
             this.businessConfigDialog.setTextPostcode(business.getPostcode());
+            this.businessConfigDialog.setTextLocation(business.getLocation());
 
             LegalForm legalForm = business.getLegalForm();
 
@@ -97,7 +102,15 @@ public class BusinessConfigDialogController implements Controller {
         }
     }
 
-    private void saveComponentData(){
+    private void createBussinesFromWindowData(){
+        String id = null;
+
+        if(this.business != null){
+            id = this.business.getId();
+        }else {
+            id = Publisher.getModel().getNewObjectId();
+        }
+
 
         String legalFormText =   this.businessConfigDialog.getSelectedLegalFormText();
         LegalForm legalForm = null;
@@ -114,14 +127,21 @@ public class BusinessConfigDialogController implements Controller {
             e.printStackTrace();
         }
 
-        Business business = new Business("",this.businessConfigDialog.getTextName(),
-                            this.businessConfigDialog.getTextProprietor(),
-                            this.businessConfigDialog.getTextStreet(),
-                            this.businessConfigDialog.getTextStreetNumber(),
-                            this.businessConfigDialog.getTextPostcode(),legalForm);
+        Business business = new Business(id,this.businessConfigDialog.getTextName(),
+                this.businessConfigDialog.getTextProprietor(),
+                this.businessConfigDialog.getTextStreet(),
+                this.businessConfigDialog.getTextStreetNumber(),
+                this.businessConfigDialog.getTextLocation(),
+                this.businessConfigDialog.getTextPostcode(),legalForm);
 
+        this.business = business;
+
+    }
+
+
+    private void saveComponentData(){
         try {
-            BusinessService.writeBusiness(business);
+            BusinessService.writeBusiness(this.business);
         } catch (SQLException e) {
             //TODO
             e.printStackTrace();

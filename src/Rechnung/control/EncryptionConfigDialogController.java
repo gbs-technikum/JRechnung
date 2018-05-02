@@ -23,7 +23,7 @@ public class EncryptionConfigDialogController implements Controller {
     public EncryptionConfigDialogController(JFrame window,boolean reinit) {
         this.reinitMode = reinit;
         this.passwordCheckOnly = false;
-        this.encryptionConfigDialog = new EncryptionConfigDialog(window);
+        this.encryptionConfigDialog = new EncryptionConfigDialog(window, "Passwort setzen");
         this.encryptionConfigDialog.setSecondPasswordFieldVisible(true);
         this.encryptionConfigDialog.setPreviousPasswordFieldVisible(reinit);
         this.initEvents();
@@ -33,7 +33,7 @@ public class EncryptionConfigDialogController implements Controller {
     public EncryptionConfigDialogController(JFrame window) {
         this.reinitMode = false;
         this.passwordCheckOnly = true;
-        this.encryptionConfigDialog = new EncryptionConfigDialog(window);
+        this.encryptionConfigDialog = new EncryptionConfigDialog(window, "Passwort eingeben");
         this.initEvents();
         this.controllerReturnStatus = ControllerReturnStatus.ABORT;
     }
@@ -82,7 +82,7 @@ public class EncryptionConfigDialogController implements Controller {
 
         if(this.passwordCheckOnly){
             try {
-                return (Publisher.getModel().isPasswordValid(password) && sp.unlock(password));
+                return (sp.unlock(password));
             } catch (InvalidKeySpecException e) {
                 e.printStackTrace();
             } catch (NoSuchAlgorithmException e) {
@@ -98,7 +98,7 @@ public class EncryptionConfigDialogController implements Controller {
         {
             String password2 = this.encryptionConfigDialog.getSecondPassword();
             if(!this.reinitMode){
-                if(Publisher.getModel().isPasswordValid(password) && password.equals(password2)){
+                if(Publisher.getModel().isPasswordValid(password) && Publisher.getModel().isPasswordEqualsPassword2(password, password2)){
                     try {
                         return sp.firstInit(password);
                     } catch (InvalidKeySpecException e) {
@@ -116,7 +116,7 @@ public class EncryptionConfigDialogController implements Controller {
                     boolean isLocked = !tmpSecurityProvider.unlock(oldPassword);
                     tmpSecurityProvider = null;
                     if(!isLocked){
-                        if(Publisher.getModel().isPasswordValid(password) && password.equals(password2)){
+                        if(Publisher.getModel().isPasswordValid(password) && Publisher.getModel().isPasswordEqualsPassword2(password, password2)){
                             sp.reInit(password);
                         }
                     }

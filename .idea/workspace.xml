@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ccef6486-95cc-49f2-a1f0-84894b3af296" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/org_xerial_sqlite_jdbc_3_21_0_1.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/poi_3_17.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/poi_ooxml_3_17.xml" afterPath="" />
+    <list default="true" id="9a88aa8a-d265-455b-a94b-8aceaeaa507e" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Rechnung/TableRenderDemo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Rechnung/control/WordStarter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Rechnung/model/WordFileGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Rechnung/view/WaitWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Rechnung/view/WordOLEWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/org.eclipse.swt.win32.win32.x86_64.source_3.106.3.v20180214-0345.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/jrechnung.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/jrechnung.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Rechnung/SwtOleFrameInSwingApp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Rechnung/control/BillConfigDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rechnung/control/BillConfigDialogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Rechnung/control/BillOverviewConfigDialogController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Rechnung/model/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rechnung/model/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Rechnung/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rechnung/model/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Rechnung/model/db/BillService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rechnung/model/db/BillService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Rechnung/view/BillConfigDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rechnung/view/BillConfigDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Rechnung/view/BillOverviewConfigDialog.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,13 +28,38 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/JRechnung$Main.ic" NAME="Main Coverage Results" MODIFIED="1525199488556" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Rechnung.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/JRechnung$Main.coverage" NAME="Main Coverage Results" MODIFIED="1524033834073" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Rechnung.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/JRechnung$SwtOleFrameInSwingApp.ic" NAME="SwtOleFrameInSwingApp Coverage Results" MODIFIED="1525109743738" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Rechnung.*</FILTER>
+    </SUITE>
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ProductView.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/View/ProductView.java">
+      <file leaf-file-name="BillConfigDialogController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Rechnung/control/BillConfigDialogController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="62" column="12" lean-forward="false" selection-start-line="62" selection-start-column="12" selection-end-line="62" selection-end-column="12" />
+            <state relative-caret-position="373">
+              <caret line="212" column="69" lean-forward="true" selection-start-line="212" selection-start-column="69" selection-end-line="212" selection-end-column="69" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -29,107 +67,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProductOverview.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/View/ProductOverview.java">
+      <file leaf-file-name="BillConfigDialog.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Rechnung/view/BillConfigDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1020">
-              <caret line="60" column="31" lean-forward="false" selection-start-line="60" selection-start-column="31" selection-end-line="60" selection-end-column="31" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
-              <caret line="57" column="17" lean-forward="false" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1699#1700#0" expanded="true" />
-                <element signature="e#1730#1731#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Productlist.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/Productlist.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="816">
-              <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#370#371#0" expanded="true" />
-                <element signature="e#407#408#0" expanded="true" />
-                <element signature="e#457#458#0" expanded="true" />
-                <element signature="e#497#498#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProductService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/controler/ProductService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1547">
-              <caret line="95" column="29" lean-forward="false" selection-start-line="95" selection-start-column="29" selection-end-line="95" selection-end-column="29" />
-              <folding>
-                <element signature="docComment;class#ProductService#0" expanded="false" />
-                <element signature="e#376#377#0" expanded="true" />
-                <element signature="e#409#410#0" expanded="true" />
-                <element signature="e#453#454#0" expanded="true" />
-                <element signature="e#492#493#0" expanded="true" />
-                <element signature="e#542#543#0" expanded="true" />
-                <element signature="e#579#580#0" expanded="true" />
-                <marker date="1523830375524" expanded="true" signature="758:780" ph="select * fro... products" />
-                <marker date="1523830375524" expanded="false" signature="1180:1215" ph="select * fro... products" />
-                <marker date="1523830375524" expanded="true" signature="1721:1801" ph="update procu... " />
-                <marker date="1523830375524" expanded="false" signature="2556:2589" ph="delete from " />
-                <marker date="1523830375524" expanded="false" signature="3274:3344" ph="insert into products... " />
-                <marker date="1523830375524" expanded="true" signature="3390:3865" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Products.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/model/Products.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1207">
-              <caret line="71" column="39" lean-forward="false" selection-start-line="71" selection-start-column="39" selection-end-line="71" selection-end-column="39" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1093#1094#0" expanded="true" />
-                <element signature="e#1124#1125#0" expanded="true" />
-                <element signature="e#1184#1185#0" expanded="true" />
-                <element signature="e#1224#1225#0" expanded="true" />
-                <element signature="e#1272#1273#0" expanded="true" />
-                <element signature="e#1309#1310#0" expanded="true" />
-                <element signature="e#3483#3484#0" expanded="true" />
-                <element signature="e#3513#3514#0" expanded="true" />
-                <element signature="e#3568#3569#0" expanded="true" />
-                <element signature="e#3606#3607#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Product.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/model/Product.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-              <folding>
-                <element signature="e#980#981#0" expanded="true" />
-                <element signature="e#1014#1015#0" expanded="true" />
-                <element signature="e#1046#1047#0" expanded="true" />
-                <element signature="e#1074#1075#0" expanded="true" />
-                <element signature="e#1116#1117#0" expanded="true" />
-                <element signature="e#1150#1151#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="102">
+              <caret line="16" column="88" selection-start-line="16" selection-start-column="88" selection-end-line="16" selection-end-column="88" />
             </state>
           </provider>
         </entry>
@@ -145,48 +87,87 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>close</find>
-      <find>createStatement</find>
-      <find>setService</find>
-      <find>jComboBox</find>
-      <find>getConnection</find>
-      <find>connect</find>
-      <find>connect(</find>
-      <find>system.out.println</find>
-      <find>setPrice</find>
-      <find>System.out.println</find>
-      <find>procuts</find>
-      <find>executeQuery(</find>
-      <find>float</find>
-      <find>getPro</find>
-      <find>delete</find>
-      <find>getPrice</find>
+      <find>abbrechen</find>
+      <find>verschlüsselungspasswort</find>
+      <find>isPasswordValid</find>
+      <find>charsCorrespondPasswordPolicy</find>
+      <find>DefaultTab</find>
+      <find>TableMode</find>
+      <find>String.format</find>
+      <find>jtblEntries</find>
+      <find>addDeleteButtonToRow</find>
+      <find>clientSite</find>
+      <find>Lister</find>
+      <find>Display</find>
+      <find>display</find>
+      <find>childFrame</find>
+      <find>shell</find>
+      <find>frame</find>
+      <find>gener</find>
+      <find>gene</find>
+      <find>jlblFile</find>
+      <find>genera</find>
+      <find>btnGenerateBillFile</find>
+      <find>bill</find>
     </findStrings>
+    <dirStrings>
+      <dir>C:\Users\Mirko\Projekte\JRechnung</dir>
+    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GradleLocalSettings">
-    <option name="externalProjectsViewState">
-      <projects_view />
-    </option>
-  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
-        <option value="$PROJECT_DIR$/out/production/JRechnung/Diensteverwaltung/Product.class" />
-        <option value="$PROJECT_DIR$/src/Diensteverwaltung/View/ProductView.java" />
-        <option value="$PROJECT_DIR$/src/Diensteverwaltung/ProductService.java" />
-        <option value="$PROJECT_DIR$/src/Diensteverwaltung/Products.java" />
-        <option value="$PROJECT_DIR$/src/Diensteverwaltung/Product.java" />
-        <option value="$PROJECT_DIR$/src/Diensteverwaltung/View/ProductOverview.form" />
-        <option value="$PROJECT_DIR$/src/Diensteverwaltung/View/ProductOverview.java" />
-        <option value="$PROJECT_DIR$/src/Diensteverwaltung/Main.java" />
-        <option value="$PROJECT_DIR$/src/Diensteverwaltung/controler/ProductService.java" />
-        <option value="$PROJECT_DIR$/src/Diensteverwaltung/model/Products.java" />
-        <option value="$PROJECT_DIR$/src/Diensteverwaltung/Productlist.java" />
-        <option value="$PROJECT_DIR$/src/Diensteverwaltung/model/Product.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/model/CustomerService.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/view/ConfigDialog.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/view/CustomersConfigDialog.java" />
+        <option value="$PROJECT_DIR$/src/Allgemein/Message.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/model/SecurityProvider.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/control/CustomersConfigDialogController.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/view/EncryptionConfigDialog.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/control/EncryptionConfigDialogController.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/view/MainWindow.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/control/MainWindowController.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/view/BillList.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/model/objects/Bill.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/model/objects/BillEntry.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/view/WordFileExportDailog.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/control/WordFileExportController.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/WordUtil.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/TestApachePOI.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/Main.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/JRechungConfigGenerator.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/model/Configuration.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/model/objects/Business.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/view/BusinessConfigDialog.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/model/db/BusinessService.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/control/BusinessConfigDialogController.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/view/BillOverviewConfigWindow.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/SecondFrame.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/control/TestController.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/view/BillOverviewWindow.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/SwtOleFrameInSwingApp.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/view/BillOverviewConfigDialog.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/view/BillOverciewWindow.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/control/BillOverviewConfigDialogController.java" />
+        <option value="$PROJECT_DIR$/src/Word2.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/view/Word2.java" />
+        <option value="$PROJECT_DIR$/src/Word3.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/view/Word3.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/control/WordStarter.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/view/WaitDialog.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/view/WaitWindow.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/model/Message.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/view/WordOLEWindow.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/Testklasse2.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/model/WordFileGenerator.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/model/db/BillService.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/model/Model.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/TableRenderDemo.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/control/BillConfigDialogController.java" />
+        <option value="$PROJECT_DIR$/src/Rechnung/view/BillConfigDialog.java" />
       </list>
     </option>
   </component>
@@ -196,29 +177,26 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
   </component>
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
+    <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -235,39 +213,26 @@
               <item name="JRechnung" type="b2602c69:ProjectViewProjectNode" />
               <item name="JRechnung" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Diensteverwaltung" type="462c0819:PsiDirectoryNode" />
+              <item name="Rechnung" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="JRechnung" type="b2602c69:ProjectViewProjectNode" />
               <item name="JRechnung" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Diensteverwaltung" type="462c0819:PsiDirectoryNode" />
-              <item name="controler" type="462c0819:PsiDirectoryNode" />
+              <item name="Rechnung" type="462c0819:PsiDirectoryNode" />
+              <item name="control" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="JRechnung" type="b2602c69:ProjectViewProjectNode" />
               <item name="JRechnung" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Diensteverwaltung" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JRechnung" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JRechnung" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Diensteverwaltung" type="462c0819:PsiDirectoryNode" />
-              <item name="View" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JRechnung" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Rechnung" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="AndroidView" />
       <pane id="PackagesPane" />
     </panes>
@@ -275,27 +240,19 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="C:/Program Files/nodejs/node" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../JRechnung-dev_gross" />
-    <property name="SearchEverywhereHistoryKey" value="close&#9;PSI&#9;JAVA://Diensteverwaltung.ProductService#close" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="182" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="126" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="68" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="354" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="51" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="44" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="99" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="535" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="project.structure.side.proportion" value="0.2551724" />
+    <property name="settings.editor.selected.configurable" value="reference.idesettings.quicklists" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Mirko\Projekte\JRechnung" />
+      <recent name="C:\Users\Mirko\Projekte\JRechnung\lib" />
+      <recent name="C:\Users\Gollmer\IdeaProjects\JRechnung\out\production\JRechnung" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -310,71 +267,37 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="Diensteverwaltung.model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="Diensteverwaltung.Main" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="JRechnung" />
-      <envs />
-    </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="Diensteverwaltung.model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="Diensteverwaltung.Main" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="ALTERNATIVE_JRE_PATH" value="9.0" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-      <method>
-        <option name="MakeProject" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <module />
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Rechnung.Main" />
+      <module name="JRechnung" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Rechnung.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <shortenClasspath name="MANIFEST" />
+    </configuration>
+    <configuration name="Testklasse2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Rechnung.Testklasse2" />
+      <module name="JRechnung" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Rechnung.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <shortenClasspath name="CLASSPATH_FILE" />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" />
@@ -383,31 +306,14 @@
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="singleModule" />
       </option>
-      <envs />
       <patterns />
     </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
-      <module name="" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
-      <option name="PROGRAM_PARAMETERS" />
-      <predefined_log_file id="idea.log" enabled="true" />
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
@@ -418,473 +324,679 @@
       <option name="TEST_OBJECT" value="CLASS" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="singleModule" />
       </option>
       <option name="USE_DEFAULT_REPORTERS" value="false" />
       <option name="PROPERTIES_FILE" />
-      <envs />
       <properties />
       <listeners />
     </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Testklasse2" />
+    </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Testklasse2" />
       </list>
     </recent_temporary>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
+  <component name="SvnConfiguration">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ccef6486-95cc-49f2-a1f0-84894b3af296" name="Default" comment="" />
-      <created>1523817025533</created>
+      <changelist id="9a88aa8a-d265-455b-a94b-8aceaeaa507e" name="Default" comment="" />
+      <created>1521015450819</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1523817025533</updated>
-      <workItem from="1523817028907" duration="2165000" />
-      <workItem from="1523819338414" duration="27000" />
-      <workItem from="1523820664220" duration="10144000" />
-      <workItem from="1523831173014" duration="187000" />
+      <updated>1521015450819</updated>
+      <workItem from="1521015454653" duration="191000" />
+      <workItem from="1521015974161" duration="1033000" />
+      <workItem from="1521017736992" duration="269000" />
+      <workItem from="1521018049606" duration="4670000" />
+      <workItem from="1521117038188" duration="16000" />
+      <workItem from="1521444936880" duration="3887000" />
+      <workItem from="1521531271996" duration="37000" />
+      <workItem from="1521549605523" duration="65000" />
+      <workItem from="1521623234166" duration="2314000" />
+      <workItem from="1521788787625" duration="609000" />
+      <workItem from="1521794488515" duration="34000" />
+      <workItem from="1523426740211" duration="10622000" />
+      <workItem from="1523523898191" duration="404000" />
+      <workItem from="1524031687608" duration="10200000" />
+      <workItem from="1524639297190" duration="35000" />
+      <workItem from="1524639404670" duration="3840000" />
+      <workItem from="1524679984304" duration="3000" />
+      <workItem from="1524679988970" duration="639000" />
+      <workItem from="1524764071365" duration="8486000" />
+      <workItem from="1524772601416" duration="202000" />
+      <workItem from="1524772890690" duration="98000" />
+      <workItem from="1524851554448" duration="4603000" />
+      <workItem from="1524856184755" duration="3880000" />
+      <workItem from="1524900020317" duration="6322000" />
+      <workItem from="1524910735916" duration="3605000" />
+      <workItem from="1524914442363" duration="2465000" />
+      <workItem from="1524931351371" duration="3597000" />
+      <workItem from="1524997052820" duration="4514000" />
+      <workItem from="1525020773955" duration="674000" />
+      <workItem from="1525026042954" duration="6155000" />
+      <workItem from="1525086268307" duration="4100000" />
+      <workItem from="1525107006994" duration="7547000" />
+      <workItem from="1525114779749" duration="1826000" />
+      <workItem from="1525116899530" duration="992000" />
+      <workItem from="1525118134161" duration="336000" />
+      <workItem from="1525118475067" duration="149000" />
+      <workItem from="1525118628147" duration="52000" />
+      <workItem from="1525118682695" duration="408000" />
+      <workItem from="1525155256056" duration="1518000" />
+      <workItem from="1525157401715" duration="1997000" />
+      <workItem from="1525159468290" duration="1904000" />
+      <workItem from="1525162378733" duration="311000" />
+      <workItem from="1525170952717" duration="211000" />
+      <workItem from="1525171175442" duration="4020000" />
+      <workItem from="1525175300762" duration="353000" />
+      <workItem from="1525196130291" duration="5630000" />
     </task>
+    <task id="LOCAL-00001" summary="Gültigkeitsprüfung von Groß angefangen zu erweitern!">
+      <created>1521022721699</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1521022721699</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Programmieren der Gültigkeitsprüfung fortgesetzt!">
+      <created>1521448243619</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1521448243619</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Gültigkeitsprüfung und des Fehlermeldungen fertig!">
+      <created>1521625442546</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1521625442546</updated>
+    </task>
+    <task id="LOCAL-00004" summary="ConfigDialog um Pflichtfeld-Label erweitern">
+      <created>1523438110672</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1523438110672</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Mit dev_groß gemerged">
+      <created>1524640089551</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1524640089551</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Änderungen von dev_gollmer eingepflegt / Message Klasse in Model verschoben">
+      <created>1524680611127</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1524680611127</updated>
+    </task>
+    <task id="LOCAL-00007" summary="BillConfigDialog überarbeitet Einträge können jetzt gelöscht und hinzugefügt werden / Rechnungstablle in MainWindow per Doppelklick Rechnung öffnen jetzt möglich">
+      <created>1524772745562</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1524772745562</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Word Generierung und Anzeige und Druck der Rechnung hinzugefügt und 1000 andere Dinge geändert // noch viel zu tun">
+      <created>1525032191607</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1525032191607</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12523000" />
+    <option name="totallyTimeSpent" value="114823000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="974" height="1047" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32996634" sideWeight="0.15973742" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33333334" sideWeight="0.47592998" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32996634" sideWeight="0.8402626" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29978117" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32996634" sideWeight="0.47811815" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.4978678" order="1" side_tool="false" content_ui="tabs" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32900432" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.33116883" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info id="Image Layers" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="right" id="Maven Projects" order="3" weight="0.32995737" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32900432" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3181818" />
+      <window_info anchor="right" id="Coverage" order="4" side_tool="true" weight="0.32995737" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="2" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22974414" />
+      <window_info anchor="right" id="Database" order="3" weight="0.32995737" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39069265" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3225108" />
     </layout>
+    <layout-to-restore>
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3181818" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2457356" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32900432" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32900432" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3225108" />
+      <window_info anchor="right" id="Maven Projects" order="8" weight="0.32995737" />
+      <window_info anchor="right" id="Database" order="6" weight="0.32995737" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39125684" />
+      <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32900432" />
+      <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.32995737" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="Klassen überarbeitet, Service überarbeitet, Datenbank implementiert und auf Funktionen überprüft," />
-    <MESSAGE value="fehler im git commit korrigiert" />
-    <option name="LAST_COMMIT_MESSAGE" value="fehler im git commit korrigiert" />
+    <MESSAGE value="Gültigkeitsprüfung von Groß angefangen zu erweitern!" />
+    <MESSAGE value="Programmieren der Gültigkeitsprüfung fortgesetzt!" />
+    <MESSAGE value="Gültigkeitsprüfung und des Fehlermeldungen fertig!" />
+    <MESSAGE value="ConfigDialog um Pflichtfeld-Label erweitern" />
+    <MESSAGE value="Mit dev_groß gemerged" />
+    <MESSAGE value="Änderungen von dev_gollmer eingepflegt / Message Klasse in Model verschoben" />
+    <MESSAGE value="BillConfigDialog überarbeitet Einträge können jetzt gelöscht und hinzugefügt werden / Rechnungstablle in MainWindow per Doppelklick Rechnung öffnen jetzt möglich" />
+    <MESSAGE value="Word Generierung und Anzeige und Druck der Rechnung hinzugefügt und 1000 andere Dinge geändert // noch viel zu tun" />
+    <option name="LAST_COMMIT_MESSAGE" value="Word Generierung und Anzeige und Druck der Rechnung hinzugefügt und 1000 andere Dinge geändert // noch viel zu tun" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <breakpoints>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/Rechnung/control/CustomersConfigDialogController.java</url>
+          <line>50</line>
+          <properties />
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/Rechnung/control/CustomersConfigDialogController.java</url>
+          <line>82</line>
+          <properties />
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/Rechnung/view/EncryptionConfigDialog.java</url>
+          <line>26</line>
+          <properties />
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/Rechnung/model/SecurityProvider.java</url>
+          <line>68</line>
+          <properties />
+          <option name="timeStamp" value="57" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/Rechnung/control/EncryptionConfigDialogController.java</url>
+          <line>78</line>
+          <properties />
+          <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Rechnung/model/WordFileGenerator.java</url>
+          <line>21</line>
+          <properties />
+          <option name="timeStamp" value="81" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Rechnung/model/Model.java</url>
+          <line>456</line>
+          <properties />
+          <option name="timeStamp" value="82" />
+        </line-breakpoint>
+      </breakpoints>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="83" />
     </breakpoint-manager>
-    <watches-manager />
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/View/ProductView.java">
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/view/EncryptionConfigDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="62" column="12" lean-forward="false" selection-start-line="62" selection-start-column="12" selection-end-line="62" selection-end-column="12" />
+        <state relative-caret-position="136">
+          <caret line="11" column="26" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/View/ProductOverview.java">
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/model/Configuration.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="60" column="31" lean-forward="true" selection-start-line="60" selection-start-column="31" selection-end-line="60" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="1105">
+          <caret line="76" column="33" selection-start-line="76" selection-start-column="33" selection-end-line="76" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/Productlist.java">
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/jdk/internal/util/Preconditions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#370#371#0" expanded="true" />
-            <element signature="e#407#408#0" expanded="true" />
-            <element signature="e#457#458#0" expanded="true" />
-            <element signature="e#497#498#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="612">
+          <caret line="63" selection-start-line="63" selection-end-line="63" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/controler/ProductService.java">
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/util/ArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1547">
-          <caret line="95" column="29" lean-forward="false" selection-start-line="95" selection-start-column="29" selection-end-line="95" selection-end-column="29" />
-          <folding>
-            <element signature="docComment;class#ProductService#0" expanded="false" />
-            <element signature="e#376#377#0" expanded="true" />
-            <element signature="e#409#410#0" expanded="true" />
-            <element signature="e#453#454#0" expanded="true" />
-            <element signature="e#492#493#0" expanded="true" />
-            <element signature="e#542#543#0" expanded="true" />
-            <element signature="e#579#580#0" expanded="true" />
-            <marker date="1523830375524" expanded="true" signature="758:780" ph="select * fro... products" />
-            <marker date="1523830375524" expanded="false" signature="1180:1215" ph="select * fro... products" />
-            <marker date="1523830375524" expanded="true" signature="1721:1801" ph="update procu... " />
-            <marker date="1523830375524" expanded="false" signature="2556:2589" ph="delete from " />
-            <marker date="1523830375524" expanded="false" signature="3274:3344" ph="insert into products... " />
-            <marker date="1523830375524" expanded="true" signature="3390:3865" ph="{...}" />
-          </folding>
+        <state relative-caret-position="6749">
+          <caret line="439" selection-start-line="439" selection-end-line="439" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/model/Products.java">
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/model/SecurityProvider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1207">
-          <caret line="71" column="39" lean-forward="false" selection-start-line="71" selection-start-column="39" selection-end-line="71" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1093#1094#0" expanded="true" />
-            <element signature="e#1124#1125#0" expanded="true" />
-            <element signature="e#1184#1185#0" expanded="true" />
-            <element signature="e#1224#1225#0" expanded="true" />
-            <element signature="e#1272#1273#0" expanded="true" />
-            <element signature="e#1309#1310#0" expanded="true" />
-            <element signature="e#3483#3484#0" expanded="true" />
-            <element signature="e#3513#3514#0" expanded="true" />
-            <element signature="e#3568#3569#0" expanded="true" />
-            <element signature="e#3606#3607#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="502">
+          <caret line="79" selection-start-line="79" selection-end-line="79" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/model/Product.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding>
-            <element signature="e#980#981#0" expanded="true" />
-            <element signature="e#1014#1015#0" expanded="true" />
-            <element signature="e#1046#1047#0" expanded="true" />
-            <element signature="e#1074#1075#0" expanded="true" />
-            <element signature="e#1116#1117#0" expanded="true" />
-            <element signature="e#1150#1151#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="57" column="17" lean-forward="true" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1699#1700#0" expanded="true" />
-            <element signature="e#1730#1731#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/View/ProductView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/TestKlasse.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
-          <caret line="15" column="19" lean-forward="false" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1699#1700#0" expanded="true" />
-            <element signature="e#1730#1731#0" expanded="true" />
-          </folding>
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/Productlist.java">
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/model/db/BusinessService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#370#371#0" expanded="true" />
-            <element signature="e#407#408#0" expanded="true" />
-            <element signature="e#457#458#0" expanded="true" />
-            <element signature="e#497#498#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="442">
+          <caret line="36" column="44" lean-forward="true" selection-start-line="36" selection-start-column="44" selection-end-line="36" selection-end-column="44" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/out/production/JRechnung/Diensteverwaltung/Product.class" />
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/model/Product.java">
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/model/objects/Business.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding>
-            <element signature="e#980#981#0" expanded="true" />
-            <element signature="e#1014#1015#0" expanded="true" />
-            <element signature="e#1046#1047#0" expanded="true" />
-            <element signature="e#1074#1075#0" expanded="true" />
-            <element signature="e#1116#1117#0" expanded="true" />
-            <element signature="e#1150#1151#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="374">
+          <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/control/CustomersConfigDialogController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="19" lean-forward="true" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1699#1700#0" expanded="true" />
-            <element signature="e#1730#1731#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/View/ProductView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        <state relative-caret-position="119">
+          <caret line="266" selection-start-line="266" selection-end-line="266" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/Productlist.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#370#371#0" expanded="true" />
-            <element signature="e#407#408#0" expanded="true" />
-            <element signature="e#457#458#0" expanded="true" />
-            <element signature="e#497#498#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/out/production/JRechnung/Diensteverwaltung/Product.class" />
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/model/Product.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding>
-            <element signature="e#980#981#0" expanded="true" />
-            <element signature="e#1014#1015#0" expanded="true" />
-            <element signature="e#1046#1047#0" expanded="true" />
-            <element signature="e#1074#1075#0" expanded="true" />
-            <element signature="e#1116#1117#0" expanded="true" />
-            <element signature="e#1150#1151#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="472" column="24" lean-forward="true" selection-start-line="472" selection-start-column="24" selection-end-line="472" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/product.sqlite">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/out/production/JRechnung/Diensteverwaltung/Product.class" />
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/model/Products.java">
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/model/objects/Bill.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1093#1094#0" expanded="true" />
-            <element signature="e#1124#1125#0" expanded="true" />
-            <element signature="e#1184#1185#0" expanded="true" />
-            <element signature="e#1224#1225#0" expanded="true" />
-            <element signature="e#1272#1273#0" expanded="true" />
-            <element signature="e#1309#1310#0" expanded="true" />
-            <element signature="e#3483#3484#0" expanded="true" />
-            <element signature="e#3513#3514#0" expanded="true" />
-            <element signature="e#3568#3569#0" expanded="true" />
-            <element signature="e#3606#3607#0" expanded="true" />
-          </folding>
+          <caret line="13" column="25" lean-forward="true" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/product.sqlite-journal" />
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/brainstorming">
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/view/CustomersConfigDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="476">
+          <caret line="220" selection-start-line="220" selection-end-line="224" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/View/ProductOverview.form" />
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/View/ProductOverview.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="60" column="31" lean-forward="false" selection-start-line="60" selection-start-column="31" selection-end-line="60" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/ProductData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/Productlist.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#370#371#0" expanded="true" />
-            <element signature="e#407#408#0" expanded="true" />
-            <element signature="e#457#458#0" expanded="true" />
-            <element signature="e#497#498#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/model/Products.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1207">
-          <caret line="71" column="39" lean-forward="false" selection-start-line="71" selection-start-column="39" selection-end-line="71" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1093#1094#0" expanded="true" />
-            <element signature="e#1124#1125#0" expanded="true" />
-            <element signature="e#1184#1185#0" expanded="true" />
-            <element signature="e#1224#1225#0" expanded="true" />
-            <element signature="e#1272#1273#0" expanded="true" />
-            <element signature="e#1309#1310#0" expanded="true" />
-            <element signature="e#3483#3484#0" expanded="true" />
-            <element signature="e#3513#3514#0" expanded="true" />
-            <element signature="e#3568#3569#0" expanded="true" />
-            <element signature="e#3606#3607#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/model/Product.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding>
-            <element signature="e#980#981#0" expanded="true" />
-            <element signature="e#1014#1015#0" expanded="true" />
-            <element signature="e#1046#1047#0" expanded="true" />
-            <element signature="e#1074#1075#0" expanded="true" />
-            <element signature="e#1116#1117#0" expanded="true" />
-            <element signature="e#1150#1151#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/controler/ProductService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1547">
-          <caret line="95" column="29" lean-forward="false" selection-start-line="95" selection-start-column="29" selection-end-line="95" selection-end-column="29" />
-          <folding>
-            <element signature="docComment;class#ProductService#0" expanded="false" />
-            <element signature="e#376#377#0" expanded="true" />
-            <element signature="e#409#410#0" expanded="true" />
-            <element signature="e#453#454#0" expanded="true" />
-            <element signature="e#492#493#0" expanded="true" />
-            <element signature="e#542#543#0" expanded="true" />
-            <element signature="e#579#580#0" expanded="true" />
-            <marker date="1523830375524" expanded="true" signature="758:780" ph="select * fro... products" />
-            <marker date="1523830375524" expanded="false" signature="1180:1215" ph="select * fro... products" />
-            <marker date="1523830375524" expanded="true" signature="1721:1801" ph="update procu... " />
-            <marker date="1523830375524" expanded="false" signature="2556:2589" ph="delete from " />
-            <marker date="1523830375524" expanded="false" signature="3274:3344" ph="insert into products... " />
-            <marker date="1523830375524" expanded="true" signature="3390:3865" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="57" column="17" lean-forward="false" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1699#1700#0" expanded="true" />
-            <element signature="e#1730#1731#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/View/ProductTabelModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/View/ProductList.java">
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/control/BusinessConfigDialogController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
-          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding />
+          <caret line="18" selection-start-line="18" selection-end-line="102" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Diensteverwaltung/View/ProductView.java">
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/TestApachePOI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="62" column="12" lean-forward="false" selection-start-line="62" selection-start-column="12" selection-end-line="62" selection-end-column="12" />
+        <state relative-caret-position="565">
+          <caret line="38" column="38" selection-start-line="38" selection-start-column="38" selection-end-line="38" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/control/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/WordUtil.java" />
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/view/BusinessConfigDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="884">
+          <caret line="60" selection-start-line="60" selection-end-line="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/lang/Thread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="472">
+          <caret line="501" column="26" selection-start-line="501" selection-start-column="18" selection-end-line="501" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/SecondFrame.java" />
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/control/TestController.java" />
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/view/BillOverviewWindow.java" />
+    <entry file="jar://$PROJECT_DIR$/lib/org.eclipse.swt.win32.win32.x86_64.source_3.106.3.v20180214-0345.jar!/org/eclipse/swt/SWT.java" />
+    <entry file="jar://$PROJECT_DIR$/lib/org.eclipse.swt.win32.win32.x86_64.source_3.106.3.v20180214-0345.jar!/org/eclipse/swt/widgets/Display.java" />
+    <entry file="jar://$PROJECT_DIR$/lib/org.eclipse.jface.source_3.13.2.v20171022-1656.jar!/org/eclipse/jface/window/Window.java" />
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/jdk/internal/reflect/NativeMethodAccessorImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="61" selection-start-line="61" selection-end-line="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/org.eclipse.swt.win32.win32.x86_64.source_3.106.3.v20180214-0345.jar!/org/eclipse/swt/ole/win32/OleClientSite.java" />
+    <entry file="jar://$PROJECT_DIR$/lib/org.eclipse.swt.win32.win32.x86_64.source_3.106.3.v20180214-0345.jar!/org/eclipse/swt/ole/win32/OLE.java" />
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/JRechungConfigGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1122">
+          <caret line="87" selection-start-line="87" selection-end-line="95" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/view/BillOverciewWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="27" column="63" selection-start-line="27" selection-start-column="63" selection-end-line="27" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/org.eclipse.swt.win32.win32.x86_64_3.106.3.v20180214-0345.jar!/org/eclipse/swt/widgets/FileDialog.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="34" column="50" selection-start-line="34" selection-start-column="50" selection-end-line="34" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/control/WordFileExportController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="44" column="48" selection-start-line="44" selection-start-column="48" selection-end-line="44" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/view/ConfigDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="25" column="6" selection-start-line="25" selection-start-column="6" selection-end-line="25" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/view/WordFileExportDailog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="9" selection-start-line="9" selection-end-line="18" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.desktop/java/awt/Container.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7157">
+          <caret line="496" selection-start-line="496" selection-end-line="496" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/view/Word2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="60" selection-start-line="60" selection-end-line="61" selection-end-column="157" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/control/BillOverviewConfigDialogController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="655">
+          <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="82" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/control/WordStarter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/model/Message.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="62" column="41" selection-start-line="62" selection-start-column="41" selection-end-line="62" selection-end-column="41" />
+          <folding>
+            <element signature="e#2086#2087#0" expanded="true" />
+            <element signature="e#2142#2143#0" expanded="true" />
+            <element signature="e#2358#2359#0" expanded="true" />
+            <element signature="e#2398#2399#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/view/WordOLEWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="135" column="8" selection-start-line="135" selection-start-column="8" selection-end-line="135" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4984#4985#0" expanded="true" />
+            <element signature="e#5012#5013#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/SwtOleFrameInSwingApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="123" selection-start-line="123" selection-end-line="126" selection-end-column="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/Testklasse2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="51" column="8" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="146" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/control/MainWindowController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="63" selection-start-line="63" selection-end-line="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/model/WordFileGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1241">
+          <caret line="23" column="25" lean-forward="true" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/view/WaitWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="34" lean-forward="true" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/Publisher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-544">
+          <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/model/db/BillService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-408">
+          <caret line="182" column="56" lean-forward="true" selection-start-line="182" selection-start-column="56" selection-end-line="182" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/model/Model.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="275" column="18" selection-start-line="275" selection-start-column="18" selection-end-line="275" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/view/BillList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="13" column="150" selection-start-line="13" selection-start-column="144" selection-end-line="13" selection-end-column="150" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/TableRenderDemo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2006">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6684#6685#0" expanded="true" />
+            <element signature="e#6733#6734#0" expanded="true" />
+            <element signature="e#6769#6770#0" expanded="true" />
+            <element signature="e#6811#6812#0" expanded="true" />
+            <element signature="e#6859#6860#0" expanded="true" />
+            <element signature="e#6906#6907#0" expanded="true" />
+            <element signature="e#6960#6961#0" expanded="true" />
+            <element signature="e#7005#7006#0" expanded="true" />
+            <element signature="e#7319#7320#0" expanded="true" />
+            <element signature="e#7377#7378#0" expanded="true" />
+            <element signature="e#9862#9863#0" expanded="true" />
+            <element signature="e#9912#9913#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/control/BillConfigDialogController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="212" column="69" lean-forward="true" selection-start-line="212" selection-start-column="69" selection-end-line="212" selection-end-column="69" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rechnung/view/BillConfigDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="16" column="88" selection-start-line="16" selection-start-column="88" selection-end-line="16" selection-end-column="88" />
         </state>
       </provider>
     </entry>
@@ -894,10 +1006,12 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
+          <last-edited>JRechnung:jar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.2551724" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
@@ -909,7 +1023,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.2551724" />
               </list>
             </option>
           </splitter-proportions>
@@ -920,7 +1034,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.2551724" />
               </list>
             </option>
           </splitter-proportions>
@@ -932,7 +1046,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.2551724" />
               </list>
             </option>
           </splitter-proportions>
@@ -944,8 +1058,19 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
+                <option value="0.2551724" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>9.0</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -953,7 +1078,18 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>sqlite-jdbc-3.21.0</last-edited>
+          <last-edited>lib</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2551724" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
           <splitter-proportions>
             <option name="proportions">
               <list>

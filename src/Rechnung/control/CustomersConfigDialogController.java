@@ -1,6 +1,7 @@
 package Rechnung.control;
 
 import Rechnung.Publisher;
+import Rechnung.model.Model;
 import Rechnung.model.objects.*;
 import Rechnung.view.CustomersConfigDialog;
 
@@ -46,8 +47,18 @@ public class CustomersConfigDialogController implements Controller {
         this.customersConfigDialog.setApplyButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                saveComponentData();
-                fillWindowComponents(false);
+                Model model = Publisher.getModel();
+                boolean isNameValid = model.isNameOrForenameOrStreetOrVillageValid("Name", customersConfigDialog.getNameTextField());
+                boolean isForenameValid = model.isNameOrForenameOrStreetOrVillageValid("Vorname", customersConfigDialog.getForennameTextField());
+                boolean isStreetValid = model.isNameOrForenameOrStreetOrVillageValid("Straße", customersConfigDialog.getStreetTextField());
+                boolean isHouseNumberValid = model.isHouseNumberValid(customersConfigDialog.getHouseNumberTextField());
+                boolean isPostCodeValid = model.isPostCodeValid(customersConfigDialog.getPostCodeTextField());
+                boolean isVillageValid = model.isNameOrForenameOrStreetOrVillageValid("Ort", customersConfigDialog.getVillageTextField());
+                boolean isLandValid = model.isLandValid(customersConfigDialog.getLandTextField());
+                if(isNameValid && isForenameValid && isStreetValid && isHouseNumberValid && isPostCodeValid && isVillageValid && isLandValid){
+                    saveComponentData();
+                    fillWindowComponents(false);
+                }
             }
         });
         this.customersConfigDialog.setApplyButtonEnabled(true);

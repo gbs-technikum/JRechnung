@@ -1,17 +1,19 @@
 package Rechnung.control;
 
 import Rechnung.Publisher;
-import Rechnung.model.db.BillEntryService;
-import Rechnung.model.db.CustomerService;
 import Rechnung.model.objects.*;
 import Rechnung.view.BillConfigDialog;
+import Rechnung.view.WaitWindow;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,14 +25,17 @@ public class BillConfigDialogController implements Controller {
     private BillConfigDialog billConfigDialog ;
     private Controller.ControllerReturnStatus controllerReturnStatus;
     private Bill bill;
+    private JFrame parentWindow;
 
 
-    public BillConfigDialogController(JFrame window) {
-        this.billConfigDialog = new BillConfigDialog(window);
+    public BillConfigDialogController(JFrame window,Bill bill) {
+        ImageIcon imageIcon = Publisher.getModel().getImageIconFromResources("delete.png");
+        this.billConfigDialog = new BillConfigDialog(window,imageIcon);
+        this.parentWindow = window;
         this.initEvents();
         this.controllerReturnStatus = Controller.ControllerReturnStatus.ABORT;
-        fillWindowComponents(null);
-        this.bill = null;
+        this.bill = bill;
+        fillWindowComponents(this.bill);
     }
 
     @Override
@@ -57,6 +62,7 @@ public class BillConfigDialogController implements Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 saveComponentData();
+                billConfigDialog.setBillGenerationEnabled(true);
             }
         });
         this.billConfigDialog.setApplyButtonEnabled(true);
@@ -74,11 +80,23 @@ public class BillConfigDialogController implements Controller {
         this.billConfigDialog.setAddEntryButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                billConfigDialog.addRowsToEntryTable(1);
+                billConfigDialog.setTableModelListenerEnabled(false);
+
+                if(Publisher.getModel().isCompletePriceDataValid(billConfigDialog.getTableColumnData(4))) {
+                    ProductOrService selectedProductOrService = billConfigDialog.getProductOrServiceFromList(billConfigDialog.getIndexOfSelectedProductOrService());
+                    if (selectedProductOrService != null) {
+                        addRowWithProductOrServiceData(selectedProductOrService);
+                    } else {
+                        billConfigDialog.addRowsToEntryTable(1);
+                    }
+                }
+
+
+                billConfigDialog.setTableModelListenerEnabled(true);
             }
         });
 
-        this.billConfigDialog.setTableChangeListener(new TableModelListener() {
+        this.billConfigDialog.setTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(TableModelEvent e) {
 
@@ -120,6 +138,60 @@ public class BillConfigDialogController implements Controller {
                 tableModel.addTableModelListener(this);
             }
         });
+
+        this.billConfigDialog.setTableMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                super.mouseClicked(mouseEvent);
+                JTable table =(JTable) mouseEvent.getSource();
+                Point point = mouseEvent.getPoint();
+                int row = table.rowAtPoint(point);
+                int column = table.columnAtPoint(point);
+                if (column == 5) {
+                    billConfigDialog.setTableModelListenerEnabled(false);
+                    billConfigDialog.removeEntryRow(row);
+                    billConfigDialog.setTableModelListenerEnabled(true);
+                }
+            }
+        });
+
+        this.billConfigDialog.setBillOverviewButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(bill != null && bill.getBillFile() != null) {
+                    JDialog waitWindow = new WaitWindow(parentWindow, "Rechnungsanzeige wird vorbereitet...");
+
+                    WordStarter runnable = new WordStarter(bill.getBillFile());
+
+                    Thread wordStarterThread = new Thread(runnable);
+
+                    wordStarterThread.start();
+
+
+                    while (!runnable.isReadyToUse()) {
+                        try {
+                            Thread.sleep(200);
+                        } catch (InterruptedException e1) {
+                        }
+                    }
+
+                    ((WaitWindow) waitWindow).close();
+                }
+
+            }});
+
+        this.billConfigDialog.setBillGenerationButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File file = Publisher.getModel().generateWordFile(bill);
+                if (file != null) {
+                    billConfigDialog.setFileLabel(file.getAbsolutePath());
+                    bill.setBillFile(file);
+                    Publisher.getModel().saveBillWithNewFile(bill);
+                    billConfigDialog.setBillOverviewButtonEnabled(true);
+                }
+            }
+        });
     }
 
     private void saveComponentData() {
@@ -129,7 +201,18 @@ public class BillConfigDialogController implements Controller {
     private List<BillEntry> createBillEntriesFromWindowData(){
         List<BillEntry> billEntries = new ArrayList<>();
 
+        int rowCount = this.billConfigDialog.getEntryTableRowCount();
 
+        for(int i=0; i < rowCount;i++){
+            String id = Publisher.getModel().getNewObjectId();
+            String entryText = this.billConfigDialog.getCellValue(i,0);
+            double unitPrice =  Double.parseDouble(this.billConfigDialog.getCellValue(i,3).replace(",","."));
+            int amount = Integer.parseInt(this.billConfigDialog.getCellValue(i,2));
+            double taxRate = Double.parseDouble(this.billConfigDialog.getCellValue(i,1).replace(",","."));
+
+            BillEntry billEntry = new BillEntry(id,taxRate,unitPrice,amount,entryText);
+            billEntries.add(billEntry);
+        }
 
         return billEntries;
     }
@@ -144,7 +227,7 @@ public class BillConfigDialogController implements Controller {
 
             List<BillEntry> billEntries = bill.getBillEntries();
             for (int i = 0; i < billEntries.size(); i++) {
-                this.billConfigDialog.setEntryTitel(i, billEntries.get(i).getEntryText());
+                fillRowWithBillEntry(i, billEntries.get(i));
             }
 
             if (this.bill == null) {
@@ -155,7 +238,19 @@ public class BillConfigDialogController implements Controller {
             this.billConfigDialog.setBillNumberTextField(Publisher.getModel().generateBillNumber());
             this.billConfigDialog.setTitleTextField(Publisher.getModel().generateBillDefaultName());
             fillDebtorComboBox(null,null);
+            fillProductOrServiceComboBox();
         }
+    }
+
+    private void fillRowWithBillEntry(int rowIndex, BillEntry billEntry){
+        this.billConfigDialog.setEntryTitel(rowIndex, billEntry.getEntryText());
+
+    }
+
+    private void addRowWithProductOrServiceData(ProductOrService productOrService){
+        String[] cellData = new String[]{productOrService.getTitle(),"","",String.format(Locale.GERMANY,"%.2f",productOrService.getPrice()),""};
+
+        this.billConfigDialog.addRowToEntryTable(cellData);
     }
 
     private void createBillFromWindowData(){
@@ -197,6 +292,8 @@ public class BillConfigDialogController implements Controller {
             bill.addEntry(entry);
         }
 
+        System.out.println(bill.toString());
+
         this.bill = bill;
     }
 
@@ -217,6 +314,20 @@ public class BillConfigDialogController implements Controller {
 
         return selectedIndex;
     }
+
+    private void fillProductOrServiceComboBox(){
+
+        List<ProductOrService> productsOrServices = Publisher.getModel().readProductsOrServices();
+
+        this.billConfigDialog.addToProductOrServiceList(null);
+
+        for (int i = 0; i < productsOrServices.size(); i++) {
+            ProductOrService productOrService = productsOrServices.get(i);
+            this.billConfigDialog.addToProductOrServiceList(productOrService);
+        }
+    }
+
+
 
 }
 

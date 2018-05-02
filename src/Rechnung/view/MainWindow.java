@@ -5,6 +5,7 @@ import Rechnung.view.BillList;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 public class MainWindow extends JFrame {
 
@@ -102,6 +103,10 @@ public class MainWindow extends JFrame {
     public void setEncPasswortResetButtonListener(ActionListener listener){
         this.jbtnEncPasswortReset.addActionListener(listener);
         this.jbtnEncPasswortReset.setVisible(true);
+    }
+
+    public void setTableMouseListener(MouseListener mouseListener){
+        this.jtblBillList.addMouseListener(mouseListener);
     }
 
     public void setEncPasswortResetButtonEnabled(boolean enabled){
