@@ -8,10 +8,13 @@ import Rechnung.model.objects.Bill;
 import Rechnung.model.objects.Business;
 import Rechnung.model.objects.Customer;
 import Rechnung.model.objects.ProductOrService;
+import Rechnung.view.WordFileExportDailog;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.swing.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.security.CodeSource;
@@ -29,9 +32,11 @@ public class Model {
     private static final String DB_NAME = "jrechnung.sqlite";
 
     private Random random;
+    private Configuration config;
 
     public Model() {
-        random = new Random();
+        this.config = new Configuration();
+        this.random = new Random();
     }
 
     public Business getBusiness(){
@@ -263,6 +268,19 @@ public class Model {
         return false;
     }
 
+    public boolean saveBillWithNewFile(Bill bill){
+        try {
+            return BillService.modifyBillFile(bill);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            //TODO
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
     public boolean removeBill(Bill bill){
         try {
             return BillService.remove(bill);
@@ -288,6 +306,21 @@ public class Model {
 
         return result;
     }
+
+    public Bill readBill(String id){
+        Bill bill = null;
+        try {
+            bill = BillService.read(id);
+        } catch (SQLException e) {
+            e.printStackTrace(); //TODO
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            //TODO
+        }
+
+        return bill;
+    }
+
 
     public Date convert(String germanDateText){
         DateFormat format = new SimpleDateFormat("dd.mm.yyyy", Locale.GERMANY);
@@ -369,5 +402,66 @@ public class Model {
         }
 
         return x == completePriceData.length;
+    }
+
+    public File getFileFromResources(String fileName){
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource(fileName).getFile());
+
+        if(file.exists()){
+            return file;
+        }
+
+        return null;
+    }
+
+    public ImageIcon getImageIconFromResources(String iconFileName){
+
+        File f = this.getFileFromResources(iconFileName);
+
+        if(f != null) {
+            ImageIcon icon = new ImageIcon(f.getAbsolutePath());
+            return icon;
+        }
+
+        return null;
+    }
+
+    public File getWordExportPath(){
+        return new File(this.config.getWordFileExportPath());
+    }
+
+    public File getWordTemaple(){
+        return new File(this.config.getWordTemplate());
+    }
+
+    public static File changeFileName(File file){
+        if(!file.exists()){
+            return file;
+        }
+
+        return changeFileName(new File(file.getPath() + file.getParentFile() + "0" + ".docx"));
+    }
+
+    public boolean loadConfigFile(){
+        try {
+            this.config.loadConfigFile();
+        } catch (FileNotFoundException e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public File generateWordFile(Bill bill){
+        if(bill != null) {
+            File file = new File(this.getWordExportPath() + "/" + bill.getTitel() + ".docx");
+
+            if (WordFileGenerator.generate(this.getWordTemaple(), file, bill, this.getBusiness())) {
+                return file;
+            }
+        }
+
+        return null;
     }
 }

@@ -21,6 +21,7 @@ public class BillService {
     private static final String SQL_INSERT = "INSERT INTO bill (id, customer_id, title, bill_number, creation_date, to_pay2date, paid_on_date, paid, comment, billfile, taxfree, tax_included) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
     private static final String SQL_UPDATE = "UPDATE bill set title=?, creation_date=?, to_pay2date=?, paid_on_date=?, paid=?, comment=?, billfile=?, taxfree=?, tax_included=? WHERE ID=?";
     private static final String SQL_DELETE = "DELETE FROM bill WHERE id = ?";
+    private static final String SQL_UPDATE_BILLFILE = "UPDATE bill set billfile=? WHERE ID=?";
 
     public static List<Bill> readAllBillsInYear(int year) throws SQLException, UnsupportedEncodingException {
         Connection connection = Publisher.getDBConnection();
@@ -150,6 +151,36 @@ public class BillService {
             preparedStatement.setBytes(8,securityProvider.encrypt(bill.isBusinessTaxFree() ? 1 : 0));
             preparedStatement.setBytes(9,securityProvider.encrypt(bill.mustBeIncludedTaxes() ? 1 : 0));
             preparedStatement.setString(10,bill.getId());
+
+            preparedStatement.execute();
+
+            BillEntryService.removeBillEntriesFromBill(bill.getId());
+
+            BillEntryService.saveListOfBillEntries(bill.getBillEntries(),bill.getId());
+
+            return true;
+        }finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    if (Debug.ON) {
+                        System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getStackTrace().toString());
+                    }
+                }
+
+            }
+        }
+    }
+
+    public static boolean modifyBillFile(Bill bill) throws SQLException, UnsupportedEncodingException {
+
+        Connection connection = Publisher.getDBConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_BILLFILE);
+        SecurityProvider securityProvider = Publisher.getSecurityProvider();
+        try {
+            preparedStatement.setBytes(1,securityProvider.encrypt(bill.getBillFile().getAbsolutePath()));
+            preparedStatement.setString(2,bill.getId());
 
             preparedStatement.execute();
 

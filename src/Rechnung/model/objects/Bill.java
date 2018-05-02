@@ -18,7 +18,6 @@ public class Bill {
     private boolean taxFree;
     private boolean taxIncluded;
 
-
     public Bill(String id, String number, Customer debtor, String titel, Date creationDate, Date toPayToDate, Date paidOnDate, boolean paid, String comment, File billFile, boolean taxFree, boolean taxIncluded) {
         this.id = id;
         this.number = number;
@@ -236,6 +235,32 @@ public class Bill {
         return billEntries;
     }
 
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Bill{");
+        sb.append("id='").append(id).append('\'');
+        sb.append(", number='").append(number).append('\'');
+        sb.append(", debtor=").append(debtor);
+        sb.append(", titel='").append(titel).append('\'');
+        sb.append(", creationDate=").append(creationDate);
+        sb.append(", toPayToDate=").append(toPayToDate);
+        sb.append(", paidOnDate=").append(paidOnDate);
+        sb.append(", paid=").append(paid);
+        sb.append(", comment='").append(comment).append('\'');
+        sb.append(", billFile=").append(billFile);
+        sb.append(String.format("%n"));
+        sb.append(", entries=");
+        for (BillEntry entry : entries) {
+            sb.append(entry);
+            sb.append(String.format("%n"));
+        }
+
+        sb.append(", taxFree=").append(taxFree);
+        sb.append(", taxIncluded=").append(taxIncluded);
+        sb.append('}');
+        return sb.toString();
+    }
 
 
 }

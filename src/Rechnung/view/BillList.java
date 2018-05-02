@@ -20,7 +20,14 @@ public class BillList extends JTable {
 
 
     public BillList() {
-        super(new DefaultTableModel(TABLE_COLUMN_NAMES, BillList.PREDEFIND_TABLE_ROWCOUNT));
+        super(new DefaultTableModel(TABLE_COLUMN_NAMES, BillList.PREDEFIND_TABLE_ROWCOUNT){
+
+            @Override
+            public boolean isCellEditable(int i, int i1) {
+                return false;
+            }
+
+        });
         setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         getTableHeader().setReorderingAllowed(true);
         setShowGrid(false);
@@ -37,8 +44,5 @@ public class BillList extends JTable {
         return jc;
     }
 
-    public void fillList(List<Bill> bills){
-
-    }
 }
 

@@ -1,30 +1,29 @@
 package Rechnung.control;
 
 import Rechnung.Publisher;
-import Rechnung.control.BusinessConfigDialogController;
-import Rechnung.control.Controller;
-import Rechnung.model.db.BillService;
 import Rechnung.model.objects.Bill;
-import Rechnung.model.objects.BillEntry;
-import Rechnung.view.CustomersConfigDialog;
 import Rechnung.view.MainWindow;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.UnsupportedEncodingException;
-import java.sql.SQLException;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainWindowController implements Controller {
 
     private MainWindow mainWindow;
     private ControllerReturnStatus controllerReturnStatus;
+    private List<Bill> billsOfYear;
 
     public MainWindowController() {
             this.mainWindow = new MainWindow();
             this.initEvents();
             this.controllerReturnStatus = ControllerReturnStatus.OK;
+            billsOfYear = new ArrayList<>();
         }
 
     @Override
@@ -46,10 +45,10 @@ public class MainWindowController implements Controller {
 
     private void fillWindowComponents(boolean refill) {
 
-        List<Bill> bills = Publisher.getModel().readBillsInYear(2018);
-        System.out.println("count of bills in year: " + bills.size());
-        for (int i = 0; i < bills.size(); i++) {
-            Bill bill = bills.get(i);
+        billsOfYear = Publisher.getModel().readBillsInYear(2018);
+        System.out.println("count of bills in year: " + billsOfYear.size());
+        for (int i = 0; i < billsOfYear.size(); i++) {
+            Bill bill = billsOfYear.get(i);
             this.mainWindow.setBillTitel(i,bill.getTitel());
         }
 
@@ -61,7 +60,7 @@ public class MainWindowController implements Controller {
             public void actionPerformed(ActionEvent e) {
                 controllerReturnStatus = ControllerReturnStatus.OK;
 
-                Controller controller = new BillConfigDialogController(mainWindow);
+                Controller controller = new BillConfigDialogController(mainWindow,null);
                 controller.run();
             }
         });
@@ -108,5 +107,24 @@ public class MainWindowController implements Controller {
         });
 
         this.mainWindow.setManageProductOrServiceButtonEnabled(true);
+
+        this.mainWindow.setTableMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {
+                super.mousePressed(mouseEvent);
+                JTable table =(JTable) mouseEvent.getSource();
+                Point point = mouseEvent.getPoint();
+                int row = table.rowAtPoint(point);
+                if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+                    if(row < billsOfYear.size()){
+                        controllerReturnStatus = ControllerReturnStatus.OK;
+
+                        Controller controller = new BillConfigDialogController(mainWindow, billsOfYear.get(row));
+                        controller.run();
+                        fillWindowComponents(true);
+                    }
+                }
+            }
+        });
     }
 }

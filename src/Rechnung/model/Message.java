@@ -58,4 +58,11 @@ public class Message {
         showErrorMessage("Nummer ist ungültig!");
     }
 
+    public static void showErrorMessageCantSaveFile(String fileName){
+        showErrorMessage("Die Datei " + fileName + " kann nicht gespeichert werden!");
+    }
+
+    public static void showErrorMessagePrinting(){
+        showErrorMessage("Dokument konnte nicht gedruckt werden!");
+    }
 }
