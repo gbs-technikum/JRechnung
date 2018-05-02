@@ -399,6 +399,15 @@ public class BillConfigDialog extends ConfigDialog {
         return null;
     }
 
+    public void setCellValue(Object value, int row, int column){
+        int rowCount = this.getEntryTableRowCount();
+        int columnCount = this.getEntryTableColumnCount();
+
+        if(row >= 0 && row < rowCount && column >= 0 && column < columnCount){
+            this.jtblEntries.getModel().setValueAt(value,row,column);
+        }
+    }
+
     public void clearComponentData(){
         this.jcbxDebtor.removeAllItems();
 
@@ -463,5 +472,12 @@ public class BillConfigDialog extends ConfigDialog {
         this.btnGenerateBillFile.setEnabled(enabled);
     }
 
+    public void setTaxIncludedCheckboxListener(ActionListener actionListener){
+        this.jchkbxTaxIncluded.addActionListener(actionListener);
+    }
+
+    public void setTaxFreeCheckboxListener(ActionListener actionListener){
+        this.jchkbxTaxFree.addActionListener(actionListener);
+    }
 
 }

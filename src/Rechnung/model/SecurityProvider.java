@@ -126,7 +126,7 @@ public class SecurityProvider {
         return this.encrypt(ByteBuffer.allocate(4).putInt(data).array());
     }
 
-    public byte[] encrypt(Long data){
+    public byte[] encrypt(long data){
         return this.encrypt(ByteBuffer.allocate(8).putLong(data).array());
     }
 

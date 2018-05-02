@@ -322,8 +322,8 @@ public class Model {
     }
 
 
-    public Date convert(String germanDateText){
-        DateFormat format = new SimpleDateFormat("dd.mm.yyyy", Locale.GERMANY);
+    public Date germanDateStringToDate(String germanDateText){
+        DateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
         Date date = null;
         try {
             date = format.parse(germanDateText);
@@ -332,6 +332,18 @@ public class Model {
         }
 
         return date;
+    }
+
+    public String dateToGermanDateString(Date date){
+        if(date != null){
+            System.out.println(date.toString());
+
+            DateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
+
+            return format.format(date);
+        }
+
+        return "";
     }
 
     public String generateBillDefaultName(){
@@ -463,5 +475,13 @@ public class Model {
         }
 
         return null;
+    }
+
+    public Date getTwoWeeksFromTodayDate(){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.HOUR, 336);
+
+        return cal.getTime();
     }
 }

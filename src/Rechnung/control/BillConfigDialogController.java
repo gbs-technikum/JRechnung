@@ -162,10 +162,10 @@ public class BillConfigDialogController implements Controller {
         this.billConfigDialog.setBillOverviewButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-              //  if(bill != null && bill.getBillFile() != null) {
+                if(bill != null && bill.getBillFile() != null) {
                     JDialog waitWindow = new WaitWindow(null, "Rechnungsanzeige wird vorbereitet...");
 
-                    WordStarter runnable = new WordStarter(new File("C:\\Users\\mgross\\Documents\\20171114_Ergebnisblatt_1SA_Semester3_Mirko_Groß.docx"));
+                    WordStarter runnable = new WordStarter(bill.getBillFile());
 
                     Thread wordStarterThread = new Thread(runnable);
 
@@ -179,14 +179,12 @@ public class BillConfigDialogController implements Controller {
                     }
                 }
 
-
-
                      ((WaitWindow) waitWindow).close();
-            //    }
+                }
 
             }});
 
-        this.billConfigDialog.setBillOverviewButtonEnabled(true);
+     //   this.billConfigDialog.setBillOverviewButtonEnabled(true);
 
         this.billConfigDialog.setBillGenerationButtonListener(new ActionListener() {
             @Override
@@ -200,6 +198,31 @@ public class BillConfigDialogController implements Controller {
                 }
             }
         });
+
+        this.billConfigDialog.setTaxIncludedCheckboxListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateTableCompletePrice();
+            }
+        });
+
+        this.billConfigDialog.setTaxFreeCheckboxListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateTableCompletePrice();
+            }
+        });
+    }
+
+    private void updateTableCompletePrice(){
+        for (int i = 0; i < billConfigDialog.getEntryTableRowCount(); i++) {
+            double calcPrice = calculateRowCompletePrice(i);
+            if(calcPrice > -1){
+                billConfigDialog.setCellValue(String.format(Locale.GERMANY,"%.2f",calcPrice),i,4);
+            }else{
+                billConfigDialog.setCellValue("",i,4);
+            }
+        }
     }
 
     private void saveComponentData() {
@@ -229,29 +252,58 @@ public class BillConfigDialogController implements Controller {
         this.billConfigDialog.clearComponentData();
 
         if(bill != null) {
-            fillDebtorComboBox(null,null);
+            fillDebtorComboBox(null,bill.getDebtor());
+
 
             this.billConfigDialog.setTitleTextField(bill.getTitel());
+            this.billConfigDialog.setToPayToDateTextField(Publisher.getModel().dateToGermanDateString(bill.getToPayToDate()));
+            this.billConfigDialog.setPaidOnDateTextField(Publisher.getModel().dateToGermanDateString(bill.getPaidOnDate()));
+            this.billConfigDialog.setBillNumberTextField(bill.getNumber());
+
+            billConfigDialog.setTaxIncludedCheckbox(bill.mustBeIncludedTaxes());
+            billConfigDialog.setTaxFreeCheckbox(bill.isBusinessTaxFree());
+            billConfigDialog.setPaidCheckbox(bill.isPaid());
+
+            billConfigDialog.setCommentTextArea(bill.getComment());
 
             List<BillEntry> billEntries = bill.getBillEntries();
             for (int i = 0; i < billEntries.size(); i++) {
                 fillRowWithBillEntry(i, billEntries.get(i));
             }
 
-            if (this.bill == null) {
-                this.bill = bill;
+            billConfigDialog.setBillGenerationEnabled(true);
+
+            File billFile = bill.getBillFile();
+
+            if(billFile != null){
+                billConfigDialog.setFileLabel(billFile.getAbsolutePath());
+                billConfigDialog.setBillOverviewButtonEnabled(true);
             }
+
+            this.bill = bill;
         }else
         {
+            this.billConfigDialog.setToPayToDateTextField(Publisher.getModel().dateToGermanDateString(Publisher.getModel().getTwoWeeksFromTodayDate()));
             this.billConfigDialog.setBillNumberTextField(Publisher.getModel().generateBillNumber());
             this.billConfigDialog.setTitleTextField(Publisher.getModel().generateBillDefaultName());
             fillDebtorComboBox(null,null);
-            fillProductOrServiceComboBox();
         }
+
+        fillProductOrServiceComboBox();
     }
 
     private void fillRowWithBillEntry(int rowIndex, BillEntry billEntry){
-        this.billConfigDialog.setEntryTitel(rowIndex, billEntry.getEntryText());
+
+        String[] cellData = new String[]{billEntry.getEntryText(),String.format(Locale.GERMANY,"%.2f",billEntry.getTaxRateInPercent()),
+                String.valueOf(billEntry.getAmount()),String.format(Locale.GERMANY,"%.2f",billEntry.getUnitPrice()),""};
+
+        this.billConfigDialog.setTableModelListenerEnabled(false);
+
+        this.billConfigDialog.addRowToEntryTable(cellData);
+
+        this.updateTableCompletePrice();
+
+        this.billConfigDialog.setTableModelListenerEnabled(true);
 
     }
 
@@ -284,11 +336,18 @@ public class BillConfigDialogController implements Controller {
         String billNumber = this.billConfigDialog.getBillNumberTextField();
 
         Date creationDate = new Date();
-        Date toPayToDate = Publisher.getModel().convert(this.billConfigDialog.getToPayToDateTextField());
-        Date paidOnDate =  Publisher.getModel().convert(this.billConfigDialog.getPaidOnDateTextField());
+        Date toPayToDate = Publisher.getModel().germanDateStringToDate(this.billConfigDialog.getToPayToDateTextField());
+        Date paidOnDate =  Publisher.getModel().germanDateStringToDate(this.billConfigDialog.getPaidOnDateTextField());
+
         boolean paid = this.billConfigDialog.isPaidCheckbox();
         String comment = this.billConfigDialog.getCommentTextArea();
-        File billFile = new File(this.billConfigDialog.getFileLabel());
+
+        String filePath = this.billConfigDialog.getFileLabel();
+
+        File billFile = null;
+        if(filePath.length() > 0){
+            billFile = new File(this.billConfigDialog.getFileLabel());
+        }
 
         boolean taxFree = this.billConfigDialog.isTaxFreeCheckbox();
         boolean taxIncluded = this.billConfigDialog.isTaxIncludedCheckbox();
@@ -351,8 +410,6 @@ public class BillConfigDialogController implements Controller {
             double price = Double.parseDouble(cellPrice.replace(",","."));
             double tax = Double.parseDouble(cellTax.replace(",","."));
             int amount = Integer.parseInt(cellAmount);
-
-            System.out.println("ggggggggggggggggggggg");
 
             result = price * amount;
 

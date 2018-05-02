@@ -42,11 +42,29 @@ public class BillService {
                 String titel = securityProvider.decryptAsString(resultSet.getBytes("title"));
                 String billNumber = resultSet.getString("bill_number");
                 Date creationDate = new Date(resultSet.getLong("creation_date"));
-                Date toPayToDate = new Date(securityProvider.decryptAsLong(resultSet.getBytes("to_pay2date")));
-                Date paidOnDate = new Date(securityProvider.decryptAsLong(resultSet.getBytes("paid_on_date")));
+
+                byte[] toPayToDateData = resultSet.getBytes("to_pay2date");
+                byte[] paidOnDateData = resultSet.getBytes("paid_on_date");
+
+                Date toPayToDate = null;
+                if(toPayToDateData != null && toPayToDateData.length > 0){
+                    toPayToDate = new Date(securityProvider.decryptAsLong(toPayToDateData));
+                }
+
+                Date paidOnDate = null;
+                if(paidOnDateData != null && paidOnDateData.length > 0){
+                    paidOnDate =  new Date(securityProvider.decryptAsLong(paidOnDateData));
+                }
+
                 boolean paid = (resultSet.getInt("paid") != 0);
                 String comment = securityProvider.decryptAsString(resultSet.getBytes("comment"));
-                File billFile = new File(securityProvider.decryptAsString(resultSet.getBytes("billfile")));
+
+                byte[] billFileData = resultSet.getBytes("billfile");
+
+                File billFile = null;
+                if(billFileData != null && billFileData.length > 0){
+                    billFile = new File(securityProvider.decryptAsString(resultSet.getBytes("billfile")));
+                }
 
                 boolean taxFree = (resultSet.getInt("taxfree") != 0);
                 boolean taxIncluded = (resultSet.getInt("tax_included") != 0);
@@ -102,11 +120,28 @@ public class BillService {
                 String titel = securityProvider.decryptAsString(resultSet.getBytes("title"));
                 String billNumber = resultSet.getString("bill_number");
                 Date creationDate = new Date(resultSet.getLong("creation_date"));
-                Date toPayToDate = new Date(securityProvider.decryptAsLong(resultSet.getBytes("to_pay2date")));
-                Date paidOnDate = new Date(securityProvider.decryptAsLong(resultSet.getBytes("paid_on_date")));
+
+                byte[] toPayToDateData = resultSet.getBytes("to_pay2date");
+                byte[] paidOnDateData = resultSet.getBytes("paid_on_date");
+
+                Date toPayToDate = null;
+                if(toPayToDateData != null && toPayToDateData.length > 0){
+                    toPayToDate = new Date(securityProvider.decryptAsLong(toPayToDateData));
+                }
+
+                Date paidOnDate = null;
+                if(paidOnDateData != null && paidOnDateData.length > 0){
+                    paidOnDate =  new Date(securityProvider.decryptAsLong(paidOnDateData));
+                }
                 boolean paid = (resultSet.getInt("paid") != 0);
                 String comment = securityProvider.decryptAsString(resultSet.getBytes("comment"));
-                File billFile = new File(securityProvider.decryptAsString(resultSet.getBytes("billfile")));
+
+                byte[] billFileData = resultSet.getBytes("billfile");
+
+                File billFile = null;
+                if(billFileData != null && billFileData.length > 0){
+                    billFile = new File(securityProvider.decryptAsString(resultSet.getBytes("billfile")));
+                }
 
                 boolean taxFree = (resultSet.getInt("taxfree") != 0);
                 boolean taxIncluded = (resultSet.getInt("tax_included") != 0);
@@ -143,11 +178,30 @@ public class BillService {
         try {
             preparedStatement.setBytes(1,securityProvider.encrypt(bill.getTitel()));
             preparedStatement.setLong(2,bill.getCreationDate().getTime());
-            preparedStatement.setBytes(3,securityProvider.encrypt(bill.getToPayToDate().getTime()));
-            preparedStatement.setBytes(4,securityProvider.encrypt(bill.getPaidOnDate().getTime()));
+
+            Date toPayToDate = bill.getToPayToDate();
+            if(toPayToDate != null){
+                System.out.println(toPayToDate.getTime());
+                preparedStatement.setBytes(3,securityProvider.encrypt(toPayToDate.getTime()));
+            }else {
+                preparedStatement.setNull(3,Types.BLOB);
+            }
+
+            Date paidOnDate = bill.getPaidOnDate();
+            if(paidOnDate != null){
+                preparedStatement.setBytes(4,securityProvider.encrypt(paidOnDate.getTime()));
+            }else {
+                preparedStatement.setNull(4,Types.BLOB);
+            }
             preparedStatement.setBytes(5,securityProvider.encrypt(bill.isPaid() ? 1 : 0));
             preparedStatement.setBytes(6,securityProvider.encrypt(bill.getComment()));
-            preparedStatement.setBytes(7,securityProvider.encrypt(bill.getBillFile().getAbsolutePath()));
+            File file = bill.getBillFile();
+
+            if(file != null) {
+                preparedStatement.setBytes(7, securityProvider.encrypt(file.getAbsolutePath()));
+            }else {
+                preparedStatement.setNull(7,Types.BLOB);
+            }
             preparedStatement.setBytes(8,securityProvider.encrypt(bill.isBusinessTaxFree() ? 1 : 0));
             preparedStatement.setBytes(9,securityProvider.encrypt(bill.mustBeIncludedTaxes() ? 1 : 0));
             preparedStatement.setString(10,bill.getId());
@@ -218,18 +272,31 @@ public class BillService {
             preparedStatement.setBytes(3,securityProvider.encrypt(bill.getTitel()));
             preparedStatement.setString(4,bill.getNumber());
             preparedStatement.setLong(5,bill.getCreationDate().getTime());
-            preparedStatement.setBytes(6,securityProvider.encrypt(bill.getToPayToDate().getTime()));
+
+            Date toPayToDate = bill.getToPayToDate();
+            if(toPayToDate != null){
+                preparedStatement.setBytes(6,securityProvider.encrypt(toPayToDate.getTime()));
+            }else {
+                preparedStatement.setNull(6,Types.BLOB);
+            }
 
             Date paidOnDate = bill.getPaidOnDate();
             if(paidOnDate != null){
-                preparedStatement.setBytes(7,securityProvider.encrypt(bill.getPaidOnDate().getTime()));
+                preparedStatement.setBytes(7,securityProvider.encrypt(paidOnDate.getTime()));
             }else {
                 preparedStatement.setNull(7,Types.BLOB);
             }
-
             preparedStatement.setBytes(8,securityProvider.encrypt(bill.isPaid() ? 1 : 0));
             preparedStatement.setBytes(9,securityProvider.encrypt(bill.getComment()));
-            preparedStatement.setBytes(10,securityProvider.encrypt(bill.getBillFile().getAbsolutePath()));
+
+            File file = bill.getBillFile();
+
+            if(file != null) {
+                preparedStatement.setBytes(10, securityProvider.encrypt(file.getAbsolutePath()));
+            }else {
+                preparedStatement.setNull(10,Types.BLOB);
+            }
+
             preparedStatement.setBytes(11,securityProvider.encrypt(bill.isBusinessTaxFree() ? 1 : 0));
             preparedStatement.setBytes(12,securityProvider.encrypt(bill.mustBeIncludedTaxes() ? 1 : 0));
 
