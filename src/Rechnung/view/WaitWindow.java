@@ -26,7 +26,7 @@ public class WaitWindow extends JDialog {
         this.panel.add(this.jlblWaitText);
         this.add(this.panel,BorderLayout.CENTER);
 
-        this.pack();
+ //       this.pack();
 
         this.setVisible(true);
     }

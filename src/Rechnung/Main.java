@@ -12,6 +12,7 @@ import it.sauronsoftware.junique.MessageHandler;
 
 import javax.swing.*;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public class Main {
 
@@ -21,62 +22,70 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        if(!Publisher.getModel().loadConfigFile()){
-            System.exit(0);
-        }
 
-        MainWindowController mainWindowController = new MainWindowController();
-
-        try {
-            JUnique.acquireLock(UNIQUE_APP_ID, new MessageHandler() {
-                @Override
-                public String handle(String message) {
-                    if(message.equals(MSG_OPEN)){
-                        mainWindowController.showWindow();
-                    }
-                    return null;
+                if(!Publisher.getModel().loadConfigFile()){
+                    System.exit(0);
                 }
-            });
-        }catch (AlreadyLockedException exc) {
-            // one instance is already running, inform it to open but don't continue!
-            JUnique.sendMessage(UNIQUE_APP_ID, MSG_OPEN);
-            System.exit(0);
-        }
 
-        SecurityProvider sp = Publisher.getSecurityProvider();
+                MainWindowController mainWindowController = new MainWindowController();
 
-        Controller.ControllerReturnStatus returnStatus = Controller.ControllerReturnStatus.ABORT;
-        JFrame tmpFrame = new JFrame();
+                try {
+                    JUnique.acquireLock(UNIQUE_APP_ID, new MessageHandler() {
+                        @Override
+                        public String handle(String message) {
+                            if(message.equals(MSG_OPEN)){
+                                mainWindowController.showWindow();
+                            }
+                            return null;
+                        }
+                    });
+                }catch (AlreadyLockedException exc) {
+                    // one instance is already running, inform it to open but don't continue!
+                    JUnique.sendMessage(UNIQUE_APP_ID, MSG_OPEN);
+                    System.exit(0);
+                }
 
-        if(!sp.isInitialized()){
-            do{
-                Controller controller = new EncryptionConfigDialogController(tmpFrame,false);
-                returnStatus = controller.run();
-            }while (returnStatus != Controller.ControllerReturnStatus.OK && returnStatus != Controller.ControllerReturnStatus.ABORT);
-            if(returnStatus == Controller.ControllerReturnStatus.ABORT){
-                System.exit(0);
-            }
-        }
+                SecurityProvider sp = Publisher.getSecurityProvider();
 
-        do{
-            Controller controller = new EncryptionConfigDialogController(tmpFrame);
-            returnStatus = controller.run();
-        }while (returnStatus != Controller.ControllerReturnStatus.OK && returnStatus != Controller.ControllerReturnStatus.ABORT);
+                Controller.ControllerReturnStatus returnStatus = Controller.ControllerReturnStatus.ABORT;
+                JFrame tmpFrame = new JFrame();
 
-        tmpFrame.dispose();
-        tmpFrame = null;
+                if(!sp.isInitialized()){
+                    do{
+                        Controller controller = new EncryptionConfigDialogController(tmpFrame,false);
+                        returnStatus = controller.run();
+                    }while (returnStatus != Controller.ControllerReturnStatus.OK && returnStatus != Controller.ControllerReturnStatus.ABORT);
+                    if(returnStatus == Controller.ControllerReturnStatus.ABORT){
+                        System.exit(0);
+                    }
+                }
 
-        if(returnStatus == Controller.ControllerReturnStatus.ABORT){
-            System.exit(0);
-        }
+                do{
+                    Controller controller = new EncryptionConfigDialogController(tmpFrame);
+                    returnStatus = controller.run();
+                }while (returnStatus != Controller.ControllerReturnStatus.OK && returnStatus != Controller.ControllerReturnStatus.ABORT);
 
-        Logger logger = Publisher.getLogger();
+                tmpFrame.dispose();
+                tmpFrame = null;
 
-        Connection connection = Publisher.getDBConnection();
+                if(returnStatus == Controller.ControllerReturnStatus.ABORT){
+                    System.exit(0);
+                }
 
-        logger.loginfo("Start...");
+                Logger logger = Publisher.getLogger();
 
-        mainWindowController.run();
+                try {
+                    Connection connection = Publisher.getDBConnection();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+                logger.loginfo("Start...");
+
+                mainWindowController.run();
+
+
+
     }
 
 }

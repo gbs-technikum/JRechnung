@@ -1,7 +1,5 @@
 package Rechnung.model.objects;
 
-import org.apache.poi.hsmf.datatypes.StringChunk;
-
 public class BillEntry {
 
     private String id;

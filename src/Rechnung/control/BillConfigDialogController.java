@@ -1,6 +1,7 @@
 package Rechnung.control;
 
 import Rechnung.Publisher;
+import Rechnung.model.Model;
 import Rechnung.model.objects.*;
 import Rechnung.view.BillConfigDialog;
 import Rechnung.view.WaitWindow;
@@ -104,35 +105,38 @@ public class BillConfigDialogController implements Controller {
                 tableModel.removeTableModelListener(this);
                 String cellValue = tableModel.getValueAt(e.getFirstRow(), e.getColumn()).toString();
 
+                int currentRow = e.getFirstRow();
+
                 if(e.getLastRow() == e.getFirstRow()){
                     switch (e.getColumn()){
+                        case 1:
+                            if(!Publisher.getModel().isFloatingPointNumber(cellValue)){
+                                tableModel.setValueAt("",currentRow, e.getColumn());
+                                tableModel.setValueAt("",currentRow,4);
+                            }
+                            break;
+
                         case 2:
                             if(!Publisher.getModel().isIntNumber(cellValue)){
                                 tableModel.setValueAt("",e.getFirstRow(), e.getColumn());
                                 tableModel.setValueAt("",e.getFirstRow(),4);
-                            }else{
-                                Object cellPriceObject = tableModel.getValueAt(e.getFirstRow(),3);
-                                if(cellPriceObject != null){
-                                    if(Publisher.getModel().isFloatingPointNumber(cellPriceObject.toString())){
-                                        tableModel.setValueAt(String.format(Locale.GERMANY,"%.2f",Double.parseDouble(cellPriceObject.toString().replace(",",".")) * Double.parseDouble(cellValue.replace(",","."))),e.getFirstRow(),4);
-                                    }
-                                }
                             }
                             break;
                         case 3:
                             if(!Publisher.getModel().isFloatingPointNumber(cellValue)){
                                 tableModel.setValueAt("",e.getFirstRow(), e.getColumn());
                                 tableModel.setValueAt("",e.getFirstRow(),4);
-                            }else{
-                                Object cellAmountObject = tableModel.getValueAt(e.getFirstRow(),2);
-                                if(cellAmountObject != null){
-                                    if(Publisher.getModel().isIntNumber(cellAmountObject.toString())){
-                                        tableModel.setValueAt(String.format(Locale.GERMANY,"%.2f",Double.parseDouble(cellAmountObject.toString()) * Double.parseDouble(cellValue.replace(",","."))),e.getFirstRow(),4);
-                                    }
-                                }
                             }
                             break;
                     }
+
+                    double calcPrice = calculateRowCompletePrice(currentRow);
+                    if(calcPrice > -1){
+                        tableModel.setValueAt(String.format(Locale.GERMANY,"%.2f",calcPrice),currentRow,4);
+                    }else{
+                        tableModel.setValueAt("",currentRow,4);
+                    }
+
                 }
 
                 tableModel.addTableModelListener(this);
@@ -158,27 +162,31 @@ public class BillConfigDialogController implements Controller {
         this.billConfigDialog.setBillOverviewButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(bill != null && bill.getBillFile() != null) {
-                    JDialog waitWindow = new WaitWindow(parentWindow, "Rechnungsanzeige wird vorbereitet...");
+              //  if(bill != null && bill.getBillFile() != null) {
+                    JDialog waitWindow = new WaitWindow(null, "Rechnungsanzeige wird vorbereitet...");
 
-                    WordStarter runnable = new WordStarter(bill.getBillFile());
+                    WordStarter runnable = new WordStarter(new File("C:\\Users\\mgross\\Documents\\20171114_Ergebnisblatt_1SA_Semester3_Mirko_Groß.docx"));
 
                     Thread wordStarterThread = new Thread(runnable);
 
                     wordStarterThread.start();
 
 
-                    while (!runnable.isReadyToUse()) {
-                        try {
-                            Thread.sleep(200);
-                        } catch (InterruptedException e1) {
-                        }
+                while (!runnable.isReadyToUse()) {
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e1) {
                     }
-
-                    ((WaitWindow) waitWindow).close();
                 }
 
+
+
+                     ((WaitWindow) waitWindow).close();
+            //    }
+
             }});
+
+        this.billConfigDialog.setBillOverviewButtonEnabled(true);
 
         this.billConfigDialog.setBillGenerationButtonListener(new ActionListener() {
             @Override
@@ -327,6 +335,35 @@ public class BillConfigDialogController implements Controller {
         }
     }
 
+
+    private double calculateRowCompletePrice(int row){
+
+        double result = -1.0;
+
+        Model model = Publisher.getModel();
+        String cellTax = this.billConfigDialog.getCellValue(row,1);
+        String cellPrice = this.billConfigDialog.getCellValue(row,3);
+        String cellAmount = this.billConfigDialog.getCellValue(row,2);
+
+        System.out.println(cellAmount + " " + cellPrice + " " + cellTax);
+        if(cellTax != null && cellPrice != null && cellAmount != null &&
+                model.isFloatingPointNumber(cellTax) && model.isIntNumber(cellAmount) && model.isFloatingPointNumber(cellPrice)){
+            double price = Double.parseDouble(cellPrice.replace(",","."));
+            double tax = Double.parseDouble(cellTax.replace(",","."));
+            int amount = Integer.parseInt(cellAmount);
+
+            System.out.println("ggggggggggggggggggggg");
+
+            result = price * amount;
+
+            if(this.billConfigDialog.isTaxIncludedCheckbox() && !this.billConfigDialog.isTaxFreeCheckbox()){
+
+                result = result + result * (tax/100);
+            }
+        }
+
+        return result;
+    }
 
 
 }
