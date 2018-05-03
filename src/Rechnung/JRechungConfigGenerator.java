@@ -31,7 +31,7 @@ public class JRechungConfigGenerator extends JFrame {
 
     public JRechungConfigGenerator() throws HeadlessException {
         super("Config");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.initComponents();
         this.pack();
         this.setVisible(true);
@@ -156,7 +156,4 @@ public class JRechungConfigGenerator extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-        new JRechungConfigGenerator();
-    }
 }

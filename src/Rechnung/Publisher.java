@@ -57,12 +57,13 @@ public final class Publisher {
                 dbFile = new File(f.getPath() + "/" + Publisher.getModel().getDataBaseFileName());
 
                 if(!dbFile.exists() || !dbFile.canWrite()){
-                    throw new SQLException("DB File Error");
+                //    throw new SQLException("DB File Error");
+                    return null;
                 }
                 DB_CONNECTION_STRING += dbFile.getAbsoluteFile();
                 dbConnectionInstance = DriverManager.getConnection(DB_CONNECTION_STRING);
             } catch (Exception e) {
-                e.printStackTrace();
+                return null;
             }
         }
 

@@ -1,5 +1,7 @@
 package Rechnung.model;
 
+import Rechnung.Main;
+import Rechnung.Publisher;
 import Rechnung.model.db.BillService;
 import Rechnung.model.db.BusinessService;
 import Rechnung.model.db.CustomerService;
@@ -15,9 +17,13 @@ import javax.mail.internet.InternetAddress;
 import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.security.CodeSource;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -483,5 +489,45 @@ public class Model {
         cal.add(Calendar.HOUR, 336);
 
         return cal.getTime();
+    }
+
+    public boolean copyPreDefinedDBToApplicationDir(boolean overwrite){
+
+        File sourceFile = this.getFileFromResources("jrechnung.sqlite");
+
+        try {
+            Connection dbConnection = Publisher.getDBConnection();
+            if(dbConnection != null){
+                dbConnection.close();
+            }
+        } catch (SQLException e) {
+
+        }
+
+        File f = null;
+        try {
+            f = new File(Publisher.getModel().getJarContainingFolder(Main.class));
+        } catch (Exception e) {
+           return false;
+        }
+        File destFile = new File(f.getPath() + "/" + Publisher.getModel().getDataBaseFileName());
+
+
+        if(overwrite){
+            try {
+                Files.copy(sourceFile.toPath(), destFile.toPath(),StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                return false;
+            }
+        }else {
+            try {
+                Files.copy(sourceFile.toPath(), destFile.toPath());
+            } catch (IOException e) {
+                return true;
+            }
+        }
+
+
+        return true;
     }
 }

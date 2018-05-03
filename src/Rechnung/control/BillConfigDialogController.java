@@ -23,7 +23,7 @@ import java.util.Locale;
 
 public class BillConfigDialogController implements Controller {
 
-    private BillConfigDialog billConfigDialog ;
+    private BillConfigDialog billConfigDialog;
     private Controller.ControllerReturnStatus controllerReturnStatus;
     private Bill bill;
     private JFrame parentWindow;

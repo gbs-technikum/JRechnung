@@ -2,6 +2,7 @@ package Rechnung;
 
 import Rechnung.control.Controller;
 import Rechnung.control.EncryptionConfigDialogController;
+import Rechnung.control.StarterWindowController;
 import Rechnung.model.SecurityProvider;
 import Rechnung.control.MainWindowController;
 
@@ -23,8 +24,13 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
 
-                if(!Publisher.getModel().loadConfigFile()){
-                    System.exit(0);
+                boolean configExists = Publisher.getModel().loadConfigFile();
+                boolean dbEsits = !(Publisher.getDBConnection() == null);
+                boolean encryptionIsInitialized = false;
+
+                if(dbEsits){
+                    SecurityProvider sp = Publisher.getSecurityProvider();
+                    encryptionIsInitialized = sp.isInitialized();
                 }
 
                 MainWindowController mainWindowController = new MainWindowController();
@@ -45,46 +51,53 @@ public class Main {
                     System.exit(0);
                 }
 
-                SecurityProvider sp = Publisher.getSecurityProvider();
 
-                Controller.ControllerReturnStatus returnStatus = Controller.ControllerReturnStatus.ABORT;
-                JFrame tmpFrame = new JFrame();
+                Controller starter = new StarterWindowController(dbEsits,encryptionIsInitialized,configExists);
 
-                if(!sp.isInitialized()){
-                    do{
-                        Controller controller = new EncryptionConfigDialogController(tmpFrame,false);
+                if(starter.run() != Controller.ControllerReturnStatus.ABORT) {
+
+                    SecurityProvider sp = Publisher.getSecurityProvider();
+
+                    Controller.ControllerReturnStatus returnStatus = Controller.ControllerReturnStatus.ABORT;
+                    JFrame tmpFrame = new JFrame();
+
+                    if (!sp.isInitialized()) {
+                        do {
+                            Controller controller = new EncryptionConfigDialogController(tmpFrame, false);
+                            returnStatus = controller.run();
+                        }
+                        while (returnStatus != Controller.ControllerReturnStatus.OK && returnStatus != Controller.ControllerReturnStatus.ABORT);
+                        if (returnStatus == Controller.ControllerReturnStatus.ABORT) {
+                            System.exit(0);
+                        }
+                    }
+
+                    do {
+                        Controller controller = new EncryptionConfigDialogController(tmpFrame);
                         returnStatus = controller.run();
-                    }while (returnStatus != Controller.ControllerReturnStatus.OK && returnStatus != Controller.ControllerReturnStatus.ABORT);
-                    if(returnStatus == Controller.ControllerReturnStatus.ABORT){
+                    }
+                    while (returnStatus != Controller.ControllerReturnStatus.OK && returnStatus != Controller.ControllerReturnStatus.ABORT);
+
+                    tmpFrame.dispose();
+                    tmpFrame = null;
+
+                    if (returnStatus == Controller.ControllerReturnStatus.ABORT) {
                         System.exit(0);
                     }
+
+                    Logger logger = Publisher.getLogger();
+
+                    try {
+                        Connection connection = Publisher.getDBConnection();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+
+                    logger.loginfo("Start...");
+
+                    mainWindowController.run();
+
                 }
-
-                do{
-                    Controller controller = new EncryptionConfigDialogController(tmpFrame);
-                    returnStatus = controller.run();
-                }while (returnStatus != Controller.ControllerReturnStatus.OK && returnStatus != Controller.ControllerReturnStatus.ABORT);
-
-                tmpFrame.dispose();
-                tmpFrame = null;
-
-                if(returnStatus == Controller.ControllerReturnStatus.ABORT){
-                    System.exit(0);
-                }
-
-                Logger logger = Publisher.getLogger();
-
-                try {
-                    Connection connection = Publisher.getDBConnection();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-
-                logger.loginfo("Start...");
-
-                mainWindowController.run();
-
-
 
     }
 
