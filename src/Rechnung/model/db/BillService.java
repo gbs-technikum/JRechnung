@@ -8,29 +8,36 @@ import Rechnung.model.objects.*;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.sql.*;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class BillService {
 
-    private static final String SQL_QUERY = "SELECT id, customer_id, title, bill_number, creation_date, to_pay2date, paid_on_date, paid, comment, billfile, taxfree, tax_included " +
+    private static final String SQL_QUERY_WITH_YEAR = "SELECT id, customer_id, title, bill_number, creation_date, to_pay2date, paid_on_date, paid, comment, billfile, taxfree, tax_included " +
                                             "FROM bill WHERE  strftime(\"%Y\",datetime(creation_date/1000,'unixepoch','localtime')) = ? ";
+
+    private static final String SQL_QUERY = "SELECT id, customer_id, title, bill_number, creation_date, to_pay2date, paid_on_date, paid, comment, billfile, taxfree, tax_included FROM bill";
+
     private static final String SQL_QUERY_WITH_ID = "SELECT id, customer_id, title, bill_number, creation_date, to_pay2date, paid_on_date, paid, comment, billfile, taxfree, tax_included FROM bill WHERE id = ?";
     private static final String SQL_INSERT = "INSERT INTO bill (id, customer_id, title, bill_number, creation_date, to_pay2date, paid_on_date, paid, comment, billfile, taxfree, tax_included) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
     private static final String SQL_UPDATE = "UPDATE bill set title=?, creation_date=?, to_pay2date=?, paid_on_date=?, paid=?, comment=?, billfile=?, taxfree=?, tax_included=? WHERE ID=?";
     private static final String SQL_DELETE = "DELETE FROM bill WHERE id = ?";
     private static final String SQL_UPDATE_BILLFILE = "UPDATE bill set billfile=? WHERE ID=?";
 
-    public static List<Bill> readAllBillsInYear(int year) throws SQLException, UnsupportedEncodingException {
+    public static List<Bill> readAllBills(int year) throws SQLException, UnsupportedEncodingException {
         Connection connection = Publisher.getDBConnection();
         PreparedStatement preparedStatement = null;
         List<Bill> bills = new ArrayList<>();
         SecurityProvider securityProvider = Publisher.getSecurityProvider();
         try {
-            preparedStatement = connection.prepareStatement(SQL_QUERY);
-            preparedStatement.setString(1,String.valueOf(year));
+            if(year > 0) {
+                preparedStatement = connection.prepareStatement(SQL_QUERY_WITH_YEAR);
+                preparedStatement.setString(1,String.valueOf(year));
+            }else {
+                preparedStatement = connection.prepareStatement(SQL_QUERY);
+            }
+
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
 
@@ -340,6 +347,16 @@ public class BillService {
                 }
 
             }
+        }
+    }
+
+    public static void reEncryptAll() throws UnsupportedEncodingException, SQLException {
+        List<Bill> bills = readAllBills(0);
+
+        for (Bill bill : bills) {
+            remove(bill);
+
+            save(bill);
         }
     }
 

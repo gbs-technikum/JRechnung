@@ -1,6 +1,8 @@
 package Rechnung.control;
 
+import Rechnung.JRechungConfigGenerator;
 import Rechnung.Publisher;
+import Rechnung.model.Configuration;
 import Rechnung.model.SecurityProvider;
 import Rechnung.view.EncryptionConfigDialog;
 
@@ -8,6 +10,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -72,9 +75,6 @@ public class EncryptionConfigDialogController implements Controller {
         this.encryptionConfigDialog.setCancelButtonEnabled(true);
     }
 
-
-
-
     private boolean validateComponentData(){
         String password = this.encryptionConfigDialog.getFirstPassword();
 
@@ -100,7 +100,24 @@ public class EncryptionConfigDialogController implements Controller {
             if(!this.reinitMode){
                 if(Publisher.getModel().isPasswordValid(password) && Publisher.getModel().isPasswordEqualsPassword2(password, password2)){
                     try {
-                        return sp.firstInit(password);
+                        sp = Publisher.getNewSecurityProvider();
+                        boolean initOkay = sp.firstInit(password);
+
+                        if(initOkay){
+                            JFileChooser fileChooser = new JFileChooser();
+                            int chooserResult = -1;
+                            File saveFile = null;
+                            do {
+                                fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                                chooserResult = fileChooser.showSaveDialog(encryptionConfigDialog);
+                                if(chooserResult == JFileChooser.APPROVE_OPTION){
+                                    saveFile = new File(fileChooser.getSelectedFile().getAbsolutePath());
+                                }
+                            }while(!Publisher.getModel().writeSecretKeyFile(saveFile));
+                        }
+
+                        return initOkay;
+
                     } catch (InvalidKeySpecException e) {
                         e.printStackTrace();
                     } catch (NoSuchAlgorithmException e) {

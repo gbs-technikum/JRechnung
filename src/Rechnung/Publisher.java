@@ -36,7 +36,13 @@ public final class Publisher {
         return securityProviderInstance;
     }
 
+    public static SecurityProvider getNewSecurityProvider(){
 
+        securityProviderInstance = new SecurityProvider();
+
+
+        return securityProviderInstance;
+    }
 
     public static Connection getDBConnection() throws SQLException {
         try {

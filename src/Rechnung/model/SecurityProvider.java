@@ -16,6 +16,7 @@ import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.sql.*;
+import java.util.Base64;
 import java.util.Random;
 
 public class SecurityProvider {
@@ -40,14 +41,27 @@ public class SecurityProvider {
     }
 
     public boolean firstInit(String password) throws InvalidKeySpecException, NoSuchAlgorithmException, SQLException {
-        System.out.printf("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        this.secretKey = KeySecurityHelper.firstInit(password);
+        this.secretKey = KeySecurityHelper.firstInit(password,null);
         if(this.secretKey != null){
             this.setLock(false);
             return true;
         }
 
         return false;
+    }
+
+    public boolean reset(String password, String base64Key) throws InvalidKeySpecException, NoSuchAlgorithmException, SQLException {
+        this.secretKey = KeySecurityHelper.firstInit(password,base64Key);
+        if(this.secretKey != null){
+            this.setLock(false);
+            return true;
+        }
+
+        return false;
+    }
+
+    public String getSecretKeyAsBase64() {
+        return Base64.getEncoder().encodeToString(secretKey.getEncoded());
     }
 
     public boolean isInitialized(){
@@ -192,6 +206,7 @@ public class SecurityProvider {
             private static final String SQL_QUERY = "SELECT decrypt_password, reference_text, salt FROM security WHERE id  = 0";
             private static final String SQL_INSERT = "INSERT INTO security VALUES (?,?,?,?)";
             private static final String SQL_UPDATE = "UPDATE security set decrypt_password = ?, reference_text = ?, salt = ? WHERE id = 0";
+            private static final String SQL_DELETE = "DELETE FROM security";
             private boolean externalData;
 
             public SecurityDataBaseHelper(byte[] secretKeyData, byte[] referenzeTextData, byte[] salt) {
@@ -325,32 +340,31 @@ public class SecurityProvider {
 
                 Connection con = Publisher.getDBConnection();
                 if(con != null) {
-                    if(!this.securityDataExist()){
-                        PreparedStatement preparedStatement = null;
-                        try {
-                            System.out.printf("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
-                            preparedStatement = con.prepareStatement(SecurityDataBaseHelper.SQL_INSERT);
+                    PreparedStatement preparedStatement = null;
+                    try {
+                        con.createStatement().execute(SecurityDataBaseHelper.SQL_DELETE);
 
-                            preparedStatement.setInt(1, 0);
-                            preparedStatement.setBytes(2, this.secretKeyData);
-                            preparedStatement.setBytes(3, this.referenzeTextData);
-                            preparedStatement.setBytes(4, this.salt);
-                            preparedStatement.execute();
-                            return true;
-                        }finally {
-                            if (preparedStatement != null) {
-                                try{
-                                    preparedStatement.close();
-                                }catch (SQLException e){
-                                    if(Debug.ON){
-                                        System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getStackTrace().toString());
-                                    }
+                        preparedStatement = con.prepareStatement(SecurityDataBaseHelper.SQL_INSERT);
+
+                        preparedStatement.setInt(1, 0);
+                        preparedStatement.setBytes(2, this.secretKeyData);
+                        preparedStatement.setBytes(3, this.referenzeTextData);
+                        preparedStatement.setBytes(4, this.salt);
+                        preparedStatement.execute();
+                        return true;
+                    }finally {
+                        if (preparedStatement != null) {
+                            try{
+                                preparedStatement.close();
+                            }catch (SQLException e){
+                                if(Debug.ON){
+                                    System.err.println("Fehler: " + String.format("%n") + "-------------------------------------" + String.format("%n") + e.getStackTrace().toString());
                                 }
-
                             }
-                            preparedStatement = null;
-                            con = null;
+
                         }
+                        preparedStatement = null;
+                        con = null;
                     }
                 }
 
@@ -427,20 +441,29 @@ public class SecurityProvider {
                 return false;
             }
 
-            public static SecretKey firstInit(String password) throws InvalidKeySpecException, NoSuchAlgorithmException, SQLException {
+            public static SecretKey firstInit(String password,String base64Key) throws InvalidKeySpecException, NoSuchAlgorithmException, SQLException {
                 try {
                     Cipher cipher = Cipher.getInstance(SecurityProvider.ALGORITHM);
                     System.out.printf("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
                     byte[] salt = generateSalt();
                     SecretKey secret = prepareKey(password,salt);
 
-                    SecretKey secretKey = generateDBEncryptionKey();
+                    byte[] decodedKey = Base64.getDecoder().decode(base64Key);
+
+                    SecretKey secretKey = null;
+                    if(decodedKey.length > 0){
+                        secretKey = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES");
+                    }else {
+                        secretKey = generateDBEncryptionKey();
+                    }
 
                     cipher.init(Cipher.ENCRYPT_MODE,secret);
                     byte[] dbKeyEncrypted = cipher.doFinal(secretKey.getEncoded());
                     byte[] refTextEncrypted = cipher.doFinal(SecurityProvider.REFERENCE_TEXT.getBytes(StandardCharsets.UTF_8));
 
                     SecurityDataBaseHelper sdb = new SecurityProvider.SecurityDataBaseHelper(dbKeyEncrypted,refTextEncrypted, salt);
+
+                    System.out.println("save db");
                     if(sdb.saveDataToDB()){
                         return secretKey;
                     }

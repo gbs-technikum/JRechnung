@@ -10,15 +10,11 @@ import Rechnung.model.objects.Bill;
 import Rechnung.model.objects.Business;
 import Rechnung.model.objects.Customer;
 import Rechnung.model.objects.ProductOrService;
-import Rechnung.view.WordFileExportDailog;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.swing.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
@@ -302,7 +298,7 @@ public class Model {
         List<Bill> result = new ArrayList<>();
 
         try {
-            result = BillService.readAllBillsInYear(year);
+            result = BillService.readAllBills(year);
         } catch (SQLException e) {
             e.printStackTrace(); //TODO
         } catch (UnsupportedEncodingException e) {
@@ -527,6 +523,42 @@ public class Model {
             }
         }
 
+
+        return true;
+    }
+
+    public boolean reEncryptDataBase(){
+
+        try {
+            CustomerService.reEncryptAll();
+            BillService.reEncryptAll();
+        } catch (UnsupportedEncodingException e) {
+            return false;
+        } catch (SQLException e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean writeSecretKeyFile(File keyfile){
+        if(keyfile == null){
+            return false;
+        }
+
+        BufferedWriter writer = null;
+        try {
+
+            writer = new BufferedWriter(new FileWriter(keyfile,true));
+            writer.write(Publisher.getSecurityProvider().getSecretKeyAsBase64());
+        } catch (Exception e) {
+            return false;
+        } finally {
+            try {
+                writer.close();
+            } catch (Exception e) {
+            }
+        }
 
         return true;
     }

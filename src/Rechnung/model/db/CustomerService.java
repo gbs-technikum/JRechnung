@@ -254,7 +254,15 @@ public class CustomerService {
        }
     }
 
+    public static void reEncryptAll() throws UnsupportedEncodingException, SQLException {
+        List<Customer> customers = readAllCustomers();
 
+        for (Customer customer : customers) {
+            removeCustomer(customer);
+        }
+
+        saveAllCustomers(customers);
+    }
 
 
 }

@@ -121,6 +121,32 @@ public class StarterWindowController implements Controller {
 
             }
         });
+
+        this.starterWindow.setChangeDBEncryptionKeyButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ControllerReturnStatus returnStatus = ControllerReturnStatus.ABORT;
+
+/*                do {
+                    Controller controller = new EncryptionConfigDialogController(starterWindow);
+                    returnStatus = controller.run();
+                }
+                while (returnStatus != ControllerReturnStatus.OK && returnStatus != ControllerReturnStatus.ABORT);
+
+                if(returnStatus == ControllerReturnStatus.OK){*/
+                    do {
+                        Controller controller = new EncryptionConfigDialogController(starterWindow, false);
+                        returnStatus = controller.run();
+                    }
+                    while (returnStatus != Controller.ControllerReturnStatus.OK && returnStatus != Controller.ControllerReturnStatus.ABORT);
+                    if(returnStatus == ControllerReturnStatus.OK){
+                        if(!Publisher.getModel().reEncryptDataBase()){
+                            //TODO Fehler
+                        }
+                    }
+                //}
+            }
+        });
     }
 
     @Override
