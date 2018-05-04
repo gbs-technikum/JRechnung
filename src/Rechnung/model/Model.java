@@ -35,10 +35,14 @@ public class Model {
 
     private Random random;
     private Configuration config;
+    private List<Customer> tmpCustomers;
+    private List<Bill> tmpBills;
 
     public Model() {
         this.config = new Configuration();
         this.random = new Random();
+        this.tmpBills = null;
+        this.tmpCustomers = null;
     }
 
     public Business getBusiness(){
@@ -527,11 +531,11 @@ public class Model {
         return true;
     }
 
-    public boolean reEncryptDataBase(){
+    public boolean reEncryptDataBasePhase1(){
 
         try {
-            CustomerService.reEncryptAll();
-            BillService.reEncryptAll();
+            this.tmpCustomers = CustomerService.readAllCustomers();
+            this.tmpBills = BillService.readAllBills(0);
         } catch (UnsupportedEncodingException e) {
             return false;
         } catch (SQLException e) {
@@ -541,6 +545,32 @@ public class Model {
         return true;
     }
 
+    public boolean reEncryptDataBasePhase2(){
+
+        if(this.tmpCustomers != null && this.tmpBills != null) {
+            try {
+                for (Customer customer : this.tmpCustomers) {
+                    removeCustomer(customer);
+                }
+
+                CustomerService.saveAllCustomers(this.tmpCustomers);
+
+                for (Bill bill : this.tmpBills) {
+                    BillService.remove(bill);
+
+                    BillService.save(bill);
+                }
+            } catch (UnsupportedEncodingException e) {
+                return false;
+            } catch (SQLException e) {
+                return false;
+            }
+            return true;
+        }
+
+        return false;
+    }
+
     public boolean writeSecretKeyFile(File keyfile){
         if(keyfile == null){
             return false;
@@ -548,8 +578,7 @@ public class Model {
 
         BufferedWriter writer = null;
         try {
-
-            writer = new BufferedWriter(new FileWriter(keyfile,true));
+            writer = new BufferedWriter(new FileWriter(keyfile,false));
             writer.write(Publisher.getSecurityProvider().getSecretKeyAsBase64());
         } catch (Exception e) {
             return false;
@@ -561,5 +590,26 @@ public class Model {
         }
 
         return true;
+    }
+
+    public String readSecretKeyFile(File keyfile){
+        Scanner scanner = null;
+
+        try {
+            scanner = new Scanner(keyfile);
+            StringBuilder fileContents = new StringBuilder((int)keyfile.length());
+
+            String lineSeparator = System.getProperty("line.separator");
+
+            while(scanner.hasNextLine()) {
+                fileContents.append(scanner.next());
+            }
+            return fileContents.toString();
+        } catch (Exception e) {
+            return null;
+        } finally {
+            scanner.close();
+        }
+
     }
 }

@@ -189,6 +189,8 @@ public class CustomerService {
             return CustomerService.modifyCustomer(customer);
         }
 
+        System.out.println(customer);
+
         Connection connection = Publisher.getDBConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT);
         SecurityProvider securityProvider = Publisher.getSecurityProvider();
@@ -252,16 +254,6 @@ public class CustomerService {
 
            }
        }
-    }
-
-    public static void reEncryptAll() throws UnsupportedEncodingException, SQLException {
-        List<Customer> customers = readAllCustomers();
-
-        for (Customer customer : customers) {
-            removeCustomer(customer);
-        }
-
-        saveAllCustomers(customers);
     }
 
 

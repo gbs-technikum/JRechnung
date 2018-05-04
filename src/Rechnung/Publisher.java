@@ -37,9 +37,7 @@ public final class Publisher {
     }
 
     public static SecurityProvider getNewSecurityProvider(){
-
         securityProviderInstance = new SecurityProvider();
-
 
         return securityProviderInstance;
     }

@@ -7,7 +7,10 @@ import Rechnung.view.MainWindow;
 import Rechnung.view.StarterWindow;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.*;
+import java.io.File;
 
 public class StarterWindowController implements Controller {
 
@@ -127,24 +130,65 @@ public class StarterWindowController implements Controller {
             public void actionPerformed(ActionEvent e) {
                 ControllerReturnStatus returnStatus = ControllerReturnStatus.ABORT;
 
-/*                do {
+                do{
                     Controller controller = new EncryptionConfigDialogController(starterWindow);
                     returnStatus = controller.run();
                 }
                 while (returnStatus != ControllerReturnStatus.OK && returnStatus != ControllerReturnStatus.ABORT);
 
-                if(returnStatus == ControllerReturnStatus.OK){*/
-                    do {
-                        Controller controller = new EncryptionConfigDialogController(starterWindow, false);
-                        returnStatus = controller.run();
-                    }
-                    while (returnStatus != Controller.ControllerReturnStatus.OK && returnStatus != Controller.ControllerReturnStatus.ABORT);
-                    if(returnStatus == ControllerReturnStatus.OK){
-                        if(!Publisher.getModel().reEncryptDataBase()){
-                            //TODO Fehler
+                if(returnStatus == ControllerReturnStatus.OK){
+                    if(Publisher.getModel().reEncryptDataBasePhase1()) {
+                        do {
+                            Controller controller = new EncryptionConfigDialogController(starterWindow, false);
+                            returnStatus = controller.run();
+                        }
+                        while (returnStatus != Controller.ControllerReturnStatus.OK && returnStatus != Controller.ControllerReturnStatus.ABORT);
+                        if (returnStatus == ControllerReturnStatus.OK) {
+
+                            do{
+                                Controller controller = new EncryptionConfigDialogController(starterWindow);
+                                returnStatus = controller.run();
+                            }
+                            while (returnStatus != ControllerReturnStatus.OK && returnStatus != ControllerReturnStatus.ABORT);
+
+                            if (returnStatus == ControllerReturnStatus.OK) {
+                                if (!Publisher.getModel().reEncryptDataBasePhase2()) {
+                                    //TODO Fehler
+                                }
+                                SecurityProvider sp = Publisher.getNewSecurityProvider();
+                            }
                         }
                     }
-                //}
+                }
+            }
+        });
+
+        this.starterWindow.setResetEncryptionPasswortButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FileFilter filter = new FileNameExtensionFilter("Schlüsseldatei", "key");
+                JFileChooser fileChooser = new JFileChooser();
+                int chooserResult = -1;
+
+                fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                fileChooser.setFileFilter(filter);
+                fileChooser.setAcceptAllFileFilterUsed(false);
+                fileChooser.setAcceptAllFileFilterUsed(false);
+                chooserResult = fileChooser.showSaveDialog(starterWindow);
+                if(chooserResult == JFileChooser.APPROVE_OPTION){
+                    ControllerReturnStatus returnStatus = ControllerReturnStatus.ABORT;
+
+                    String secretKeyBase64 = Publisher.getModel().readSecretKeyFile(fileChooser.getSelectedFile());
+
+                    if(secretKeyBase64 != null) {
+                        do {
+                            Controller controller = new EncryptionConfigDialogController(starterWindow, secretKeyBase64);
+                            returnStatus = controller.run();
+                        }
+                        while (returnStatus != ControllerReturnStatus.OK && returnStatus != ControllerReturnStatus.ABORT);
+                    }
+                }
+
             }
         });
     }

@@ -40,24 +40,16 @@ public class SecurityProvider {
         this.unlock(password);
     }
 
-    public boolean firstInit(String password) throws InvalidKeySpecException, NoSuchAlgorithmException, SQLException {
+    public boolean firstInit(String password) throws InvalidKeySpecException, NoSuchAlgorithmException, SQLException, NoSuchPaddingException {
         this.secretKey = KeySecurityHelper.firstInit(password,null);
-        if(this.secretKey != null){
-            this.setLock(false);
-            return true;
-        }
 
-        return false;
+        return (this.secretKey != null);
     }
 
-    public boolean reset(String password, String base64Key) throws InvalidKeySpecException, NoSuchAlgorithmException, SQLException {
+    public boolean reset(String password, String base64Key) throws InvalidKeySpecException, NoSuchAlgorithmException, SQLException, NoSuchPaddingException {
         this.secretKey = KeySecurityHelper.firstInit(password,base64Key);
-        if(this.secretKey != null){
-            this.setLock(false);
-            return true;
-        }
 
-        return false;
+        return (this.secretKey != null);
     }
 
     public String getSecretKeyAsBase64() {
@@ -448,10 +440,13 @@ public class SecurityProvider {
                     byte[] salt = generateSalt();
                     SecretKey secret = prepareKey(password,salt);
 
-                    byte[] decodedKey = Base64.getDecoder().decode(base64Key);
+                    byte[] decodedKey = null;
+                    if(base64Key != null) {
+                        decodedKey = Base64.getDecoder().decode(base64Key);
+                    }
 
                     SecretKey secretKey = null;
-                    if(decodedKey.length > 0){
+                    if(decodedKey != null && decodedKey.length > 0){
                         secretKey = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES");
                     }else {
                         secretKey = generateDBEncryptionKey();

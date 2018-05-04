@@ -8,6 +8,8 @@ import Rechnung.view.EncryptionConfigDialog;
 
 import javax.crypto.NoSuchPaddingException;
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -22,9 +24,16 @@ public class EncryptionConfigDialogController implements Controller {
     private ControllerReturnStatus controllerReturnStatus;
     private boolean reinitMode;
     private boolean passwordCheckOnly;
+    private String encryptionKey;
+
+    public EncryptionConfigDialogController(JFrame window, String encryptionKey) {
+        this(window,false);
+        this.encryptionKey = encryptionKey;
+    }
 
     public EncryptionConfigDialogController(JFrame window,boolean reinit) {
         this.reinitMode = reinit;
+        this.encryptionKey = null;
         this.passwordCheckOnly = false;
         this.encryptionConfigDialog = new EncryptionConfigDialog(window, "Passwort setzen");
         this.encryptionConfigDialog.setSecondPasswordFieldVisible(true);
@@ -34,6 +43,7 @@ public class EncryptionConfigDialogController implements Controller {
     }
 
     public EncryptionConfigDialogController(JFrame window) {
+        this.encryptionKey = null;
         this.reinitMode = false;
         this.passwordCheckOnly = true;
         this.encryptionConfigDialog = new EncryptionConfigDialog(window, "Passwort eingeben");
@@ -101,17 +111,34 @@ public class EncryptionConfigDialogController implements Controller {
                 if(Publisher.getModel().isPasswordValid(password) && Publisher.getModel().isPasswordEqualsPassword2(password, password2)){
                     try {
                         sp = Publisher.getNewSecurityProvider();
-                        boolean initOkay = sp.firstInit(password);
+                        boolean initOkay = false;
 
-                        if(initOkay){
+                        if(this.encryptionKey != null){
+                            try {
+                                initOkay = sp.reset(password,this.encryptionKey);
+                            } catch (NoSuchPaddingException e) {
+
+                            }
+                        }else{
+                            try {
+                                initOkay = sp.firstInit(password);
+                            } catch (NoSuchPaddingException e) {
+                                initOkay = false;
+                            }
+                        }
+
+                        if(initOkay && this.encryptionKey == null){
+                            FileFilter filter = new FileNameExtensionFilter("Schlüsseldatei", "key");
                             JFileChooser fileChooser = new JFileChooser();
+                            fileChooser.setFileFilter(filter);
                             int chooserResult = -1;
                             File saveFile = null;
                             do {
                                 fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                                 chooserResult = fileChooser.showSaveDialog(encryptionConfigDialog);
                                 if(chooserResult == JFileChooser.APPROVE_OPTION){
-                                    saveFile = new File(fileChooser.getSelectedFile().getAbsolutePath());
+                                    System.out.println(fileChooser.getSelectedFile().getAbsolutePath());
+                                    saveFile = new File(fileChooser.getSelectedFile().getAbsolutePath() + ".key");
                                 }
                             }while(!Publisher.getModel().writeSecretKeyFile(saveFile));
                         }

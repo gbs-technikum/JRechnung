@@ -200,7 +200,7 @@ public class BillService {
             }else {
                 preparedStatement.setNull(4,Types.BLOB);
             }
-            preparedStatement.setBytes(5,securityProvider.encrypt(bill.isPaid() ? 1 : 0));
+            preparedStatement.setInt(5,bill.isPaid() ? 1 : 0);
             preparedStatement.setBytes(6,securityProvider.encrypt(bill.getComment()));
             File file = bill.getBillFile();
 
@@ -209,8 +209,8 @@ public class BillService {
             }else {
                 preparedStatement.setNull(7,Types.BLOB);
             }
-            preparedStatement.setBytes(8,securityProvider.encrypt(bill.isBusinessTaxFree() ? 1 : 0));
-            preparedStatement.setBytes(9,securityProvider.encrypt(bill.mustBeIncludedTaxes() ? 1 : 0));
+            preparedStatement.setInt(8,bill.isBusinessTaxFree() ? 1 : 0);
+            preparedStatement.setInt(9,bill.mustBeIncludedTaxes() ? 1 : 0);
             preparedStatement.setString(10,bill.getId());
 
             preparedStatement.execute();
@@ -293,7 +293,7 @@ public class BillService {
             }else {
                 preparedStatement.setNull(7,Types.BLOB);
             }
-            preparedStatement.setBytes(8,securityProvider.encrypt(bill.isPaid() ? 1 : 0));
+            preparedStatement.setInt(8,bill.isPaid() ? 1 : 0);
             preparedStatement.setBytes(9,securityProvider.encrypt(bill.getComment()));
 
             File file = bill.getBillFile();
@@ -304,8 +304,8 @@ public class BillService {
                 preparedStatement.setNull(10,Types.BLOB);
             }
 
-            preparedStatement.setBytes(11,securityProvider.encrypt(bill.isBusinessTaxFree() ? 1 : 0));
-            preparedStatement.setBytes(12,securityProvider.encrypt(bill.mustBeIncludedTaxes() ? 1 : 0));
+            preparedStatement.setInt(11,bill.isBusinessTaxFree() ? 1 : 0);
+            preparedStatement.setInt(12,bill.mustBeIncludedTaxes() ? 1 : 0);
 
             preparedStatement.execute();
             BillEntryService.saveListOfBillEntries(bill.getBillEntries(),bill.getId());
@@ -347,16 +347,6 @@ public class BillService {
                 }
 
             }
-        }
-    }
-
-    public static void reEncryptAll() throws UnsupportedEncodingException, SQLException {
-        List<Bill> bills = readAllBills(0);
-
-        for (Bill bill : bills) {
-            remove(bill);
-
-            save(bill);
         }
     }
 

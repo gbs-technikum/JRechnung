@@ -23,7 +23,6 @@ public class Customer {
 
     public Customer(String id, String  number, String name, String forename, String street, String houseNumber, String postCode, String village, String land) {
         this.id = id;
-        System.out.println("new Custimer id" + this.id);
         this.number = number;
         this.name = name;
         this.forename = forename;

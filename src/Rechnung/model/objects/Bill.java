@@ -134,6 +134,8 @@ public class Bill {
         return this.entries.add(entry);
     }
 
+
+
     public BillEntry removeEntry(int index){
         if(!this.isEntryIndexValid(index)){
             return null;
@@ -150,16 +152,16 @@ public class Bill {
         return this.entries.set(index,newEntry);
     }
 
+    public int getEntryCount(){
+        return this.entries.size();
+    }
+
     public double getEntryUnitPrice(int index){
         if(this.isEntryIndexValid(index)) {
 
             BillEntry entry = this.entries.get(index);
             if (entry != null) {
-                if (this.isBusinessTaxFree() || !this.mustBeIncludedTaxes()) {
-                    return entry.getUnitPrice();
-                }else{
-                    return entry.getUnitPrice() + (entry.getUnitPrice() * (entry.getTaxRateInPercent() / 100));
-                }
+                return entry.getUnitPrice();
             }
         }
 
@@ -172,7 +174,12 @@ public class Bill {
         if(result > 0){
             BillEntry entry = this.entries.get(index);
             if (entry != null) {
+
                 result *= entry.getAmount();
+
+                if (!this.isBusinessTaxFree() && !this.mustBeIncludedTaxes()) {
+                    result = result + result * (entry.getTaxRateInPercent()/100);
+                }
             }
         }
 
@@ -185,10 +192,10 @@ public class Bill {
         if(this.isEntryIndexValid(index)){
             BillEntry entry = this.entries.get(index);
             if (entry != null) {
-                if (this.isBusinessTaxFree() || !this.mustBeIncludedTaxes()) {
+                if (this.mustBeIncludedTaxes()) {
                     result = this.getEntryTotalPrice(index) * (entry.getTaxRateInPercent() / 100);
                 }else{
-                    result = this.getEntryTotalPrice(index) - (this.getEntryTotalPrice(index) * ((entry.getTaxRateInPercent()+100) / 100));
+                   TODO result = this.getEntryTotalPrice(index) - (this.getEntryTotalPrice(index) * ((entry.getTaxRateInPercent()+100) / 100));
                 }
             }
         }
@@ -213,13 +220,8 @@ public class Bill {
     public double getTotalPrice(){
         double result = 0;
 
-
         for (int i=0;i<this.entries.size();i++){
-            if (this.isBusinessTaxFree() || !this.mustBeIncludedTaxes()) {
-                result += (this.getEntryTotalPrice(i) + this.getEntryTaxValue(i));
-            }else{
-                result += this.getEntryTotalPrice(i);
-            }
+            result += this.getEntryTotalPrice(i);
         }
 
         return result;

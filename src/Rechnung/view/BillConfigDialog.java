@@ -393,7 +393,12 @@ public class BillConfigDialog extends ConfigDialog {
         int columnCount = this.getEntryTableColumnCount();
 
         if(row >= 0 && row < rowCount && column >= 0 && column < columnCount){
-            return this.jtblEntries.getValueAt(row,column).toString();
+            Object cellValue = this.jtblEntries.getValueAt(row,column);
+            if(cellValue != null){
+                return cellValue.toString();
+            }else{
+                return null;
+            }
         }
 
         return null;

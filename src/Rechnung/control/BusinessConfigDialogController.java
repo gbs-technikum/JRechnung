@@ -131,8 +131,8 @@ public class BusinessConfigDialogController implements Controller {
                 this.businessConfigDialog.getTextProprietor(),
                 this.businessConfigDialog.getTextStreet(),
                 this.businessConfigDialog.getTextStreetNumber(),
-                this.businessConfigDialog.getTextLocation(),
-                this.businessConfigDialog.getTextPostcode(),legalForm);
+                this.businessConfigDialog.getTextPostcode(),
+                this.businessConfigDialog.getTextLocation(),legalForm);
 
         this.business = business;
 

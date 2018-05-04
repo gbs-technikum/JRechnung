@@ -1,5 +1,6 @@
 package Rechnung.model;
 
+import Rechnung.Publisher;
 import Rechnung.model.objects.Bill;
 import Rechnung.model.objects.BillEntry;
 import Rechnung.model.objects.Business;
@@ -44,65 +45,36 @@ public class WordFileGenerator {
 
             Customer customer = bill.getDebtor();
 
+            System.out.println(business);
+
             replaceText(doc,"$$CUSTOMERNAME$$",customer.getForename() + " " + customer.getName());
             replaceText(doc,"$$CUSTOMERSTREET",customer.getStreet() + " " + customer.getHouseNumber());
             replaceText(doc,"$$CUSTOMERLOCATION$$",customer.getVillage());
             replaceText(doc,"$$CUSTOMERPOSTCODE$",customer.getPostCode());
 
+            System.out.println(business.getLocation());
+            System.out.println(business.getPostcode());
             replaceText(doc,"$$COMPANYNAME$$",business.getName());
             replaceText(doc,"$$STREET$$",business.getStreet() + " " + business.getStreetNumber());
             replaceText(doc,"$$LOCATION$$",business.getLocation());
             replaceText(doc,"$$POSTCODE$$",business.getPostcode());
 
-            replaceText(doc,"$$CUSTOMERNUMBER$$","Kundennummer: " + customer.getNumber());
+/*            replaceText(doc,"$$CUSTOMERNUMBER$$","Kundennummer: " + customer.getNumber());
 
-            replaceText(doc,"$$BILLNUMBER$$","Rechnungsnummer: " + bill.getNumber());
+            replaceText(doc,"$$BILLNUMBER$$","Rechnungsnummer: " + bill.getNumber());*/
 
-            XWPFTable table = doc.getTableArray(0);
 
-            for (int i = 0; i < bill.getBillEntries().size(); i++) {
-                BillEntry billEntry = bill.getBillEntries().get(i);
+            modifyTableBillData(doc,bill);
+            modifyTableWithEntries(doc,bill);
 
-                XWPFTableRow oldRow = table.getRow(table.getNumberOfRows() - 1);
-                CTRow ctrow = CTRow.Factory.parse(oldRow.getCtRow().newInputStream());
-                XWPFTableRow newRow = new XWPFTableRow(ctrow, table);
 
-                for (int j = 0; j < newRow.getTableCells().size(); j++) {
-                    XWPFTableCell cell = newRow.getTableCells().get(j);
-
-                    XWPFParagraph paragraph = cell.getParagraphs().get(0);
-
-                    XWPFRun run = paragraph.createRun();
-
-                    switch (j) {
-                        case 0:
-                            run.setText(billEntry.getEntryText());
-                            break;
-                        case 1:
-                            run.setText(String.format(Locale.GERMANY, "%.2f", billEntry.getUnitPrice()));
-                            break;
-                        case 2:
-                            run.setText(String.valueOf(billEntry.getAmount()));
-                            break;
-                        case 3:
-                            run.setText(String.format(Locale.GERMANY, "%.2f", billEntry.getUnitPrice() * billEntry.getAmount()));
-                            break;
-                    }
-                    System.out.println(String.valueOf(j));
-                }
-
-                table.addRow(newRow, 1);
-            }
-
-            XWPFTable tableTaxes = doc.getTableArray(1);
-
-            if(bill.mustBeIncludedTaxes()) {
+/*            if(bill.mustBeIncludedTaxes()) {
 
                 int position = doc.getPosOfTable( tableTaxes );
                 doc.removeBodyElement( position );
                 replaceText(doc,"$$TAXVALUE$$","0.0");
 
-            }else {
+            }else {*/
 
 /*                for (int i = 0; i < bill.getBillEntries().size(); i++) {
                     BillEntry billEntry = bill.getBillEntries().get(i);
@@ -138,17 +110,17 @@ public class WordFileGenerator {
                     table.addRow(newRow, 1);
                 }*/
 
+/*
                 replaceText(doc,"$$TAXVALUE$$","0.0");
             }
+*/
 
 
-            replaceText(doc, "$$COMPLETEPRICE$$", String.format(Locale.GERMANY, "%.2f", bill.getTotalPrice()));
+          // replaceText(doc, "$$COMPLETEPRICE$$", String.format(Locale.GERMANY, "%.2f", bill.getTotalPrice()));
 
 
             doc.write(new FileOutputStream(destination));
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (XmlException e) {
             e.printStackTrace();
         }
 
@@ -170,6 +142,71 @@ public class WordFileGenerator {
                 }
             }
         }
+    }
+
+    private static void modifyTableWithEntries(XWPFDocument doc,Bill bill){
+        try {
+            XWPFTable table = doc.getTableArray(1);
+
+            for (int i = bill.getBillEntries().size()-1; i >= 0 ; i--) {
+                BillEntry billEntry = bill.getBillEntries().get(i);
+
+                XWPFTableRow oldRow = table.getRow(table.getNumberOfRows() - 1);
+                CTRow ctrow = CTRow.Factory.parse(oldRow.getCtRow().newInputStream());
+                XWPFTableRow newRow = new XWPFTableRow(ctrow, table);
+
+                for (int j = 0; j < newRow.getTableCells().size(); j++) {
+                    XWPFTableCell cell = newRow.getTableCells().get(j);
+
+                    XWPFParagraph paragraph = cell.getParagraphs().get(0);
+
+                    XWPFRun run = paragraph.createRun();
+
+                    switch (j) {
+                        case 0:
+                            run.setText(String.valueOf(i));
+                            break;
+                        case 1:
+                            run.setText(billEntry.getEntryText());
+                            break;
+                        case 2:
+                            run.setText(String.format(Locale.GERMANY, "%.2f", bill.getEntryUnitPrice(i)));
+                            break;
+                        case 3:
+                            run.setText(String.valueOf(billEntry.getAmount()));
+                            break;
+                        case 4:
+                            run.setText(String.format(Locale.GERMANY, "%.2f", bill.getEntryTotalPrice(i)));
+                            break;
+                    }
+                }
+
+                table.addRow(newRow, 1);
+            }
+
+        } catch (XmlException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void modifyTableBillData(XWPFDocument doc,Bill bill){
+        XWPFTable table = doc.getTableArray(0);
+
+        XWPFTableRow oldRow = table.getRow(1);
+
+        XWPFTableCell cell = oldRow.getTableCells().get(0);
+        XWPFParagraph paragraph = cell.getParagraphs().get(0);
+        XWPFRun run = paragraph.createRun();
+        run.setText(bill.getNumber());
+
+        oldRow = table.getRow(3);
+        cell = oldRow.getTableCells().get(0);
+        paragraph = cell.getParagraphs().get(0);
+        run = paragraph.createRun();
+
+        run.setText(Publisher.getModel().dateToGermanDateString(bill.getCreationDate()));
     }
 
 }

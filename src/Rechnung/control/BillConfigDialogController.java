@@ -413,9 +413,10 @@ public class BillConfigDialogController implements Controller {
 
             result = price * amount;
 
-            if(this.billConfigDialog.isTaxIncludedCheckbox() && !this.billConfigDialog.isTaxFreeCheckbox()){
+            if(!this.billConfigDialog.isTaxIncludedCheckbox() && !this.billConfigDialog.isTaxFreeCheckbox()){
 
                 result = result + result * (tax/100);
+
             }
         }
 
