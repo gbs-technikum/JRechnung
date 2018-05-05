@@ -110,8 +110,9 @@ public class BillConfigDialogController implements Controller {
                 if(e.getLastRow() == e.getFirstRow()){
                     switch (e.getColumn()){
                         case 1:
-                            if(!Publisher.getModel().isFloatingPointNumber(cellValue)){
+                            if(!Publisher.getModel().isIntNumber(cellValue)){
                                 tableModel.setValueAt("",currentRow, e.getColumn());
+                                System.out.println("dyfassadasdsadjltfhlasiuiesjaIPJOAKL");
                                 tableModel.setValueAt("",currentRow,4);
                             }
                             break;
@@ -131,7 +132,8 @@ public class BillConfigDialogController implements Controller {
                     }
 
                     double calcPrice = calculateRowCompletePrice(currentRow);
-                    if(calcPrice > -1){
+                    System.out.println("calcPrice" + calcPrice);
+                    if(calcPrice > -0.5){
                         tableModel.setValueAt(String.format(Locale.GERMANY,"%.2f",calcPrice),currentRow,4);
                     }else{
                         tableModel.setValueAt("",currentRow,4);
@@ -217,6 +219,7 @@ public class BillConfigDialogController implements Controller {
     private void updateTableCompletePrice(){
         for (int i = 0; i < billConfigDialog.getEntryTableRowCount(); i++) {
             double calcPrice = calculateRowCompletePrice(i);
+            System.out.println("calcPrice" + calcPrice);
             if(calcPrice > -1){
                 billConfigDialog.setCellValue(String.format(Locale.GERMANY,"%.2f",calcPrice),i,4);
             }else{
@@ -237,9 +240,19 @@ public class BillConfigDialogController implements Controller {
         for(int i=0; i < rowCount;i++){
             String id = Publisher.getModel().getNewObjectId();
             String entryText = this.billConfigDialog.getCellValue(i,0);
-            double unitPrice =  Double.parseDouble(this.billConfigDialog.getCellValue(i,3).replace(",","."));
-            int amount = Integer.parseInt(this.billConfigDialog.getCellValue(i,2));
-            double taxRate = Double.parseDouble(this.billConfigDialog.getCellValue(i,1).replace(",","."));
+
+            double unitPrice =  -1.0;
+            int amount = -1;
+            int taxRate = -1;
+
+            try {
+                taxRate = Integer.parseInt(this.billConfigDialog.getCellValue(i,1));
+                amount = Integer.parseInt(this.billConfigDialog.getCellValue(i,2));
+                unitPrice =  Double.parseDouble(this.billConfigDialog.getCellValue(i,3).replace(",","."));
+            }catch (Exception e){
+
+
+            }
 
             BillEntry billEntry = new BillEntry(id,taxRate,unitPrice,amount,entryText);
             billEntries.add(billEntry);
@@ -294,7 +307,7 @@ public class BillConfigDialogController implements Controller {
 
     private void fillRowWithBillEntry(int rowIndex, BillEntry billEntry){
 
-        String[] cellData = new String[]{billEntry.getEntryText(),String.format(Locale.GERMANY,"%.2f",billEntry.getTaxRateInPercent()),
+        String[] cellData = new String[]{billEntry.getEntryText(),String.valueOf(billEntry.getTaxRateInPercent()),
                 String.valueOf(billEntry.getAmount()),String.format(Locale.GERMANY,"%.2f",billEntry.getUnitPrice()),""};
 
         this.billConfigDialog.setTableModelListenerEnabled(false);
@@ -396,9 +409,7 @@ public class BillConfigDialogController implements Controller {
 
 
     private double calculateRowCompletePrice(int row){
-
-        double result = -1.0;
-
+/*        double result = 0.0;
         Model model = Publisher.getModel();
         String cellTax = this.billConfigDialog.getCellValue(row,1);
         String cellPrice = this.billConfigDialog.getCellValue(row,3);
@@ -406,21 +417,22 @@ public class BillConfigDialogController implements Controller {
 
         System.out.println(cellAmount + " " + cellPrice + " " + cellTax);
         if(cellTax != null && cellPrice != null && cellAmount != null &&
-                model.isFloatingPointNumber(cellTax) && model.isIntNumber(cellAmount) && model.isFloatingPointNumber(cellPrice)){
+                model.isIntNumber(cellTax) && model.isIntNumber(cellAmount) && model.isFloatingPointNumber(cellPrice)){
             double price = Double.parseDouble(cellPrice.replace(",","."));
             double tax = Double.parseDouble(cellTax.replace(",","."));
             int amount = Integer.parseInt(cellAmount);
 
             result = price * amount;
 
-            if(!this.billConfigDialog.isTaxIncludedCheckbox() && !this.billConfigDialog.isTaxFreeCheckbox()){
+        }*/
 
-                result = result + result * (tax/100);
+        createBillFromWindowData();
 
-            }
+        if(this.bill != null) {
+            return this.bill.getEntryTotalPrice(row);
         }
 
-        return result;
+        return -1;
     }
 
 

@@ -3,13 +3,13 @@ package Rechnung.model.objects;
 public class BillEntry {
 
     private String id;
-    private double taxRateInPercent;
+    private int taxRateInPercent;
     private double unitPrice;
     private int amount;
     private String entryText;
 
 
-    public BillEntry(String id, double taxRateInPercent, double unitPrice, int amount, String entryText) {
+    public BillEntry(String id, int taxRateInPercent, double unitPrice, int amount, String entryText) {
         this.id = id;
         this.taxRateInPercent = taxRateInPercent;
         this.unitPrice = unitPrice;
@@ -21,11 +21,11 @@ public class BillEntry {
         return id;
     }
 
-    public double getTaxRateInPercent() {
+    public int getTaxRateInPercent() {
         return taxRateInPercent;
     }
 
-    public void setTaxRateInPercent(double taxRateInPercent) {
+    public void setTaxRateInPercent(int taxRateInPercent) {
         this.taxRateInPercent = taxRateInPercent;
     }
 

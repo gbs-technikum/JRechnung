@@ -177,25 +177,28 @@ public class Bill {
 
                 result *= entry.getAmount();
 
-                if (!this.isBusinessTaxFree() && !this.mustBeIncludedTaxes()) {
-                    result = result + result * (entry.getTaxRateInPercent()/100);
-                }
             }
         }
 
         return result;
     }
+
+
 
     public double getEntryTaxValue(int index){
         double result = 0;
 
-        if(this.isEntryIndexValid(index)){
-            BillEntry entry = this.entries.get(index);
-            if (entry != null) {
-                if (this.mustBeIncludedTaxes()) {
-                    result = this.getEntryTotalPrice(index) * (entry.getTaxRateInPercent() / 100);
-                }else{
-                   TODO result = this.getEntryTotalPrice(index) - (this.getEntryTotalPrice(index) * ((entry.getTaxRateInPercent()+100) / 100));
+        System.out.println("isBusinessTaxFree" + " --> " + this.isBusinessTaxFree());
+        if(!this.isBusinessTaxFree()){
+            if(this.isEntryIndexValid(index)){
+                BillEntry entry = this.entries.get(index);
+                System.out.println(" entry ::: " + entry);
+                if (entry != null) {
+                    if (this.mustBeIncludedTaxes()) {
+                        result = (this.getEntryTotalPrice(index) / ((double) (entry.getTaxRateInPercent())+100)) * entry.getTaxRateInPercent();
+                    }else{
+                        result = this.getEntryTotalPrice(index) * (((double) entry.getTaxRateInPercent()) / 100);
+                    }
                 }
             }
         }
@@ -203,25 +206,57 @@ public class Bill {
         return result;
     }
 
-    public double getEntryTaxRateInPercent(int index){
+    public double getTaxValueForPercentage(int percentage){
         double result = 0;
 
-        if(this.isEntryIndexValid(index)){
-            BillEntry entry = this.entries.get(index);
-            if (entry != null) {
-                result = entry.getTaxRateInPercent();
+        if(!this.isBusinessTaxFree()){
+            for (int i = 0; i < this.entries.size(); i++) {
+                if(this.getEntryTaxRateInPercent(i) == percentage){
+                    System.out.println(percentage + " : " + this.getEntryTaxValue(i));
+                    result += this.getEntryTaxValue(i);
+                }
             }
         }
 
         return result;
+    }
 
+    public Set<Integer> getTaxPercentages(){
+        Set<Integer> resultSet = new HashSet<>();
+
+        for (BillEntry entry : entries) {
+            resultSet.add(Integer.valueOf(entry.getTaxRateInPercent()));
+        }
+
+        return resultSet;
+    }
+
+    public int getEntryTaxRateInPercent(int index) {
+        int result = 0;
+
+        if (!this.isBusinessTaxFree()){
+            if (this.isEntryIndexValid(index)) {
+                BillEntry entry = this.entries.get(index);
+                if (entry != null) {
+                    result = entry.getTaxRateInPercent();
+                }
+            }
+        }
+
+        return result;
     }
 
     public double getTotalPrice(){
         double result = 0;
 
         for (int i=0;i<this.entries.size();i++){
-            result += this.getEntryTotalPrice(i);
+            double entryPrice = this.getEntryTotalPrice(i);
+
+            if (!this.isBusinessTaxFree() && !this.mustBeIncludedTaxes()) {
+                entryPrice = entryPrice + entryPrice * (((double) this.getEntryTaxRateInPercent(i))/100);
+            }
+
+            result += entryPrice;
         }
 
         return result;
@@ -264,5 +299,15 @@ public class Bill {
         return sb.toString();
     }
 
+
+    public double getEntryPriceSum() {
+        double result = 0;
+
+        for (int i=0;i<this.entries.size();i++){
+            result += this.getEntryTotalPrice(i);
+        }
+
+        return result;
+    }
 
 }

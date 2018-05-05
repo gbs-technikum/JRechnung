@@ -75,7 +75,7 @@ public class BillEntryService {
                 while(resultSet.next()) {
                     String id = resultSet.getString("id");
                     String entryText = securityProvider.decryptAsString(resultSet.getBytes("entrytext"));
-                    double taxRateInPercent = securityProvider.decryptAsDouble(resultSet.getBytes("tax_rate_in_percent"));
+                    int taxRateInPercent = securityProvider.decryptAsInt(resultSet.getBytes("tax_rate_in_percent"));
                     double unitPrice = securityProvider.decryptAsDouble(resultSet.getBytes("unitprice"));
                     int amount = securityProvider.decryptAsInt(resultSet.getBytes("amount"));
 
