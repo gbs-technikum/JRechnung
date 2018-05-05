@@ -6,13 +6,11 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a88aa8a-d265-455b-a94b-8aceaeaa507e" name="Default" comment="">
+    <list default="true" id="9a88aa8a-d265-455b-a94b-8aceaeaa507e" name="Default" comment="Word File Generierung fast Fertig">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Rechnung/control/BillConfigDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rechnung/control/BillConfigDialogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/default.dotx" beforeDir="false" afterPath="$PROJECT_DIR$/default.dotx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/jrechnung.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/jrechnung.sqlite" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Rechnung/model/WordFileGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rechnung/model/WordFileGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Rechnung/model/db/BillEntryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rechnung/model/db/BillEntryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Rechnung/model/objects/Bill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rechnung/model/objects/Bill.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Rechnung/model/objects/BillEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rechnung/model/objects/BillEntry.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -52,8 +50,8 @@
       <file leaf-file-name="WordFileGenerator.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Rechnung/model/WordFileGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="599">
-              <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
+            <state relative-caret-position="416">
+              <caret line="301" column="5" lean-forward="true" selection-start-line="301" selection-start-column="5" selection-end-line="301" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -64,7 +62,7 @@
       <file leaf-file-name="Model.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Rechnung/model/Model.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
+            <state relative-caret-position="5287">
               <caret line="342" column="18" selection-start-line="342" selection-start-column="18" selection-end-line="342" selection-end-column="18" />
             </state>
           </provider>
@@ -481,7 +479,8 @@
       <workItem from="1525435880570" duration="1324000" />
       <workItem from="1525442213177" duration="2149000" />
       <workItem from="1525455215378" duration="9235000" />
-      <workItem from="1525504488113" duration="15014000" />
+      <workItem from="1525504488113" duration="15271000" />
+      <workItem from="1525540293990" duration="1501000" />
     </task>
     <task id="LOCAL-00001" summary="Gültigkeitsprüfung von Groß angefangen zu erweitern!">
       <created>1521022721699</created>
@@ -560,11 +559,18 @@
       <option name="project" value="LOCAL" />
       <updated>1525464604042</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Word File Generierung fast Fertig">
+      <created>1525522795752</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1525522795752</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="173242000" />
+    <option name="totallyTimeSpent" value="175000000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -590,11 +596,10 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32900432" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.31493506" />
-      <window_info anchor="right" id="Coverage" order="4" side_tool="true" weight="0.32995737" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17803837" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17963752" />
       <window_info anchor="right" id="Database" order="3" weight="0.32995737" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -603,6 +608,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.38961038" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Coverage" order="4" side_tool="true" weight="0.32995737" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -613,30 +619,30 @@
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.32995737" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3181818" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32900432" />
       <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32900432" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2457356" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32900432" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32900432" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3181818" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
-      <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info id="UI Designer" order="4" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3225108" />
+      <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="6" weight="0.32995737" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.32995737" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39125684" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info id="Capture Tool" order="5" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32900432" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3225108" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="right" id="Maven Projects" order="8" weight="0.32995737" />
       <window_info id="Favorites" order="6" side_tool="true" />
     </layout-to-restore>
@@ -685,7 +691,8 @@
     <MESSAGE value="Datumsfehler in BillConfigDialog behoben // Laden und Anzeigen der Rechnungsdaten fast fertig" />
     <MESSAGE value="Datenbankverschlüsselung Reset usw." />
     <MESSAGE value="Starter Tasks funktionieren // Rechnungserstellung (WordFile) Preisberechnung in Arbeit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Starter Tasks funktionieren // Rechnungserstellung (WordFile) Preisberechnung in Arbeit" />
+    <MESSAGE value="Word File Generierung fast Fertig" />
+    <option name="LAST_COMMIT_MESSAGE" value="Word File Generierung fast Fertig" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -715,12 +722,6 @@
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Rechnung/model/WordFileGenerator.java</url>
-          <line>26</line>
-          <properties />
-          <option name="timeStamp" value="81" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Rechnung/model/SecurityProvider.java</url>
           <line>451</line>
           <properties />
@@ -736,7 +737,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="94" />
+      <option name="time" value="95" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -923,9 +924,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1190">
           <caret line="91" column="16" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="62" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -933,9 +931,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="714">
           <caret line="46" selection-start-line="46" selection-end-line="46" />
-          <folding>
-            <element signature="e#1145#1146#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -985,9 +980,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="748">
           <caret line="134" column="40" selection-start-line="134" selection-start-column="40" selection-end-line="134" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1023,9 +1015,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1649">
           <caret line="152" column="50" selection-start-line="152" selection-start-column="50" selection-end-line="152" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1061,12 +1050,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="296">
           <caret line="31" column="32" lean-forward="true" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
-          <folding>
-            <element signature="e#578#579#0" expanded="true" />
-            <element signature="e#617#618#0" expanded="true" />
-            <element signature="e#770#771#0" expanded="true" />
-            <element signature="e#802#803#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1074,10 +1057,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-513">
           <caret line="255" column="57" selection-start-line="255" selection-start-column="57" selection-end-line="255" selection-end-column="57" />
-          <folding>
-            <element signature="e#3522#3523#0" expanded="true" />
-            <element signature="e#3564#3565#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1090,15 +1069,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Rechnung/model/Model.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
+        <state relative-caret-position="5287">
           <caret line="342" column="18" selection-start-line="342" selection-start-column="18" selection-end-line="342" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Rechnung/model/WordFileGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="599">
-          <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
+        <state relative-caret-position="416">
+          <caret line="301" column="5" lean-forward="true" selection-start-line="301" selection-start-column="5" selection-end-line="301" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
