@@ -3,6 +3,8 @@ package Rechnung.view;
 import Rechnung.view.BillList;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
@@ -11,12 +13,16 @@ public class MainWindow extends JFrame {
 
     private JButton jbtnCreateBill, jbtnManageBusiness, jbtnManageCustomers, jbtnEncPasswortReset, jbtnManageProductOrService;
     private JPanel jpCenter;
-    private JPanel jpWest;
+    private JPanel jpWest, jpCenterWest, jpSouthWest;
     private JTable jtblBillList;
+    private JComboBox<Integer> jcbxYear;
+    private JLabel lblCompletePriceDesc, lblCompletePrice, lblNotYetPaidDesc, lblNotYetPaid;
+    private ActionListener comboBoxListener;
+    private ImageIcon deletImage;
 
-    public MainWindow() throws HeadlessException {
+    public MainWindow(ImageIcon deletImage) throws HeadlessException {
         super("JRechnung");
-
+        this.deletImage = deletImage;
      //   initEvents();
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.initComponents();
@@ -28,6 +34,9 @@ public class MainWindow extends JFrame {
     private void initComponents() {
 
         this.jpWest = new JPanel();
+        this.jpWest.setLayout(new BorderLayout());
+
+        this.jpCenterWest = new JPanel();
         this.jbtnCreateBill = new JButton();
         this.jbtnManageBusiness = new JButton();
         this.jbtnCreateBill.setText("Neue Rechnung");
@@ -56,15 +65,34 @@ public class MainWindow extends JFrame {
         this.jpCenter.add(scrollPane,BorderLayout.CENTER);
 
         this.jpWest.setBackground(new java.awt.Color(207, 117, 117));
-        this.jpWest.setPreferredSize(new java.awt.Dimension(150, 0));
+        this.jpWest.setPreferredSize(new java.awt.Dimension(200, 0));
 
 
-        this.jpWest.add(this.jbtnCreateBill);
-        this.jpWest.add(this.jbtnManageBusiness);
-        this.jpWest.add(this.jbtnManageCustomers);
-        this.jpWest.add(this.jbtnEncPasswortReset);
-        this.jpWest.add(this.jbtnManageProductOrService);
+        this.jpCenterWest.add(this.jbtnCreateBill);
+        this.jpCenterWest.add(this.jbtnManageBusiness);
+        this.jpCenterWest.add(this.jbtnManageCustomers);
+        this.jpCenterWest.add(this.jbtnEncPasswortReset);
+        this.jpCenterWest.add(this.jbtnManageProductOrService);
 
+        this.jpSouthWest = new JPanel();
+        this.jpSouthWest.setSize(0,200);
+        this.jpSouthWest.setLayout(new BorderLayout());
+
+        this.lblCompletePrice = new JLabel("xxx");
+        this.lblCompletePrice.setBorder(new TitledBorder("Gesamtrechnungsbetrag"));
+        this.lblNotYetPaid = new JLabel("xxx");
+        this.lblNotYetPaid.setBorder(new TitledBorder("Gesamtbetrag offener Rechnungen"));
+        this.jcbxYear = new JComboBox<>();
+        this.jcbxYear.setBorder(new TitledBorder("Anzeigejahr"));
+
+        this.jpSouthWest.add(this.jcbxYear,BorderLayout.NORTH);
+        this.lblCompletePrice.setSize(200,70);
+        this.lblNotYetPaid.setSize(200,70);
+        this.jpSouthWest.add(this.lblCompletePrice,BorderLayout.CENTER);
+        this.jpSouthWest.add(this.lblNotYetPaid,BorderLayout.SOUTH);
+
+        this.jpWest.add(this.jpCenterWest,BorderLayout.CENTER);
+        this.jpWest.add(this.jpSouthWest,BorderLayout.SOUTH);
         this.add(jpWest, BorderLayout.WEST);
 
         this.jpCenter.setBackground(new java.awt.Color(60, 73, 14));
@@ -126,4 +154,80 @@ public class MainWindow extends JFrame {
         this.jtblBillList.setValueAt(text,rowIndex,0);
     }
 
+    public void addToYearList(int year){
+        if(year > 2000){
+            this.jcbxYear.addItem(Integer.valueOf(year));
+        }
+    }
+
+    public void setYearComboBoxListener(ActionListener listener){
+        this.jcbxYear.addActionListener(listener);
+        this.comboBoxListener = listener;
+    }
+
+    public void removeCustomerComboBoxListener(){
+
+        for(int i=0;i< this.jcbxYear.getActionListeners().length;i++){
+            this.jcbxYear.removeActionListener(this.jcbxYear.getActionListeners()[i]);
+        }
+
+    }
+
+    public ActionListener getYearComboBoxListener(){
+        if(this.jcbxYear.getActionListeners().length > 0) {
+            return this.jcbxYear.getActionListeners()[0];
+        }
+
+        return null;
+    }
+
+
+    public int getIndexOfSelectedYear(){
+        return this.jcbxYear.getSelectedIndex();
+    }
+
+
+    public void setIndexOfSelectedYear(int index){
+        if(index >= 0 && index < this.jcbxYear.getItemCount()) {
+            this.jcbxYear.setSelectedIndex(index);
+        }
+    }
+
+    public int getYearFromList(int index){
+        if(index >= 0 && index < this.jcbxYear.getItemCount()){
+            return this.jcbxYear.getItemAt(index).intValue();
+        }
+
+        return 0;
+    }
+
+    public void setCompletePriceLabelText(String text) {
+        this.lblCompletePrice.setText(text);
+    }
+
+    public void setNotYetPaidLabelText(String text) {
+        this.lblNotYetPaid.setText(text);
+    }
+
+    public void removeAllTableEntries(){
+        this.jtblBillList.removeAll();
+        DefaultTableModel defaultTableModel = (DefaultTableModel) this.jtblBillList.getModel();
+        defaultTableModel.setRowCount(0);
+    }
+
+    public void setYearComboBoxListenerEnabled(boolean enabled){
+        if(enabled){
+            this.jcbxYear.addActionListener(this.comboBoxListener);
+        }else {
+            this.jcbxYear.removeActionListener(this.comboBoxListener);
+        }
+    }
+
+    public void addRowToBillTable(String[] cellData){
+        if(cellData.length == this.jtblBillList.getColumnCount()){
+            DefaultTableModel model = (DefaultTableModel) this.jtblBillList.getModel();
+            model.addRow(cellData);
+            model.setValueAt(this.deletImage, model.getRowCount()-1, 7);
+        }
+    }
 }

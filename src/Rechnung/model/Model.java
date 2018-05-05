@@ -612,4 +612,21 @@ public class Model {
         }
 
     }
+
+    public int getCurrentYear(){
+        Calendar now = Calendar.getInstance();
+        return now.get(Calendar.YEAR);
+    }
+
+    public List<Integer> getYearList(int rangeLength){
+        int cYear = this.getCurrentYear();
+        List<Integer> list = new ArrayList<>();
+
+        for (int i = cYear-2; i < ((cYear-2)+rangeLength); i++) {
+            list.add(Integer.valueOf(i));
+            System.out.println(i);
+        }
+
+        return list;
+    }
 }

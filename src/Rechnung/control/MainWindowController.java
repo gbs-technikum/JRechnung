@@ -2,6 +2,7 @@ package Rechnung.control;
 
 import Rechnung.Publisher;
 import Rechnung.model.objects.Bill;
+import Rechnung.model.objects.BillEntry;
 import Rechnung.view.MainWindow;
 
 import javax.swing.*;
@@ -12,6 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MainWindowController implements Controller {
 
@@ -20,7 +22,8 @@ public class MainWindowController implements Controller {
     private List<Bill> billsOfYear;
 
     public MainWindowController() {
-            this.mainWindow = new MainWindow();
+            ImageIcon imageIcon = Publisher.getModel().getImageIconFromResources("delete.png");
+            this.mainWindow = new MainWindow(imageIcon);
             this.initEvents();
             this.controllerReturnStatus = ControllerReturnStatus.OK;
             billsOfYear = new ArrayList<>();
@@ -44,13 +47,44 @@ public class MainWindowController implements Controller {
     };
 
     private void fillWindowComponents(boolean refill) {
+        this.mainWindow.setYearComboBoxListenerEnabled(false);
+        if(!refill) {
+            List<Integer> yearList = Publisher.getModel().getYearList(5);
 
-        billsOfYear = Publisher.getModel().readBillsInYear(2018);
+            for (Integer year : yearList) {
+                this.mainWindow.addToYearList(year.intValue());
+            }
+
+            this.mainWindow.setIndexOfSelectedYear(2);
+
+            this.billsOfYear = Publisher.getModel().readBillsInYear(Publisher.getModel().getCurrentYear());
+        }else{
+            int yearFromList = this.mainWindow.getYearFromList(this.mainWindow.getIndexOfSelectedYear());
+            billsOfYear = Publisher.getModel().readBillsInYear(yearFromList);
+            this.mainWindow.removeAllTableEntries();
+        }
+
+
         System.out.println("count of bills in year: " + billsOfYear.size());
         for (int i = 0; i < billsOfYear.size(); i++) {
             Bill bill = billsOfYear.get(i);
-            this.mainWindow.setBillTitel(i,bill.getTitel());
+            fillRowWithBillData(i,bill);
         }
+
+        this.mainWindow.setYearComboBoxListenerEnabled(true);
+    }
+
+    private void fillRowWithBillData(int rowIndex, Bill bill){
+
+        String[] cellData = new String[]{bill.getTitel(),bill.getDebtor().getName(),Publisher.getModel().dateToGermanDateString(bill.getCreationDate()),
+                Publisher.getModel().dateToGermanDateString(bill.getToPayToDate()),bill.isPaid() ? "Ja" : "Nein",
+                Publisher.getModel().dateToGermanDateString(bill.getPaidOnDate()),String.format(Locale.GERMANY,"%.2f",bill.getTotalPrice()),""};
+
+     //   this.billConfigDialog.setTableModelListenerEnabled(false);
+
+        this.mainWindow.addRowToBillTable(cellData);
+
+       // this.billConfigDialog.setTableModelListenerEnabled(true);
 
     }
 
@@ -124,6 +158,13 @@ public class MainWindowController implements Controller {
                         fillWindowComponents(true);
                     }
                 }
+            }
+        });
+
+        this.mainWindow.setYearComboBoxListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fillWindowComponents(true);
             }
         });
     }
