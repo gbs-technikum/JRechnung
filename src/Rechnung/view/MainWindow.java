@@ -1,7 +1,5 @@
 package Rechnung.view;
 
-import Rechnung.view.BillList;
-
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
@@ -11,12 +9,12 @@ import java.awt.event.MouseListener;
 
 public class MainWindow extends JFrame {
 
-    private JButton jbtnCreateBill, jbtnManageBusiness, jbtnManageCustomers, jbtnEncPasswortReset, jbtnManageProductOrService;
+    private JButton jbtnCreateBill, jbtnManageBusiness, jbtnManageCustomers, jbtnEncPasswortReset, jbtnManageProductOrService, jbtnWorkingtime;
     private JPanel jpCenter;
     private JPanel jpWest, jpCenterWest, jpSouthWest;
     private JTable jtblBillList;
     private JComboBox<Integer> jcbxYear;
-    private JLabel lblCompletePriceDesc, lblCompletePrice, lblNotYetPaidDesc, lblNotYetPaid;
+    private JLabel lblTax, lblCompletePrice, lblPaid, lblNotYetPaid;
     private ActionListener comboBoxListener;
     private ImageIcon deletImage;
 
@@ -46,6 +44,7 @@ public class MainWindow extends JFrame {
         this.jbtnEncPasswortReset = new JButton();
         this.jbtnEncPasswortReset.setText("Passwort ändern");
         this.jbtnManageProductOrService = new JButton("Produkt oder Dienstleistung");
+        this.jbtnWorkingtime = new JButton("Arbeitszeit erfassen");
 
 
         this.jbtnManageBusiness.setEnabled(false);
@@ -56,6 +55,8 @@ public class MainWindow extends JFrame {
         this.jbtnEncPasswortReset.setVisible(false);
         this.jbtnManageProductOrService.setEnabled(false);
         this.jbtnManageProductOrService.setVisible(false);
+        this.jbtnWorkingtime.setEnabled(false);
+        this.jbtnWorkingtime.setVisible(false);
 
         this.jpCenter = new JPanel();
         this.jpCenter.setLayout(new BorderLayout());
@@ -73,23 +74,36 @@ public class MainWindow extends JFrame {
         this.jpCenterWest.add(this.jbtnManageCustomers);
         this.jpCenterWest.add(this.jbtnEncPasswortReset);
         this.jpCenterWest.add(this.jbtnManageProductOrService);
+        this.jpCenterWest.add(this.jbtnWorkingtime);
 
         this.jpSouthWest = new JPanel();
-        this.jpSouthWest.setSize(0,200);
-        this.jpSouthWest.setLayout(new BorderLayout());
+        this.jpSouthWest.setSize(0,250);
+        this.jpSouthWest.setLayout(new GridLayout(5,1));
 
         this.lblCompletePrice = new JLabel("xxx");
         this.lblCompletePrice.setBorder(new TitledBorder("Gesamtrechnungsbetrag"));
+
+        this.lblPaid = new JLabel("xxx");
+        this.lblPaid.setBorder(new TitledBorder("beglichener Gesamtbertag"));
         this.lblNotYetPaid = new JLabel("xxx");
-        this.lblNotYetPaid.setBorder(new TitledBorder("Gesamtbetrag offener Rechnungen"));
+        this.lblNotYetPaid.setBorder(new TitledBorder("offener Gesamtbetrag"));
+
+        this.lblTax = new JLabel("xxx");
+        this.lblTax.setBorder(new TitledBorder("Gesamte Umsatzsteuer"));
+
         this.jcbxYear = new JComboBox<>();
         this.jcbxYear.setBorder(new TitledBorder("Anzeigejahr"));
 
-        this.jpSouthWest.add(this.jcbxYear,BorderLayout.NORTH);
+        this.jpSouthWest.add(this.jcbxYear);
         this.lblCompletePrice.setSize(200,70);
         this.lblNotYetPaid.setSize(200,70);
-        this.jpSouthWest.add(this.lblCompletePrice,BorderLayout.CENTER);
-        this.jpSouthWest.add(this.lblNotYetPaid,BorderLayout.SOUTH);
+        this.lblPaid.setSize(200,70);
+        this.lblTax.setSize(200,70);
+
+        this.jpSouthWest.add(this.lblCompletePrice);
+        this.jpSouthWest.add(this.lblPaid);
+        this.jpSouthWest.add(this.lblNotYetPaid);
+        this.jpSouthWest.add(this.lblTax);
 
         this.jpWest.add(this.jpCenterWest,BorderLayout.CENTER);
         this.jpWest.add(this.jpSouthWest,BorderLayout.SOUTH);
@@ -148,6 +162,15 @@ public class MainWindow extends JFrame {
 
     public void setManageProductOrServiceButtonEnabled(boolean enabled){
         this.jbtnManageProductOrService.setEnabled(enabled);
+    }
+
+    public void setWorkingtimeButtonListener(ActionListener listener){
+        this.jbtnWorkingtime.addActionListener(listener);
+        this.jbtnWorkingtime.setVisible(true);
+    }
+
+    public void setWorkingtimeButtonButtonEnabled(boolean enabled){
+        this.jbtnWorkingtime.setEnabled(enabled);
     }
 
     public void setBillTitel(int rowIndex, String text){
@@ -209,6 +232,15 @@ public class MainWindow extends JFrame {
         this.lblNotYetPaid.setText(text);
     }
 
+    public void setTaxLabelText(String text) {
+        this.lblTax.setText(text);
+    }
+
+    public void setPaidLabelText(String text) {
+        this.lblPaid.setText(text);
+    }
+
+
     public void removeAllTableEntries(){
         this.jtblBillList.removeAll();
         DefaultTableModel defaultTableModel = (DefaultTableModel) this.jtblBillList.getModel();
@@ -228,6 +260,12 @@ public class MainWindow extends JFrame {
             DefaultTableModel model = (DefaultTableModel) this.jtblBillList.getModel();
             model.addRow(cellData);
             model.setValueAt(this.deletImage, model.getRowCount()-1, 7);
+        }
+    }
+
+    public void removeTableRow(int rowIndex){
+        if(rowIndex >= 0 && rowIndex < this.jtblBillList.getRowCount()){
+            ((DefaultTableModel)this.jtblBillList.getModel()).removeRow(rowIndex);
         }
     }
 }

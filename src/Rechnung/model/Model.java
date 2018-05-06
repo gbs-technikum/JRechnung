@@ -10,6 +10,8 @@ import Rechnung.model.objects.Bill;
 import Rechnung.model.objects.Business;
 import Rechnung.model.objects.Customer;
 import Rechnung.model.objects.ProductOrService;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTRow;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -628,5 +630,56 @@ public class Model {
         }
 
         return list;
+    }
+
+    public double calcCompletePriceForYear(List<Bill> billsOfYear){
+        if(billsOfYear == null){
+            return 0.0;
+        }
+
+        double result = 0.0;
+
+        for (Bill bill : billsOfYear) {
+            result += bill.getTotalPrice();
+        }
+
+        return result;
+    }
+
+    public double calcCompleteTax(List<Bill> billsOfYear){
+        if(billsOfYear == null){
+            return 0.0;
+        }
+
+        double result = 0.0;
+
+        for (Bill bill : billsOfYear) {
+            if(!bill.mustBeIncludedTaxes()){
+                result += (bill.getTotalPrice() - bill.getEntryPriceSum());
+            }else {
+                for (Integer taxPercentage : bill.getTaxPercentages()) {
+                    result += bill.getTaxValueForPercentage(taxPercentage.intValue());
+                }
+            }
+
+        }
+
+        return result;
+    }
+
+    public double calcNotYetPaidOrPaidPrice(List<Bill> billsOfYear, boolean paid){
+        if(billsOfYear == null){
+            return 0.0;
+        }
+
+        double result = 0.0;
+
+        for (Bill bill : billsOfYear) {
+            if(bill.isPaid() == paid) {
+                result += bill.getTotalPrice();
+            }
+        }
+
+        return result;
     }
 }

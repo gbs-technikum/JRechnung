@@ -65,11 +65,16 @@ public class MainWindowController implements Controller {
         }
 
 
-        System.out.println("count of bills in year: " + billsOfYear.size());
+
         for (int i = 0; i < billsOfYear.size(); i++) {
             Bill bill = billsOfYear.get(i);
             fillRowWithBillData(i,bill);
         }
+
+        this.mainWindow.setCompletePriceLabelText(String.format(Locale.GERMANY,"%.2f €",Publisher.getModel().calcCompletePriceForYear(billsOfYear)));
+        this.mainWindow.setPaidLabelText(String.format(Locale.GERMANY,"%.2f €",Publisher.getModel().calcNotYetPaidOrPaidPrice(billsOfYear,true)));
+        this.mainWindow.setNotYetPaidLabelText(String.format(Locale.GERMANY,"%.2f €",Publisher.getModel().calcNotYetPaidOrPaidPrice(billsOfYear,false)));
+        this.mainWindow.setTaxLabelText(String.format(Locale.GERMANY,"%.2f €",Publisher.getModel().calcCompleteTax(billsOfYear)));
 
         this.mainWindow.setYearComboBoxListenerEnabled(true);
     }
@@ -149,7 +154,7 @@ public class MainWindowController implements Controller {
                 JTable table =(JTable) mouseEvent.getSource();
                 Point point = mouseEvent.getPoint();
                 int row = table.rowAtPoint(point);
-                if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+                if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1 && table.getSelectedColumn() < 7) {
                     if(row < billsOfYear.size()){
                         controllerReturnStatus = ControllerReturnStatus.OK;
 
@@ -158,6 +163,19 @@ public class MainWindowController implements Controller {
                         fillWindowComponents(true);
                     }
                 }
+
+
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                super.mouseClicked(mouseEvent);
+                JTable table =(JTable) mouseEvent.getSource();
+                table.removeMouseListener(this);
+                if (table.getSelectedColumn() == 7) {
+                    mainWindow.removeTableRow(table.getSelectedRow());
+                }
+                table.addMouseListener(this);
             }
         });
 
@@ -167,5 +185,17 @@ public class MainWindowController implements Controller {
                 fillWindowComponents(true);
             }
         });
+
+        this.mainWindow.setWorkingtimeButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Controller controller = new WorkingtimeRecordConfigDialogController(mainWindow);
+                controller.run();
+            }
+        });
+
+        this.mainWindow.setWorkingtimeButtonButtonEnabled(true);
     }
+
+
 }
