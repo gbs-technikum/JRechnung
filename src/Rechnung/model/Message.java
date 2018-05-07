@@ -34,6 +34,12 @@ public class Message {
         showErrorMessage("Sie müssen eine Kundennummer als Zahl zwischen -2.147.483.648 und 2.147.483.647 eingeben!");
     }
 
+    public static void showErrorMessageIfIsNameOrForenameOrStreetOrVillageNotValid(boolean valid, String fieldname){
+        if(!valid){
+            Message.showErrorMessageNoValidNameOrForenameOrStreetOrVillage(fieldname);
+        }
+    }
+
     public static void showErrorMessageNoValidNameOrForenameOrStreetOrVillage(String fieldname){
         showErrorMessage(fieldname + " ist ein Pflichtfeld und darf keine Zahl enthalten!");
     }

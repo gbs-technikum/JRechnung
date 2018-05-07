@@ -1,6 +1,7 @@
 package Rechnung.control;
 
 import Rechnung.Publisher;
+import Rechnung.model.Message;
 import Rechnung.model.Model;
 import Rechnung.model.objects.*;
 import Rechnung.view.CustomersConfigDialog;
@@ -48,13 +49,26 @@ public class CustomersConfigDialogController implements Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Model model = Publisher.getModel();
-                boolean isNameValid = model.isNameOrForenameOrStreetOrVillageValid("Name", customersConfigDialog.getNameTextField());
-                boolean isForenameValid = model.isNameOrForenameOrStreetOrVillageValid("Vorname", customersConfigDialog.getForennameTextField());
-                boolean isStreetValid = model.isNameOrForenameOrStreetOrVillageValid("Straße", customersConfigDialog.getStreetTextField());
+                boolean isNameValid = model.isNameOrForenameOrStreetOrVillageValid(customersConfigDialog.getNameTextField());
+                Message.showErrorMessageIfIsNameOrForenameOrStreetOrVillageNotValid(isNameValid, "Name");
+                boolean isForenameValid = model.isNameOrForenameOrStreetOrVillageValid(customersConfigDialog.getForennameTextField());
+                Message.showErrorMessageIfIsNameOrForenameOrStreetOrVillageNotValid(isForenameValid, "Vorname");
+                boolean isStreetValid = model.isNameOrForenameOrStreetOrVillageValid(customersConfigDialog.getStreetTextField());
+                Message.showErrorMessageIfIsNameOrForenameOrStreetOrVillageNotValid(isStreetValid, "Straße");
                 boolean isHouseNumberValid = model.isHouseNumberValid(customersConfigDialog.getHouseNumberTextField());
+                if(!isHouseNumberValid){
+                    Message.showErrorMessageNoValidHouseNumber();
+                }
                 boolean isPostCodeValid = model.isPostCodeValid(customersConfigDialog.getPostCodeTextField());
-                boolean isVillageValid = model.isNameOrForenameOrStreetOrVillageValid("Ort", customersConfigDialog.getVillageTextField());
+                if(!isPostCodeValid){
+                    Message.showErrorMessageNoValidPostCode();
+                }
+                boolean isVillageValid = model.isNameOrForenameOrStreetOrVillageValid(customersConfigDialog.getVillageTextField());
+                Message.showErrorMessageIfIsNameOrForenameOrStreetOrVillageNotValid(isVillageValid, "Ort");
                 boolean isLandValid = model.isLandValid(customersConfigDialog.getLandTextField());
+                if(!isLandValid){
+                    Message.showErrorMessageNoValidLand();
+                }
                 if(isNameValid && isForenameValid && isStreetValid && isHouseNumberValid && isPostCodeValid && isVillageValid && isLandValid){
                     saveComponentData();
                     fillWindowComponents(false);
@@ -95,6 +109,8 @@ public class CustomersConfigDialogController implements Controller {
                 if(Publisher.getModel().isFaxOrPhoneNumberValid(number) &&
                    !Publisher.getModel().isStringInList(customersConfigDialog.getFaxAcessibilityStringList(),number.trim())){
                     customersConfigDialog.addToFaxList(number.trim());
+                }else if(!Publisher.getModel().isFaxOrPhoneNumberValid(number)){
+                    Message.showErrorMessageNoValidPhoneOrFaxNumber();
                 }
 
             }
@@ -119,6 +135,8 @@ public class CustomersConfigDialogController implements Controller {
                 if(Publisher.getModel().isFaxOrPhoneNumberValid(number) &&
                         !Publisher.getModel().isStringInList(customersConfigDialog.getPhoneAcessibilityStringList(),number.trim())){
                     customersConfigDialog.addToPhoneList(number.trim());
+                }else if(!Publisher.getModel().isFaxOrPhoneNumberValid(number)){
+                    Message.showErrorMessageNoValidPhoneOrFaxNumber();
                 }
 
             }
@@ -143,6 +161,8 @@ public class CustomersConfigDialogController implements Controller {
                 if(Publisher.getModel().isValidEmailAddress(mail) &&
                         !Publisher.getModel().isStringInList(customersConfigDialog.getEMailAcessibilityStringList(),mail.trim())){
                     customersConfigDialog.addToEMailList(mail.trim());
+                }else if(!Publisher.getModel().isValidEmailAddress(mail)){
+                    Message.showErrorMessageNoValidMailAddress();
                 }
 
             }

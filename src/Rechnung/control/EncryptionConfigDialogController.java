@@ -1,6 +1,7 @@
 package Rechnung.control;
 
 import Rechnung.Publisher;
+import Rechnung.model.Message;
 import Rechnung.model.SecurityProvider;
 import Rechnung.view.EncryptionConfigDialog;
 
@@ -82,7 +83,11 @@ public class EncryptionConfigDialogController implements Controller {
 
         if(this.passwordCheckOnly){
             try {
-                return (sp.unlock(password));
+                boolean unlocked = sp.unlock(password);
+                if(!unlocked){
+                    Message.showErrorMessagePasswordFalse();
+                }
+                return unlocked;
             } catch (InvalidKeySpecException e) {
                 e.printStackTrace();
             } catch (NoSuchAlgorithmException e) {
@@ -114,10 +119,20 @@ public class EncryptionConfigDialogController implements Controller {
                 SecurityProvider tmpSecurityProvider = new SecurityProvider();
                 try {
                     boolean isLocked = !tmpSecurityProvider.unlock(oldPassword);
+                    if(isLocked){
+                        Message.showErrorMessagePasswordFalse();
+                    }
                     tmpSecurityProvider = null;
                     if(!isLocked){
                         if(Publisher.getModel().isPasswordValid(password) && Publisher.getModel().isPasswordEqualsPassword2(password, password2)){
                             sp.reInit(password);
+                        }else{
+                            if(Publisher.getModel().isPasswordValid(password)){
+                                Message.showErrorMessageNoValidPassword();
+                            }
+                            if(Publisher.getModel().isPasswordEqualsPassword2(password, password2)){
+                                Message.showErrorMessagePasswordNotEqualPassword2();
+                            }
                         }
                     }
                 } catch (InvalidKeySpecException e) {

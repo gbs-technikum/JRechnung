@@ -179,7 +179,6 @@ public class SecurityProvider {
             return this.initCipher();
         }
 
-        Message.showErrorMessagePasswordFalse();
         return false;
     }
 

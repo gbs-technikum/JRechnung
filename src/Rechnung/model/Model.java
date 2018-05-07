@@ -148,7 +148,6 @@ public class Model {
         if(password != null && password.length() > 7 && charsCorrespondPasswordPolicy(password)){
             return true;
         }
-        Message.showErrorMessageNoValidPassword();
         return false;
     }
 
@@ -156,13 +155,11 @@ public class Model {
         if(password.equals(password2)){
             return true;
         }
-        Message.showErrorMessagePasswordNotEqualPassword2();
         return false;
     }
 
-    public boolean isNameOrForenameOrStreetOrVillageValid(String fieldname, String worth){
+    public boolean isNameOrForenameOrStreetOrVillageValid(String worth){
         if (Pattern.compile( "[0-9]" ).matcher(worth).find() || worth.isEmpty()){
-            Message.showErrorMessageNoValidNameOrForenameOrStreetOrVillage(fieldname);
             return false;
         }
         return true;
@@ -170,7 +167,7 @@ public class Model {
 
     public boolean isHouseNumberValid(String houseNumber){
         if(!Pattern.compile( "[0-9]" ).matcher(houseNumber).find() || houseNumber.isEmpty() || houseNumber.contains(" ")){
-            Message.showErrorMessageNoValidHouseNumber();
+            //Message.showErrorMessageNoValidHouseNumber();
             return false;
         }
         return true;
@@ -180,7 +177,6 @@ public class Model {
         try{
             Integer.parseInt(number);
         }catch (NumberFormatException e){
-            Message.showErrorMessageNoValidPostCode();
             return false;
         }
         return true;
@@ -188,7 +184,6 @@ public class Model {
 
     public boolean isLandValid(String land){
         if(Pattern.compile( "[0-9]" ).matcher(land).find()){
-            Message.showErrorMessageNoValidLand();
             return false;
         }
         return true;
@@ -198,7 +193,6 @@ public class Model {
         if(number != null && number.length() > 5 && number.matches("[0-9]+")){
             return true;
         }
-        Message.showErrorMessageNoValidPhoneOrFaxNumber();
         return false;
     }
 
@@ -218,7 +212,6 @@ public class Model {
             InternetAddress emailAddr = new InternetAddress(email);
             emailAddr.validate();
         } catch (AddressException ex) {
-            Message.showErrorMessageNoValidMailAddress();
             result = false;
         }
         return result;

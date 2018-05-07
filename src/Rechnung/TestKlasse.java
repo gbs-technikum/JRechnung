@@ -31,7 +31,10 @@ public class TestKlasse {
         customer.addPhoneNumber(new TelephoneAccessibility(teluuid,"6666666"));
 
         SecurityProvider sp = Publisher.getSecurityProvider();
-        sp.unlock("password");
+        boolean unlocked = sp.unlock("password");
+        if(!unlocked){
+            Message.showErrorMessagePasswordFalse();
+        }
 
          CustomerService.saveCustomer(customer);
         // customer.removePhoneNumber(new TelephoneAccessibility(teluuid,"6666666"));
