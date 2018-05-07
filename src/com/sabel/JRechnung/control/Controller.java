@@ -18,7 +18,11 @@ public interface Controller {
 
     default void waitForWindowToClose(Window window){
         while (window.isDisplayable()){
-            //Nichts zu tun ausser zu warten
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         window.dispose();
     }

@@ -10,20 +10,9 @@ import java.sql.SQLException;
 
 public final class Publisher {
 
-    private static Logger loggerInstance;
     private static SecurityProvider securityProviderInstance;
     private static Connection dbConnectionInstance;
     private static Model modelInstance;
-
-
-    public static Logger getLogger() {
-        if(!(loggerInstance instanceof ConsoleLogger)){
-            loggerInstance = new ConsoleLogger();
-        }
-
-        return loggerInstance;
-    }
-
 
     public static SecurityProvider getSecurityProvider(){
         if(!(securityProviderInstance instanceof SecurityProvider)){

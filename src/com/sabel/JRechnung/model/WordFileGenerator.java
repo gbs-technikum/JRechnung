@@ -21,6 +21,13 @@ import java.util.Locale;
 public class WordFileGenerator {
 
     public static boolean generate(File template, File destination, Bill bill, Business business){
+
+        System.out.println("template == null" + (template == null));
+        System.out.println("template.exists()" + template.exists());
+        System.out.println("destination == null" + (destination == null));
+        System.out.println("business == null" + (business == null));
+        System.out.println("bill == null" + (business == null));
+
         if((template != null && !template.exists()) || (destination == null) ||
                 bill == null || business == null){
             return false;

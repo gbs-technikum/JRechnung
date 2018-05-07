@@ -9,7 +9,7 @@ import java.awt.event.MouseListener;
 
 public class MainWindow extends JFrame {
 
-    private JButton jbtnCreateBill, jbtnManageBusiness, jbtnManageCustomers, jbtnEncPasswortReset, jbtnManageProductOrService, jbtnWorkingtime;
+    private JButton jbtnCreateBill, jbtnManageBusiness, jbtnManageCustomers, jbtnEncPasswortReset, jbtnManageProductOrService;
     private JPanel jpCenter;
     private JPanel jpWest, jpCenterWest, jpSouthWest;
     private JTable jtblBillList;
@@ -44,7 +44,6 @@ public class MainWindow extends JFrame {
         this.jbtnEncPasswortReset = new JButton();
         this.jbtnEncPasswortReset.setText("Passwort ändern");
         this.jbtnManageProductOrService = new JButton("Produkt oder Dienstleistung");
-        this.jbtnWorkingtime = new JButton("Arbeitszeit erfassen");
 
 
         this.jbtnManageBusiness.setEnabled(false);
@@ -55,8 +54,6 @@ public class MainWindow extends JFrame {
         this.jbtnEncPasswortReset.setVisible(false);
         this.jbtnManageProductOrService.setEnabled(false);
         this.jbtnManageProductOrService.setVisible(false);
-        this.jbtnWorkingtime.setEnabled(false);
-        this.jbtnWorkingtime.setVisible(false);
 
         this.jpCenter = new JPanel();
         this.jpCenter.setLayout(new BorderLayout());
@@ -74,7 +71,6 @@ public class MainWindow extends JFrame {
         this.jpCenterWest.add(this.jbtnManageCustomers);
         this.jpCenterWest.add(this.jbtnEncPasswortReset);
         this.jpCenterWest.add(this.jbtnManageProductOrService);
-        this.jpCenterWest.add(this.jbtnWorkingtime);
 
         this.jpSouthWest = new JPanel();
         this.jpSouthWest.setSize(0,250);
@@ -162,15 +158,6 @@ public class MainWindow extends JFrame {
 
     public void setManageProductOrServiceButtonEnabled(boolean enabled){
         this.jbtnManageProductOrService.setEnabled(enabled);
-    }
-
-    public void setWorkingtimeButtonListener(ActionListener listener){
-        this.jbtnWorkingtime.addActionListener(listener);
-        this.jbtnWorkingtime.setVisible(true);
-    }
-
-    public void setWorkingtimeButtonButtonEnabled(boolean enabled){
-        this.jbtnWorkingtime.setEnabled(enabled);
     }
 
     public void setBillTitel(int rowIndex, String text){

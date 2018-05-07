@@ -85,15 +85,11 @@ public class Main {
                         System.exit(0);
                     }
 
-                    Logger logger = Publisher.getLogger();
-
                     try {
                         Connection connection = Publisher.getDBConnection();
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
-
-                    logger.loginfo("Start...");
 
                     mainWindowController.run();
 

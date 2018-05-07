@@ -4,7 +4,7 @@ import com.sabel.JRechnung.Publisher;
 import com.sabel.JRechnung.model.WorkingTimeRecorder;
 import com.sabel.JRechnung.model.objects.*;
 import com.sabel.JRechnung.view.BillConfigDialog;
-import com.sabel.JRechnung.view.WaitWindow;
+import com.sabel.JRechnung.view.WordWaitWindow;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
@@ -176,23 +176,24 @@ public class BillConfigDialogController implements Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(bill != null && bill.getBillFile() != null) {
-                    JDialog waitWindow = new WaitWindow(null, "Rechnungsanzeige wird vorbereitet...");
+                    ImageIcon loader = Publisher.getModel().getImageIconFromResources("loader.gif");
+                    JDialog waitWindow = new WordWaitWindow(parentWindow,bill,loader);
 
-                    WordStarter runnable = new WordStarter(bill.getBillFile());
+/*                    WordStarter runnable = new WordStarter(bill.getBillFile());
 
                     Thread wordStarterThread = new Thread(runnable);
 
                     wordStarterThread.start();
 
 
-                while (!runnable.isReadyToUse()) {
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e1) {
-                    }
-                }
+                    while (!runnable.isReadyToUse()) {
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e1) {
+                        }
+                    }*/
 
-                     ((WaitWindow) waitWindow).close();
+                   //  ((WordWaitWindow) waitWindow).close();
                 }
 
             }});

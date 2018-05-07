@@ -1,6 +1,7 @@
 package com.sabel.JRechnung.control;
 
 import com.sabel.JRechnung.Publisher;
+import com.sabel.JRechnung.model.Message;
 import com.sabel.JRechnung.model.objects.Bill;
 import com.sabel.JRechnung.view.MainWindow;
 
@@ -100,6 +101,7 @@ public class MainWindowController implements Controller {
 
                 Controller controller = new BillConfigDialogController(mainWindow,null);
                 controller.run();
+                fillWindowComponents(true);
             }
         });
         this.mainWindow.setCreateBillButtonEnabled(true);
@@ -172,7 +174,11 @@ public class MainWindowController implements Controller {
                 JTable table =(JTable) mouseEvent.getSource();
                 table.removeMouseListener(this);
                 if (table.getSelectedColumn() == 7) {
-                    mainWindow.removeTableRow(table.getSelectedRow());
+                    Bill billToRemove = billsOfYear.get(table.getSelectedRow());
+                    if(Message.showYesNoConfirmDialog(mainWindow,"Möchten Sie diese Rechnung wirklich löschen?","Rechnung löschen")){
+                        Publisher.getModel().removeBill(billToRemove,Message.showYesNoConfirmDialog(mainWindow,"Soll die zur Rechnung gehörige Word-Datei auch gelöscht werden?","Rechnung löschen"));
+                        fillWindowComponents(true);
+                    }
                 }
                 table.addMouseListener(this);
             }
@@ -184,16 +190,6 @@ public class MainWindowController implements Controller {
                 fillWindowComponents(true);
             }
         });
-
-        this.mainWindow.setWorkingtimeButtonListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Controller controller = new WorkingtimeRecordConfigDialogController(mainWindow);
-                controller.run();
-            }
-        });
-
-        this.mainWindow.setWorkingtimeButtonButtonEnabled(true);
     }
 
 

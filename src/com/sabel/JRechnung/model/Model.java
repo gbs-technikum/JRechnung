@@ -288,8 +288,15 @@ public class Model {
         return false;
     }
 
-    public boolean removeBill(Bill bill){
+    public boolean removeBill(Bill bill,boolean deleteFile){
         try {
+            if(bill == null){
+                return false;
+            }
+            if(bill.getBillFile() != null && deleteFile){
+                bill.getBillFile().delete();
+            }
+
             return BillService.remove(bill);
         } catch (SQLException e) {
             //TODO
@@ -694,4 +701,5 @@ public class Model {
 
         return format.format(new Date());
     }
+
 }

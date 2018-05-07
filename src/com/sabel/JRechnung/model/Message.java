@@ -1,6 +1,7 @@
 package com.sabel.JRechnung.model;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Message {
 
@@ -62,5 +63,11 @@ public class Message {
 
     public static void showErrorMessagePrinting(){
         showErrorMessage("Dokument konnte nicht gedruckt werden!");
+    }
+
+    public static boolean showYesNoConfirmDialog(Component parent,String message, String title){
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog(parent, message, title, dialogButton);
+        return  dialogResult == 0;
     }
 }

@@ -1,7 +1,6 @@
 package com.sabel.JRechnung.model;
 
 import com.sabel.JRechnung.Debug;
-import com.sabel.JRechnung.Logger;
 import com.sabel.JRechnung.Publisher;
 
 import javax.crypto.*;
@@ -26,13 +25,10 @@ public class SecurityProvider {
     private boolean lock;
     private Cipher cipher;
     private SecretKey secretKey;
-    private Logger logger;
 
     public SecurityProvider(){
         setLock(true);
         this.secretKey = null;
-        this.logger = Publisher.getLogger();
-        this.logger.loginfo(getClass().getName());
     }
 
     public SecurityProvider(String password) throws InvalidKeySpecException, NoSuchAlgorithmException, UnsupportedEncodingException, SQLException, NoSuchPaddingException {
