@@ -1,6 +1,7 @@
 package com.sabel.JRechnung.control;
 
 import com.sabel.JRechnung.Publisher;
+import com.sabel.JRechnung.model.WorkingTimeRecorder;
 import com.sabel.JRechnung.model.objects.*;
 import com.sabel.JRechnung.view.BillConfigDialog;
 import com.sabel.JRechnung.view.WaitWindow;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
 
 public class BillConfigDialogController implements Controller {
 
@@ -89,6 +91,7 @@ public class BillConfigDialogController implements Controller {
                     } else {
                         billConfigDialog.addRowsToEntryTable(1);
                     }
+                    billConfigDialog.setCellValue(String.valueOf(getPredefinedTax()),billConfigDialog.getEntryTableRowCount()-1,1);
                 }
 
 
@@ -211,6 +214,17 @@ public class BillConfigDialogController implements Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateTableCompletePrice();
+            }
+        });
+
+        this.billConfigDialog.setStartButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ((JButton)e.getSource()).setEnabled(false);
+
+                java.util.Timer timer = new Timer();
+                timer.schedule(new WorkingTimeRecorder(billConfigDialog.getTimeLabelObject()), 0, 1000);
+
             }
         });
     }
@@ -432,6 +446,15 @@ public class BillConfigDialogController implements Controller {
         }
 
         return -1;
+    }
+
+    public int getPredefinedTax(){
+
+        if(this.billConfigDialog.isTax0RadioButtonChecked() || this.billConfigDialog.isTaxFreeCheckbox()) {
+            return 0;
+        }
+
+        return (this.billConfigDialog.isTax19RadioButtonChecked()) ? 19 : 7;
     }
 
 

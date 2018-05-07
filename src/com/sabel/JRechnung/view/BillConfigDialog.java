@@ -34,6 +34,12 @@ public class BillConfigDialog extends ConfigDialog {
     private JLabel jlblFile;
     private TableModelListener tableModelListener;
     private ImageIcon deleImage;
+    private JRadioButton jrdbtnTax19, jrdbtnTax7, jrdbtnTax0;
+    private ButtonGroup btnTaxGroup;
+    private JPanel taxButtonPanel;
+    private JPanel jpWorkingTimeRecord;
+    private JLabel lblTime;
+    private JButton jbtnStart, jbtnStop;
 
 
     public BillConfigDialog(JFrame frame, ImageIcon deleImage) {
@@ -47,6 +53,37 @@ public class BillConfigDialog extends ConfigDialog {
         this.setPreferredSize(new Dimension(1024,768));
         this.mainPanel = new JPanel();
         this.mainPanel.setLayout(new BoxLayout(this.mainPanel, BoxLayout.Y_AXIS));
+
+        this.btnTaxGroup = new ButtonGroup();
+        this.taxButtonPanel = new JPanel();
+        this.taxButtonPanel.setBorder(new TitledBorder("MwSt."));
+        this.jrdbtnTax19 = new JRadioButton("19%");
+        this.jrdbtnTax19.setSelected(true);
+        this.jrdbtnTax7 = new JRadioButton("7%");
+        this.jrdbtnTax0 = new JRadioButton("0%");
+
+        this.btnTaxGroup.add(this.jrdbtnTax19);
+        this.btnTaxGroup.add(this.jrdbtnTax7);
+        this.btnTaxGroup.add(this.jrdbtnTax0);
+
+        this.taxButtonPanel.add(this.jrdbtnTax19);
+        this.taxButtonPanel.add(this.jrdbtnTax7);
+        this.taxButtonPanel.add(this.jrdbtnTax0);
+
+        this.jpWorkingTimeRecord = new JPanel();
+
+        this.lblTime = new JLabel();
+        this.lblTime.setText("00:00:00");
+        this.lblTime.setBorder(new TitledBorder("Zeit"));
+        lblTime.setSize(200,70);
+
+        this.jbtnStart = new JButton("Start");
+        this.jbtnStop = new JButton("Stop");
+
+        this.jpWorkingTimeRecord.setBorder(new TitledBorder("Arbeitszeiterfassung"));
+        this.jpWorkingTimeRecord.add(this.lblTime);
+        this.jpWorkingTimeRecord.add(this.jbtnStart);
+        this.jpWorkingTimeRecord.add(this.jbtnStop);
 
         this.jtfTitel = new JTextField();
         this.jtfTitel.setBorder(new TitledBorder("Bezeichnung"));
@@ -153,7 +190,11 @@ public class BillConfigDialog extends ConfigDialog {
         this.leftPanel2.setPreferredSize(new Dimension(450,50));
         this.leftPanel2.add(this.btnAddEntry);
         this.leftPanel2.add(this.jcbxProductOrService);
+        this.entryPanel.setBorder(new TitledBorder("Neue Eintragung"));
         this.entryPanel.add(this.leftPanel2,BorderLayout.WEST);
+        this.entryPanel.add(this.taxButtonPanel,BorderLayout.CENTER);
+        this.entryPanel.add(this.jpWorkingTimeRecord,BorderLayout.EAST);
+
 
 
         this.mainPanel.add(this.jPanelCheckboxes);
@@ -272,6 +313,10 @@ public class BillConfigDialog extends ConfigDialog {
         return this.jlblFile.getText();
     }
 
+    public void setFileLabel(String text){
+        this.jlblFile.setText(text);
+    }
+
     public void setTitleTextField(String text){
         this.jtfTitel.setText(text);
     }
@@ -304,9 +349,7 @@ public class BillConfigDialog extends ConfigDialog {
         this.jtxtaComment.setText(text);
     }
 
-    public void setFileLabel(String text){
-        this.jlblFile.setText(text);
-    }
+
 
     public void setBillOverviewButtonListener(ActionListener actionListener){
         this.btnBillOverview.addActionListener(actionListener);
@@ -485,4 +528,44 @@ public class BillConfigDialog extends ConfigDialog {
         this.jchkbxTaxFree.addActionListener(actionListener);
     }
 
+    public boolean isTax19RadioButtonChecked() {
+        return jrdbtnTax19.isSelected();
+    }
+
+    public boolean isTax7RadioButtonChecked() {
+        return jrdbtnTax7.isSelected();
+    }
+
+    public boolean isTax0RadioButtonChecked() {
+        return jrdbtnTax0.isSelected();
+    }
+
+
+    public String getTimeLabel(){
+        return this.jlblFile.getText();
+    }
+
+    public void setTimeLabel(String text){
+        this.jlblFile.setText(text);
+    }
+
+    public void setStopButtonListener(ActionListener actionListener){
+        this.jbtnStop.addActionListener(actionListener);
+    }
+
+    public void setStopButtonEnabled(Boolean enabled){
+        this.jbtnStop.setEnabled(enabled);
+    }
+
+    public void setStartButtonListener(ActionListener actionListener){
+        this.jbtnStart.addActionListener(actionListener);
+    }
+
+    public void setStartButtonEnabled(Boolean enabled){
+        this.jbtnStop.setEnabled(enabled);
+    }
+
+    public JLabel getTimeLabelObject() {
+        return lblTime;
+    }
 }
