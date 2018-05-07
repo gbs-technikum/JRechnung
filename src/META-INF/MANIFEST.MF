@@ -1,3 +1,13 @@
 Manifest-Version: 1.0
-Main-Class: Rechnung.Main
+Class-Path: .\lib\poi-3.17.jar .\lib\jai_codec.jar .\lib\javax.mail.ja
+ r .\lib\log4j-1.2.17.jar .\lib\rtfkit_nosrc.jar .\lib\junique-1.0.4.j
+ ar .\lib\poi-ooxml-3.17.jar .\lib\xmlbeans-2.6.0.jar .\lib\commons-co
+ dec-1.10.jar .\lib\sqlite-jdbc-3.21.0.jar .\lib\commons-logging-1.2.j
+ ar .\lib\poi-scratchpad-3.17.jar .\lib\xmlbeans-xpath-2.6.0.jar .\lib
+ \poi-ooxml-schemas-3.17.jar .\lib\commons-collections4-4.1.jar .\lib\
+ org.eclipse.swt_3.106.3.v20180214-0345.jar .\lib\org.eclipse.jface_3.
+ 13.2.v20171022-1656.jar .\lib\org.eclipse.core.commands_3.9.0.v201705
+ 30-1048.jar .\lib\org.eclipse.equinox.common_3.9.0.v20170207-1454.jar
+  .\lib\org.eclipse.swt.win32.win32.x86_64_3.106.3.v20180214-0345.jar
+Main-Class: com.sabel.JRechnung.Main
 

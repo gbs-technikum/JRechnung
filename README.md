@@ -1,4 +1,4 @@
-# JRechnung
+# com.sabel.JRechnung
 
 Projekt 4. Schulaufgabe
 
