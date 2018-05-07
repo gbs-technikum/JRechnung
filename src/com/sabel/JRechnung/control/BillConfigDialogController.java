@@ -28,11 +28,16 @@ public class BillConfigDialogController implements Controller {
     private Controller.ControllerReturnStatus controllerReturnStatus;
     private Bill bill;
     private JFrame parentWindow;
+    private java.util.Timer timer;
+    private boolean timeIsRecognized;
+    private Date workingTimeRecordStart;
 
 
     public BillConfigDialogController(JFrame window,Bill bill) {
         ImageIcon imageIcon = Publisher.getModel().getImageIconFromResources("delete.png");
         this.billConfigDialog = new BillConfigDialog(window,imageIcon);
+        this.workingTimeRecordStart = null;
+        this.timeIsRecognized = false;
         this.parentWindow = window;
         this.initEvents();
         this.controllerReturnStatus = Controller.ControllerReturnStatus.ABORT;
@@ -88,7 +93,11 @@ public class BillConfigDialogController implements Controller {
                     ProductOrService selectedProductOrService = billConfigDialog.getProductOrServiceFromList(billConfigDialog.getIndexOfSelectedProductOrService());
                     if (selectedProductOrService != null) {
                         addRowWithProductOrServiceData(selectedProductOrService);
-                    } else {
+                    } else if(timeIsRecognized && timer == null) {
+                        addRowWithWorkingTime();
+                        billConfigDialog.setTimeLabel("00:00:00");
+                        timeIsRecognized = false;
+                    } else{
                         billConfigDialog.addRowsToEntryTable(1);
                     }
                     billConfigDialog.setCellValue(String.valueOf(getPredefinedTax()),billConfigDialog.getEntryTableRowCount()-1,1);
@@ -220,11 +229,30 @@ public class BillConfigDialogController implements Controller {
         this.billConfigDialog.setStartButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ((JButton)e.getSource()).setEnabled(false);
+                if(!timeIsRecognized){
+                    ((JButton)e.getSource()).setEnabled(false);
 
-                java.util.Timer timer = new Timer();
-                timer.schedule(new WorkingTimeRecorder(billConfigDialog.getTimeLabelObject()), 0, 1000);
+                    workingTimeRecordStart = new Date();
 
+                    timeIsRecognized = true;
+
+                    timer = new Timer();
+                    timer.schedule(new WorkingTimeRecorder(billConfigDialog.getTimeLabelObject()), 0, 1000);
+                }else{
+                    //TODO Fehler
+                }
+            }
+        });
+
+        this.billConfigDialog.setStopButtonListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(timer != null){
+                    timer.cancel();;
+                    timer = null;
+
+                    billConfigDialog.setStartButtonEnabled(true);
+                }
             }
         });
     }
@@ -335,6 +363,15 @@ public class BillConfigDialogController implements Controller {
 
     private void addRowWithProductOrServiceData(ProductOrService productOrService){
         String[] cellData = new String[]{productOrService.getTitle(),"","",String.format(Locale.GERMANY,"%.2f",productOrService.getPrice()),""};
+
+        //String.valueOf(getPredefinedTax())
+
+        this.billConfigDialog.addRowToEntryTable(cellData);
+    }
+
+    private void addRowWithWorkingTime(){
+        String[] cellData = new String[]{"erfasste Arbeitszeit am " + Publisher.getModel().dateToGermanDateTimeString(this.workingTimeRecordStart) + " ==> " +
+                this.billConfigDialog.getTimeLabel(),String.valueOf(getPredefinedTax()),"1","",""};
 
         this.billConfigDialog.addRowToEntryTable(cellData);
     }

@@ -353,6 +353,18 @@ public class Model {
         return "";
     }
 
+    public String dateToGermanDateTimeString(Date date){
+        if(date != null){
+            System.out.println(date.toString());
+
+            DateFormat format = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.GERMANY);
+
+            return format.format(date);
+        }
+
+        return "";
+    }
+
     public String generateBillDefaultName(){
         return "Rechnung " + Integer.valueOf(random.nextInt());
     }
@@ -674,5 +686,12 @@ public class Model {
         }
 
         return result;
+    }
+
+    public String getCurrentGermanDateTime(){
+
+        DateFormat format = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.GERMANY);
+
+        return format.format(new Date());
     }
 }

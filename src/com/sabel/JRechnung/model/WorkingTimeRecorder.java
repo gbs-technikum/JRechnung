@@ -24,7 +24,6 @@ public class WorkingTimeRecorder extends TimerTask {
         duration = duration.minusMinutes(minutes);
         long millis = duration.toMillis();
         long seconds = millis / 1000;
-        System.out.println(String.format("%04d:%02d:%02d", hours, minutes, seconds));
-        this.lblOutput.setText(String.format("%04d:%02d:%02d", hours, minutes, seconds));
+        this.lblOutput.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
     }
 }

@@ -542,11 +542,11 @@ public class BillConfigDialog extends ConfigDialog {
 
 
     public String getTimeLabel(){
-        return this.jlblFile.getText();
+        return this.lblTime.getText();
     }
 
     public void setTimeLabel(String text){
-        this.jlblFile.setText(text);
+        this.lblTime.setText(text);
     }
 
     public void setStopButtonListener(ActionListener actionListener){
@@ -562,7 +562,7 @@ public class BillConfigDialog extends ConfigDialog {
     }
 
     public void setStartButtonEnabled(Boolean enabled){
-        this.jbtnStop.setEnabled(enabled);
+        this.jbtnStart.setEnabled(enabled);
     }
 
     public JLabel getTimeLabelObject() {
