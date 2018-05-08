@@ -339,7 +339,9 @@ public class BillConfigDialogController implements Controller {
         this.billConfigDialog.clearComponentData();
 
         if(bill != null) {
-            fillDebtorComboBox(null,bill.getDebtor());
+            int index = fillDebtorComboBox(null,bill.getDebtor());
+
+            this.billConfigDialog.setIndexOfSelectedCustomer(index);
 
 
             this.billConfigDialog.setTitleTextField(bill.getTitel());

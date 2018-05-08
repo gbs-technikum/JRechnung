@@ -208,12 +208,13 @@ public class BillConfigDialog extends ConfigDialog {
 
         this.mainPanel.add(leftButtunPanel);
 
-        this.mainPanel.add(this.btnGenerateBillFile);
-        this.mainPanel.add(this.btnBillOverview);
+/*        this.mainPanel.add(this.btnGenerateBillFile);
+        this.mainPanel.add(this.btnBillOverview);*/
 
 
         this.leftButtunPanel.add(this.btnGenerateBillFile,BorderLayout.WEST);
         this.leftButtunPanel.add(this.jlblFile,BorderLayout.CENTER);
+        this.leftButtunPanel.add(this.btnBillOverview,BorderLayout.EAST);
 
         this.mainPanel.add(this.leftButtunPanel);
 

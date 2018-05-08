@@ -4,6 +4,7 @@ import com.sabel.JRechnung.Publisher;
 import com.sabel.JRechnung.model.db.BusinessService;
 import com.sabel.JRechnung.model.db.LegalFormService;
 import com.sabel.JRechnung.model.objects.Business;
+import com.sabel.JRechnung.model.objects.Customer;
 import com.sabel.JRechnung.model.objects.LegalForm;
 import com.sabel.JRechnung.view.BusinessConfigDialog;
 
@@ -73,22 +74,6 @@ public class BusinessConfigDialogController implements Controller {
     private void fillWindowComponents(){
         Business business = Publisher.getModel().getBusiness();
 
-        List<String> legalFormNames = new ArrayList<>();
-
-        int selectedIndex = 0;
-        int i=0;
-        try {
-            for (LegalForm legalForm : LegalFormService.readAllLegalForms()) {
-                this.businessConfigDialog.addToLegalFormList(legalForm);
-                if(business.getLegalForm().getId() == legalForm.getId()){
-                    selectedIndex = i;
-                }
-                i++;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
         if(business != null){
             this.businessConfigDialog.setTextName(business.getName());
             this.businessConfigDialog.setTextProprietor(business.getProprietor());
@@ -101,9 +86,34 @@ public class BusinessConfigDialogController implements Controller {
             this.businessConfigDialog.setTextPhone(business.getPhone());
             this.businessConfigDialog.setTextFax(business.getFax());
             this.businessConfigDialog.setTextEmail(business.getEmail());
-            this.businessConfigDialog.setIndexOfSelectedLegalForm(i);
+
+            int index = fillLegalFormComboBox(null,business.getLegalForm());
+            this.businessConfigDialog.setIndexOfSelectedLegalForm(index);
         }
     }
+
+    private int fillLegalFormComboBox(List<LegalForm> legalForms, LegalForm selectedLegalform){
+        int selectedIndex = 0;
+
+        if(legalForms == null){
+            try {
+                legalForms = LegalFormService.readAllLegalForms();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        for (int i = 0; i < legalForms.size(); i++) {
+            LegalForm legalForm = legalForms.get(i);
+            this.businessConfigDialog.addToLegalFormList(legalForm);
+            if (selectedLegalform != null && selectedLegalform.equals(legalForm)) {
+                selectedIndex = i;
+            }
+        }
+
+        return selectedIndex;
+    }
+
 
     private void createBussinesFromWindowData(){
         String id = null;
@@ -129,6 +139,8 @@ public class BusinessConfigDialogController implements Controller {
                 this.businessConfigDialog.getTextFax(),
                 this.businessConfigDialog.getTextEmail(),
                 legalForm);
+
+        System.out.println(legalForm);
 
         this.business = business;
 
