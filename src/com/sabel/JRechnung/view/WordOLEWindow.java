@@ -50,7 +50,7 @@ public class WordOLEWindow extends ApplicationWindow {
         oleFrame = new OleFrame(composite, SWT.NULL);
 
         clientSite = new OleClientSite(oleFrame, SWT.NULL, wordFile);
-        System.out.println(clientSite.getProgramID() + ", " + clientSite);
+
 
 
         clientSite.doVerb(OLE.OLEIVERB_SHOW);

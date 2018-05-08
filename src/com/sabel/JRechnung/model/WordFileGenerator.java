@@ -19,12 +19,6 @@ public class WordFileGenerator {
 
     public static boolean generate(File template, File destination, Bill bill, Business business){
 
-        System.out.println("template == null" + (template == null));
-        System.out.println("template.exists()" + template.exists());
-        System.out.println("destination == null" + (destination == null));
-        System.out.println("business == null" + (business == null));
-        System.out.println("bill == null" + (business == null));
-
         if((template != null && !template.exists()) || (destination == null) ||
                 bill == null || business == null){
             return false;
@@ -53,8 +47,6 @@ public class WordFileGenerator {
 
             Customer customer = bill.getDebtor();
 
-            System.out.println(business);
-
             replacePOI(doc,"$$CUSTOMERNAME$$",customer.getForename() + " " + customer.getName());
             replacePOI(doc,"$$CUSTOMERSTREET$$",customer.getStreet() + " " + customer.getHouseNumber());
             replacePOI(doc,"$$CUSTOMERLOCATION$$",customer.getVillage());
@@ -63,13 +55,13 @@ public class WordFileGenerator {
 
             LegalForm legalForm = business.getLegalForm();
 
-            System.out.println(legalForm.mustToBeAPostfix());
-
             if(legalForm != null && legalForm.mustToBeAPostfix()){
                 replacePOI(doc,"$$COMPANYNAME$$",business.getName() + " " + legalForm.getShortName());
             }else{
                 replacePOI(doc,"$$COMPANYNAME$$",business.getName());
             }
+
+
 
             replacePOI(doc,"$$STREET$$",business.getStreet() + " " + business.getStreetNumber());
             replacePOI(doc,"$$LOCATION$$",business.getLocation());

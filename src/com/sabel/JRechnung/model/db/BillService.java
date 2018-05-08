@@ -220,7 +220,6 @@ public class BillService {
 
             Date toPayToDate = bill.getToPayToDate();
             if(toPayToDate != null){
-                System.out.println(toPayToDate.getTime());
                 preparedStatement.setBytes(3,securityProvider.encrypt(toPayToDate.getTime()));
             }else {
                 preparedStatement.setNull(3,Types.BLOB);

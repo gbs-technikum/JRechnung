@@ -46,13 +46,13 @@ public class AccessibilityService {
         try {
 
             if(accessibility instanceof EMailAccessibility){
-                System.out.println("EMailAccessibility : " + accessibility.getEntry() );
+
                 preparedStatement = connection.prepareStatement(SQL_INSERT_MAIL);
             } else if(accessibility instanceof FaxAccessibility){
-                System.out.println("FaxAccessibility : " + accessibility.getEntry() );
+
                 preparedStatement = connection.prepareStatement(SQL_INSERT_FAX);
             }else if(accessibility instanceof TelephoneAccessibility){
-                System.out.println("TelephoneAccessibility : " + accessibility.getEntry() );
+
                 preparedStatement = connection.prepareStatement(SQL_INSERT_PHONE);
             }
 
@@ -177,7 +177,6 @@ public class AccessibilityService {
                     String id = resultSet.getString("id");
                     String address = securityProvider.decryptAsString(resultSet.getBytes("address"));
 
-                    System.out.println("EMIAL ID " +  id + "EMIAL : " + address);
                     Accessibility eMailAccessibility = new EMailAccessibility(id,address);
                     eMailAccessibilityList.add(eMailAccessibility);
                 }

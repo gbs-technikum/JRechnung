@@ -68,4 +68,16 @@ public final class Publisher {
         return modelInstance;
     }
 
+    public static void destroy(){
+        try {
+            Connection dbConnection = getDBConnection();
+            if(dbConnection != null && dbConnection.isClosed()){
+                dbConnection.close();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

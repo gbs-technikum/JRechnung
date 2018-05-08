@@ -188,11 +188,9 @@ public class Bill {
     public double getEntryTaxValue(int index){
         double result = 0;
 
-        System.out.println("isBusinessTaxFree" + " --> " + this.isBusinessTaxFree());
         if(!this.isBusinessTaxFree()){
             if(this.isEntryIndexValid(index)){
                 BillEntry entry = this.entries.get(index);
-                System.out.println(" entry ::: " + entry);
                 if (entry != null) {
                     if (this.mustBeIncludedTaxes()) {
                         result = (this.getEntryTotalPrice(index) / ((double) (entry.getTaxRateInPercent())+100)) * entry.getTaxRateInPercent();
@@ -212,7 +210,6 @@ public class Bill {
         if(!this.isBusinessTaxFree()){
             for (int i = 0; i < this.entries.size(); i++) {
                 if(this.getEntryTaxRateInPercent(i) == percentage){
-                    System.out.println(percentage + " : " + this.getEntryTaxValue(i));
                     result += this.getEntryTaxValue(i);
                 }
             }

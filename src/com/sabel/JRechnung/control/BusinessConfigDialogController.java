@@ -89,6 +89,8 @@ public class BusinessConfigDialogController implements Controller {
 
             int index = fillLegalFormComboBox(null,business.getLegalForm());
             this.businessConfigDialog.setIndexOfSelectedLegalForm(index);
+        }else{
+            fillLegalFormComboBox(null,null);
         }
     }
 
@@ -139,8 +141,6 @@ public class BusinessConfigDialogController implements Controller {
                 this.businessConfigDialog.getTextFax(),
                 this.businessConfigDialog.getTextEmail(),
                 legalForm);
-
-        System.out.println(legalForm);
 
         this.business = business;
 

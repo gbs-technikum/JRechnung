@@ -231,7 +231,7 @@ public class SecurityProvider {
                         resultSet = statement.executeQuery(SecurityDataBaseHelper.SQL_QUERY);
                         return (resultSet != null && !resultSet.isClosed() && resultSet.next());
                     } catch (SQLException e) {
-                        System.out.println("BLA: " + e.getMessage());
+
                     } finally {
                         if (statement != null) {
                             try {
@@ -292,7 +292,7 @@ public class SecurityProvider {
                     if(this.securityDataExist()){
                         PreparedStatement preparedStatement = null;
                         try {
-                            System.out.println("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+
                             preparedStatement = con.prepareStatement(SecurityDataBaseHelper.SQL_UPDATE);
 
                             preparedStatement.setBytes(1, this.secretKeyData);
@@ -454,7 +454,6 @@ public class SecurityProvider {
 
                     SecurityDataBaseHelper sdb = new SecurityProvider.SecurityDataBaseHelper(dbKeyEncrypted,refTextEncrypted, salt);
 
-                    System.out.println("save db");
                     if(sdb.saveDataToDB()){
                         return secretKey;
                     }

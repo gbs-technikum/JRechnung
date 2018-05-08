@@ -24,9 +24,6 @@ public class ProductOrServiceService {
 
         if(productOrService != null){
 
-
-            System.out.println(productOrService.getId());
-
             if(ProductOrServiceService.read(productOrService.getId()) != null){
                 return ProductOrServiceService.modify(productOrService);
             }

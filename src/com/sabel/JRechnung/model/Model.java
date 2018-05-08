@@ -401,7 +401,6 @@ public class Model {
 
     public String dateToGermanDateString(Date date){
         if(date != null){
-            System.out.println(date.toString());
 
             DateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
 
@@ -413,7 +412,6 @@ public class Model {
 
     public String dateToGermanDateTimeString(Date date){
         if(date != null){
-            System.out.println(date.toString());
 
             DateFormat format = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.GERMANY);
 
@@ -497,8 +495,6 @@ public class Model {
         ClassLoader classLoader = Main.class.getClassLoader();
         File file = new File(classLoader.getResource(fileName).getFile());
 
-        System.out.println("Res-File:" + file.getAbsolutePath());
-
         return file;
 
     }
@@ -506,7 +502,7 @@ public class Model {
     public ImageIcon getImageIconFromResources(String iconFileName){
 
         java.net.URL imgURL = getClass().getResource("/" + iconFileName);
-        System.out.println(imgURL.toString());
+
         ImageIcon icon = new ImageIcon(imgURL);
 
         return icon;
@@ -687,7 +683,6 @@ public class Model {
 
         for (int i = cYear-2; i < ((cYear-2)+rangeLength); i++) {
             list.add(Integer.valueOf(i));
-            System.out.println(i);
         }
 
         return list;

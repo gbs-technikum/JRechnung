@@ -126,7 +126,6 @@ public class BillConfigDialogController implements Controller {
                         case 1:
                             if(!Publisher.getModel().isIntNumber(cellValue)){
                                 tableModel.setValueAt("",currentRow, e.getColumn());
-                                System.out.println("dyfassadasdsadjltfhlasiuiesjaIPJOAKL");
                                 tableModel.setValueAt("",currentRow,4);
                             }
                             break;
@@ -146,7 +145,7 @@ public class BillConfigDialogController implements Controller {
                     }
 
                     double calcPrice = calculateRowCompletePrice(currentRow);
-                    System.out.println("calcPrice" + calcPrice);
+
                     if(calcPrice > -0.5){
                         tableModel.setValueAt(String.format(Locale.GERMANY,"%.2f",calcPrice),currentRow,4);
                     }else{
@@ -266,7 +265,7 @@ public class BillConfigDialogController implements Controller {
     private void updateTableCompletePrice(){
         for (int i = 0; i < billConfigDialog.getEntryTableRowCount(); i++) {
             double calcPrice = calculateRowCompletePrice(i);
-            System.out.println("calcPrice" + calcPrice);
+
             if(calcPrice > -1){
                 billConfigDialog.setCellValue(String.format(Locale.GERMANY,"%.2f",calcPrice),i,4);
             }else{

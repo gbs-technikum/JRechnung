@@ -277,7 +277,7 @@ public class CustomersConfigDialogController implements Controller {
             Customer customer = null;
 
             String id = null;
-            System.out.println(this.customer);
+
             if (this.customer != null) {
                 id = this.customer.getId();
             } else {

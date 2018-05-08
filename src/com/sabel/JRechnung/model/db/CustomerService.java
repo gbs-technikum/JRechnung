@@ -189,8 +189,6 @@ public class CustomerService {
             return CustomerService.modifyCustomer(customer);
         }
 
-        System.out.println(customer);
-
         Connection connection = Publisher.getDBConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT);
         SecurityProvider securityProvider = Publisher.getSecurityProvider();

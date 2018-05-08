@@ -165,13 +165,13 @@ public class ProductOrServiceConfigDialogController implements Controller {
         ProductOrService productOrService = null;
 
         String id = null;
-        System.out.println(this.productOrService);
+
         if(this.productOrService != null){
             id = this.productOrService.getId();
-            System.out.println("alte id");
+
         }else {
             id = Publisher.getModel().getNewObjectId();
-            System.out.println("neue id");
+
         }
 
         String title = this.productOrServiceConfigDialog.getTitleTextField();

@@ -111,6 +111,8 @@ public class Main {
 
                     mainWindowController.run();
 
+                    Publisher.destroy();
+
                 }
 
     }

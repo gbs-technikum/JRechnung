@@ -135,7 +135,6 @@ public class EncryptionConfigDialogController implements Controller {
                                 fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                                 chooserResult = fileChooser.showSaveDialog(encryptionConfigDialog);
                                 if(chooserResult == JFileChooser.APPROVE_OPTION){
-                                    System.out.println(fileChooser.getSelectedFile().getAbsolutePath());
                                     saveFile = new File(fileChooser.getSelectedFile().getAbsolutePath() + ".key");
                                 }
                             }while(!Publisher.getModel().writeSecretKeyFile(saveFile));

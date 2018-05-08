@@ -1,7 +1,7 @@
 package com.sabel.JRechnung.control;
 
-import com.sabel.JRechnung.JRechungConfigGenerator;
 import com.sabel.JRechnung.Publisher;
+import com.sabel.JRechnung.model.Message;
 import com.sabel.JRechnung.model.SecurityProvider;
 import com.sabel.JRechnung.view.StarterWindow;
 
@@ -126,7 +126,6 @@ public class StarterWindowController implements Controller {
         this.starterWindow.setCreateConfigButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-          //      JFrame window = new JRechungConfigGenerator();
 
                 Controller controller = new ConfigGeneratorDialogController(starterWindow);
 
@@ -166,7 +165,7 @@ public class StarterWindowController implements Controller {
 
                             if (returnStatus == ControllerReturnStatus.OK) {
                                 if (!Publisher.getModel().reEncryptDataBasePhase2()) {
-                                    //TODO Fehler
+                                    Message.showErrorMessage("Umschlüsseln der Datenbank fehlgeschlagen.");
                                 }
                                 SecurityProvider sp = Publisher.getNewSecurityProvider();
                             }

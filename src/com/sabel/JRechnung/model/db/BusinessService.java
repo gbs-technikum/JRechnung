@@ -52,7 +52,6 @@ public class BusinessService {
 
                 if (legalForm != null) {
                     preparedStatement.setInt(13, legalForm.getId());
-                    System.out.println(legalForm + " " +  legalForm.getId());
                 } else {
                     preparedStatement.setNull(13, java.sql.Types.INTEGER);
                 }
