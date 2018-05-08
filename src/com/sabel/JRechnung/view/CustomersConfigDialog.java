@@ -42,9 +42,9 @@ public class CustomersConfigDialog extends ConfigDialog {
         jtfNumber = new JTextField();
         jtfNumber.setBorder(new TitledBorder("Kundennummer*"));
         jtfName = new JTextField();
-        jtfName.setBorder(new TitledBorder("Name*"));
+        jtfName.setBorder(new TitledBorder("Name/Firma*"));
         jtfForename = new JTextField();
-        jtfForename.setBorder(new TitledBorder("Vorname*"));
+        jtfForename.setBorder(new TitledBorder("Vorname"));
         jtfStreet = new JTextField();
         jtfStreet.setBorder(new TitledBorder("Straße*"));
         jtfHouseNumber = new JTextField();

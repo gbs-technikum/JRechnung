@@ -18,7 +18,9 @@ public class ProductOrServiceConfigDialog extends ConfigDialog {
 
     public ProductOrServiceConfigDialog(JFrame frame) {
         super(frame, "Produkt oder Dienstleistung");
+        this.setPreferredSize(new Dimension(700,300));
         this.initComponents();
+        this.pack();
     }
 
     private void initComponents() {
@@ -36,8 +38,6 @@ public class ProductOrServiceConfigDialog extends ConfigDialog {
         this.jtfPrice.setBorder(new TitledBorder("Preis"));
         this.jtfDescription = new JTextField();
         this.jtfDescription.setBorder(new TitledBorder("Beschreibung"));
-
-
 
         this.jPanelNorth = new JPanel();
         this.jPanelCenter = new JPanel();

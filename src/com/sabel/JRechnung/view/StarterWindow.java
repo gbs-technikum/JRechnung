@@ -1,6 +1,7 @@
 package com.sabel.JRechnung.view;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -16,33 +17,42 @@ public class StarterWindow extends JFrame {
 
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.initComponents();
-        this.setSize(300,500);
+        this.setSize(400,500);
         this.setLocationRelativeTo(null);
         this.pack();
     }
 
     private void initComponents() {
+        Insets insets = new Insets(20, 20, 20, 20);
         this.appPanel = new JPanel();
         this.appPanel.setBorder(new TitledBorder("App"));
+        this.appPanel.setLayout(new GridLayout(2,1));
         this.dbPanel = new JPanel();
-        this.appPanel.setBorder(new TitledBorder("Datenbank"));
+        this.dbPanel.setLayout(new GridLayout(4,1));
+        this.dbPanel.setBorder(new TitledBorder("Datenbank"));
 
         this.btnApp = new JButton();
         this.btnApp.setText("Rechnung starten...");
+        this.btnApp.setMargin(insets);
         this.btnCreateConfig = new JButton();
         this.btnCreateConfig.setText("Konfigurationsdatei erstellen...");
+        this.btnCreateConfig.setMargin(insets);
 
         this.btnInitEncryption = new JButton();
         this.btnInitEncryption.setText("Verschlüsselungspasswort setzen...");
+        this.btnInitEncryption.setMargin(insets);
 
         this.btnResetEncryptionPasswort = new JButton();
         this.btnResetEncryptionPasswort.setText("Verschlüsselungspasswort zurücksetzen...");
+        this.btnResetEncryptionPasswort.setMargin(insets);
 
         this.btnChangeDBEncryptionKey = new JButton();
         this.btnChangeDBEncryptionKey.setText("Verschlüsselung erneuern...");
+        this.btnChangeDBEncryptionKey.setMargin(insets);
 
         this.btnResetDB = new JButton();
         this.btnResetDB.setText("Datenbank zurücksetzen");
+        this.btnResetDB.setMargin(insets);
 
         this.btnApp.setEnabled(false);
         this.btnCreateConfig.setEnabled(false);

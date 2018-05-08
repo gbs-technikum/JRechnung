@@ -16,17 +16,15 @@ public class MainWindow extends JFrame {
     private JComboBox<Integer> jcbxYear;
     private JLabel lblTax, lblCompletePrice, lblPaid, lblNotYetPaid;
     private ActionListener comboBoxListener;
-    private ImageIcon deletImage;
+    private ImageIcon deleteIcon;
 
-    public MainWindow(ImageIcon deletImage) throws HeadlessException {
-        super("Rechnung");
-        this.deletImage = deletImage;
-     //   initEvents();
+    public MainWindow() throws HeadlessException {
+        super("JRechnung");
+        this.deleteIcon = null;
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.initComponents();
         this.setSize(1280,768);
         this.setLocationRelativeTo(null);
-      //  this.pack();
     }
 
     private void initComponents() {
@@ -37,13 +35,14 @@ public class MainWindow extends JFrame {
         this.jpCenterWest = new JPanel();
         this.jbtnCreateBill = new JButton();
         this.jbtnManageBusiness = new JButton();
-        this.jbtnCreateBill.setText("Neue Rechnung");
-        this.jbtnManageBusiness.setText("Unternehmmen verwalten");
+        this.jbtnCreateBill.setToolTipText("Neue Rechnung");
+        this.jbtnManageBusiness.setToolTipText("Unternehmmen verwalten");
         this.jbtnManageCustomers = new JButton();
-        this.jbtnManageCustomers.setText("Kundenverwaltung");
+        this.jbtnManageCustomers.setToolTipText("Kundenverwaltung");
         this.jbtnEncPasswortReset = new JButton();
-        this.jbtnEncPasswortReset.setText("Passwort ändern");
-        this.jbtnManageProductOrService = new JButton("Produkt oder Dienstleistung");
+        this.jbtnEncPasswortReset.setToolTipText("Passwort ändern");
+        this.jbtnManageProductOrService = new JButton();
+        this.jbtnManageProductOrService.setToolTipText("Produkt oder Dienstleistung");
 
 
         this.jbtnManageBusiness.setEnabled(false);
@@ -57,12 +56,12 @@ public class MainWindow extends JFrame {
 
         this.jpCenter = new JPanel();
         this.jpCenter.setLayout(new BorderLayout());
+        this.jpCenter.setBackground(Color.WHITE);
 
         this.jtblBillList = new BillList();
         JScrollPane scrollPane = new JScrollPane(this.jtblBillList);
         this.jpCenter.add(scrollPane,BorderLayout.CENTER);
 
-        this.jpWest.setBackground(new java.awt.Color(207, 117, 117));
         this.jpWest.setPreferredSize(new java.awt.Dimension(200, 0));
 
 
@@ -111,6 +110,10 @@ public class MainWindow extends JFrame {
 
     }
 
+    public void setDeleteIcon(ImageIcon deleteIcon) {
+        this.deleteIcon = deleteIcon;
+    }
+
     public void setCreateBillButtonListener(ActionListener listener){
         this.jbtnCreateBill.addActionListener(listener);
         this.jbtnCreateBill.setVisible(true);
@@ -120,9 +123,18 @@ public class MainWindow extends JFrame {
         this.jbtnCreateBill.setEnabled(enabled);
     }
 
+    public void setCreateBillButtonIcon(ImageIcon icon){
+        this.jbtnCreateBill.setIcon(icon);
+    }
+
+
     public void setManageBusinessButtonListener(ActionListener listener){
         this.jbtnManageBusiness.addActionListener(listener);
         this.jbtnManageBusiness.setVisible(true);
+    }
+
+    public void setManageBusinessButtonIcon(ImageIcon icon){
+        this.jbtnManageBusiness.setIcon(icon);
     }
 
     public void setManageBusinessButtonEnabled(boolean enabled){
@@ -138,9 +150,17 @@ public class MainWindow extends JFrame {
         this.jbtnManageCustomers.setEnabled(enabled);
     }
 
+    public void setManageCustomersButtonIcon(ImageIcon icon){
+        this.jbtnManageCustomers.setIcon(icon);
+    }
+
     public void setEncPasswortResetButtonListener(ActionListener listener){
         this.jbtnEncPasswortReset.addActionListener(listener);
         this.jbtnEncPasswortReset.setVisible(true);
+    }
+
+    public void setEncPasswortResetButtonIcon(ImageIcon icon){
+        this.jbtnEncPasswortReset.setIcon(icon);
     }
 
     public void setTableMouseListener(MouseListener mouseListener){
@@ -154,6 +174,10 @@ public class MainWindow extends JFrame {
     public void setManageProductOrServiceButtonListener(ActionListener listener){
         this.jbtnManageProductOrService.addActionListener(listener);
         this.jbtnManageProductOrService.setVisible(true);
+    }
+
+    public void setManageProductOrServiceButtonIcon(ImageIcon icon){
+        this.jbtnManageProductOrService.setIcon(icon);
     }
 
     public void setManageProductOrServiceButtonEnabled(boolean enabled){
@@ -246,7 +270,7 @@ public class MainWindow extends JFrame {
         if(cellData.length == this.jtblBillList.getColumnCount()){
             DefaultTableModel model = (DefaultTableModel) this.jtblBillList.getModel();
             model.addRow(cellData);
-            model.setValueAt(this.deletImage, model.getRowCount()-1, 7);
+            model.setValueAt(this.deleteIcon, model.getRowCount()-1, 7);
         }
     }
 

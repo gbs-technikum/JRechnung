@@ -64,7 +64,7 @@ public class JRechungConfigGenerator extends JFrame {
                     saveFile = new File(fileChooser.getSelectedFile().getAbsolutePath() + "\\" + Configuration.CONFIG_FILE_NAME);
 
                     if(jtfWordFileExportPath.getText().length() > 0) {
-                        saveXMLConfigFile(saveFile);
+                     //   Publisher.getModel().saveXMLConfigFile(saveFile,);
                     }
                 }
             }
@@ -110,50 +110,6 @@ public class JRechungConfigGenerator extends JFrame {
 
     }
 
-    private void saveXMLConfigFile(File saveFile) {
-        System.out.println(saveFile.getAbsoluteFile());
-        if(saveFile != null){
 
-            try {
-                DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder dBuilder = null;
-                dBuilder = dbFactory.newDocumentBuilder();
-                Document doc = dBuilder.newDocument();
-
-                Element rootElement = doc.createElement("config");
-                doc.appendChild(rootElement);
-
-                Element wordFileExportPath = doc.createElement("export_path");
-                rootElement.appendChild(wordFileExportPath);
-                Attr attr = doc.createAttribute("value");
-                attr.setValue(this.jtfWordFileExportPath.getText());
-                wordFileExportPath.setAttributeNode(attr);
-
-                Element wordTemplate = doc.createElement("word_template");
-                rootElement.appendChild(wordTemplate);
-                Attr attr1 = doc.createAttribute("value");
-                attr1.setValue(this.jtfWordTemplateFile.getText());
-                wordTemplate.setAttributeNode(attr1);
-
-                // write the content into xml file
-                TransformerFactory transformerFactory = TransformerFactory.newInstance();
-                Transformer transformer = transformerFactory.newTransformer();
-                DOMSource source = new DOMSource(doc);
-                StreamResult result = new StreamResult(saveFile);
-                transformer.transform(source, result);
-
-            } catch (ParserConfigurationException e) {
-                e.printStackTrace();
-            } catch (TransformerConfigurationException e) {
-                e.printStackTrace();
-            } catch (TransformerException e) {
-                e.printStackTrace();
-            }
-
-        }else
-        {
-            System.out.println("nein");
-        }
-    }
 
 }

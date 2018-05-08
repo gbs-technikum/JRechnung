@@ -20,14 +20,34 @@ public class MainWindowController implements Controller {
     private MainWindow mainWindow;
     private ControllerReturnStatus controllerReturnStatus;
     private List<Bill> billsOfYear;
+    private ImageIcon deleteIcon, billIcon, businessIcon, customerIcon, passwordIcon, productOrServiceIcon;
 
     public MainWindowController() {
-            ImageIcon imageIcon = Publisher.getModel().getImageIconFromResources("delete.png");
-            this.mainWindow = new MainWindow(imageIcon);
-            this.initEvents();
-            this.controllerReturnStatus = ControllerReturnStatus.OK;
-            billsOfYear = new ArrayList<>();
-        }
+        this.loadIcons();
+        this.mainWindow = new MainWindow();
+        this.initEvents();
+        this.controllerReturnStatus = ControllerReturnStatus.OK;
+        billsOfYear = new ArrayList<>();
+        this.setIcons();
+    }
+
+    private void loadIcons() {
+        this.deleteIcon = Publisher.getModel().getImageIconFromResources("delete.png");
+        this.billIcon = Publisher.getModel().getImageIconFromResources("bill.png");
+        this.businessIcon = Publisher.getModel().getImageIconFromResources("company.png");
+        this.customerIcon = Publisher.getModel().getImageIconFromResources("customer.png");
+        this.passwordIcon = Publisher.getModel().getImageIconFromResources("password.png");
+        this.productOrServiceIcon = Publisher.getModel().getImageIconFromResources("product_service.png");
+    }
+
+    private void setIcons() {
+        this.mainWindow.setCreateBillButtonIcon(this.billIcon);
+        this.mainWindow.setDeleteIcon(this.deleteIcon);
+        this.mainWindow.setManageBusinessButtonIcon(this.businessIcon);
+        this.mainWindow.setManageCustomersButtonIcon(this.customerIcon);
+        this.mainWindow.setEncPasswortResetButtonIcon(this.passwordIcon);
+        this.mainWindow.setManageProductOrServiceButtonIcon(this.productOrServiceIcon);
+    }
 
     @Override
     public ControllerReturnStatus run() {
@@ -97,11 +117,16 @@ public class MainWindowController implements Controller {
         this.mainWindow.setCreateBillButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controllerReturnStatus = ControllerReturnStatus.OK;
+                if(Publisher.getModel().businessExists() &&Publisher.getModel().thereAreCustomers()) {
 
-                Controller controller = new BillConfigDialogController(mainWindow,null);
-                controller.run();
-                fillWindowComponents(true);
+                    controllerReturnStatus = ControllerReturnStatus.OK;
+
+                    Controller controller = new BillConfigDialogController(mainWindow, null);
+                    controller.run();
+                    fillWindowComponents(true);
+                }else{
+                    Message.showErrorMessage("Sie müssen ein Unternehmen anlegen und Kunden einpflegen bevor Sie Rechnungen anlegen können.");
+                }
             }
         });
         this.mainWindow.setCreateBillButtonEnabled(true);

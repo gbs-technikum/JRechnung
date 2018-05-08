@@ -3,6 +3,7 @@ package com.sabel.JRechnung;
 import com.sabel.JRechnung.control.Controller;
 import com.sabel.JRechnung.control.EncryptionConfigDialogController;
 import com.sabel.JRechnung.control.StarterWindowController;
+import com.sabel.JRechnung.model.Message;
 import com.sabel.JRechnung.model.SecurityProvider;
 import com.sabel.JRechnung.control.MainWindowController;
 
@@ -25,10 +26,19 @@ public class Main {
 
 
                 boolean configExists = Publisher.getModel().loadConfigFile();
-                boolean dbEsits = !(Publisher.getDBConnection() == null);
+                boolean dbExist = !(Publisher.getDBConnection() == null);
                 boolean encryptionIsInitialized = false;
 
-                if(dbEsits){
+                if(!dbExist){
+                    if(Publisher.getModel().copyPreDefinedDBToApplicationDir(false)) {
+                        dbExist = true;
+                    }else{
+                        Message.showErrorMessage("Datenbank kann nicht erstellt werden");
+                        System.exit(0);
+                    }
+                }
+
+                if(dbExist){
                     SecurityProvider sp = Publisher.getSecurityProvider();
                     encryptionIsInitialized = sp.isInitialized();
                 }
@@ -52,9 +62,23 @@ public class Main {
                 }
 
 
-                Controller starter = new StarterWindowController(dbEsits,encryptionIsInitialized,configExists);
+                Controller starter = new StarterWindowController(dbExist,encryptionIsInitialized,configExists);
 
                 if(starter.run() != Controller.ControllerReturnStatus.ABORT) {
+
+                    if(!configExists){
+                        if(!Publisher.getModel().loadConfigFile()){
+                            Message.showErrorMessage("Konfigurationsdatei nicht gefunden.");
+                            System.exit(0);
+                        }
+                    }
+
+                    if(!dbExist){
+                        if(Publisher.getDBConnection() == null){
+                            Message.showErrorMessage("Konfigurationsdatei nicht gefunden.");
+                            System.exit(0);
+                        }
+                    }
 
                     SecurityProvider sp = Publisher.getSecurityProvider();
 
@@ -83,12 +107,6 @@ public class Main {
 
                     if (returnStatus == Controller.ControllerReturnStatus.ABORT) {
                         System.exit(0);
-                    }
-
-                    try {
-                        Connection connection = Publisher.getDBConnection();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
                     }
 
                     mainWindowController.run();

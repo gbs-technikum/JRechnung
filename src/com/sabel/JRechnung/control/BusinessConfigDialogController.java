@@ -75,15 +75,19 @@ public class BusinessConfigDialogController implements Controller {
 
         List<String> legalFormNames = new ArrayList<>();
 
+        int selectedIndex = 0;
+        int i=0;
         try {
             for (LegalForm legalForm : LegalFormService.readAllLegalForms()) {
-                legalFormNames.add(legalForm.getName());
+                this.businessConfigDialog.addToLegalFormList(legalForm);
+                if(business.getLegalForm().getId() == legalForm.getId()){
+                    selectedIndex = i;
+                }
+                i++;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        this.businessConfigDialog.setLegalform(legalFormNames);
 
         if(business != null){
             this.businessConfigDialog.setTextName(business.getName());
@@ -92,13 +96,12 @@ public class BusinessConfigDialogController implements Controller {
             this.businessConfigDialog.setTextStreetNumber(business.getStreetNumber());
             this.businessConfigDialog.setTextPostcode(business.getPostcode());
             this.businessConfigDialog.setTextLocation(business.getLocation());
-
-            LegalForm legalForm = business.getLegalForm();
-
-            if(legalForm != null){
-                this.businessConfigDialog.selectLegalform(this.businessConfigDialog.getIndexByLegalFormText(legalForm.getName()));
-            }
-
+            this.businessConfigDialog.setTextTaxNumber(business.getTaxNumber());
+            this.businessConfigDialog.setTextJurisdiction(business.getJurisdiction());
+            this.businessConfigDialog.setTextPhone(business.getPhone());
+            this.businessConfigDialog.setTextFax(business.getFax());
+            this.businessConfigDialog.setTextEmail(business.getEmail());
+            this.businessConfigDialog.setIndexOfSelectedLegalForm(i);
         }
     }
 
@@ -112,27 +115,20 @@ public class BusinessConfigDialogController implements Controller {
         }
 
 
-        String legalFormText =   this.businessConfigDialog.getSelectedLegalFormText();
-        LegalForm legalForm = null;
-
-        try {
-            for (LegalForm tmpLegalForm : LegalFormService.readAllLegalForms()) {
-                if(tmpLegalForm.getName().equals(legalFormText))
-                {
-                    legalForm = tmpLegalForm;
-                    break;
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        LegalForm legalForm = this.businessConfigDialog.getLegalFormFromList(this.businessConfigDialog.getIndexOfSelectedLegalForm());
 
         Business business = new Business(id,this.businessConfigDialog.getTextName(),
                 this.businessConfigDialog.getTextProprietor(),
                 this.businessConfigDialog.getTextStreet(),
                 this.businessConfigDialog.getTextStreetNumber(),
                 this.businessConfigDialog.getTextPostcode(),
-                this.businessConfigDialog.getTextLocation(),legalForm);
+                this.businessConfigDialog.getTextLocation(),
+                this.businessConfigDialog.getTextTaxNumber(),
+                this.businessConfigDialog.getTextJurisdiction(),
+                this.businessConfigDialog.getTextPhone(),
+                this.businessConfigDialog.getTextFax(),
+                this.businessConfigDialog.getTextEmail(),
+                legalForm);
 
         this.business = business;
 

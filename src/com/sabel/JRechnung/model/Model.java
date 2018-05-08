@@ -10,10 +10,22 @@ import com.sabel.JRechnung.model.objects.Bill;
 import com.sabel.JRechnung.model.objects.Business;
 import com.sabel.JRechnung.model.objects.Customer;
 import com.sabel.JRechnung.model.objects.ProductOrService;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.swing.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.net.URLDecoder;
 import java.nio.file.Files;
@@ -64,12 +76,15 @@ public class Model {
             try {
                 return BusinessService.writeBusiness(business);
             } catch (SQLException e) {
-                //TODO
-                e.printStackTrace();
+                return false;
             }
         }
 
         return false;
+    }
+
+    public boolean businessExists(){
+        return getBusiness() != null;
     }
 
     public List<Customer> readCustomers(){
@@ -146,8 +161,44 @@ public class Model {
         return false;
     }
 
+    public boolean hasCustomerBills(Customer customer){
+        try {
+            return BillService.hasCustomerBills(customer);
+        } catch (Exception e) {
+            return true;
+        }
+    }
+
+    public boolean thereAreCustomers(){
+        List<Customer> customers = readCustomers();
+
+        if(customers != null){
+            return customers.size() > 0;
+        }
+
+        return false;
+    }
+
     public String getNewObjectId(){
         return UUIDStringGenerator.generate();
+    }
+
+    public boolean isBillTitleValid(String billTitle){
+
+        if(billTitle != null && billTitle.length() > 2){
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean isBillNumberValid(String billNumber){
+
+        if(billNumber != null && billNumber.length() > 2){
+            return true;
+        }
+
+        return false;
     }
 
     public boolean isPasswordValid(String password){
@@ -513,32 +564,30 @@ public class Model {
         try {
             out = new File(Publisher.getModel().getJarContainingFolder(Main.class),Publisher.getModel().getDataBaseFileName());
         } catch (Exception e) {
-            e.printStackTrace();
+           return false;
         }
 
         if (out == null || (!replace && out.exists())){
             return false;
         }
-        // Step 1:
+
         InputStream resource = this.getClass().getResourceAsStream("/jrechnung.sqlite");
         if (resource == null){
             return false;
         }
 
-        // Step 2 and automatic step 4
-
                 InputStream in = resource;
         try (OutputStream writer = new BufferedOutputStream(new FileOutputStream(out))) {
-            // Step 3
+
             byte[] buffer = new byte[1024 * 4];
             int length;
             while ((length = in.read(buffer)) >= 0) {
                 writer.write(buffer, 0, length);
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            return false;
         } catch (IOException e) {
-            e.printStackTrace();
+            return false;
         }
 
 
@@ -702,4 +751,51 @@ public class Model {
         return format.format(new Date());
     }
 
+    public static boolean isDateAfterGivenDate(Date pastDate, Date dateAfterPast){
+        return pastDate.after(dateAfterPast);
+    }
+
+    public boolean saveXMLConfigFile(File saveFile, String wordFileExportPath, String wordTemplateFile) {
+
+        if(saveFile != null){
+
+            try {
+                DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder dBuilder = null;
+                dBuilder = dbFactory.newDocumentBuilder();
+                Document doc = dBuilder.newDocument();
+
+                Element rootElement = doc.createElement("config");
+                doc.appendChild(rootElement);
+
+                Element wordFileExportPathElement = doc.createElement("export_path");
+                rootElement.appendChild(wordFileExportPathElement);
+                Attr attr = doc.createAttribute("value");
+                attr.setValue(wordFileExportPath);
+                wordFileExportPathElement.setAttributeNode(attr);
+
+                Element wordTemplate = doc.createElement("word_template");
+                rootElement.appendChild(wordTemplate);
+                Attr attr1 = doc.createAttribute("value");
+                attr1.setValue(wordTemplateFile);
+                wordTemplate.setAttributeNode(attr1);
+
+                // write the content into xml file
+                TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                Transformer transformer = transformerFactory.newTransformer();
+                DOMSource source = new DOMSource(doc);
+                StreamResult result = new StreamResult(saveFile);
+                transformer.transform(source, result);
+
+            } catch (Exception e) {
+                return false;
+            }
+
+        }else
+        {
+            return false;
+        }
+
+        return true;
+    }
 }

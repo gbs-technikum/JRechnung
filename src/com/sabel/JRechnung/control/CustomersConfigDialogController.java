@@ -1,6 +1,7 @@
 package com.sabel.JRechnung.control;
 
 import com.sabel.JRechnung.Publisher;
+import com.sabel.JRechnung.model.Message;
 import com.sabel.JRechnung.model.Model;
 import com.sabel.JRechnung.model.objects.*;
 import com.sabel.JRechnung.view.CustomersConfigDialog;
@@ -36,8 +37,6 @@ public class CustomersConfigDialogController implements Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controllerReturnStatus = ControllerReturnStatus.OK;
-
-
                 customersConfigDialog.setVisible(false);
                 customersConfigDialog.dispose();
             }
@@ -47,18 +46,8 @@ public class CustomersConfigDialogController implements Controller {
         this.customersConfigDialog.setApplyButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Model model = Publisher.getModel();
-                boolean isNameValid = model.isNameOrForenameOrStreetOrVillageValid("Name", customersConfigDialog.getNameTextField());
-                boolean isForenameValid = model.isNameOrForenameOrStreetOrVillageValid("Vorname", customersConfigDialog.getForennameTextField());
-                boolean isStreetValid = model.isNameOrForenameOrStreetOrVillageValid("Straße", customersConfigDialog.getStreetTextField());
-                boolean isHouseNumberValid = model.isHouseNumberValid(customersConfigDialog.getHouseNumberTextField());
-                boolean isPostCodeValid = model.isPostCodeValid(customersConfigDialog.getPostCodeTextField());
-                boolean isVillageValid = model.isNameOrForenameOrStreetOrVillageValid("Ort", customersConfigDialog.getVillageTextField());
-                boolean isLandValid = model.isLandValid(customersConfigDialog.getLandTextField());
-                if(isNameValid && isForenameValid && isStreetValid && isHouseNumberValid && isPostCodeValid && isVillageValid && isLandValid){
-                    saveComponentData();
-                    fillWindowComponents(false);
-                }
+                saveComponentData();
+                fillWindowComponents(false);
             }
         });
         this.customersConfigDialog.setApplyButtonEnabled(true);
@@ -79,9 +68,13 @@ public class CustomersConfigDialogController implements Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
               //  createCustomerFromWindowData();
-                if(customersConfigDialog.getIndexOfSelectedCustomer() >= 0) {
-                    Publisher.getModel().removeCustomer(customer);
-                    fillWindowComponents(false);
+                if(!Publisher.getModel().hasCustomerBills(customer)) {
+                    if (customersConfigDialog.getIndexOfSelectedCustomer() >= 0) {
+                        Publisher.getModel().removeCustomer(customer);
+                        fillWindowComponents(false);
+                    }
+                }else {
+                    Message.showErrorMessage("Dieser Kunde ist noch an Rechnungen im Programm gebunden. Löschen Sie bitte erst die entsprechenden Rechnungen oder Ändern Sie deren Kunden.");
                 }
             }
         });
@@ -203,6 +196,7 @@ public class CustomersConfigDialogController implements Controller {
             this.customersConfigDialog.setLandTextFieldEnabled(true);
             this.customersConfigDialog.setForenameTextFieldEnabled(true);
             this.customersConfigDialog.setPostCodeetJTextFieldEnabled(true);
+            this.customersConfigDialog.setNumberTextFieldEnabled(true);
 
             if(customers.size() > 0){
                 selectedCustomer = customers.get(0);
@@ -266,50 +260,63 @@ public class CustomersConfigDialogController implements Controller {
 
     private void createCustomerFromWindowData(){
 
-        Customer customer = null;
-
-        String id = null;
-        System.out.println(this.customer);
-        if(this.customer != null){
-            id = this.customer.getId();
-            System.out.println("alte id");
-        }else {
-            id = Publisher.getModel().getNewObjectId();
-            System.out.println("neue id");
+        Model model = Publisher.getModel();
+        boolean isNameValid = model.isNameOrForenameOrStreetOrVillageValid("Name", customersConfigDialog.getNameTextField());
+        boolean isForenameValid = true;
+        if(customersConfigDialog.getForennameTextField().length() > 0){
+            isForenameValid = model.isNameOrForenameOrStreetOrVillageValid("Vorname", customersConfigDialog.getForennameTextField());
         }
+        boolean isStreetValid = model.isNameOrForenameOrStreetOrVillageValid("Straße", customersConfigDialog.getStreetTextField());
+        boolean isHouseNumberValid = model.isHouseNumberValid(customersConfigDialog.getHouseNumberTextField());
+        boolean isPostCodeValid = model.isPostCodeValid(customersConfigDialog.getPostCodeTextField());
+        boolean isVillageValid = model.isNameOrForenameOrStreetOrVillageValid("Ort", customersConfigDialog.getVillageTextField());
+        boolean isLandValid = model.isLandValid(customersConfigDialog.getLandTextField());
 
-        String number = this.customersConfigDialog.getNumberTextField();
-        String forenname = this.customersConfigDialog.getForennameTextField();
-        String name = this.customersConfigDialog.getNameTextField();
-        String street = this.customersConfigDialog.getStreetTextField();
-        String houseNumber = this.customersConfigDialog.getHouseNumberTextField();
-        String postCode = this.customersConfigDialog.getPostCodeTextField();
-        String village = this.customersConfigDialog.getVillageTextField();
-        String land = this.customersConfigDialog.getLandTextField();
+        if(isNameValid && isForenameValid && isStreetValid && isHouseNumberValid && isPostCodeValid && isVillageValid && isLandValid) {
 
-        customer = new Customer(id,number,name,forenname,street,houseNumber,postCode,village,land);
+            Customer customer = null;
 
-        List<String> mailList = this.customersConfigDialog.getEMailAcessibilityStringList();
+            String id = null;
+            System.out.println(this.customer);
+            if (this.customer != null) {
+                id = this.customer.getId();
+            } else {
+                id = Publisher.getModel().getNewObjectId();
+            }
 
-        for (String entry : mailList){
-            EMailAccessibility accessibility = new EMailAccessibility(Publisher.getModel().getNewObjectId(),entry);
-            customer.addEMail(accessibility);
+            String number = this.customersConfigDialog.getNumberTextField();
+            String forenname = this.customersConfigDialog.getForennameTextField();
+            String name = this.customersConfigDialog.getNameTextField();
+            String street = this.customersConfigDialog.getStreetTextField();
+            String houseNumber = this.customersConfigDialog.getHouseNumberTextField();
+            String postCode = this.customersConfigDialog.getPostCodeTextField();
+            String village = this.customersConfigDialog.getVillageTextField();
+            String land = this.customersConfigDialog.getLandTextField();
+
+            customer = new Customer(id, number, name, forenname, street, houseNumber, postCode, village, land);
+
+            List<String> mailList = this.customersConfigDialog.getEMailAcessibilityStringList();
+
+            for (String entry : mailList) {
+                EMailAccessibility accessibility = new EMailAccessibility(Publisher.getModel().getNewObjectId(), entry);
+                customer.addEMail(accessibility);
+            }
+
+            List<String> phoneList = this.customersConfigDialog.getPhoneAcessibilityStringList();
+
+            for (String entry : phoneList) {
+                TelephoneAccessibility accessibility = new TelephoneAccessibility(Publisher.getModel().getNewObjectId(), entry);
+                customer.addPhoneNumber(accessibility);
+            }
+
+            List<String> faxList = this.customersConfigDialog.getFaxAcessibilityStringList();
+
+            for (String entry : faxList) {
+                FaxAccessibility accessibility = new FaxAccessibility(Publisher.getModel().getNewObjectId(), entry);
+                customer.addFaxNumber(accessibility);
+            }
+
+            this.customer = customer;
         }
-
-        List<String> phoneList = this.customersConfigDialog.getPhoneAcessibilityStringList();
-
-        for (String entry : phoneList){
-            TelephoneAccessibility accessibility = new TelephoneAccessibility(Publisher.getModel().getNewObjectId(),entry);
-            customer.addPhoneNumber(accessibility);
-        }
-
-        List<String> faxList = this.customersConfigDialog.getFaxAcessibilityStringList();
-
-        for (String entry : faxList){
-            FaxAccessibility accessibility = new FaxAccessibility(Publisher.getModel().getNewObjectId(),entry);
-            customer.addFaxNumber(accessibility);
-        }
-
-        this.customer = customer;
     }
 }

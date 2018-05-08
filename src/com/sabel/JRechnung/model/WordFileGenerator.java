@@ -2,10 +2,7 @@ package com.sabel.JRechnung.model;
 
 import com.sabel.JRechnung.Debug;
 import com.sabel.JRechnung.Publisher;
-import com.sabel.JRechnung.model.objects.Bill;
-import com.sabel.JRechnung.model.objects.BillEntry;
-import com.sabel.JRechnung.model.objects.Business;
-import com.sabel.JRechnung.model.objects.Customer;
+import com.sabel.JRechnung.model.objects.*;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.xwpf.usermodel.*;
 import org.apache.xmlbeans.XmlException;
@@ -63,9 +60,17 @@ public class WordFileGenerator {
             replacePOI(doc,"$$CUSTOMERLOCATION$$",customer.getVillage());
             replacePOI(doc,"$$CUSTOMERPOSTCODE$$",customer.getPostCode());
 
-            System.out.println(business.getLocation());
-            System.out.println(business.getPostcode());
-            replacePOI(doc,"$$COMPANYNAME$$",business.getName());
+
+            LegalForm legalForm = business.getLegalForm();
+
+            System.out.println(legalForm.mustToBeAPostfix());
+
+            if(legalForm != null && legalForm.mustToBeAPostfix()){
+                replacePOI(doc,"$$COMPANYNAME$$",business.getName() + " " + legalForm.getShortName());
+            }else{
+                replacePOI(doc,"$$COMPANYNAME$$",business.getName());
+            }
+
             replacePOI(doc,"$$STREET$$",business.getStreet() + " " + business.getStreetNumber());
             replacePOI(doc,"$$LOCATION$$",business.getLocation());
             replacePOI(doc,"$$POSTCODE$$",business.getPostcode());
@@ -73,6 +78,14 @@ public class WordFileGenerator {
             replacePOI(doc,"$$TOPAYDATE$$",Publisher.getModel().dateToGermanDateString(bill.getToPayToDate()));
 
             replacePOI(doc,"$$PROPRIETOR$$",business.getProprietor());
+
+            replacePOI(doc,"$$TAXNUMBER$$",business.getTaxNumber());
+
+            replacePOI(doc,"$$JURISDICTION$$",business.getJurisdiction());
+
+            replacePOI(doc,"$$COMPANYPHONE$$",business.getPhone());
+            replacePOI(doc,"$$COMPANYFAX$$",business.getFax());
+            replacePOI(doc,"$$COMPANYEMAIL$$",business.getEmail());
 
             modifyTableBillData(doc,bill);
             modifyTableWithEntries(doc,bill);

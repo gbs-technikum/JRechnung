@@ -13,8 +13,10 @@ public class BusinessService {
 
     private static final String SQL_QUERY_WITH_ID = "SELECT * FROM business WHERE id  = ?";
     private static final String SQL_QUERY = "SELECT * FROM business";
-    private static final String SQL_INSERT = "INSERT INTO business VALUES (?,?,?,?,?,?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE business SET name=?, proprietor=?, street=?, streetnumber=?, postcode=?, location=?, id_legalform=?";
+    private static final String SQL_INSERT = "INSERT INTO business VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private static final String SQL_UPDATE = "UPDATE business SET name=?, proprietor=?, street=?, streetnumber=?, " +
+                                                "postcode=?, location=?, tax_number=?, jurisdiction=?, " +
+                                                "phone=?, fax=?, email=?, id_legalform=?";
 
     public static boolean writeBusiness(Business business) throws SQLException{
 
@@ -38,13 +40,18 @@ public class BusinessService {
                 preparedStatement.setString(5, business.getStreetNumber());
                 preparedStatement.setString(6, business.getPostcode());
                 preparedStatement.setString(7, business.getLocation());
+                preparedStatement.setString(8, business.getTaxNumber());
+                preparedStatement.setString(9, business.getJurisdiction());
+                preparedStatement.setString(10, business.getPhone());
+                preparedStatement.setString(11, business.getFax());
+                preparedStatement.setString(12, business.getEmail());
 
                 LegalForm legalForm = business.getLegalForm();
 
                 if (legalForm != null) {
-                    preparedStatement.setInt(8, legalForm.getId());
+                    preparedStatement.setInt(13, legalForm.getId());
                 } else {
-                    preparedStatement.setNull(8, java.sql.Types.INTEGER);
+                    preparedStatement.setNull(13, java.sql.Types.INTEGER);
                 }
 
 
@@ -85,13 +92,18 @@ public class BusinessService {
                 preparedStatement.setString(4, business.getStreetNumber());
                 preparedStatement.setString(5, business.getPostcode());
                 preparedStatement.setString(6, business.getLocation());
+                preparedStatement.setString(7, business.getTaxNumber());
+                preparedStatement.setString(8, business.getJurisdiction());
+                preparedStatement.setString(9, business.getPhone());
+                preparedStatement.setString(10, business.getFax());
+                preparedStatement.setString(11, business.getEmail());
 
                 LegalForm legalForm = business.getLegalForm();
 
                 if (legalForm != null) {
-                    preparedStatement.setInt(7, legalForm.getId());
+                    preparedStatement.setInt(12, legalForm.getId());
                 } else {
-                    preparedStatement.setNull(7, java.sql.Types.INTEGER);
+                    preparedStatement.setNull(12, java.sql.Types.INTEGER);
                 }
 
 
@@ -115,6 +127,8 @@ public class BusinessService {
 
         return false;
     }
+
+
 
     public static Business readBusiness() throws SQLException {
         return BusinessService.readBusiness(null);
@@ -145,11 +159,17 @@ public class BusinessService {
                 String streetNumber = resultSet.getString("streetnumber");
                 String location = resultSet.getString("location");
                 String postcode = resultSet.getString("postcode");
+                String taxNumber = resultSet.getString("tax_number");
+                String jurisdiction = resultSet.getString("jurisdiction");
+                String phone = resultSet.getString("phone");
+                String fax = resultSet.getString("fax");
+                String email = resultSet.getString("email");
                 int legalformId = resultSet.getInt("id_legalform");
 
                 LegalForm legalForm = LegalFormService.readLegalForm(legalformId);
 
-                result = new Business(dataset_id, name, proprietor, street, streetNumber, postcode, location, legalForm);
+                result = new Business(dataset_id, name, proprietor, street, streetNumber,
+                        postcode, location, taxNumber, jurisdiction,phone,fax,email,legalForm);
             }
         }finally {
             if (preparedStatement != null) {

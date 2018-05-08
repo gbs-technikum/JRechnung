@@ -126,8 +126,15 @@ public class StarterWindowController implements Controller {
         this.starterWindow.setCreateConfigButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame window = new JRechungConfigGenerator();
+          //      JFrame window = new JRechungConfigGenerator();
 
+                Controller controller = new ConfigGeneratorDialogController(starterWindow);
+
+
+                if(controller.run() == ControllerReturnStatus.OK){
+                    configExists = true;
+                    setButtonStatus();
+                }
             }
         });
 

@@ -230,7 +230,7 @@ public class BillConfigDialog extends ConfigDialog {
     }
 
     public String getBillNumberTextField(){
-        return this.jtfBillNumber.getText().toString();
+        return this.jtfBillNumber.getText();
     }
 
     public void addToCustomerList(Customer customer){

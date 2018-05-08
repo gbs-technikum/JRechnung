@@ -1,6 +1,7 @@
 package com.sabel.JRechnung.control;
 
 import com.sabel.JRechnung.Publisher;
+import com.sabel.JRechnung.model.Message;
 import com.sabel.JRechnung.model.WorkingTimeRecorder;
 import com.sabel.JRechnung.model.objects.*;
 import com.sabel.JRechnung.view.BillConfigDialog;
@@ -101,6 +102,8 @@ public class BillConfigDialogController implements Controller {
                         billConfigDialog.addRowsToEntryTable(1);
                     }
                     billConfigDialog.setCellValue(String.valueOf(getPredefinedTax()),billConfigDialog.getEntryTableRowCount()-1,1);
+                }else{
+                    Message.showErrorMessage("Sie können erst eine Neue Zeile hinzufügen, wenn die bestehenden Zeilen vollständig befüllt sind.");
                 }
 
 
@@ -203,12 +206,14 @@ public class BillConfigDialogController implements Controller {
         this.billConfigDialog.setBillGenerationButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                File file = Publisher.getModel().generateWordFile(bill);
-                if (file != null) {
-                    billConfigDialog.setFileLabel(file.getAbsolutePath());
-                    bill.setBillFile(file);
-                    Publisher.getModel().saveBillWithNewFile(bill);
-                    billConfigDialog.setBillOverviewButtonEnabled(true);
+                if(createBillFromWindowData(true)) {
+                    File file = Publisher.getModel().generateWordFile(bill);
+                    if (file != null) {
+                        billConfigDialog.setFileLabel(file.getAbsolutePath());
+                        bill.setBillFile(file);
+                        Publisher.getModel().saveBillWithNewFile(bill);
+                        billConfigDialog.setBillOverviewButtonEnabled(true);
+                    }
                 }
             }
         });
@@ -271,10 +276,12 @@ public class BillConfigDialogController implements Controller {
     }
 
     private void saveComponentData() {
-        createBillFromWindowData();
-        Publisher.getModel().saveBill(this.bill);
+        if(createBillFromWindowData(true))
+        {
+            Publisher.getModel().saveBill(this.bill);
+        }
     }
-    private List<BillEntry> createBillEntriesFromWindowData(){
+    private List<BillEntry> createBillEntriesFromWindowData(boolean withMessage){
         List<BillEntry> billEntries = new ArrayList<>();
 
         int rowCount = this.billConfigDialog.getEntryTableRowCount();
@@ -283,17 +290,42 @@ public class BillConfigDialogController implements Controller {
             String id = Publisher.getModel().getNewObjectId();
             String entryText = this.billConfigDialog.getCellValue(i,0);
 
+            if(entryText == null || entryText.length() < 3){
+                if(withMessage){
+                    Message.showErrorMessage("Sie müssen mindestens 3 Zeichen für das Feld 'Produkt/Dienstleistung' angeben.");
+                }
+                return null;
+            }
+
             double unitPrice =  -1.0;
             int amount = -1;
             int taxRate = -1;
 
             try {
                 taxRate = Integer.parseInt(this.billConfigDialog.getCellValue(i,1));
+            }catch (Exception e){
+                if(withMessage){
+                    Message.showErrorMessage("Sie müssen einen ganzzaligen Wert für den Mehrwertsteuersatz angeben.");
+                }
+                return null;
+            }
+
+            try {
                 amount = Integer.parseInt(this.billConfigDialog.getCellValue(i,2));
+            }catch (Exception e){
+                if(withMessage){
+                    Message.showErrorMessage("Sie müssen einen ganzzaligen Wert für die Anzahl angeben.");
+                }
+                return null;
+            }
+
+            try {
                 unitPrice =  Double.parseDouble(this.billConfigDialog.getCellValue(i,3).replace(",","."));
             }catch (Exception e){
-
-
+                if(withMessage){
+                    Message.showErrorMessage("Sie müssen einen Wert für den Einzelpreis angeben.");
+                }
+                return null;
             }
 
             BillEntry billEntry = new BillEntry(id,taxRate,unitPrice,amount,entryText);
@@ -377,7 +409,7 @@ public class BillConfigDialogController implements Controller {
         this.billConfigDialog.addRowToEntryTable(cellData);
     }
 
-    private void createBillFromWindowData(){
+    private boolean createBillFromWindowData(boolean withMessage){
 
         Bill bill = null;
 
@@ -397,13 +429,64 @@ public class BillConfigDialogController implements Controller {
         }
 
         String titel = this.billConfigDialog.getTitleTextField();
+
+        if(!Publisher.getModel().isBillTitleValid(titel)){
+
+            if(withMessage){
+                Message.showErrorMessage("Rechnungname muss mindestens 3 Zeichen beinhalten.");
+            }
+            return false;
+        }
+
         String billNumber = this.billConfigDialog.getBillNumberTextField();
 
-        Date creationDate = new Date();
+        if(!Publisher.getModel().isBillNumberValid(billNumber)){
+
+            if(withMessage){
+                Message.showErrorMessage("Rechnungsnummer muss mindestens 3 Zeichen beinhalten.");
+            }
+            return false;
+        }
+
+        Date creationDate = null;
+        if(this.bill != null){
+            creationDate = this.bill.getCreationDate();
+        }else {
+            creationDate = new Date();
+        }
+
         Date toPayToDate = Publisher.getModel().germanDateStringToDate(this.billConfigDialog.getToPayToDateTextField());
         Date paidOnDate =  Publisher.getModel().germanDateStringToDate(this.billConfigDialog.getPaidOnDateTextField());
 
+        if(Publisher.getModel().isDateAfterGivenDate(creationDate,toPayToDate)){
+            if(withMessage){
+                Message.showErrorMessage("Sie müssen ein gültiges Datum für den Zahlungsstermin eintragen. Dieses muss nach dem Erstellungsdatum liegen!");
+            }
+            return false;
+        }
+
+        if(this.billConfigDialog.getPaidOnDateTextField().length() > 0){
+            if(Publisher.getModel().isDateAfterGivenDate(creationDate,paidOnDate)){
+                if(withMessage){
+                    Message.showErrorMessage("Wenn Sie ein Datum für den Tag, an die die Rechnung beglichen wurde, angeben. Muss dieses Datum nach dem Erstellungsdatum liegen.");
+                }
+                return false;
+            }else {
+                this.billConfigDialog.setPaidCheckbox(true);
+            }
+        }
+
+
+
         boolean paid = this.billConfigDialog.isPaidCheckbox();
+
+        if(paid && this.billConfigDialog.getPaidOnDateTextField().length() < 6){
+            if(withMessage){
+                Message.showErrorMessage("Wenn Sie die Rechnung als bezahlt markieren, müssen Sie ein Datum, an dem sie beglichen wurde, eingeben.");
+            }
+            return false;
+        }
+
         String comment = this.billConfigDialog.getCommentTextArea();
 
         String filePath = this.billConfigDialog.getFileLabel();
@@ -417,15 +500,19 @@ public class BillConfigDialogController implements Controller {
         boolean taxIncluded = this.billConfigDialog.isTaxIncludedCheckbox();
 
         bill = new Bill(id,billNumber,debtor,titel,creationDate,toPayToDate,paidOnDate,paid,comment,billFile,taxFree,taxIncluded);
-        List<BillEntry> list = this.createBillEntriesFromWindowData();
+        List<BillEntry> list = this.createBillEntriesFromWindowData(withMessage);
+
+        if(list == null){
+            return false;
+        }
 
         for (BillEntry entry : list){
             bill.addEntry(entry);
         }
 
-        System.out.println(bill.toString());
-
         this.bill = bill;
+
+        return true;
     }
 
     private int fillDebtorComboBox(List<Customer> customers,  Customer selectedCustomer){
@@ -458,28 +545,9 @@ public class BillConfigDialogController implements Controller {
         }
     }
 
-
     private double calculateRowCompletePrice(int row){
-/*        double result = 0.0;
-        Model model = Publisher.getModel();
-        String cellTax = this.billConfigDialog.getCellValue(row,1);
-        String cellPrice = this.billConfigDialog.getCellValue(row,3);
-        String cellAmount = this.billConfigDialog.getCellValue(row,2);
 
-        System.out.println(cellAmount + " " + cellPrice + " " + cellTax);
-        if(cellTax != null && cellPrice != null && cellAmount != null &&
-                model.isIntNumber(cellTax) && model.isIntNumber(cellAmount) && model.isFloatingPointNumber(cellPrice)){
-            double price = Double.parseDouble(cellPrice.replace(",","."));
-            double tax = Double.parseDouble(cellTax.replace(",","."));
-            int amount = Integer.parseInt(cellAmount);
-
-            result = price * amount;
-
-        }*/
-
-        createBillFromWindowData();
-
-        if(this.bill != null) {
+        if(createBillFromWindowData(false) && this.bill != null) {
             return this.bill.getEntryTotalPrice(row);
         }
 

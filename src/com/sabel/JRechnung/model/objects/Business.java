@@ -9,10 +9,17 @@ public class Business {
     private String streetNumber;
     private String location;
     private String postcode;
+    private String taxNumber;
+    private String jurisdiction;
+    private String phone;
+    private String fax;
+    private String email;
     private LegalForm legalForm;
 
 
-    public Business(String id, String name, String proprietor, String street, String streetNumber, String postcode, String location, LegalForm legalForm) {
+    public Business(String id, String name, String proprietor, String street, String streetNumber,
+                    String postcode, String location, String taxNumber, String jurisdiction,
+                    String phone, String fax, String email, LegalForm legalForm) {
         this.id = id;
         this.name = name;
         this.proprietor = proprietor;
@@ -20,6 +27,11 @@ public class Business {
         this.streetNumber = streetNumber;
         this.postcode = postcode;
         this.legalForm = legalForm;
+        this.taxNumber = taxNumber;
+        this.jurisdiction = jurisdiction;
+        this.phone = phone;
+        this.fax = fax;
+        this.email = email;
         this.location = location;
     }
 
@@ -85,5 +97,45 @@ public class Business {
 
     public void setLegalForm(LegalForm legalForm) {
         this.legalForm = legalForm;
+    }
+
+    public String getTaxNumber() {
+        return this.taxNumber;
+    }
+
+    public void setTaxNumber(String taxNumber) {
+        this.taxNumber = taxNumber;
+    }
+
+    public String getJurisdiction() {
+        return jurisdiction;
+    }
+
+    public void setJurisdiction(String jurisdiction) {
+        this.jurisdiction = jurisdiction;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getFax() {
+        return fax;
+    }
+
+    public void setFax(String fax) {
+        this.fax = fax;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
