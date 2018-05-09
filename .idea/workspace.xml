@@ -9,28 +9,14 @@
     <bookmark url="file://$PROJECT_DIR$/src/com/sabel/JRechnung/view/BillList.java" line="55" mnemonic="7" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a88aa8a-d265-455b-a94b-8aceaeaa507e" name="Default" comment="">
+    <list default="true" id="9a88aa8a-d265-455b-a94b-8aceaeaa507e" name="Default" comment="Fertig (hoffe ich)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dokumentation_JRechnung.docx" beforeDir="false" afterPath="$PROJECT_DIR$/Dokumentation_JRechnung.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sabel/JRechnung/JRechungConfigGenerator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sabel/JRechnung/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sabel/JRechnung/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sabel/JRechnung/Publisher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sabel/JRechnung/Publisher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/sabel/JRechnung/control/BillConfigDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sabel/JRechnung/control/BillConfigDialogController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/sabel/JRechnung/control/BusinessConfigDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sabel/JRechnung/control/BusinessConfigDialogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sabel/JRechnung/control/CustomersConfigDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sabel/JRechnung/control/CustomersConfigDialogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sabel/JRechnung/control/EncryptionConfigDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sabel/JRechnung/control/EncryptionConfigDialogController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/sabel/JRechnung/control/ProductOrServiceConfigDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sabel/JRechnung/control/ProductOrServiceConfigDialogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sabel/JRechnung/control/StarterWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sabel/JRechnung/control/StarterWindowController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/sabel/JRechnung/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sabel/JRechnung/model/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sabel/JRechnung/model/SecurityProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sabel/JRechnung/model/SecurityProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sabel/JRechnung/model/WordFileGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sabel/JRechnung/model/WordFileGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sabel/JRechnung/model/db/AccessibilityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sabel/JRechnung/model/db/AccessibilityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sabel/JRechnung/model/db/BillService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sabel/JRechnung/model/db/BillService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/sabel/JRechnung/model/db/BusinessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sabel/JRechnung/model/db/BusinessService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sabel/JRechnung/model/db/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sabel/JRechnung/model/db/CustomerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/sabel/JRechnung/model/db/ProductOrServiceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sabel/JRechnung/model/db/ProductOrServiceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sabel/JRechnung/model/objects/Bill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sabel/JRechnung/model/objects/Bill.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/sabel/JRechnung/view/WordOLEWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/sabel/JRechnung/view/WordOLEWindow.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -66,99 +52,21 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="WordWaitWindow.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/view/WordWaitWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StarterWindow.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/view/StarterWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="25" column="49" selection-start-line="25" selection-start-column="49" selection-end-line="25" selection-end-column="49" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StarterWindowController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/control/StarterWindowController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-217">
-              <caret line="128" selection-start-line="128" selection-end-line="128" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Publisher.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/Publisher.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="805">
-              <caret line="73" column="64" selection-start-line="73" selection-start-column="64" selection-end-line="73" selection-end-column="64" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="686">
-              <caret line="113" column="40" selection-start-line="113" selection-start-column="40" selection-end-line="113" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ConfigGeneratorDialogController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/control/ConfigGeneratorDialogController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="53">
-              <caret line="94" column="79" selection-start-line="94" selection-start-column="57" selection-end-line="94" selection-end-column="79" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BusinessConfigDialogController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/control/BusinessConfigDialogController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="94" column="5" lean-forward="true" selection-start-line="94" selection-start-column="5" selection-end-line="94" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BusinessConfigDialog.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/view/BusinessConfigDialog.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="120" selection-start-line="120" selection-end-line="120" />
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="Model.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/model/Model.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="606" column="19" selection-start-line="606" selection-start-column="19" selection-end-line="606" selection-end-column="19" />
+            <state relative-caret-position="-378">
+              <caret line="211" column="19" selection-start-line="211" selection-start-column="19" selection-end-line="211" selection-end-column="19" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WordFileGenerator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/model/WordFileGenerator.java">
+      <file leaf-file-name="BusinessConfigDialogController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/control/BusinessConfigDialogController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="57" selection-start-line="57" selection-end-line="57" />
+            <state relative-caret-position="206">
+              <caret line="135" column="83" selection-start-line="135" selection-start-column="83" selection-end-line="135" selection-end-column="83" />
             </state>
           </provider>
         </entry>
@@ -174,13 +82,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>copy</find>
-      <find>btnAddEntry</find>
-      <find>Label</find>
-      <find>Button</find>
-      <find>word</find>
-      <find>delete</find>
-      <find>imageIcon</find>
       <find>removeBil</find>
       <find>customer</find>
       <find>billn</find>
@@ -204,6 +105,13 @@
       <find>btnBillOverview</find>
       <find>System.out.println</find>
       <find>fillDebtorComboBox</find>
+      <find>Entry</find>
+      <find>über</find>
+      <find>TODO</find>
+      <find>createProductOrServiceFromWindowData</find>
+      <find>Business</find>
+      <find>createBussinesFromWindowData</find>
+      <find>name</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -252,24 +160,24 @@
         <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/view/BusinessConfigDialog.java" />
         <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/model/objects/LegalForm.java" />
         <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/view/BillConfigDialog.java" />
-        <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/control/BillConfigDialogController.java" />
         <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/control/CustomersConfigDialogController.java" />
         <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/control/EncryptionConfigDialogController.java" />
-        <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/control/ProductOrServiceConfigDialogController.java" />
-        <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/model/Model.java" />
         <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/model/SecurityProvider.java" />
         <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/model/db/AccessibilityService.java" />
-        <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/model/db/BusinessService.java" />
         <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/model/db/CustomerService.java" />
-        <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/model/db/ProductOrServiceService.java" />
         <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/model/objects/Bill.java" />
         <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/view/WordOLEWindow.java" />
         <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/model/db/BillService.java" />
         <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/model/WordFileGenerator.java" />
-        <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/control/BusinessConfigDialogController.java" />
         <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/control/StarterWindowController.java" />
         <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/Publisher.java" />
         <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/Main.java" />
+        <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/control/BillConfigDialogController.java" />
+        <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/model/Model.java" />
+        <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/control/ProductOrServiceConfigDialogController.java" />
+        <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/model/db/ProductOrServiceService.java" />
+        <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/model/db/BusinessService.java" />
+        <option value="$PROJECT_DIR$/src/com/sabel/JRechnung/control/BusinessConfigDialogController.java" />
       </list>
     </option>
   </component>
@@ -298,6 +206,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -336,12 +245,18 @@
               <item name="JRechnung" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="JRechnung" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JRechnung" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="JRechnung" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -587,7 +502,8 @@
       <workItem from="1525779082828" duration="3699000" />
       <workItem from="1525800290882" duration="1848000" />
       <workItem from="1525804186318" duration="7769000" />
-      <workItem from="1525812101234" duration="942000" />
+      <workItem from="1525812101234" duration="1143000" />
+      <workItem from="1525837202796" duration="3741000" />
     </task>
     <task id="LOCAL-00001" summary="Gültigkeitsprüfung von Groß angefangen zu erweitern!">
       <created>1521022721699</created>
@@ -722,11 +638,18 @@
       <option name="project" value="LOCAL" />
       <updated>1525811449059</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Fertig (hoffe ich)">
+      <created>1525813211285</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1525813211285</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="231355000" />
+    <option name="totallyTimeSpent" value="235297000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -751,11 +674,11 @@
       <window_info anchor="right" id="Maven Projects" order="3" weight="0.32995737" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32792208" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.31709957" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.31709957" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2260128" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22814499" />
       <window_info anchor="right" id="Database" order="3" weight="0.32995737" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3225108" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -773,18 +696,18 @@
     </layout>
     <layout-to-restore>
       <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3225108" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3181818" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32900432" />
       <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32900432" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2457356" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32900432" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32900432" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3181818" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
@@ -797,8 +720,8 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info id="Capture Tool" order="5" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3225108" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32900432" />
       <window_info anchor="right" id="Maven Projects" order="8" weight="0.32995737" />
       <window_info id="Favorites" order="6" side_tool="true" />
     </layout-to-restore>
@@ -866,7 +789,8 @@
     <MESSAGE value="Fast fertig" />
     <MESSAGE value="Fast fertig // Design &amp; Fenster fertig" />
     <MESSAGE value="Fehler in Unternehmensverwaltung behoben" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fehler in Unternehmensverwaltung behoben" />
+    <MESSAGE value="Fertig (hoffe ich)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fertig (hoffe ich)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -895,32 +819,11 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.desktop/javax/swing/ImageIcon.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2958">
-          <caret line="216" selection-start-line="216" selection-end-line="216" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/nio/file/Paths.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="130" column="27" selection-start-line="130" selection-start-column="27" selection-end-line="130" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/view/WorkingtimeRecordConfigDialog.java" />
     <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/SimpleStopWatch.java" />
     <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/view/WordFileExportDailog.java" />
     <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/control/WordFileExportController.java" />
     <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/ConsoleLogger.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/Debug.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/lang/Thread.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
@@ -984,13 +887,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/JRechungConfigGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="66" column="23" selection-start-line="66" selection-start-column="23" selection-end-line="66" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/JRechungConfigGenerator.java" />
     <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/view/EncryptionConfigDialog.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -1072,34 +969,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/control/BillConfigDialogController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="267" selection-start-line="267" selection-end-line="267" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/control/CustomersConfigDialogController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="279" selection-start-line="279" selection-end-line="279" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/control/EncryptionConfigDialogController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
           <caret line="136" column="81" selection-start-line="136" selection-start-column="81" selection-end-line="136" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/control/ProductOrServiceConfigDialogController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="173" selection-start-line="173" selection-end-line="173" />
         </state>
       </provider>
     </entry>
@@ -1114,20 +987,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
           <caret line="178" selection-start-line="178" selection-end-line="178" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/model/db/BusinessService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="53" column="68" selection-start-line="53" selection-start-column="68" selection-end-line="53" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/model/db/ProductOrServiceService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="24" column="37" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -1162,7 +1021,7 @@
     <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/view/WordWaitWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="348">
-          <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+          <caret line="60" selection-start-line="60" selection-end-line="60" />
         </state>
       </provider>
     </entry>
@@ -1173,30 +1032,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/model/Model.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="606" column="19" selection-start-line="606" selection-start-column="19" selection-end-line="606" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/model/WordFileGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
+        <state relative-caret-position="748">
           <caret line="57" selection-start-line="57" selection-end-line="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/view/BusinessConfigDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="120" selection-start-line="120" selection-end-line="120" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/control/ConfigGeneratorDialogController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="53">
+        <state relative-caret-position="1428">
           <caret line="94" column="79" selection-start-line="94" selection-start-column="57" selection-end-line="94" selection-end-column="79" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1204,16 +1049,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/control/BusinessConfigDialogController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="94" column="5" lean-forward="true" selection-start-line="94" selection-start-column="5" selection-end-line="94" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/control/StarterWindowController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-217">
+        <state relative-caret-position="2023">
           <caret line="128" selection-start-line="128" selection-end-line="128" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1223,15 +1061,101 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/Publisher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="805">
+        <state relative-caret-position="1139">
           <caret line="73" column="64" selection-start-line="73" selection-start-column="64" selection-end-line="73" selection-end-column="64" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="686">
+        <state relative-caret-position="1683">
           <caret line="113" column="40" selection-start-line="113" selection-start-column="40" selection-end-line="113" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/Debug.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="34" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/control/BillConfigDialogController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="77">
+          <caret line="239" column="42" selection-start-line="239" selection-start-column="42" selection-end-line="239" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6627#7285#0" expanded="true" />
+            <element signature="e#7284#7285#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/lang/Double.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="542" selection-start-line="542" selection-end-line="542" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/control/ProductOrServiceConfigDialogController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="161" column="47" selection-start-line="161" selection-start-column="47" selection-end-line="161" selection-end-column="47" />
+          <folding>
+            <element signature="e#6588#6589#0" expanded="true" />
+            <element signature="e#6646#6647#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/view/BusinessConfigDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-253">
+          <caret line="120" selection-start-line="120" selection-end-line="120" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/model/db/ProductOrServiceService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="106" column="13" lean-forward="true" selection-start-line="106" selection-start-column="13" selection-end-line="106" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/control/CustomersConfigDialogController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="111" column="19" selection-start-line="111" selection-start-column="19" selection-end-line="111" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/model/db/BusinessService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1570">
+          <caret line="115" column="28" selection-start-line="115" selection-start-column="28" selection-end-line="115" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/jdk/internal/math/FloatingDecimal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="109" selection-start-line="109" selection-end-line="109" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/model/Model.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-378">
+          <caret line="211" column="19" selection-start-line="211" selection-start-column="19" selection-end-line="211" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/sabel/JRechnung/control/BusinessConfigDialogController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="135" column="83" selection-start-line="135" selection-start-column="83" selection-end-line="135" selection-end-column="83" />
         </state>
       </provider>
     </entry>

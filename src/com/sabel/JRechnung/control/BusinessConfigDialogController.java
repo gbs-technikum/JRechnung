@@ -1,6 +1,8 @@
 package com.sabel.JRechnung.control;
 
 import com.sabel.JRechnung.Publisher;
+import com.sabel.JRechnung.model.Message;
+import com.sabel.JRechnung.model.Model;
 import com.sabel.JRechnung.model.db.BusinessService;
 import com.sabel.JRechnung.model.db.LegalFormService;
 import com.sabel.JRechnung.model.objects.Business;
@@ -126,33 +128,61 @@ public class BusinessConfigDialogController implements Controller {
             id = Publisher.getModel().getNewObjectId();
         }
 
+        Model model = Publisher.getModel();
 
-        LegalForm legalForm = this.businessConfigDialog.getLegalFormFromList(this.businessConfigDialog.getIndexOfSelectedLegalForm());
+        boolean isNameValid = this.businessConfigDialog.getTextName().length() > 0;
 
-        Business business = new Business(id,this.businessConfigDialog.getTextName(),
-                this.businessConfigDialog.getTextProprietor(),
-                this.businessConfigDialog.getTextStreet(),
-                this.businessConfigDialog.getTextStreetNumber(),
-                this.businessConfigDialog.getTextPostcode(),
-                this.businessConfigDialog.getTextLocation(),
-                this.businessConfigDialog.getTextTaxNumber(),
-                this.businessConfigDialog.getTextJurisdiction(),
-                this.businessConfigDialog.getTextPhone(),
-                this.businessConfigDialog.getTextFax(),
-                this.businessConfigDialog.getTextEmail(),
-                legalForm);
+        if(!isNameValid){
+            Message.showErrorMessage("Geben Sie eine Namen für das Unternehmen ein.");
+        }
 
-        this.business = business;
+        boolean isProprietor = model.isNameOrForenameOrStreetOrVillageValid("Inhaber", this.businessConfigDialog.getTextProprietor());
+        boolean isStreetValid = model.isNameOrForenameOrStreetOrVillageValid("Straße", this.businessConfigDialog.getTextStreet());
+        boolean isHouseNumberValid = model.isHouseNumberValid(this.businessConfigDialog.getTextStreetNumber());
+        boolean isPostCodeValid = model.isPostCodeValid(this.businessConfigDialog.getTextPostcode());
+        boolean isVillageValid = model.isNameOrForenameOrStreetOrVillageValid("Ort", this.businessConfigDialog.getTextLocation());
+        boolean isJurisValid = model.isNameOrForenameOrStreetOrVillageValid("Gerichtsstand", this.businessConfigDialog.getTextLocation());
+
+        boolean isPhoneValid = true;
+        if(this.businessConfigDialog.getTextPhone().length() > 0) {
+            isPhoneValid = Publisher.getModel().isFaxOrPhoneNumberValid(this.businessConfigDialog.getTextPhone());
+        }
+        boolean isFaxValid = true;
+        if(this.businessConfigDialog.getTextFax().length() > 0) {
+            isFaxValid = Publisher.getModel().isFaxOrPhoneNumberValid(this.businessConfigDialog.getTextFax());
+        }
+        boolean isEMailValid = true;
+        if(this.businessConfigDialog.getTextEmail().length() > 0) {
+            isEMailValid = Publisher.getModel().isValidEmailAddress(this.businessConfigDialog.getTextEmail());
+        }
+
+        if(isNameValid && isProprietor && isHouseNumberValid && isJurisValid && isStreetValid && isPostCodeValid && isVillageValid &&
+                isPhoneValid && isFaxValid && isEMailValid && isJurisValid) {
+
+            LegalForm legalForm = this.businessConfigDialog.getLegalFormFromList(this.businessConfigDialog.getIndexOfSelectedLegalForm());
+
+            Business business = new Business(id, this.businessConfigDialog.getTextName(),
+                    this.businessConfigDialog.getTextProprietor(),
+                    this.businessConfigDialog.getTextStreet(),
+                    this.businessConfigDialog.getTextStreetNumber(),
+                    this.businessConfigDialog.getTextPostcode(),
+                    this.businessConfigDialog.getTextLocation(),
+                    this.businessConfigDialog.getTextTaxNumber(),
+                    this.businessConfigDialog.getTextJurisdiction(),
+                    this.businessConfigDialog.getTextPhone(),
+                    this.businessConfigDialog.getTextFax(),
+                    this.businessConfigDialog.getTextEmail(),
+                    legalForm);
+
+            this.business = business;
+        }
 
     }
 
 
     private void saveComponentData(){
-        try {
-            BusinessService.writeBusiness(this.business);
-        } catch (SQLException e) {
-            //TODO
-            e.printStackTrace();
+        if(!Publisher.getModel().setBusiness(this.business)){
+            Message.showErrorMessage("Unternehmensdaten konnten nicht in die Datenbank geschrieben werden.");
         }
     }
 

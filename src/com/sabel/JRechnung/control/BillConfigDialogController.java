@@ -96,8 +96,7 @@ public class BillConfigDialogController implements Controller {
                         addRowWithProductOrServiceData(selectedProductOrService);
                     } else if(timeIsRecognized && timer == null) {
                         addRowWithWorkingTime();
-                        billConfigDialog.setTimeLabel("00:00:00");
-                        timeIsRecognized = false;
+                        resetTimeRecord();
                     } else{
                         billConfigDialog.addRowsToEntryTable(1);
                     }
@@ -234,18 +233,24 @@ public class BillConfigDialogController implements Controller {
         this.billConfigDialog.setStartButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(!timeIsRecognized){
-                    ((JButton)e.getSource()).setEnabled(false);
-
-                    workingTimeRecordStart = new Date();
-
-                    timeIsRecognized = true;
-
-                    timer = new Timer();
-                    timer.schedule(new WorkingTimeRecorder(billConfigDialog.getTimeLabelObject()), 0, 1000);
-                }else{
-                    //TODO Fehler
+                if(timeIsRecognized){
+                    if(Message.showYesNoConfirmDialog(billConfigDialog,"Es ist noch eine Zeit erfasst, " +
+                            "die Sie noch nicht in die Rechnung übernommen haben." +
+                            "Möchten Sie diese überschreiben.","Zeit zrücksetzen")){
+                        resetTimeRecord();
+                    }else {
+                        return;
+                    }
                 }
+                ((JButton)e.getSource()).setEnabled(false);
+
+                workingTimeRecordStart = new Date();
+
+                timeIsRecognized = true;
+
+                timer = new Timer();
+                timer.schedule(new WorkingTimeRecorder(billConfigDialog.getTimeLabelObject()), 0, 1000);
+
             }
         });
 
@@ -260,6 +265,11 @@ public class BillConfigDialogController implements Controller {
                 }
             }
         });
+    }
+
+    private void resetTimeRecord(){
+        billConfigDialog.setTimeLabel("00:00:00");
+        timeIsRecognized = false;
     }
 
     private void updateTableCompletePrice(){

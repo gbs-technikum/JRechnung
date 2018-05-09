@@ -58,6 +58,8 @@ public class BusinessService {
 
 
                 preparedStatement.execute();
+
+                return true;
             }finally {
                 if (preparedStatement != null) {
                     try{
@@ -110,6 +112,8 @@ public class BusinessService {
 
 
                 preparedStatement.execute();
+
+                return true;
             }finally {
                 if (preparedStatement != null) {
                     try{

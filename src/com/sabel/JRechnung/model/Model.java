@@ -64,8 +64,7 @@ public class Model {
         try {
             business = BusinessService.readBusiness();
         } catch (SQLException e) {
-            //TODO
-            e.printStackTrace();
+
         }
 
         return business;
@@ -93,10 +92,9 @@ public class Model {
         try {
             result = CustomerService.readAllCustomers();
         } catch (SQLException e) {
-            e.printStackTrace(); //TODO
+            e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-            //TODO
         }
 
         return result;
@@ -107,10 +105,8 @@ public class Model {
             return CustomerService.saveCustomer(customer);
         } catch (SQLException e) {
             e.printStackTrace();
-            //TODO
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-            //TODO
         }
 
         return false;
@@ -120,7 +116,6 @@ public class Model {
         try {
             return CustomerService.removeCustomer(customer);
         } catch (SQLException e) {
-            //TODO
             e.printStackTrace();
         }
 
@@ -133,7 +128,7 @@ public class Model {
         try {
             result = ProductOrServiceService.read();
         } catch (SQLException e) {
-            e.printStackTrace(); //TODO
+            e.printStackTrace();
         }
 
         return result;
@@ -143,18 +138,14 @@ public class Model {
         try {
             return ProductOrServiceService.write(productOrService);
         } catch (SQLException e) {
-            e.printStackTrace();
-            //TODO
+            return false;
         }
-
-        return false;
     }
 
     public boolean removeProductOrService(ProductOrService productOrService){
         try {
             return ProductOrServiceService.remove(productOrService);
         } catch (SQLException e) {
-            //TODO
             e.printStackTrace();
         }
 
@@ -318,7 +309,6 @@ public class Model {
             return BillService.save(bill);
         } catch (SQLException e) {
             e.printStackTrace();
-            //TODO
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -331,7 +321,6 @@ public class Model {
             return BillService.modifyBillFile(bill);
         } catch (SQLException e) {
             e.printStackTrace();
-            //TODO
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -350,7 +339,6 @@ public class Model {
 
             return BillService.remove(bill);
         } catch (SQLException e) {
-            //TODO
             e.printStackTrace();
         }
 
@@ -363,10 +351,9 @@ public class Model {
         try {
             result = BillService.readAllBills(year);
         } catch (SQLException e) {
-            e.printStackTrace(); //TODO
+            e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-            //TODO
         }
 
         return result;
@@ -377,10 +364,9 @@ public class Model {
         try {
             bill = BillService.read(id);
         } catch (SQLException e) {
-            e.printStackTrace(); //TODO
+            e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-            //TODO
         }
 
         return bill;

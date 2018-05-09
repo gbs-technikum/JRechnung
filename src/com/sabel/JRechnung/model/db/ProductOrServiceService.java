@@ -40,6 +40,8 @@ public class ProductOrServiceService {
                 preparedStatement.setString(4, productOrService.getDescription());
 
                 preparedStatement.execute();
+
+                return true;
             }finally {
                 if (preparedStatement != null) {
                     try{

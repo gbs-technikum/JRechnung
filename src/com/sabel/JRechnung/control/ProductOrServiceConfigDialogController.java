@@ -1,5 +1,6 @@
 package com.sabel.JRechnung.control;
 import com.sabel.JRechnung.Publisher;
+import com.sabel.JRechnung.model.Message;
 import com.sabel.JRechnung.model.objects.ProductOrService;
 import com.sabel.JRechnung.view.ProductOrServiceConfigDialog;
 
@@ -105,8 +106,9 @@ public class ProductOrServiceConfigDialogController implements Controller {
         this.productOrServiceConfigDialog.setApplyButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                saveComponentData();
-                fillWindowComponents(false);
+                if(saveComponentData()) {
+                    fillWindowComponents(false);
+                }
             }
         });
         this.productOrServiceConfigDialog.setApplyButtonEnabled(true);
@@ -155,12 +157,18 @@ public class ProductOrServiceConfigDialogController implements Controller {
         });
     }
 
-    private void saveComponentData() {
-        createProductOrServiceFromWindowData();
-        Publisher.getModel().saveProductOrService(this.productOrService);
+    private boolean saveComponentData() {
+        if(createProductOrServiceFromWindowData()) {
+            if(!Publisher.getModel().saveProductOrService(this.productOrService)){
+                Message.showErrorMessage("Produkt/Dienstleistung konnte nicht in die Datenbank geschrieben werden.");
+                return false;
+            }
+            return false;
+        }
+        return true;
     }
 
-    private void createProductOrServiceFromWindowData(){
+    private boolean createProductOrServiceFromWindowData(){
 
         ProductOrService productOrService = null;
 
@@ -174,15 +182,28 @@ public class ProductOrServiceConfigDialogController implements Controller {
 
         }
 
+
         String title = this.productOrServiceConfigDialog.getTitleTextField();
-        //TODO
+        if(title.length() < 3){
+            Message.showErrorMessage("Die Bezeichnung muss mindestens 3 Zeichen umfassen.");
+            return false;
+        }
+
         String priceText = this.productOrServiceConfigDialog.getPriceTextField();
         priceText = priceText.replace(',','.');
+
+        if(!Publisher.getModel().isFloatingPointNumber(priceText)){
+            Message.showErrorMessage("Geben Sie bitte einen gültigen Preis ein");
+            return false;
+        }
         double price = Double.parseDouble(priceText);
+
         String description = this.productOrServiceConfigDialog.getDescriptionTextField();
 
         productOrService = new ProductOrService(id,title,price,description);
 
         this.productOrService = productOrService;
+
+        return true;
     }
 }
