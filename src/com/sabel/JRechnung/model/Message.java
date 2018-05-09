@@ -18,7 +18,7 @@ public class Message {
     }
 
     public static void showErrorMessageNoValidPassword(){
-        showErrorMessage("Passwort muss mindestens 7 Zeichen, Klein-, Großbuchstaben und Zahlen enthalten!");
+        showErrorMessage("Passwort muss mindestens 8 Zeichen, Klein-, Großbuchstaben und Zahlen enthalten!");
     }
 
     public static void showErrorMessageNoCustomerSelected(){

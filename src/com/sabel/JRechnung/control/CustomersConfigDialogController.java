@@ -261,7 +261,14 @@ public class CustomersConfigDialogController implements Controller {
     private void createCustomerFromWindowData(){
 
         Model model = Publisher.getModel();
-        boolean isNameValid = model.isNameOrForenameOrStreetOrVillageValid("Name", customersConfigDialog.getNameTextField());
+        boolean isNameValid = false;
+
+        if(customersConfigDialog.getNameTextField().length() > 2){
+            isNameValid = true;
+        }else{
+            Message.showErrorMessage("Der Name muss mindestens 3 Zeichen enthalten.");
+        }
+
         boolean isForenameValid = true;
         if(customersConfigDialog.getForennameTextField().length() > 0){
             isForenameValid = model.isNameOrForenameOrStreetOrVillageValid("Vorname", customersConfigDialog.getForennameTextField());
