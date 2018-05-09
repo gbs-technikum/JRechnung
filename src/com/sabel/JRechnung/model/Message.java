@@ -54,7 +54,7 @@ public class Message {
     }
 
     public static void showErrorMessageNoValidPhoneOrFaxNumber(){
-        showErrorMessage("Nummer ist ungültig!");
+        showErrorMessage("Die Telefon oder Fax Nummer ist ungültig!");
     }
 
     public static void showErrorMessageCantSaveFile(String fileName){

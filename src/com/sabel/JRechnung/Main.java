@@ -38,6 +38,7 @@ public class Main {
                     }
                 }
 
+
                 if(dbExist){
                     SecurityProvider sp = Publisher.getSecurityProvider();
                     encryptionIsInitialized = sp.isInitialized();
@@ -60,7 +61,6 @@ public class Main {
                     JUnique.sendMessage(UNIQUE_APP_ID, MSG_OPEN);
                     System.exit(0);
                 }
-
 
                 Controller starter = new StarterWindowController(dbExist,encryptionIsInitialized,configExists);
 
@@ -113,7 +113,10 @@ public class Main {
 
                     Publisher.destroy();
 
+
                 }
+
+                System.exit(0);
 
     }
 

@@ -59,6 +59,11 @@ public class WordOLEWindow extends ApplicationWindow {
         return composite;
     }
 
+    @Override
+    public boolean close() {
+        clientSite.dispose();
+        return super.close();
+    }
 
     @Override
     protected void constrainShellSize() {
@@ -83,7 +88,7 @@ public class WordOLEWindow extends ApplicationWindow {
                             OLE.OLECMDEXECOPT_PROMPTUSER,
                             null,
                             null);
-                    if(result != OLE.S_OK){
+                    if(result == OLE.ERROR){
                         Message.showErrorMessageCantSaveFile(wordFile.getAbsolutePath());
                     }
                 }
@@ -127,7 +132,7 @@ public class WordOLEWindow extends ApplicationWindow {
                             OLE.OLECMDEXECOPT_PROMPTUSER,
                             null,
                             null);
-                    if(result != OLE.S_OK){
+                    if(result == OLE.ERROR){
                         Message.showErrorMessagePrinting();
                     }
                 }
@@ -141,6 +146,8 @@ public class WordOLEWindow extends ApplicationWindow {
 
         return manager;
     }
+
+
 
     public boolean isReady() {
         return ready;

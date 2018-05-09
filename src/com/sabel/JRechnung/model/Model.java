@@ -525,7 +525,7 @@ public class Model {
         if(bill != null) {
             File file = new File(this.getWordExportPath() + "/" + bill.getTitel() + ".docx");
 
-            if (WordFileGenerator.generate(this.getWordTemaple(), file, bill, this.getBusiness())) {
+            if (WordFileGenerator.generate(this.getWordTemaple(), file, bill, getBusiness())) {
                 return file;
             }
         }

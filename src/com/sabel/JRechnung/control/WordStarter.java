@@ -22,6 +22,8 @@ public class WordStarter implements Runnable {
         wordOLE.open();
 
         Display.getCurrent().dispose();
+
+        wordOLE.close();
     }
 
     public synchronized boolean isReadyToUse(){

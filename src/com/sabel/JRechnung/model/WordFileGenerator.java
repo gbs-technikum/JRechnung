@@ -123,7 +123,7 @@ public class WordFileGenerator {
 
                     switch (j) {
                         case 0:
-                            run.setText(String.valueOf(i));
+                            run.setText(String.valueOf(i+1));
                             break;
                         case 1:
                             run.setText(billEntry.getEntryText());

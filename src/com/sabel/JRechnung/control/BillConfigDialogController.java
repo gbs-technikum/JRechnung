@@ -176,25 +176,11 @@ public class BillConfigDialogController implements Controller {
         this.billConfigDialog.setBillOverviewButtonListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(bill != null && bill.getBillFile() != null) {
+                if(bill != null && bill.getBillFile() != null && bill.getBillFile().exists()) {
                     ImageIcon loader = Publisher.getModel().getImageIconFromResources("loader.gif");
                     JDialog waitWindow = new WordWaitWindow(parentWindow,bill,loader);
-
-/*                    WordStarter runnable = new WordStarter(bill.getBillFile());
-
-                    Thread wordStarterThread = new Thread(runnable);
-
-                    wordStarterThread.start();
-
-
-                    while (!runnable.isReadyToUse()) {
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException e1) {
-                        }
-                    }*/
-
-                   //  ((WordWaitWindow) waitWindow).close();
+                }else{
+                    Message.showErrorMessage("Word-Rechnungsdatei kann nicht angezeigt werden.");
                 }
 
             }});
@@ -211,6 +197,8 @@ public class BillConfigDialogController implements Controller {
                         bill.setBillFile(file);
                         Publisher.getModel().saveBillWithNewFile(bill);
                         billConfigDialog.setBillOverviewButtonEnabled(true);
+                    }else{
+                        Message.showErrorMessage("Word-Rechnungsdatei konnte nicht angelegt werden");
                     }
                 }
             }
